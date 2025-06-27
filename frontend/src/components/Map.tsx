@@ -16,23 +16,45 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
 
+  const waitForContainer = (): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      const checkContainer = () => {
+        if (mapContainer.current && mapContainer.current.offsetWidth > 0 && mapContainer.current.offsetHeight > 0) {
+          resolve();
+        } else {
+          setTimeout(checkContainer, 100);
+        }
+      };
+      
+      // Start checking immediately
+      checkContainer();
+      
+      // Timeout after 5 seconds
+      setTimeout(() => {
+        reject(new Error('Map container failed to become available'));
+      }, 5000);
+    });
+  };
+
   const initializeMap = async () => {
-    if (!mapContainer.current) {
-      setError('Map container not available');
-      setIsLoading(false);
-      return;
-    }
-
-    // Get token from environment variables
-    const accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
-    
-    if (!accessToken) {
-      setError('Mapbox token not configured. Please add VITE_MAPBOX_TOKEN to your environment variables.');
-      setIsLoading(false);
-      return;
-    }
-
     try {
+      setIsLoading(true);
+      setError('');
+
+      // Wait for container to be available
+      await waitForContainer();
+
+      if (!mapContainer.current) {
+        throw new Error('Map container not available after waiting');
+      }
+
+      // Get token from environment variables
+      const accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
+      
+      if (!accessToken) {
+        throw new Error('Mapbox token not configured. Please add VITE_MAPBOX_TOKEN to your environment variables.');
+      }
+
       // Clean up existing map
       if (map.current) {
         map.current.remove();
@@ -114,10 +136,14 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
 
   // Initialize map on component mount
   useEffect(() => {
-    initializeMap();
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      initializeMap();
+    }, 100);
 
     // Clean up on unmount
     return () => {
+      clearTimeout(timer);
       if (map.current) {
         map.current.remove();
         map.current = null;
@@ -165,7 +191,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
         <div className="text-center p-6">
           <AlertCircle className="h-12 w-12 mb-4 text-destructive mx-auto" />
           <p className="text-destructive font-medium mb-2">Map Error</p>
-          <p className="text-muted-foreground text-sm">{error}</p>
+          <p className="text-muted-foreground text-sm max-w-md">{error}</p>
         </div>
       </div>
     );
@@ -173,7 +199,11 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
 
   return (
     <div className="bg-muted rounded-lg h-96 overflow-hidden">
-      <div ref={mapContainer} className="w-full h-full" />
+      <div 
+        ref={mapContainer} 
+        className="w-full h-full"
+        style={{ minHeight: '384px' }} // Ensure minimum height
+      />
     </div>
   );
 };
