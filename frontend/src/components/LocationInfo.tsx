@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { MapPin, Clock } from "lucide-react";
+import { MapPin, Clock, RefreshCw, AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import Map from "./Map";
 
 interface ServerModel {
@@ -28,43 +29,53 @@ interface ServerData {
 const LocationInfo = () => {
   const [serverData, setServerData] = useState<ServerData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchRandomServer = async () => {
-      try {
+  const fetchRandomServer = async (isRefresh = false) => {
+    try {
+      if (isRefresh) {
+        setRefreshing(true);
+      } else {
         setLoading(true);
-        setError(null);
-        
-        const response = await fetch('/data/live_servers.json');
-        if (!response.ok) {
-          throw new Error(`Failed to fetch server data: ${response.status}`);
-        }
-        
-        const serversObject = await response.json();
-        
-        // Convert object to array of server entries
-        const serverEntries = Object.values(serversObject) as ServerData[];
-        
-        if (serverEntries.length === 0) {
-          throw new Error('No servers found in the data');
-        }
-        
-        // Select a random server
-        const randomIndex = Math.floor(Math.random() * serverEntries.length);
-        const randomServer = serverEntries[randomIndex];
-        
-        setServerData(randomServer);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An unknown error occurred');
-        console.error('Error fetching server data:', err);
-      } finally {
-        setLoading(false);
       }
-    };
+      setError(null);
+      
+      const response = await fetch('/data/live_servers.json');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch server data: ${response.status}`);
+      }
+      
+      const serversObject = await response.json();
+      
+      // Convert object to array of server entries
+      const serverEntries = Object.values(serversObject) as ServerData[];
+      
+      if (serverEntries.length === 0) {
+        throw new Error('No servers found in the data');
+      }
+      
+      // Select a random server
+      const randomIndex = Math.floor(Math.random() * serverEntries.length);
+      const randomServer = serverEntries[randomIndex];
+      
+      setServerData(randomServer);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unknown error occurred');
+      console.error('Error fetching server data:', err);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
 
+  useEffect(() => {
     fetchRandomServer();
   }, []);
+
+  const handleRefresh = () => {
+    fetchRandomServer(true);
+  };
 
   const formatSize = (bytes: number) => {
     const mb = bytes / (1024 * 1024);
@@ -98,6 +109,27 @@ const LocationInfo = () => {
     };
   };
 
+  // Get country flag emoji (basic mapping for common countries)
+  const getCountryFlag = (countryCode: string) => {
+    const flags: { [key: string]: string } = {
+      'CN': '🇨🇳',
+      'JP': '🇯🇵',
+      'GB': '🇬🇧',
+      'RU': '🇷🇺',
+      'US': '🇺🇸',
+      'DE': '🇩🇪',
+      'FR': '🇫🇷',
+      'IT': '🇮🇹',
+      'ES': '🇪🇸',
+      'CA': '🇨🇦',
+      'AU': '🇦🇺',
+      'BR': '🇧🇷',
+      'IN': '🇮🇳',
+      'KR': '🇰🇷'
+    };
+    return flags[countryCode] || '🌍';
+  };
+
   // Loading state
   if (loading) {
     return (
@@ -129,7 +161,7 @@ const LocationInfo = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           <div className="bg-muted rounded-lg h-96 flex items-center justify-center">
             <div className="text-center">
-              <MapPin className="h-12 w-12 mb-4 text-muted-foreground mx-auto" />
+              <AlertCircle className="h-12 w-12 mb-4 text-destructive mx-auto" />
               <p className="text-muted-foreground">Unable to load map</p>
             </div>
           </div>
@@ -137,12 +169,13 @@ const LocationInfo = () => {
             <div className="text-center">
               <h3 className="text-lg font-semibold text-destructive mb-2">Error Loading Server Data</h3>
               <p className="text-muted-foreground mb-4">{error}</p>
-              <button 
-                onClick={() => window.location.reload()} 
-                className="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 transition-colors"
+              <Button 
+                onClick={() => fetchRandomServer()} 
+                className="bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
               >
+                <RefreshCw className="h-4 w-4 mr-2" />
                 Retry
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -157,27 +190,6 @@ const LocationInfo = () => {
 
   const timestamp = formatTimestamp(serverData.first_seen_online);
 
-  // Get country flag emoji (basic mapping for common countries)
-  const getCountryFlag = (countryCode: string) => {
-    const flags: { [key: string]: string } = {
-      'CN': '🇨🇳',
-      'JP': '🇯🇵',
-      'GB': '🇬🇧',
-      'RU': '🇷🇺',
-      'US': '🇺🇸',
-      'DE': '🇩🇪',
-      'FR': '🇫🇷',
-      'IT': '🇮🇹',
-      'ES': '🇪🇸',
-      'CA': '🇨🇦',
-      'AU': '🇦🇺',
-      'BR': '🇧🇷',
-      'IN': '🇮🇳',
-      'KR': '🇰🇷'
-    };
-    return flags[countryCode] || '🌍';
-  };
-
   return (
     <section className="container py-24">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -191,10 +203,46 @@ const LocationInfo = () => {
 
         {/* Server Information */}
         <div className="bg-background/80 dark:bg-slate-900/80 backdrop-blur-sm border border-border text-foreground p-6 rounded-lg font-mono text-sm">
-          {/* Timestamp moved to top with age in parentheses */}
-          <div className="mb-4 pb-3 border-b border-border">
+          {/* Header with Refresh Button */}
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-border">
             <div className="flex items-center gap-2 text-muted-foreground text-xs">
               <Clock className="w-3 h-3" />
+              <span>LIVE SERVER DATA</span>
+            </div>
+            <Button
+              onClick={handleRefresh}
+              disabled={refreshing}
+              size="sm"
+              variant="outline"
+              className={`
+                relative overflow-hidden transition-all duration-200 
+                hover:bg-primary hover:text-primary-foreground hover:border-primary
+                focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background
+                active:scale-95
+                disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-background
+                ${refreshing ? 'bg-primary/10' : ''}
+              `}
+              aria-label={refreshing ? "Loading new server data" : "Load new random server"}
+            >
+              <RefreshCw 
+                className={`h-4 w-4 transition-transform duration-500 ${
+                  refreshing ? 'animate-spin' : 'group-hover:rotate-180'
+                }`} 
+              />
+              <span className="ml-2 hidden sm:inline">
+                {refreshing ? 'Loading...' : 'New Server'}
+              </span>
+              {refreshing && (
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
+                              transform -skew-x-12 -translate-x-full animate-pulse" 
+                />
+              )}
+            </Button>
+          </div>
+
+          {/* Timestamp */}
+          <div className="mb-4 pb-3 border-b border-border">
+            <div className="flex items-center gap-2 text-muted-foreground text-xs">
               <span>AS OF</span>
               <span className="text-foreground font-medium">{timestamp.formatted}</span>
               <span className="text-muted-foreground">({serverData.age})</span>
