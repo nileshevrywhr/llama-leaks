@@ -1,0 +1,33 @@
+name: Refresh Server Data
+
+on:
+  schedule:
+    - cron: '0 */1 * * *'   # every hour
+  workflow_dispatch:        # allow manual trigger
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r backend/requirements.txt || true
+
+      - name: Run scanner
+        run: python backend/live_server_identifier.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "statusisgreen"
+          git config user.email "statusisgreen@bananalabs.dev"
+          git add frontend/public/data/live_servers.json
+          git commit -m "chore: auto-refresh scan [skip ci]" || echo "error refreshing servers"
+          git push
