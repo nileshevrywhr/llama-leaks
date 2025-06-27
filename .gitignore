@@ -25,7 +25,7 @@ dist-ssr
 .env
 
 # interim 
-data/
+input/
 scanner.py
 plan.md
 DISCLOSURE.md

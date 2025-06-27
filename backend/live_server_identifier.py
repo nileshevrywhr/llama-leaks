@@ -6,8 +6,8 @@ from pathlib import Path
 from datetime import datetime, timedelta, UTC
 import hashlib
 
-INPUT_JSON = Path("data/fofa_10.json")
-OUTPUT_JSON = Path("data/live_serverI can see your screens.json")
+INPUT_JSON = Path("input/fofa_10.json")
+OUTPUT_JSON = Path("frontend/public/data/live_server.json")
 LOG_FILE = Path("data/live_server_identifier.log")
 LOG_FILE.parent.mkdir(exist_ok=True)
 
