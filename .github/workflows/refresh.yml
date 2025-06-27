@@ -30,30 +30,30 @@ jobs:
       - name: Download raw input from Supabase
         run: |
           python <<EOF
-            import os
-            from supabase import create_client
-            import pathlib
-            import sys
+    import os
+    from supabase import create_client
+    import pathlib
+    import sys
 
-            try:
-                url = os.environ["SUPABASE_URL"]
-                key = os.environ["SUPABASE_SECRET_KEY"]
-                bucket = os.environ["SUPABASE_BUCKET_NAME"]
-                path = os.environ["SUPABASE_FILE_PATH"]
+    try:
+        url = os.environ["SUPABASE_URL"]
+        key = os.environ["SUPABASE_SECRET_KEY"]
+        bucket = os.environ["SUPABASE_BUCKET_NAME"]
+        path = os.environ["SUPABASE_FILE_PATH"]
 
-                supabase = create_client(url, key)
-                data = supabase.storage.from_(bucket).download(path)
+        supabase = create_client(url, key)
+        data = supabase.storage.from_(bucket).download(path)
 
-                target = pathlib.Path(f"backend/input/{sys.argv[1]}.json")
-                target.parent.mkdir(parents=True, exist_ok=True)
-                target.write_bytes(data)
+        target = pathlib.Path(f"backend/input/{sys.argv[1]}.json")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
 
-                print("✅ File fetched and saved to backend/input/fofa_10.json")
-            
-            except Exception as e:
-                print(f"❌ Failed to fetch file from Supabase:", e, file=sys.stderr)
-                sys.exit(1)
-            EOF
+        print("✅ File fetched and saved to backend/input/fofa_10.json")
+    
+    except Exception as e:
+        print(f"❌ Failed to fetch file from Supabase:", e, file=sys.stderr)
+        sys.exit(1)
+    EOF
 
       - name: Run scanner
         run: python backend/live_server_identifier.py
