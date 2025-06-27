@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MapPin, Loader2, AlertCircle } from "lucide-react";
+import { MapPin, Loader2, AlertCircle, ExternalLink } from "lucide-react";
 
 interface MapProps {
   latitude: string;
@@ -21,14 +21,26 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
   const [error, setError] = useState<string>('');
 
   const initializeMap = async () => {
-    if (!mapContainer.current || !accessToken.trim()) {
-      setError('Please enter a valid Mapbox token');
+    if (!mapContainer.current) {
+      setError('Map container not available');
       return;
     }
 
-    // Validate token format
-    if (!accessToken.startsWith('pk.')) {
-      setError('Invalid token format. Mapbox tokens start with "pk."');
+    const trimmedToken = accessToken.trim();
+    if (!trimmedToken) {
+      setError('Please enter your Mapbox access token');
+      return;
+    }
+
+    // Basic token format validation - Mapbox tokens should start with 'pk.' for public tokens
+    if (!trimmedToken.startsWith('pk.')) {
+      setError('Invalid token format. Public Mapbox tokens start with "pk."');
+      return;
+    }
+
+    // Check minimum token length (Mapbox tokens are typically quite long)
+    if (trimmedToken.length < 50) {
+      setError('Token appears to be incomplete. Please check your token.');
       return;
     }
 
@@ -42,9 +54,9 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
         map.current = null;
       }
 
-      mapboxgl.accessToken = accessToken;
+      mapboxgl.accessToken = trimmedToken;
       
-      // Test the token by creating a map
+      // Create the map
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/light-v11',
@@ -52,23 +64,37 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
         zoom: 10,
       });
 
-      // Wait for the map to load
-      await new Promise((resolve, reject) => {
+      // Wait for the map to load or error
+      await new Promise<void>((resolve, reject) => {
         if (!map.current) {
           reject(new Error('Map initialization failed'));
           return;
         }
 
-        map.current.on('load', resolve);
-        map.current.on('error', (e) => {
-          console.error('Mapbox error:', e);
-          reject(new Error('Failed to load map. Please check your token.'));
+        const timeoutId = setTimeout(() => {
+          reject(new Error('Map loading timed out. Please check your internet connection.'));
+        }, 15000);
+
+        map.current.on('load', () => {
+          clearTimeout(timeoutId);
+          resolve();
         });
 
-        // Timeout after 10 seconds
-        setTimeout(() => {
-          reject(new Error('Map loading timed out. Please check your connection.'));
-        }, 10000);
+        map.current.on('error', (e) => {
+          clearTimeout(timeoutId);
+          console.error('Mapbox error:', e);
+          
+          // Provide more specific error messages based on the error
+          if (e.error?.message?.includes('Unauthorized') || e.error?.status === 401) {
+            reject(new Error('Invalid or unauthorized token. Please check your Mapbox access token.'));
+          } else if (e.error?.message?.includes('rate limit') || e.error?.status === 429) {
+            reject(new Error('Rate limit exceeded. Please try again later.'));
+          } else if (e.error?.status === 403) {
+            reject(new Error('Access forbidden. Please check your token permissions.'));
+          } else {
+            reject(new Error(`Map error: ${e.error?.message || 'Unknown error occurred'}`));
+          }
+        });
       });
 
       // Add marker for server location
@@ -138,26 +164,33 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
       <div className="bg-muted rounded-lg h-96 flex flex-col items-center justify-center p-6">
         <MapPin className="h-12 w-12 mb-4 text-muted-foreground" />
         <p className="text-muted-foreground mb-4 text-center">
-          Enter your Mapbox public token to display the server location
+          Enter your Mapbox public access token to display the server location
         </p>
         <div className="w-full max-w-md space-y-3">
-          <Input
-            type="text"
-            placeholder="pk.eyJ1Ijoi..."
-            value={accessToken}
-            onChange={(e) => {
-              setAccessToken(e.target.value);
-              setError(''); // Clear error when typing
-            }}
-            className="font-mono text-sm"
-            disabled={isLoading}
-          />
+          <div className="space-y-2">
+            <Input
+              type="text"
+              placeholder="pk.eyJ1Ijoi..."
+              value={accessToken}
+              onChange={(e) => {
+                setAccessToken(e.target.value);
+                setError(''); // Clear error when typing
+              }}
+              className="font-mono text-sm"
+              disabled={isLoading}
+            />
+            <p className="text-xs text-muted-foreground">
+              Your token should start with "pk." and be about 100+ characters long
+            </p>
+          </div>
+          
           {error && (
-            <div className="flex items-center gap-2 text-destructive text-sm">
-              <AlertCircle className="h-4 w-4" />
+            <div className="flex items-start gap-2 text-destructive text-sm p-3 bg-destructive/10 rounded-md border border-destructive/20">
+              <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
               <span>{error}</span>
             </div>
           )}
+          
           <Button 
             onClick={initializeMap}
             disabled={!accessToken.trim() || isLoading}
@@ -173,17 +206,24 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
             )}
           </Button>
         </div>
-        <p className="text-xs text-muted-foreground mt-4 text-center">
-          Get your token at{' '}
+        
+        <div className="mt-6 text-center space-y-2">
+          <p className="text-xs text-muted-foreground">
+            Need a token? Get one for free at:
+          </p>
           <a 
             href="https://account.mapbox.com/access-tokens/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-primary hover:underline"
+            className="inline-flex items-center gap-1 text-primary hover:underline text-sm font-medium"
           >
-            mapbox.com/account
+            <ExternalLink className="h-3 w-3" />
+            mapbox.com/account/access-tokens
           </a>
-        </p>
+          <div className="text-xs text-muted-foreground mt-2 p-2 bg-blue-50 dark:bg-blue-950/20 rounded border">
+            <strong>Tip:</strong> Create a new token with "Public scopes" selected
+          </div>
+        </div>
       </div>
     );
   }
