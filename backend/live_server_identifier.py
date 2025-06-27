@@ -6,9 +6,9 @@ from pathlib import Path
 from datetime import datetime, timedelta, UTC
 import hashlib
 
-INPUT_JSON = Path("backend/input/fofa_10.json")
-OUTPUT_JSON = Path("frontend/public/data/live_servers.json")
-LOG_FILE = Path("backend/data/live_server_identifier.log")
+INPUT_JSON = Path("input/fofa_10.json")
+OUTPUT_JSON = Path("../frontend/public/data/live_servers.json")
+LOG_FILE = Path("data/live_server_identifier.log")
 LOG_FILE.parent.mkdir(exist_ok=True)
 
 logging.basicConfig(
