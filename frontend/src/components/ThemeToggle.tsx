@@ -32,9 +32,9 @@ const ThemeToggle = () => {
   return (
     <Button
       variant="ghost"
-      size="sm"
+      size="default"
       onClick={toggleTheme}
-      className="w-9 px-0"
+      className="h-11 w-11 md:h-9 md:w-9 px-0"
     >
       {isDark ? (
         <Sun className="h-4 w-4" />
