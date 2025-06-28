@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MapPin, Clock, Shuffle, AlertCircle } from "lucide-react";
+import { MapPin, Clock, RefreshCw, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Map from "./Map";
 
@@ -212,38 +212,31 @@ const LocationInfo = () => {
             <Button
               onClick={handleRefresh}
               disabled={refreshing}
-              size="lg"
-              variant="default"
+              size="sm"
+              variant="outline"
               className={`
-                relative overflow-hidden transition-all duration-300 group
-                bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600
-                hover:from-purple-700 hover:via-blue-700 hover:to-indigo-700
-                text-white font-semibold
-                shadow-lg hover:shadow-xl
-                border-0 rounded-xl px-6 py-3
-                active:scale-95 active:shadow-md
-                disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:shadow-lg
-                disabled:active:scale-100
-                transform hover:scale-105
+                relative overflow-hidden transition-all duration-200 
+                hover:bg-primary hover:text-primary-foreground hover:border-primary
+                focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background
+                active:scale-95
+                disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-background
+                ${refreshing ? 'bg-primary/10' : ''}
               `}
-              aria-label={refreshing ? "Finding random server..." : "Find a random server"}
+              aria-label={refreshing ? "Loading new server data" : "Load new random server"}
             >
-              <Shuffle 
-                className={`h-5 w-5 transition-all duration-500 ${
-                  refreshing ? 'animate-spin scale-110' : 'group-hover:rotate-180 group-hover:scale-110'
+              <RefreshCw 
+                className={`h-4 w-4 transition-transform duration-500 ${
+                  refreshing ? 'animate-spin' : 'group-hover:rotate-180'
                 }`} 
               />
-              <span className="ml-3 font-bold tracking-wide">
-                {refreshing ? 'Finding...' : 'Find Random Server'}
+              <span className="ml-2 hidden sm:inline">
+                {refreshing ? 'Loading...' : 'New Server'}
               </span>
               {refreshing && (
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent 
-                              transform -skew-x-12 -translate-x-full animate-shimmer" 
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
+                              transform -skew-x-12 -translate-x-full animate-pulse" 
                 />
               )}
-              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 
-                            transform -skew-x-12 -translate-x-full group-hover:translate-x-full 
-                            transition-transform duration-700" />
             </Button>
           </div>
 
