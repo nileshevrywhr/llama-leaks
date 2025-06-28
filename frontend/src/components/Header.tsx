@@ -68,28 +68,38 @@ const Header = () => {
             </nav>
           </div>
           
-          {/* Mobile Menu Button */}
-          <button 
-            onClick={toggleMobileMenu}
-            className="inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-11 w-11 mr-3 md:hidden"
-            aria-label="Toggle navigation menu"
-          >
-            <Menu className="h-5 w-5" />
-            <span className="sr-only">Toggle Menu</span>
-          </button>
-          
-          {/* Mobile Title */}
-          <div className="flex-1 md:hidden">
-            <a className="flex items-center space-x-2" href="/">
-              <Shield className="h-5 w-5 text-destructive" />
-              <span className="font-bold text-sm">
-                Ollama Security Alert
-              </span>
-            </a>
+          {/* Mobile Layout - Centered Title */}
+          <div className="flex items-center justify-between w-full md:hidden">
+            {/* Left Side - Hamburger Menu */}
+            <div className="flex-shrink-0">
+              <button 
+                onClick={toggleMobileMenu}
+                className="inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-11 w-11"
+                aria-label="Toggle navigation menu"
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle Menu</span>
+              </button>
+            </div>
+            
+            {/* Center - Title */}
+            <div className="flex-1 flex justify-center">
+              <a className="flex items-center space-x-2" href="/">
+                <Shield className="h-5 w-5 text-destructive" />
+                <span className="font-bold text-sm">
+                  Ollama Security Alert
+                </span>
+              </a>
+            </div>
+            
+            {/* Right Side - Theme Toggle */}
+            <div className="flex-shrink-0">
+              <ThemeToggle />
+            </div>
           </div>
           
-          {/* Right Side - Theme Toggle Only */}
-          <div className="flex items-center justify-end space-x-2 md:flex-1">
+          {/* Desktop Right Side - Theme Toggle Only */}
+          <div className="hidden md:flex items-center justify-end space-x-2 md:flex-1">
             <div className="flex items-center gap-2">
               <ThemeToggle />
             </div>
