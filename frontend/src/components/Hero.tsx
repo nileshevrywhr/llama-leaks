@@ -297,7 +297,6 @@ const Hero = () => {
                     <span className="text-green-400 ml-2">{serverData.running.length} running</span>
                   )}
                 </div>
-                </span>
               </div>
 
               {/* Collapsible Model Details - Mobile Only */}
