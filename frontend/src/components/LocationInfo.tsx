@@ -359,6 +359,8 @@ const LocationInfo = () => {
               <Eye className="h-5 w-5" />
               Evil Action #1
             </Button>
+
+            return <button onClick={() => {throw new Error("This is your first error!");}}>Break the world</button>;
             
             <Button 
               variant="destructive" 
