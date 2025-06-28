@@ -65,13 +65,12 @@ const Features = () => {
   ];
 
   const FeatureCard = ({ feature, index }: { feature: typeof features[0], index: number }) => (
-    <Card className="transition-all hover:shadow-lg border-destructive/20 h-full">
+    <Card className="relative transition-all hover:shadow-lg border-destructive/20 h-full">
       <CardHeader className="space-y-3">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center">
           <div className="p-2 bg-destructive/10 rounded-lg w-fit">
             {feature.icon}
           </div>
-          <Badge variant="destructive">{feature.badge}</Badge>
         </div>
         <CardTitle className="text-xl">{feature.title}</CardTitle>
       </CardHeader>
@@ -80,6 +79,7 @@ const Features = () => {
           {feature.description}
         </CardDescription>
       </CardContent>
+      <Badge variant="destructive" className="absolute bottom-4 right-4">{feature.badge}</Badge>
     </Card>
   );
 
