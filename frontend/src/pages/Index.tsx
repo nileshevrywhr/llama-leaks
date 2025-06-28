@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import WarningBanner from "@/components/WarningBanner";
 import Hero from "@/components/Hero";
 import ServerStats from "@/components/ServerStats";
-import LocationInfo from "@/components/LocationInfo";
 import Features from "@/components/Features";
 import Footer from "@/components/Footer";
 
@@ -13,7 +12,6 @@ const Index = () => {
       <Header />
       <WarningBanner />
       <Hero />
-      <LocationInfo />
       <ServerStats />
       <Features />
       <Footer />
