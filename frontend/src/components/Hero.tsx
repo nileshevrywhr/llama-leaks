@@ -5,11 +5,6 @@ import { ArrowRight, Shield, AlertTriangle } from "lucide-react";
 const Hero = () => {
   return (
     <section className="container flex flex-col items-center justify-center space-y-4 py-24 md:py-32 mt-4">
-      <div className="flex items-center space-x-2 rounded-lg bg-muted px-3 py-1">
-        <AlertTriangle className="h-4 w-4 text-destructive" />
-        <span className="text-sm">Your Ollama server is probably exposed right now</span>
-      </div>
-      
       <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl lg:leading-[1.1] text-center max-w-4xl">
         Congratulations! Your Ollama Server is Now a{" "}
         <span className="bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent">
