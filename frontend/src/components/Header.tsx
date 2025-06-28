@@ -71,7 +71,8 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button 
             onClick={toggleMobileMenu}
-            className="inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-9 py-2 mr-3 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+            className="inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9 mr-3 md:hidden"
+            aria-label="Toggle navigation menu"
           >
             <Menu className="h-5 w-5" />
             <span className="sr-only">Toggle Menu</span>
@@ -96,9 +97,9 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - Positioned below header */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[100] md:hidden">
+        <div className="fixed top-14 left-0 right-0 bottom-0 z-40 md:hidden">
           {/* Semi-transparent backdrop */}
           <div 
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -116,7 +117,8 @@ const Header = () => {
                 </div>
                 <button
                   onClick={closeMobileMenu}
-                  className="inline-flex items-center justify-center rounded-md h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                  className="inline-flex items-center justify-center rounded-md h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  aria-label="Close menu"
                 >
                   <X className="h-4 w-4" />
                   <span className="sr-only">Close menu</span>
@@ -129,21 +131,21 @@ const Header = () => {
                   <a
                     href="#features"
                     onClick={closeMobileMenu}
-                    className="flex items-center py-3 px-3 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground"
+                    className="flex items-center py-3 px-3 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     Vulnerabilities
                   </a>
                   <a
                     href="#scanner"
                     onClick={closeMobileMenu}
-                    className="flex items-center py-3 px-3 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground"
+                    className="flex items-center py-3 px-3 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     Scanner
                   </a>
                   <a
                     href="#solutions"
                     onClick={closeMobileMenu}
-                    className="flex items-center py-3 px-3 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground"
+                    className="flex items-center py-3 px-3 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     Solutions
                   </a>
