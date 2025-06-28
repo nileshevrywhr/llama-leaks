@@ -117,10 +117,6 @@ const Features = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex justify-center mt-6 space-x-2">
-            <CarouselPrevious className="relative left-0 translate-y-0" />
-            <CarouselNext className="relative right-0 translate-y-0" />
-          </div>
           <ResponsiveCarouselIndicators />
         </Carousel>
       </div>
