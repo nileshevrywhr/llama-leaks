@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Clock } from "lucide-react";
+import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Clock, ChevronDown, ChevronUp } from "lucide-react";
 import Map from "./Map";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface ServerModel {
   name: string;
@@ -31,6 +32,7 @@ const Hero = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [modelsExpanded, setModelsExpanded] = useState(false);
 
   const fetchRandomServer = async (isRefresh = false) => {
     try {
@@ -286,6 +288,90 @@ const Hero = () => {
                 </div>
               </div>
 
+              {/* Models Summary - Always Visible */}
+              <div className="flex items-center justify-between">
+                <div className="text-xs lg:text-sm">
+                  <span className="text-muted-foreground">Models: </span>
+                  <span className="text-foreground">{serverData.local.length} local</span>
+                  {serverData.running.length > 0 && (
+                    <span className="text-green-400 ml-2">{serverData.running.length} running</span>
+                  )}
+                </div>
+              </div>
+
+              {/* Collapsible Model Details - Mobile Only */}
+              <div className="lg:hidden">
+                <Collapsible open={modelsExpanded} onOpenChange={setModelsExpanded}>
+                  <CollapsibleTrigger className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                    <span>Model Details</span>
+                    {modelsExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="mt-2 space-y-2">
+                    {/* Local Models */}
+                    {serverData.local.length > 0 && (
+                      <div>
+                        <div className="text-accent text-xs mb-1">Local Models ({serverData.local.length})</div>
+                        <div className="text-xs text-muted-foreground space-y-1">
+                          {serverData.local.map((model, index) => (
+                            <div key={index} className="truncate">
+                              {model.name} ({formatSize(model.size)})
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Running Models */}
+                    {serverData.running.length > 0 && (
+                      <div>
+                        <div className="text-accent text-xs mb-1">Running ({serverData.running.length})</div>
+                        <div className="text-xs text-muted-foreground space-y-1">
+                          {serverData.running.map((model, index) => (
+                            <div key={index} className="truncate">
+                              {model.name} ({formatSize(model.size)})
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </CollapsibleContent>
+                </Collapsible>
+              </div>
+
+              {/* Desktop Model Details - Always Expanded */}
+              <div className="hidden lg:block space-y-2">
+                <div>
+                  <div className="text-accent text-xs mb-1">Local Models ({serverData.local.length})</div>
+                  <div className="text-xs text-muted-foreground">
+                    {serverData.local.length > 0 ? (
+                      serverData.local.map((model, index) => (
+                        <span key={index}>
+                          {model.name} ({formatSize(model.size)})
+                          {index < serverData.local.length - 1 && ", "}
+                        </span>
+                      ))
+                    ) : (
+                      <span>No local models</span>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <div className="text-accent text-xs mb-1">Running ({serverData.running.length})</div>
+                  <div className="text-xs text-muted-foreground">
+                    {serverData.running.length > 0 ? (
+                      serverData.running.map((model, index) => (
+                        <span key={index}>
+                          {model.name} ({formatSize(model.size)})
+                          {index < serverData.running.length - 1 && ", "}
+                        </span>
+                      ))
+                    ) : (
+                      <span>No running models</span>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
