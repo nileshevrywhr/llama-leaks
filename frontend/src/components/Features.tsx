@@ -57,10 +57,10 @@ const Features = () => {
       
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {features.map((feature, index) => (
-          <Card key={index} className="transition-all hover:shadow-lg border-destructive/20">
+          <Card key={index} className="transition-all hover:shadow-lg border-destructive/15 bg-white/80 backdrop-blur-sm">
             <CardHeader className="space-y-3">
               <div className="flex items-center justify-between">
-                <div className="p-2 bg-destructive/10 rounded-lg w-fit">
+                <div className="p-2 bg-destructive/8 rounded-lg w-fit">
                   {feature.icon}
                 </div>
                 <Badge variant="destructive">{feature.badge}</Badge>
