@@ -216,7 +216,7 @@ const Hero = () => {
             <div className="flex items-center justify-between p-6 pb-3 border-b border-border flex-shrink-0">
               <div className="flex items-center gap-2 text-muted-foreground text-xs">
                 <Clock className="w-3 h-3" />
-                <span>LIVE SERVER DATA</span>
+                <span>{timestamp.formatted} ({serverData.age})</span>
               </div>
               <Button
                 onClick={handleRefresh}
@@ -240,17 +240,8 @@ const Hero = () => {
               </Button>
             </div>
 
-            {/* Timestamp */}
-            <div className="px-6 pb-3 border-b border-border flex-shrink-0">
-              <div className="flex items-center gap-2 text-muted-foreground text-xs">
-                <span>AS OF</span>
-                <span className="text-foreground font-medium">{timestamp.formatted}</span>
-                <span className="text-muted-foreground">({serverData.age})</span>
-              </div>
-            </div>
-
             {/* Server Details - Scrollable Content */}
-            <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
+            <div className="flex-1 overflow-y-auto px-6 pt-4 pb-6 space-y-4 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
               {/* IP and Status */}
               <div className="flex items-center gap-3">
                 <span className="text-primary text-lg font-medium">
