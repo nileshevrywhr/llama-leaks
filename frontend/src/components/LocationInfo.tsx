@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MapPin, Clock, RefreshCw, AlertCircle } from "lucide-react";
+import { MapPin, Clock, Shuffle, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Map from "./Map";
 
@@ -224,13 +224,13 @@ const LocationInfo = () => {
               `}
               aria-label={refreshing ? "Loading new server data" : "Load new random server"}
             >
-              <RefreshCw 
-                className={`h-4 w-4 transition-transform duration-500 ${
-                  refreshing ? 'animate-spin' : 'group-hover:rotate-180'
+              <Shuffle 
+                className={`h-4 w-4 transition-transform duration-200 ${
+                  refreshing ? 'animate-pulse' : 'group-hover:scale-110'
                 }`} 
               />
               <span className="ml-2 hidden sm:inline">
-                {refreshing ? 'Loading...' : 'New Server'}
+                {refreshing ? 'Loading...' : 'Random Server'}
               </span>
               {refreshing && (
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
