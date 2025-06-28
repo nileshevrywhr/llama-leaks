@@ -137,7 +137,7 @@ const Hero = () => {
         </h1>
         
         <p className="max-w-xl text-center text-base text-muted-foreground md:text-lg">
-          Your server is cheerfully serving AI requests to the entire internet. 
+          Your server is cheerfully entertaining prompts from the entire internet. 
           No authentication required. Here's proof:
         </p>
 
