@@ -29,7 +29,7 @@ const ResponsiveCarouselIndicators: React.FC<ResponsiveCarouselIndicatorsProps> 
         <button
           key={index}
           className={cn(
-            "w-1 h-1 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary",
+            "w-0.5 h-0.5 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary",
             selectedIndex === index
               ? "bg-primary scale-125"
               : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
