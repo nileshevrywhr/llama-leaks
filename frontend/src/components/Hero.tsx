@@ -189,7 +189,7 @@ const Hero = () => {
         
         <p className="max-w-xl text-base text-muted-foreground md:text-lg">
           Your server is cheerfully serving AI requests to the entire internet. 
-          No authentication required. Here's live proof:
+          No authentication required. Just public endpoints serving AI models to anyone who asks nicely.
         </p>
       </div>
 
