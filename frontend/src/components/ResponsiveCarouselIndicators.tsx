@@ -19,7 +19,7 @@ const ResponsiveCarouselIndicators: React.FC<ResponsiveCarouselIndicatorsProps> 
   return (
     <div 
       className={cn(
-        "flex justify-center space-x-2 mt-4",
+        "flex justify-center space-x-2 mt-2",
         className
       )}
       role="tablist"
