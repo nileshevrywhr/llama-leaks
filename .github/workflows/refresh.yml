@@ -44,11 +44,11 @@ jobs:
               supabase = create_client(url, key)
               data = supabase.storage.from_(bucket).download(path)
 
-              target = pathlib.Path(f"backend/input/{sys.argv[1]}.json")
+              target = pathlib.Path(f"backend/input/raw_input.json")
               target.parent.mkdir(parents=True, exist_ok=True)
               target.write_bytes(data)
 
-              print("✅ File fetched and saved to backend/input/fofa_10.json")
+              print("✅ File fetched and saved to backend/input/raw_input.json")
           
           except Exception as e:
               print(f"❌ Failed to fetch file from Supabase:", e, file=sys.stderr)
