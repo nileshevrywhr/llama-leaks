@@ -2,10 +2,10 @@ import { AlertTriangle } from "lucide-react";
 
 const WarningBanner = () => {
   return (
-    <div className="fixed top-14 left-0 right-0 z-40 bg-red-600 text-white px-4 py-3 shadow-md">
-      <div className="container mx-auto flex items-center justify-center space-x-2">
+    <div className="fixed top-14 left-0 right-0 z-40 bg-red-600 text-white px-2 py-2 shadow-md">
+      <div className="flex items-center justify-center space-x-2 w-full">
         <AlertTriangle className="h-4 w-4" />
-        <span className="text-sm font-medium">
+        <span className="text-xs sm:text-sm font-medium whitespace-nowrap">
           Your Ollama server is probably exposed right now
         </span>
       </div>
