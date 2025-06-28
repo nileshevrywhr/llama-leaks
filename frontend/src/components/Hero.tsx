@@ -201,7 +201,7 @@ const Hero = () => {
       <div className="w-full max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           {/* Map */}
-          <div className="w-full h-96 min-h-[384px] max-h-[500px]">
+          <div className="w-full h-48 min-h-[192px] lg:h-96 lg:min-h-[384px] max-h-[500px]">
             <Map 
               latitude={serverData.latitude}
               longitude={serverData.longitude}
@@ -211,7 +211,7 @@ const Hero = () => {
           </div>
 
           {/* Server Information */}
-          <div className="w-full h-96 min-h-[384px] max-h-[500px] bg-background/80 dark:bg-slate-900/80 backdrop-blur-sm border border-border text-foreground rounded-lg font-mono text-sm flex flex-col">
+          <div className="w-full h-48 min-h-[192px] lg:h-96 lg:min-h-[384px] max-h-[500px] bg-background/80 dark:bg-slate-900/80 backdrop-blur-sm border border-border text-foreground rounded-lg font-mono text-sm flex flex-col">
             {/* Header with Refresh Button */}
             <div className="flex items-center justify-between p-6 pb-3 border-b border-border flex-shrink-0">
               <div className="flex items-center gap-2 text-muted-foreground text-xs">
