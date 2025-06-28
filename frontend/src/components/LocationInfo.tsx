@@ -202,7 +202,7 @@ const LocationInfo = () => {
         />
 
         {/* Server Information */}
-        <div className="bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-border text-foreground p-6 rounded-lg font-mono text-sm shadow-sm">
+        <div className="bg-background/80 dark:bg-slate-900/80 backdrop-blur-sm border border-border text-foreground p-6 rounded-lg font-mono text-sm">
           {/* Header with Refresh Button */}
           <div className="flex items-center justify-between mb-4 pb-3 border-b border-border">
             <div className="flex items-center gap-2 text-muted-foreground text-xs">

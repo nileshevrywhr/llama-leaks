@@ -8,25 +8,25 @@ const ServerStats = () => {
       value: 259237,
       label: "Total Servers",
       color: "text-blue-400",
-      bgColor: "bg-blue-500/8 border-blue-500/15 backdrop-blur-sm"
+      bgColor: "bg-blue-500/10 border-blue-500/20"
     },
     {
       value: 1937,
       label: "Valid Servers",
       color: "text-green-400", 
-      bgColor: "bg-green-500/8 border-green-500/15 backdrop-blur-sm"
+      bgColor: "bg-green-500/10 border-green-500/20"
     },
     {
       value: 126,
       label: "New Today",
       color: "text-orange-400",
-      bgColor: "bg-orange-500/8 border-orange-500/15 backdrop-blur-sm"
+      bgColor: "bg-orange-500/10 border-orange-500/20"
     },
     {
       value: 4,
       label: "Latest Find",
       color: "text-pink-400",
-      bgColor: "bg-pink-500/8 border-pink-500/15 backdrop-blur-sm",
+      bgColor: "bg-pink-500/10 border-pink-500/20",
       suffix: " minutes ago"
     }
   ];
