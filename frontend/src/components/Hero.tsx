@@ -216,7 +216,7 @@ const Hero = () => {
             <div className="flex items-center justify-between p-6 pb-3 border-b border-border flex-shrink-0">
               <div className="flex items-center gap-2 text-muted-foreground text-xs">
                 <Clock className="w-3 h-3" />
-                <span>{timestamp.formatted} ({serverData.age})</span>
+                <span>AS OF {timestamp.formatted} ({serverData.age})</span>
               </div>
               <Button
                 onClick={handleRefresh}
