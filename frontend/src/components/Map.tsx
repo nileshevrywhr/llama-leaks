@@ -17,6 +17,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
   const { theme, systemTheme } = useTheme();
+  const [currentMapStyle, setCurrentMapStyle] = useState<string>('');
 
   const waitForContainer = (): Promise<void> => {
     return new Promise((resolve, reject) => {
@@ -70,6 +71,8 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
       const mapStyle = currentTheme === 'dark' 
         ? 'mapbox://styles/mapbox/dark-v11' 
         : 'mapbox://styles/mapbox/light-v11';
+      
+      setCurrentMapStyle(mapStyle);
       
       // Create the map
       map.current = new mapboxgl.Map({
@@ -167,12 +170,15 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
         ? 'mapbox://styles/mapbox/dark-v11' 
         : 'mapbox://styles/mapbox/light-v11';
       
-      // Only update if the style is different
-      if (map.current.getStyle().name !== mapStyle.split('/').pop()) {
+      // Only update if the style is actually different
+      if (currentMapStyle !== mapStyle) {
+        console.log('Updating map style from', currentMapStyle, 'to', mapStyle);
+        setCurrentMapStyle(mapStyle);
         map.current.setStyle(mapStyle);
         
         // Re-add marker after style change
         map.current.once('styledata', () => {
+          console.log('Map style loaded, re-adding marker');
           if (map.current) {
             // Remove existing markers
             const markers = document.querySelectorAll('.mapboxgl-marker');
@@ -190,9 +196,15 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
               .addTo(map.current);
           }
         });
+        
+        // Also listen for style load errors
+        map.current.once('error', (e) => {
+          console.error('Map style load error:', e);
+        });
       }
     }
   }, [theme, systemTheme, latitude, longitude, city, country, isLoading, error]);
+  
   // Update map when coordinates change
   useEffect(() => {
     if (map.current && !isLoading && !error) {
@@ -214,7 +226,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
         )
         .addTo(map.current);
     }
-  }, [latitude, longitude, city, country, isLoading, error, theme, systemTheme]);
+  }, [latitude, longitude, city, country, isLoading, error]);
 
   return (
     <div className="bg-muted rounded-lg h-96 overflow-hidden relative">
