@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MapPin, Clock, Shuffle, AlertCircle } from "lucide-react";
+import { MapPin, Clock, Shuffle, AlertCircle, Zap, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Map from "./Map";
 
@@ -191,7 +191,17 @@ const LocationInfo = () => {
   const timestamp = formatTimestamp(serverData.first_seen_online);
 
   return (
-    <section className="container py-24">
+    <section className="container py-16">
+      <div className="text-center space-y-4 mb-12">
+        <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
+          Live Evidence: Random Exposed Server
+        </h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          Each refresh shows a different real server that's currently exposed to the internet. 
+          No hacking required—just public endpoints serving AI models to anyone who asks.
+        </p>
+      </div>
+      
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* Map with API Integration */}
         <Map 
@@ -322,6 +332,49 @@ const LocationInfo = () => {
                 <span>No running models</span>
               )}
             </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Action Buttons Section */}
+      <div className="mt-12 p-8 bg-gradient-to-br from-destructive/5 to-orange-500/5 border border-destructive/20 rounded-xl">
+        <div className="text-center space-y-6">
+          <div className="space-y-2">
+            <h3 className="text-xl font-semibold text-destructive">
+              What Could Someone Do With This Access?
+            </h3>
+            <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
+              These servers are completely open. Here's what a malicious actor could potentially do:
+            </p>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
+            <Button 
+              variant="destructive" 
+              size="lg" 
+              className="flex-1 gap-2 bg-destructive/90 hover:bg-destructive transition-all duration-200 shadow-lg hover:shadow-xl"
+              disabled
+              title="Educational purposes only - not functional"
+            >
+              <Eye className="h-5 w-5" />
+              Evil Action #1
+            </Button>
+            
+            <Button 
+              variant="destructive" 
+              size="lg" 
+              className="flex-1 gap-2 bg-gradient-to-r from-destructive to-orange-600 hover:from-destructive/90 hover:to-orange-600/90 transition-all duration-200 shadow-lg hover:shadow-xl"
+              disabled
+              title="Educational purposes only - not functional"
+            >
+              <Zap className="h-5 w-5" />
+              Evil Action #2
+            </Button>
+          </div>
+          
+          <div className="text-xs text-muted-foreground space-y-1">
+            <p className="font-medium">🛡️ Don't worry - these buttons don't actually do anything harmful.</p>
+            <p>This is purely educational to demonstrate the security implications of exposed AI servers.</p>
           </div>
         </div>
       </div>
