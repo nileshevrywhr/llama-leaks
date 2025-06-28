@@ -177,9 +177,9 @@ const Hero = () => {
   const timestamp = formatTimestamp(serverData.first_seen_online);
 
   return (
-    <section className="container flex flex-col items-center justify-center space-y-8 py-16 md:py-20 mt-4">
+    <section className="container flex flex-col items-center justify-center space-y-6 py-12 md:py-16 mt-2">
       {/* Hero Title */}
-      <div className="text-center space-y-4">
+      <div className="text-center space-y-2">
         <h1 className="text-2xl font-bold leading-tight tracking-tighter md:text-4xl lg:text-5xl lg:leading-[1.1] max-w-4xl">
           Your Ollama Server is Now a{" "}
           <span className="bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent">
@@ -187,7 +187,7 @@ const Hero = () => {
           </span>
         </h1>
         
-        <p className="max-w-xl text-base text-muted-foreground md:text-lg">
+        <p className="max-w-xl text-sm text-muted-foreground md:text-base mt-3">
           Your server is cheerfully serving AI requests to the entire internet. 
           No authentication required. Just public endpoints serving AI models to anyone who asks nicely.
         </p>
@@ -321,13 +321,13 @@ const Hero = () => {
         </div>
 
         {/* Action Buttons Section */}
-        <div className="mt-8 p-6 bg-gradient-to-br from-destructive/5 to-orange-500/5 border border-destructive/20 rounded-xl">
+        <div className="mt-6 p-4 bg-gradient-to-br from-destructive/5 to-orange-500/5 border border-destructive/20 rounded-xl">
           <div className="text-center space-y-6">
-            <div className="space-y-2">
+            <div className="space-y-1">
               <h3 className="text-lg font-semibold text-destructive">
                 What Could Someone Do With This Access?
               </h3>
-              <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
+              <p className="text-muted-foreground text-xs max-w-2xl mx-auto">
                 These servers are completely open. Here's what a malicious actor could potentially do:
               </p>
             </div>
