@@ -69,7 +69,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
       // Determine the current theme and select appropriate map style
       const currentTheme = theme === 'system' ? systemTheme : theme;
       const mapStyle = currentTheme === 'dark' 
-        ? 'mapbox://styles/mapbox/dark-v11' 
+        ? 'mapbox://styles/mapbox/dark-v10' 
         : 'mapbox://styles/mapbox/light-v11';
       
       setCurrentMapStyle(mapStyle);
