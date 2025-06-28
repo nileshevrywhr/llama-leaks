@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Clock } from "lucide-react";
+import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Clock, ChevronDown, ChevronUp } from "lucide-react";
 import Map from "./Map";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface ServerModel {
   name: string;
@@ -31,6 +32,7 @@ const Hero = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [modelsExpanded, setModelsExpanded] = useState(false);
 
   const fetchRandomServer = async (isRefresh = false) => {
     try {
@@ -199,9 +201,9 @@ const Hero = () => {
 
       {/* Integrated Location Evidence */}
       <div className="w-full max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 items-stretch">
           {/* Map */}
-          <div className="w-full h-48 min-h-[192px] lg:h-96 lg:min-h-[384px] max-h-[500px]">
+          <div className="w-full h-40 sm:h-48 lg:h-96 min-h-[160px] sm:min-h-[192px] lg:min-h-[384px] max-h-[500px]">
             <Map 
               latitude={serverData.latitude}
               longitude={serverData.longitude}
@@ -211,12 +213,13 @@ const Hero = () => {
           </div>
 
           {/* Server Information */}
-          <div className="w-full h-48 min-h-[192px] lg:h-96 lg:min-h-[384px] max-h-[500px] bg-background/80 dark:bg-slate-900/80 backdrop-blur-sm border border-border text-foreground rounded-lg font-mono text-sm flex flex-col">
+          <div className="w-full h-auto lg:h-96 lg:min-h-[384px] lg:max-h-[500px] bg-background/80 dark:bg-slate-900/80 backdrop-blur-sm border border-border text-foreground rounded-lg font-mono flex flex-col">
             {/* Header with Refresh Button */}
-            <div className="flex items-center justify-between p-6 pb-3 border-b border-border flex-shrink-0">
-              <div className="flex items-center gap-2 text-muted-foreground text-xs">
+            <div className="flex items-center justify-between p-3 lg:p-6 pb-2 lg:pb-3 border-b border-border flex-shrink-0">
+              <div className="flex items-center gap-2 text-muted-foreground text-xs lg:text-xs">
                 <Clock className="w-3 h-3" />
-                <span>AS OF {timestamp.formatted} ({serverData.age})</span>
+                <span className="hidden sm:inline">AS OF {timestamp.formatted} ({serverData.age})</span>
+                <span className="sm:hidden">{timestamp.formatted.split('|')[0]} ({serverData.age})</span>
               </div>
               <Button
                 onClick={handleRefresh}
@@ -231,7 +234,7 @@ const Hero = () => {
                     refreshing ? 'animate-pulse' : 'group-hover:scale-110'
                   }`} 
                 />
-                <span className="ml-2 hidden sm:inline">
+                <span className="ml-2 hidden lg:inline">
                   {refreshing ? 'Loading...' : 'Random Server'}
                 </span>
                 {refreshing && (
@@ -241,17 +244,17 @@ const Hero = () => {
             </div>
 
             {/* Server Details - Scrollable Content */}
-            <div className="flex-1 overflow-y-auto px-6 pt-4 pb-6 space-y-4 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
+            <div className="flex-1 lg:overflow-y-auto px-3 lg:px-6 pt-2 lg:pt-4 pb-3 lg:pb-6 space-y-2 lg:space-y-4 lg:scrollbar-thin lg:scrollbar-thumb-border lg:scrollbar-track-transparent">
               {/* IP and Status */}
-              <div className="flex items-center gap-3">
-                <span className="text-primary text-lg font-medium">
+              <div className="flex items-center gap-2 lg:gap-3">
+                <span className="text-primary text-sm lg:text-lg font-medium">
                   {serverData.ip}:{serverData.port}
                 </span>
                 <div className="flex items-center gap-2">
                   <div className={`w-2 h-2 rounded-full animate-pulse ${
                     serverData.status === 'live' ? 'bg-green-500' : 'bg-red-500'
                   }`}></div>
-                  <span className={`text-xs ${
+                  <span className={`text-xs lg:text-xs ${
                     serverData.status === 'live' ? 'text-green-500' : 'text-red-500'
                   }`}>
                     {serverData.status.toUpperCase()}
@@ -260,15 +263,21 @@ const Hero = () => {
               </div>
 
               {/* Location */}
-              <div className="flex items-center gap-2">
-                <span className="text-blue-400">{getCountryFlag(serverData.country)}</span>
-                <span className="text-foreground text-sm">
-                  {serverData.country} / {serverData.country_name} / {serverData.region} / {serverData.city}
-                </span>
+              <div className="flex items-start gap-2">
+                <span className="text-blue-400 mt-0.5">{getCountryFlag(serverData.country)}</span>
+                <div className="text-foreground text-xs lg:text-sm">
+                  <div className="lg:hidden">
+                    <div>{serverData.city}, {serverData.country_name}</div>
+                    <div className="text-muted-foreground">{serverData.region}</div>
+                  </div>
+                  <div className="hidden lg:block">
+                    {serverData.country} / {serverData.country_name} / {serverData.region} / {serverData.city}
+                  </div>
+                </div>
               </div>
 
-              {/* Protocol and Version */}
-              <div className="space-y-1 text-xs">
+              {/* Protocol and Version - Compact */}
+              <div className="grid grid-cols-2 gap-2 lg:space-y-1 lg:block text-xs lg:text-xs">
                 <div>
                   <span className="text-muted-foreground">Protocol: </span>
                   <span className="text-primary">http</span>
@@ -279,8 +288,59 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Models */}
-              <div className="space-y-2">
+              {/* Models Summary - Always Visible */}
+              <div className="flex items-center justify-between">
+                <div className="text-xs lg:text-sm">
+                  <span className="text-muted-foreground">Models: </span>
+                  <span className="text-foreground">{serverData.local.length} local</span>
+                  {serverData.running.length > 0 && (
+                    <span className="text-green-400 ml-2">{serverData.running.length} running</span>
+                  )}
+                </div>
+                </span>
+              </div>
+
+              {/* Collapsible Model Details - Mobile Only */}
+              <div className="lg:hidden">
+                <Collapsible open={modelsExpanded} onOpenChange={setModelsExpanded}>
+                  <CollapsibleTrigger className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                    <span>Model Details</span>
+                    {modelsExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="mt-2 space-y-2">
+                    {/* Local Models */}
+                    {serverData.local.length > 0 && (
+                      <div>
+                        <div className="text-accent text-xs mb-1">Local Models ({serverData.local.length})</div>
+                        <div className="text-xs text-muted-foreground space-y-1">
+                          {serverData.local.map((model, index) => (
+                            <div key={index} className="truncate">
+                              {model.name} ({formatSize(model.size)})
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Running Models */}
+                    {serverData.running.length > 0 && (
+                      <div>
+                        <div className="text-accent text-xs mb-1">Running ({serverData.running.length})</div>
+                        <div className="text-xs text-muted-foreground space-y-1">
+                          {serverData.running.map((model, index) => (
+                            <div key={index} className="truncate">
+                              {model.name} ({formatSize(model.size)})
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </CollapsibleContent>
+                </Collapsible>
+              </div>
+
+              {/* Desktop Model Details - Always Expanded */}
+              <div className="hidden lg:block space-y-2">
                 <div>
                   <div className="text-accent text-xs mb-1">Local Models ({serverData.local.length})</div>
                   <div className="text-xs text-muted-foreground">
@@ -318,21 +378,21 @@ const Hero = () => {
         </div>
 
         {/* Action Buttons Section */}
-        <div className="mt-8 p-6 bg-gradient-to-br from-destructive/5 to-orange-500/5 border border-destructive/20 rounded-xl">
+        <div className="mt-4 lg:mt-8 p-4 lg:p-6 bg-gradient-to-br from-destructive/5 to-orange-500/5 border border-destructive/20 rounded-xl">
           <div className="text-center space-y-6">
             <div className="space-y-1">
-              <h3 className="text-lg font-semibold text-destructive">
+              <h3 className="text-base lg:text-lg font-semibold text-destructive">
                 What Could Someone Do With This Access?
               </h3>
-              <p className="text-muted-foreground text-xs max-w-2xl mx-auto">
+              <p className="text-muted-foreground text-xs lg:text-sm max-w-2xl mx-auto">
                 These servers are completely open. Here's what a malicious actor could potentially do:
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
+            <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center max-w-lg mx-auto">
               <Button 
                 variant="destructive" 
-                size="lg" 
+                size="default"
                 className="flex-1 gap-2 bg-destructive/90 hover:bg-destructive transition-all duration-200 shadow-lg hover:shadow-xl"
                 disabled
                 title="Educational purposes only - not functional"
@@ -343,7 +403,7 @@ const Hero = () => {
               
               <Button 
                 variant="destructive" 
-                size="lg" 
+                size="default"
                 className="flex-1 gap-2 bg-gradient-to-r from-destructive to-orange-600 hover:from-destructive/90 hover:to-orange-600/90 transition-all duration-200 shadow-lg hover:shadow-xl"
                 disabled
                 title="Educational purposes only - not functional"
@@ -353,7 +413,7 @@ const Hero = () => {
               </Button>
             </div>
             
-            <div className="text-xs text-muted-foreground space-y-1">
+            <div className="text-xs lg:text-xs text-muted-foreground space-y-1">
               <p className="font-medium">🛡️ Don't worry - these buttons don't actually do anything harmful.</p>
               <p>This is purely educational to demonstrate the security implications of exposed AI servers.</p>
             </div>
