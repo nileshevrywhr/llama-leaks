@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { MapPin, Loader2, AlertCircle } from "lucide-react";
+import { useTheme } from "next-themes";
 
 interface MapProps {
   latitude: string;
@@ -15,6 +16,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
   const map = useRef<mapboxgl.Map | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
+  const { theme, systemTheme } = useTheme();
 
   const waitForContainer = (): Promise<void> => {
     return new Promise((resolve, reject) => {
@@ -63,10 +65,16 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
 
       mapboxgl.accessToken = accessToken;
       
+      // Determine the current theme and select appropriate map style
+      const currentTheme = theme === 'system' ? systemTheme : theme;
+      const mapStyle = currentTheme === 'dark' 
+        ? 'mapbox://styles/mapbox/dark-v11' 
+        : 'mapbox://styles/mapbox/light-v11';
+      
       // Create the map
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/light-v11',
+        style: mapStyle,
         center: [Number(longitude), Number(latitude)],
         zoom: 10,
       });
@@ -106,7 +114,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
 
       // Add marker for server location
       new mapboxgl.Marker({
-        color: '#10b981', // green color to match the theme
+        color: currentTheme === 'dark' ? '#22c55e' : '#10b981', // Adjust marker color for theme
       })
         .setLngLat([Number(longitude), Number(latitude)])
         .setPopup(
@@ -151,17 +159,53 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
     };
   }, []);
 
+  // Update map style when theme changes
+  useEffect(() => {
+    if (map.current && !isLoading && !error) {
+      const currentTheme = theme === 'system' ? systemTheme : theme;
+      const mapStyle = currentTheme === 'dark' 
+        ? 'mapbox://styles/mapbox/dark-v11' 
+        : 'mapbox://styles/mapbox/light-v11';
+      
+      // Only update if the style is different
+      if (map.current.getStyle().name !== mapStyle.split('/').pop()) {
+        map.current.setStyle(mapStyle);
+        
+        // Re-add marker after style change
+        map.current.once('styledata', () => {
+          if (map.current) {
+            // Remove existing markers
+            const markers = document.querySelectorAll('.mapboxgl-marker');
+            markers.forEach(marker => marker.remove());
+            
+            // Add new marker with theme-appropriate color
+            new mapboxgl.Marker({
+              color: currentTheme === 'dark' ? '#22c55e' : '#10b981',
+            })
+              .setLngLat([Number(longitude), Number(latitude)])
+              .setPopup(
+                new mapboxgl.Popup({ offset: 25 })
+                  .setHTML(`<div class="p-2"><strong>${city}, ${country}</strong><br/>Server Location</div>`)
+              )
+              .addTo(map.current);
+          }
+        });
+      }
+    }
+  }, [theme, systemTheme, latitude, longitude, city, country, isLoading, error]);
   // Update map when coordinates change
   useEffect(() => {
     if (map.current && !isLoading && !error) {
       map.current.setCenter([Number(longitude), Number(latitude)]);
+      
+      const currentTheme = theme === 'system' ? systemTheme : theme;
       
       // Update marker
       const markers = document.querySelectorAll('.mapboxgl-marker');
       markers.forEach(marker => marker.remove());
       
       new mapboxgl.Marker({
-        color: '#10b981',
+        color: currentTheme === 'dark' ? '#22c55e' : '#10b981',
       })
         .setLngLat([Number(longitude), Number(latitude)])
         .setPopup(
@@ -170,7 +214,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
         )
         .addTo(map.current);
     }
-  }, [latitude, longitude, city, country, isLoading, error]);
+  }, [latitude, longitude, city, country, isLoading, error, theme, systemTheme]);
 
   return (
     <div className="bg-muted rounded-lg h-96 overflow-hidden relative">
