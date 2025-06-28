@@ -1,5 +1,6 @@
 
 import Header from "@/components/Header";
+import WarningBanner from "@/components/WarningBanner";
 import Hero from "@/components/Hero";
 import ServerStats from "@/components/ServerStats";
 import LocationInfo from "@/components/LocationInfo";
@@ -8,8 +9,9 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-12">
       <Header />
+      <WarningBanner />
       <Hero />
       <ServerStats />
       <LocationInfo />
