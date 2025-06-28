@@ -121,9 +121,8 @@ const Features = () => {
             <CarouselPrevious className="relative left-0 translate-y-0" />
             <CarouselNext className="relative right-0 translate-y-0" />
           </div>
+          <ResponsiveCarouselIndicators />
         </Carousel>
-        
-        <ResponsiveCarouselIndicators />
       </div>
 
       {/* Desktop Grid */}
