@@ -199,19 +199,21 @@ const Hero = () => {
 
       {/* Integrated Location Evidence */}
       <div className="w-full max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           {/* Map */}
-          <Map 
-            latitude={serverData.latitude}
-            longitude={serverData.longitude}
-            city={serverData.city}
-            country={serverData.country_name}
-          />
+          <div className="w-full h-96 min-h-[384px] max-h-[500px]">
+            <Map 
+              latitude={serverData.latitude}
+              longitude={serverData.longitude}
+              city={serverData.city}
+              country={serverData.country_name}
+            />
+          </div>
 
           {/* Server Information */}
-          <div className="bg-background/80 dark:bg-slate-900/80 backdrop-blur-sm border border-border text-foreground p-6 rounded-lg font-mono text-sm">
+          <div className="w-full h-96 min-h-[384px] max-h-[500px] bg-background/80 dark:bg-slate-900/80 backdrop-blur-sm border border-border text-foreground rounded-lg font-mono text-sm flex flex-col">
             {/* Header with Refresh Button */}
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-border">
+            <div className="flex items-center justify-between p-6 pb-3 border-b border-border flex-shrink-0">
               <div className="flex items-center gap-2 text-muted-foreground text-xs">
                 <Clock className="w-3 h-3" />
                 <span>LIVE SERVER DATA</span>
@@ -239,7 +241,7 @@ const Hero = () => {
             </div>
 
             {/* Timestamp */}
-            <div className="mb-4 pb-3 border-b border-border">
+            <div className="px-6 pb-3 border-b border-border flex-shrink-0">
               <div className="flex items-center gap-2 text-muted-foreground text-xs">
                 <span>AS OF</span>
                 <span className="text-foreground font-medium">{timestamp.formatted}</span>
@@ -247,8 +249,8 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Server Details */}
-            <div className="space-y-4">
+            {/* Server Details - Scrollable Content */}
+            <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
               {/* IP and Status */}
               <div className="flex items-center gap-3">
                 <span className="text-primary text-lg font-medium">
@@ -325,7 +327,7 @@ const Hero = () => {
         </div>
 
         {/* Action Buttons Section */}
-        <div className="mt-6 p-4 bg-gradient-to-br from-destructive/5 to-orange-500/5 border border-destructive/20 rounded-xl">
+        <div className="mt-8 p-6 bg-gradient-to-br from-destructive/5 to-orange-500/5 border border-destructive/20 rounded-xl">
           <div className="text-center space-y-6">
             <div className="space-y-1">
               <h3 className="text-lg font-semibold text-destructive">

@@ -229,16 +229,15 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
   }, [latitude, longitude, city, country, isLoading, error]);
 
   return (
-    <div className="bg-muted rounded-lg h-96 overflow-hidden relative">
+    <div className="bg-muted rounded-lg w-full h-full overflow-hidden relative">
       <div 
         ref={mapContainer} 
         className="w-full h-full"
-        style={{ minHeight: '384px' }} // Ensure minimum height
       />
       
       {/* Loading overlay */}
       {isLoading && (
-        <div className="absolute inset-0 bg-muted rounded-lg flex items-center justify-center">
+        <div className="absolute inset-0 bg-muted rounded-lg flex items-center justify-center z-10">
           <div className="text-center">
             <Loader2 className="h-8 w-8 mb-4 text-primary mx-auto animate-spin" />
             <p className="text-muted-foreground">Loading map...</p>
@@ -248,7 +247,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
       
       {/* Error overlay */}
       {error && (
-        <div className="absolute inset-0 bg-muted rounded-lg flex items-center justify-center">
+        <div className="absolute inset-0 bg-muted rounded-lg flex items-center justify-center z-10">
           <div className="text-center p-6">
             <AlertCircle className="h-12 w-12 mb-4 text-destructive mx-auto" />
             <p className="text-destructive font-medium mb-2">Map Error</p>
