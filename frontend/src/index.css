@@ -123,41 +123,6 @@
     outline-offset: 2px;
   }
 
-  /* Hero title centering utilities */
-  .hero-title-flex {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 0.75rem 0.75rem; /* 12px gap */
-  }
-  
-  /* Fallback for older browsers */
-  .hero-title-flex {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-  
-  /* Better text rendering for gradient text */
-  .gradient-text {
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
-    display: inline-block;
-  }
-
   /* Custom scrollbar styles */
   .scrollbar-thin {
     scrollbar-width: thin;
