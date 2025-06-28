@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Shield, AlertTriangle, Eye, Lock, Globe, Clock, Wifi, Server, Firewall, Activity, Key, VpnIcon, Gauge, Search } from "lucide-react";
+import { Shield, AlertTriangle, Eye, Lock, Globe, Clock, Wifi, Server, ShieldCheck, Activity, Key, VpnIcon, Gauge, Search } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -170,7 +170,7 @@ const Features = () => {
               <div className="group relative overflow-hidden rounded-lg border border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-blue-600/10 hover:from-blue-500/20 hover:to-blue-600/20 transition-all duration-200 shadow-md hover:shadow-lg p-4">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-blue-500/20 rounded-lg">
-                    <Firewall className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                    <ShieldCheck className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div className="text-left">
                     <div className="font-medium text-blue-700 dark:text-blue-300">Set up firewall rules</div>
