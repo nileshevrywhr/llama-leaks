@@ -195,16 +195,6 @@ const Hero = () => {
 
       {/* Integrated Location Evidence */}
       <div className="w-full max-w-6xl">
-        <div className="text-center mb-8">
-          <h2 className="text-xl font-bold mb-2 md:text-2xl">
-            Live Evidence: Random Exposed Server
-          </h2>
-          <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
-            Each refresh shows a different real server that's currently exposed to the internet. 
-            No hacking required—just public endpoints serving AI models to anyone who asks.
-          </p>
-        </div>
-        
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Map */}
           <Map 
