@@ -26,6 +26,8 @@ type CarouselContextProps = {
   scrollNext: () => void
   canScrollPrev: boolean
   canScrollNext: boolean
+  scrollSnaps: number[]
+  selectedIndex: number
 } & CarouselProps
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
@@ -65,6 +67,8 @@ const Carousel = React.forwardRef<
     )
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
+    const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([])
+    const [selectedIndex, setSelectedIndex] = React.useState(0)
 
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
@@ -73,6 +77,7 @@ const Carousel = React.forwardRef<
 
       setCanScrollPrev(api.canScrollPrev())
       setCanScrollNext(api.canScrollNext())
+      setSelectedIndex(api.selectedScrollSnap())
     }, [])
 
     const scrollPrev = React.useCallback(() => {
@@ -109,6 +114,7 @@ const Carousel = React.forwardRef<
         return
       }
 
+      setScrollSnaps(api.scrollSnapList())
       onSelect(api)
       api.on("reInit", onSelect)
       api.on("select", onSelect)
@@ -130,6 +136,8 @@ const Carousel = React.forwardRef<
           scrollNext,
           canScrollPrev,
           canScrollNext,
+          scrollSnaps,
+          selectedIndex,
         }}
       >
         <div
@@ -138,6 +146,7 @@ const Carousel = React.forwardRef<
           className={cn("relative", className)}
           role="region"
           aria-roledescription="carousel"
+          aria-label="Feature cards carousel"
           {...props}
         >
           {children}

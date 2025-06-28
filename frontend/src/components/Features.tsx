@@ -1,9 +1,30 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Shield, AlertTriangle, Eye, Lock, Globe, Clock } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import ResponsiveCarouselIndicators from "./ResponsiveCarouselIndicators";
+import { useEffect, useState } from "react";
 
 const Features = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const features = [
     {
       icon: <AlertTriangle className="h-6 w-6" />,
@@ -43,6 +64,25 @@ const Features = () => {
     }
   ];
 
+  const FeatureCard = ({ feature, index }: { feature: typeof features[0], index: number }) => (
+    <Card className="transition-all hover:shadow-lg border-destructive/20 h-full">
+      <CardHeader className="space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="p-2 bg-destructive/10 rounded-lg w-fit">
+            {feature.icon}
+          </div>
+          <Badge variant="destructive">{feature.badge}</Badge>
+        </div>
+        <CardTitle className="text-xl">{feature.title}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <CardDescription className="text-base leading-relaxed">
+          {feature.description}
+        </CardDescription>
+      </CardContent>
+    </Card>
+  );
+
   return (
     <section id="features" className="container py-24 space-y-8">
       <div className="text-center space-y-4">
@@ -55,24 +95,41 @@ const Features = () => {
         </p>
       </div>
       
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature, index) => (
-          <Card key={index} className="transition-all hover:shadow-lg border-destructive/20">
-            <CardHeader className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="p-2 bg-destructive/10 rounded-lg w-fit">
-                  {feature.icon}
+      {/* Mobile Carousel */}
+      <div className="md:hidden">
+        <Carousel
+          className="w-full"
+          opts={{
+            align: "start",
+            loop: true,
+            dragFree: true,
+          }}
+        >
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {features.map((feature, index) => (
+              <CarouselItem 
+                key={index} 
+                className="pl-2 md:pl-4 basis-[85%] sm:basis-[70%]"
+              >
+                <div className="h-full">
+                  <FeatureCard feature={feature} index={index} />
                 </div>
-                <Badge variant="destructive">{feature.badge}</Badge>
-              </div>
-              <CardTitle className="text-xl">{feature.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-base leading-relaxed">
-                {feature.description}
-              </CardDescription>
-            </CardContent>
-          </Card>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="flex justify-center mt-6 space-x-2">
+            <CarouselPrevious className="relative left-0 translate-y-0" />
+            <CarouselNext className="relative right-0 translate-y-0" />
+          </div>
+        </Carousel>
+        
+        <ResponsiveCarouselIndicators />
+      </div>
+
+      {/* Desktop Grid */}
+      <div className="hidden md:grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {features.map((feature, index) => (
+          <FeatureCard key={index} feature={feature} index={index} />
         ))}
       </div>
       
