@@ -185,23 +185,6 @@ const PricingTiers = () => {
           </Card>
         ))}
       </div>
-
-      {/* Bottom CTA */}
-      <div className="text-center mt-16 space-y-4">
-        <h3 className="text-xl font-semibold">
-          Still not convinced? That's concerning.
-        </h3>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
-          All tiers include the same level of existential security awareness and the 
-          gradual realization that maybe, just maybe, you should secure your servers.
-        </p>
-        <div className="pt-4">
-          <Button size="lg" className="gap-2">
-            <Shield className="h-5 w-5" />
-            Start Your Free Security Enlightenment
-          </Button>
-        </div>
-      </div>
     </section>
   );
 };

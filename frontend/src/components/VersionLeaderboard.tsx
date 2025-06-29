@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Trophy, Medal, Award, Server, HardDrive } from 'lucide-react';
+import { Trophy, Medal, Award, Server, HardDrive, Shield } from 'lucide-react';
 import AnimatedCounter from './AnimatedCounter';
+import { Button } from "@/components/ui/button";
 
 interface ServerModel {
   name: string;
@@ -318,6 +319,25 @@ const VersionLeaderboard = () => {
         <p className="text-sm text-muted-foreground">
           Real-time data from live server monitoring. Rankings update automatically.
         </p>
+      </div>
+
+      {/* Bottom CTA */}
+      <div className="text-center mt-16 space-y-4">
+        <h3 className="text-xl font-semibold">
+          Don't see your version here? That's either very good or very bad.
+        </h3>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+          Either you're running the latest secure version, or you're so outdated that even 
+          our scanners gave up. Check if your server made it to the wall of shame.
+        </p>
+        <div className="pt-4">
+          <Button size="lg" className="gap-2" asChild>
+            <a href="/">
+              <Shield className="h-5 w-5" />
+              Check If You're Famous
+            </a>
+          </Button>
+        </div>
       </div>
     </section>
   );
