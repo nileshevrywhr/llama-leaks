@@ -360,8 +360,6 @@ const LocationInfo = () => {
               Evil Action #1
             </Button>
 
-            return <button onClick={() => {throw new Error("This is your first error!");}}>Break the world</button>;
-            
             <Button 
               variant="destructive" 
               size="lg" 
