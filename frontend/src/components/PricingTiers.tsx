@@ -74,11 +74,42 @@ const PricingTiers = () => {
     <section className="container py-24">
       <div className="text-center space-y-4 mb-16">
         <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-          Pricing
+         Security That Won't Break the Bank
         </h2>
-        <div className="text-muted-foreground text-lg max-w-3xl mx-auto space-y-2">
-          <p>Simple, transparent, and completely free</p>
-          <p className="italic">Because security shouldn't cost a fortune 💸</p>
+        <div className="text-muted-foreground max-w-4xl mx-auto space-y-4">
+          <p className="text-lg font-medium">
+            Zero dollars. Zero cents. Zero excuse for exposed servers.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div className="space-y-1">
+              <p className="font-semibold text-foreground">💡 Real-Time Monitoring</p>
+              <p>Catch exposed servers before hackers do</p>
+            </div>
+            <div className="space-y-1">
+              <p className="font-semibold text-foreground">🎯 Educational Tools</p>
+              <p>Learn security through public shame</p>
+            </div>
+            <div className="space-y-1">
+              <p className="font-semibold text-foreground">🛡️ Community Impact</p>
+              <p>Help secure the internet, one server at a time</p>
+            </div>
+          </div>
+          
+          <div className="pt-4 space-y-2">
+            <p className="italic text-base">
+              Because security shouldn't cost a fortune, but insecurity definitely will
+            </p>
+            
+            <div className="bg-muted/20 border border-muted/40 rounded-lg p-4 max-w-md mx-auto">
+              <p className="text-xs font-mono leading-relaxed">
+                <span className="text-muted-foreground">// A haiku about money:</span><br/>
+                <span className="text-foreground">Free tools save your cash</span><br/>
+                <span className="text-foreground">But exposed servers cost more</span><br/>
+                <span className="text-foreground">Choose wisely, my friend</span>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
