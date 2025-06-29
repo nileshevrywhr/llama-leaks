@@ -91,10 +91,7 @@ const Features = () => {
         </h3>
         <div className="text-muted-foreground text-base max-w-2xl mx-auto space-y-1">
           <p className="text-center">
-            *Don't worry, you're not alone. Thousands of developers are making the same mistake right now.
-          </p>
-          <p className="text-center">
-            Yes, even the one sitting next to you who claims to be a "security expert."
+            *Don't worry, you're not alone. Thousands of developers are making the same mistake right now. Yes, even the one sitting next to you who claims to be a "security expert."
           </p>
         </div>
       </div>
