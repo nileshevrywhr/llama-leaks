@@ -43,6 +43,28 @@ const ServerStats = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const formatTimeDuration = (minutes: number): string => {
+    if (minutes < 1) {
+      const seconds = Math.floor(minutes * 60);
+      return seconds === 1 ? "1 second ago" : `${seconds} seconds ago`;
+    } else if (minutes < 60) {
+      const mins = Math.floor(minutes);
+      return mins === 1 ? "1 minute ago" : `${mins} minutes ago`;
+    } else if (minutes < 1440) { // Less than 24 hours
+      const hours = Math.floor(minutes / 60);
+      return hours === 1 ? "1 hour ago" : `${hours} hours ago`;
+    } else if (minutes < 10080) { // Less than 7 days
+      const days = Math.floor(minutes / 1440);
+      return days === 1 ? "1 day ago" : `${days} days ago`;
+    } else if (minutes < 43200) { // Less than 30 days
+      const weeks = Math.floor(minutes / 10080);
+      return weeks === 1 ? "1 week ago" : `${weeks} weeks ago`;
+    } else {
+      const months = Math.floor(minutes / 43200);
+      return months === 1 ? "1 month ago" : `${months} months ago`;
+    }
+  };
+
   useEffect(() => {
     const fetchAndCalculateStats = async () => {
       try {
@@ -138,7 +160,7 @@ const ServerStats = () => {
       label: "Latest Find",
       color: "text-pink-400",
       bgColor: "bg-pink-500/10 border-pink-500/20",
-      suffix: " minutes ago"
+      formatAsTime: true
     }
   ];
 
@@ -188,12 +210,18 @@ const ServerStats = () => {
           >
             <div className="text-center">
               <div className={`text-2xl md:text-3xl font-bold ${stat.color} mb-2`}>
-                <AnimatedCounter 
-                  target={stat.value} 
-                  duration={2000 + (index * 300)}
-                />
-                {stat.suffix && (
-                  <span className="text-sm font-normal">{stat.suffix}</span>
+                {stat.formatAsTime ? (
+                  <span className="text-sm font-normal">{formatTimeDuration(stat.value)}</span>
+                ) : (
+                  <>
+                    <AnimatedCounter 
+                      target={stat.value} 
+                      duration={2000 + (index * 300)}
+                    />
+                    {stat.suffix && (
+                      <span className="text-sm font-normal">{stat.suffix}</span>
+                    )}
+                  </>
                 )}
               </div>
               <div className="text-sm text-muted-foreground font-medium">
