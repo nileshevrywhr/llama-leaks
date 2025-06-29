@@ -33,6 +33,14 @@ interface ServerStats {
   latestFindMinutes: number;
 }
 
+interface TimeUnits {
+  seconds: number;
+  minutes: number;
+  hours: number;
+  days: number;
+  months: number;
+}
+
 const ServerStats = () => {
   const [stats, setStats] = useState<ServerStats>({
     totalServers: 0,
@@ -42,6 +50,35 @@ const ServerStats = () => {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Convert minutes to all time units
+  const convertToTimeUnits = (minutes: number): TimeUnits => {
+    const seconds = minutes * 60;
+    const hours = minutes / 60;
+    const days = minutes / (60 * 24);
+    const months = minutes / (60 * 24 * 30.44); // Average month length
+    
+    return {
+      seconds: parseFloat(seconds.toFixed(2)),
+      minutes: parseFloat(minutes.toFixed(2)),
+      hours: parseFloat(hours.toFixed(2)),
+      days: parseFloat(days.toFixed(2)),
+      months: parseFloat(months.toFixed(2))
+    };
+  };
+
+  // Format time display for the primary metric
+  const formatPrimaryTime = (minutes: number): { value: number; unit: string } => {
+    if (minutes < 60) {
+      return { value: minutes, unit: 'min' };
+    } else if (minutes < 60 * 24) {
+      return { value: parseFloat((minutes / 60).toFixed(1)), unit: 'hr' };
+    } else if (minutes < 60 * 24 * 30) {
+      return { value: parseFloat((minutes / (60 * 24)).toFixed(1)), unit: 'day' };
+    } else {
+      return { value: parseFloat((minutes / (60 * 24 * 30.44)).toFixed(1)), unit: 'mo' };
+    }
+  };
 
   useEffect(() => {
     const fetchAndCalculateStats = async () => {
@@ -114,6 +151,9 @@ const ServerStats = () => {
     fetchAndCalculateStats();
   }, []);
 
+  const timeUnits = convertToTimeUnits(stats.latestFindMinutes);
+  const primaryTime = formatPrimaryTime(stats.latestFindMinutes);
+
   const statsConfig = [
     {
       value: stats.totalServers,
@@ -134,11 +174,12 @@ const ServerStats = () => {
       bgColor: "bg-orange-500/10 border-orange-500/20"
     },
     {
-      value: stats.latestFindMinutes,
+      value: primaryTime.value,
       label: "Latest Find",
       color: "text-pink-400",
       bgColor: "bg-pink-500/10 border-pink-500/20",
-      suffix: " minutes ago"
+      suffix: ` ${primaryTime.unit} ago`,
+      isTime: true
     }
   ];
 
@@ -203,6 +244,79 @@ const ServerStats = () => {
           </div>
         ))}
       </div>
+      
+      {/* Multi-Unit Time Display for Latest Find */}
+      {stats.latestFindMinutes > 0 && (
+        <div className="mt-8 p-6 bg-gradient-to-br from-pink-500/5 to-purple-500/5 border border-pink-500/20 rounded-xl">
+          <div className="text-center space-y-4">
+            <h3 className="text-lg font-semibold text-pink-600 dark:text-pink-400">
+              Latest Server Discovery - Time Breakdown
+            </h3>
+            
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
+              <div className="p-4 bg-background/50 rounded-lg border border-pink-500/10">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-pink-600 dark:text-pink-400">
+                    {timeUnits.seconds.toLocaleString()}
+                  </div>
+                  <div className="text-xs text-muted-foreground font-medium">
+                    Seconds
+                  </div>
+                </div>
+              </div>
+              
+              <div className="p-4 bg-background/50 rounded-lg border border-pink-500/10">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-pink-600 dark:text-pink-400">
+                    {timeUnits.minutes.toLocaleString()}
+                  </div>
+                  <div className="text-xs text-muted-foreground font-medium">
+                    Minutes
+                  </div>
+                </div>
+              </div>
+              
+              <div className="p-4 bg-background/50 rounded-lg border border-pink-500/10">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-pink-600 dark:text-pink-400">
+                    {timeUnits.hours.toLocaleString()}
+                  </div>
+                  <div className="text-xs text-muted-foreground font-medium">
+                    Hours
+                  </div>
+                </div>
+              </div>
+              
+              <div className="p-4 bg-background/50 rounded-lg border border-pink-500/10">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-pink-600 dark:text-pink-400">
+                    {timeUnits.days.toLocaleString()}
+                  </div>
+                  <div className="text-xs text-muted-foreground font-medium">
+                    Days
+                  </div>
+                </div>
+              </div>
+              
+              <div className="p-4 bg-background/50 rounded-lg border border-pink-500/10">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-pink-600 dark:text-pink-400">
+                    {timeUnits.months.toLocaleString()}
+                  </div>
+                  <div className="text-xs text-muted-foreground font-medium">
+                    Months
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="text-xs text-muted-foreground">
+              <p className="font-medium">Time since the most recently discovered exposed server</p>
+              <p>All values calculated from {stats.latestFindMinutes} minutes and rounded to 2 decimal places</p>
+            </div>
+          </div>
+        </div>
+      )}
       
       <div className="text-center mt-6">
         <p className="text-sm text-muted-foreground">
