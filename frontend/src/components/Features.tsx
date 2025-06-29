@@ -85,11 +85,11 @@ const Features = () => {
 
   return (
     <section id="features" className="container py-24 space-y-8">
-      <div className="text-center space-y-4">
-        <h3 className="text-3xl font-bold tracking-tight md:text-4xl">
+      <div className="text-center space-y-2">
+        <h3 className="text-2xl font-bold tracking-tight md:text-3xl">
           Why Your Ollama Server is a Security Nightmare*
         </h3>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+        <p className="text-muted-foreground text-base max-w-xl mx-auto">
           *Don't worry, you're not alone. Thousands of developers are making the same mistake 
           right now. Yes, even the one sitting next to you who claims to be a "security expert."
         </p>
