@@ -65,6 +65,24 @@ const Header = () => {
               >
                 Solutions
               </a>
+              <a
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+                href="/leaderboard"
+              >
+                Leaderboard
+              </a>
+              <a
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+                href="/pricing"
+              >
+                Pricing
+              </a>
+              <a
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+                href="/about"
+              >
+                About
+              </a>
             </nav>
           </div>
           
@@ -158,6 +176,27 @@ const Header = () => {
                     className="flex items-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     Solutions
+                  </a>
+                  <a
+                    href="/leaderboard"
+                    onClick={closeMobileMenu}
+                    className="flex items-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    Leaderboard
+                  </a>
+                  <a
+                    href="/pricing"
+                    onClick={closeMobileMenu}
+                    className="flex items-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    Pricing
+                  </a>
+                  <a
+                    href="/about"
+                    onClick={closeMobileMenu}
+                    className="flex items-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    About
                   </a>
                 </div>
               </nav>
