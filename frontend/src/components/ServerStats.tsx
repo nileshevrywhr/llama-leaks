@@ -233,18 +233,16 @@ const ServerStats = () => {
             <div className="text-center">
               <div className={`text-2xl md:text-3xl font-bold ${stat.color} mb-2`}>
                 {stat.formatAsTime ? (
-                  <>
-                    <div className="flex flex-col items-center">
-                      <AnimatedCounter 
-                        target={formatTimeComponents(stat.value).value} 
-                        duration={2000 + (index * 300)}
-                        className="text-2xl md:text-3xl font-bold"
-                      />
-                      <div className="text-xs md:text-sm font-normal text-center mt-1 leading-tight">
-                        {formatTimeComponents(stat.value).unit}
-                      </div>
-                    </div>
-                  </>
+                  <div className="flex items-center justify-center gap-1">
+                    <AnimatedCounter 
+                      target={formatTimeComponents(stat.value).value} 
+                      duration={2000 + (index * 300)}
+                      className="text-2xl md:text-3xl font-bold"
+                    />
+                    <span className="text-xs md:text-sm font-normal">
+                      {formatTimeComponents(stat.value).unit}
+                    </span>
+                  </div>
                 ) : (
                   <>
                     <AnimatedCounter 
