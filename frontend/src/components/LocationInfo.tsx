@@ -370,6 +370,20 @@ const LocationInfo = () => {
               <Zap className="h-5 w-5" />
               Evil Action #2
             </Button>
+
+            <Button 
+              variant="destructive" 
+              size="lg" 
+              className="flex-1 gap-2 bg-gradient-to-r from-destructive to-orange-600 hover:from-destructive/90 hover:to-orange-600/90 transition-all duration-200 shadow-lg hover:shadow-xl"
+              disabled
+              title="Educational purposes only - not functional"
+              onClick={() => {
+                throw new Error("Sentry Test Error");
+              }}
+            >
+              <Zap className="h-5 w-5" />
+              Break The World!
+            </Button>
           </div>
           
           <div className="text-xs text-muted-foreground space-y-1">
