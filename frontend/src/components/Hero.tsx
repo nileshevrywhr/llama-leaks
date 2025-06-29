@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as Sentry from "@sentry/react";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Clock, ChevronDown, ChevronUp } from "lucide-react";
 import Map from "./Map";
@@ -30,11 +31,43 @@ interface ServerData {
 
 const Hero = () => {
   const [serverData, setServerData] = useState<ServerData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
   const [modelsExpanded, setModelsExpanded] = useState(false);
 
+  // Use React Query for server data fetching
+  const { data: allServers, isLoading, isRefetching, error, refetch } = useQuery({
+    queryKey: ['servers', refreshKey],
+    queryFn: async () => {
+      const response = await fetch('/data/live_servers.json');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch server data: ${response.status}`);
+      }
+      return response.json();
+    },
+    select: (serversObject) => {
+      const serverEntries = Object.values(serversObject) as ServerData[];
+      if (serverEntries.length === 0) {
+        throw new Error('No servers found in the data');
+      }
+      const randomIndex = Math.floor(Math.random() * serverEntries.length);
+      return serverEntries[randomIndex];
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    refetchOnWindowFocus: false,
+  });
+
+  // Update local state when React Query data changes
+  useEffect(() => {
+    if (allServers) {
+      setServerData(allServers);
+    }
+  }, [allServers]);
+
+  const handleRefresh = () => {
+    setRefreshKey(prev => prev + 1);
+  };
+
+  /* Old fetch function - keeping for reference but now using React Query
   const fetchRandomServer = async (isRefresh = false) => {
     try {
       if (isRefresh) {
@@ -91,15 +124,7 @@ const Hero = () => {
       setLoading(false);
       setRefreshing(false);
     }
-  };
-
-  useEffect(() => {
-    fetchRandomServer();
-  }, []);
-
-  const handleRefresh = () => {
-    fetchRandomServer(true);
-  };
+  }; */
 
   const formatSize = (bytes: number) => {
     const mb = bytes / (1024 * 1024);
@@ -153,7 +178,7 @@ const Hero = () => {
     return flags[countryCode] || '🌍';
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <section className="container flex flex-col items-center justify-center space-y-6 py-16 md:py-20 mt-4">
         <h1 className="text-2xl font-bold leading-tight tracking-tighter md:text-4xl lg:text-5xl lg:leading-[1.1] text-center max-w-3xl">
@@ -178,7 +203,7 @@ const Hero = () => {
     );
   }
 
-  if (error || !serverData) {
+  if (error || !allServers || !serverData) {
     return (
       <section className="container flex flex-col items-center justify-center space-y-6 py-16 md:py-20 mt-4">
         <h1 className="text-2xl font-bold leading-tight tracking-tighter md:text-4xl lg:text-5xl lg:leading-[1.1] text-center max-w-3xl">
@@ -191,8 +216,8 @@ const Hero = () => {
         <div className="w-full max-w-4xl bg-destructive/5 border border-destructive/20 rounded-lg p-8 text-center">
           <AlertCircle className="h-12 w-12 mb-4 text-destructive mx-auto" />
           <h3 className="text-lg font-semibold text-destructive mb-2">Unable to Load Live Evidence</h3>
-          <p className="text-muted-foreground mb-4">{error}</p>
-          <Button onClick={() => fetchRandomServer()} className="bg-primary text-primary-foreground hover:bg-primary/90">
+          <p className="text-muted-foreground mb-4">{error?.message || 'Unknown error'}</p>
+          <Button onClick={() => refetch()} className="bg-primary text-primary-foreground hover:bg-primary/90">
             <Shuffle className="h-4 w-4 mr-2" />
             Try Again
           </Button>
@@ -248,21 +273,21 @@ const Hero = () => {
               </div>
               <Button
                 onClick={handleRefresh}
-                disabled={refreshing}
+                disabled={isRefetching}
                 size="sm"
                 variant="outline"
                 className="relative overflow-hidden transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-background"
-                aria-label={refreshing ? "Loading new server data" : "Load new random server"}
+                aria-label={isRefetching ? "Loading new server data" : "Load new random server"}
               >
                 <Shuffle 
                   className={`h-4 w-4 transition-transform duration-200 ${
-                    refreshing ? 'animate-pulse' : 'group-hover:scale-110'
+                    isRefetching ? 'animate-pulse' : 'group-hover:scale-110'
                   }`} 
                 />
                 <span className="ml-2 hidden lg:inline">
-                  {refreshing ? 'Loading...' : 'Random Server'}
+                  {isRefetching ? 'Loading...' : 'Random Server'}
                 </span>
-                {refreshing && (
+                {isRefetching && (
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full animate-pulse" />
                 )}
               </Button>

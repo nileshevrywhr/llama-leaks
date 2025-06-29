@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as Sentry from "@sentry/react";
+import { useQuery } from "@tanstack/react-query";
 import AnimatedCounter from './AnimatedCounter';
 
 interface ServerModel {
@@ -35,14 +36,6 @@ interface ServerStats {
 }
 
 const ServerStats = () => {
-  const [stats, setStats] = useState<ServerStats>({
-    totalServers: 0,
-    liveServers: 0,
-    newToday: 0,
-    latestFindMinutes: 0
-  });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   const formatTimeDuration = (minutes: number): string => {
     if (minutes < 1) {
@@ -88,6 +81,79 @@ const ServerStats = () => {
     }
   };
 
+  // Use React Query for server stats
+  const { data: stats, isLoading, error } = useQuery({
+    queryKey: ['server-stats'],
+    queryFn: async () => {
+      const response = await fetch('/data/live_servers.json');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch server data: ${response.status}`);
+      }
+      return response.json();
+    },
+    select: (serversObject): ServerStats => {
+      const serverEntries = Object.values(serversObject) as ServerData[];
+      const now = new Date();
+      const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+      
+      // Calculate total servers
+      const totalServers = serverEntries.length;
+      
+      // Calculate live servers (status === "live")
+      const liveServers = serverEntries.filter(server => server.status === 'live').length;
+      
+      // Calculate new servers today (first_seen_online within last 24 hours)
+      const newToday = serverEntries.filter(server => {
+        if (!server.first_seen_online) return false;
+        try {
+          const firstSeenDate = new Date(server.first_seen_online);
+          return firstSeenDate >= oneDayAgo;
+        } catch {
+          return false;
+        }
+      }).length;
+      
+      // Calculate latest find (most recent first_seen_online)
+      let latestFindMinutes = 0;
+      const validFirstSeenDates = serverEntries
+        .filter(server => server.first_seen_online)
+        .map(server => {
+          try {
+            return new Date(server.first_seen_online);
+          } catch {
+            return null;
+          }
+        })
+        .filter(date => date !== null) as Date[];
+      
+      if (validFirstSeenDates.length > 0) {
+        const latestDate = new Date(Math.max(...validFirstSeenDates.map(date => date.getTime())));
+        const diffMs = now.getTime() - latestDate.getTime();
+        latestFindMinutes = Math.floor(diffMs / (1000 * 60));
+      }
+      
+      return {
+        totalServers,
+        liveServers,
+        newToday,
+        latestFindMinutes
+      };
+    },
+    staleTime: 2 * 60 * 1000, // 2 minutes
+    refetchInterval: 5 * 60 * 1000, // Refetch every 5 minutes
+  });
+
+  // Default stats for loading state
+  const defaultStats = {
+    totalServers: 0,
+    liveServers: 0,
+    newToday: 0,
+    latestFindMinutes: 0
+  };
+
+  const currentStats = stats || defaultStats;
+
+  /* Old fetch function - keeping for reference but now using React Query
   useEffect(() => {
     const fetchAndCalculateStats = async () => {
       try {
@@ -178,29 +244,29 @@ const ServerStats = () => {
     };
 
     fetchAndCalculateStats();
-  }, []);
+  }, []); */
 
   const statsConfig = [
     {
-      value: stats.totalServers,
+      value: currentStats.totalServers,
       label: "Total Servers",
       color: "text-blue-400",
       bgColor: "bg-blue-500/10 border-blue-500/20"
     },
     {
-      value: stats.liveServers,
+      value: currentStats.liveServers,
       label: "Live Servers",
       color: "text-green-400", 
       bgColor: "bg-green-500/10 border-green-500/20"
     },
     {
-      value: stats.newToday,
+      value: currentStats.newToday,
       label: "New Today",
       color: "text-orange-400",
       bgColor: "bg-orange-500/10 border-orange-500/20"
     },
     {
-      value: stats.latestFindMinutes,
+      value: currentStats.latestFindMinutes,
       label: "Latest Find",
       color: "text-pink-400",
       bgColor: "bg-pink-500/10 border-pink-500/20",
@@ -208,7 +274,7 @@ const ServerStats = () => {
     }
   ];
 
-  if (loading) {
+  if (isLoading) {
     return (
       <section className="container py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
@@ -238,7 +304,7 @@ const ServerStats = () => {
       <section className="container py-12">
         <div className="text-center">
           <p className="text-sm text-destructive mb-2">Failed to load statistics</p>
-          <p className="text-xs text-muted-foreground">{error}</p>
+          <p className="text-xs text-muted-foreground">{error?.message}</p>
         </div>
       </section>
     );
