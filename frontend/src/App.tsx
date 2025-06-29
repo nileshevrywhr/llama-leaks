@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { withSentryReactRouterV6Routing } from "@sentry/react";
+import {
   createBrowserRouter, 
   RouterProvider,
   createRoutesFromChildren,
@@ -65,9 +66,13 @@ const router = createBrowserRouter(
     <Route path="*" element={<NotFound />} />
   )
 );
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       <SentryRouterProvider router={router} />
+    </TooltipProvider>
+  </QueryClientProvider>
+);
