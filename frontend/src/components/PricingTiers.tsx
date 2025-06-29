@@ -96,16 +96,6 @@ const PricingTiers = () => {
             </div>
           </div>
           
-          <div className="pt-4">
-            <div className="bg-muted/20 border border-muted/40 rounded-lg p-4 max-w-md mx-auto">
-              <p className="text-xs font-mono leading-relaxed">
-                <span className="text-muted-foreground">// A haiku about money:</span><br/>
-                <span className="text-foreground">Free tools save your cash</span><br/>
-                <span className="text-foreground">But exposed servers cost more</span><br/>
-                <span className="text-foreground">Choose wisely, my friend</span>
-              </p>
-            </div>
-          </div>
         </div>
       </div>
 
