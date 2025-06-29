@@ -50,18 +50,16 @@ const Footer = () => {
         
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-sm text-muted-foreground text-center md:text-left">
-            © 2024 Ollama Wall. Saving servers from themselves since developers stopped caring about security.
+            © {new Date().getFullYear()} Banana Labs Inc.
           </p>
           
-          <div className="flex items-center space-x-4">
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Github className="h-5 w-5" />
+          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+            <a href="/privacy" className="hover:text-foreground transition-colors">
+              privacy policy
             </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Twitter className="h-5 w-5" />
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              <Shield className="h-5 w-5" />
+            <span>|</span>
+            <a href="/legal" className="hover:text-foreground transition-colors">
+              legal disclosure
             </a>
           </div>
         </div>
