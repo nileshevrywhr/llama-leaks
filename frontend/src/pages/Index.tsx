@@ -4,6 +4,7 @@ import WarningBanner from "@/components/WarningBanner";
 import Hero from "@/components/Hero";
 import ServerStats from "@/components/ServerStats";
 import Features from "@/components/Features";
+import Solutions from "@/components/Solutions";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -14,6 +15,7 @@ const Index = () => {
       <Hero />
       <ServerStats />
       <Features />
+      <Solutions />
       <Footer />
     </div>
   );
