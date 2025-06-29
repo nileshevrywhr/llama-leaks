@@ -385,10 +385,8 @@ const Hero = () => {
               </h3>
               <div className="text-muted-foreground text-xs lg:text-sm max-w-2xl mx-auto space-y-1">
                 <p className="text-center">
-                  These servers are completely open.
-                </p>
-                <p className="text-center">
-                  Here's what a malicious actor could potentially do:
+                  <span className="md:inline block">These servers are completely open.</span>
+                  <span className="md:inline block"> Here's what a malicious actor could potentially do:</span>
                 </p>
               </div>
             </div>
