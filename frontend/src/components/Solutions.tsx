@@ -75,7 +75,7 @@ const Solutions = () => {
 
           {/* Proper Solutions Section */}
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-blue-600 dark:text-blue-400">Proper Solutions</h3>
+            <h3 className="text-lg font-medium text-blue-600 dark:text-blue-400">Long-Term Solutions</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-4xl mx-auto">
               <div className="group relative overflow-hidden rounded-lg border border-blue-500/20 bg-gradient-to-r from-primary/10 to-blue-500/10 hover:from-primary/20 hover:to-blue-500/20 transition-all duration-200 shadow-md hover:shadow-lg p-4">
                 <div className="flex items-center gap-3">
