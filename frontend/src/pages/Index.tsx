@@ -1,6 +1,7 @@
 
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import * as Sentry from "@sentry/react";
 import Header from "@/components/Header";
 import WarningBanner from "@/components/WarningBanner";
 import Hero from "@/components/Hero";
@@ -38,4 +39,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Sentry.withSentryRouting(Index);

@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import WarningBanner from "@/components/WarningBanner";
@@ -17,4 +18,4 @@ const Pricing = () => {
   );
 };
 
-export default Pricing;
+export default Sentry.withSentryRouting(Pricing);

@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/react";
 import { Button } from "@/components/ui/button";
 import { Home } from "lucide-react";
 import Header from "@/components/Header";
@@ -35,4 +36,4 @@ const Legal = () => {
   );
 };
 
-export default Legal;
+export default Sentry.withSentryRouting(Legal);

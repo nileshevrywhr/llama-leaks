@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/react";
 import Header from "@/components/Header";
 import WarningBanner from "@/components/WarningBanner";
 import Footer from "@/components/Footer";
@@ -241,4 +242,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Sentry.withSentryRouting(About);
