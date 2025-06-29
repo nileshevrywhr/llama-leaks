@@ -183,14 +183,11 @@ const Hero = () => {
       {/* Hero Title */}
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl lg:leading-[1.1] max-w-4xl mx-auto px-4 sm:px-6 lg:px-0">
+          Your Ollama Server is Now a{" "}
           <span className="bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent">
-            Ollama Wall
+            Public AI Playground
           </span>
         </h1>
-        
-        <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-muted-foreground max-w-2xl mx-auto px-4 sm:px-6 lg:px-0">
-          See what your AI models are telling the entire internet.
-        </h2>
         
         <div className="max-w-2xl mx-auto text-sm text-muted-foreground md:text-base mt-3 space-y-1">
           <p className="text-center">
