@@ -12,7 +12,7 @@ const Footer = () => {
               <p className="font-bold">
                 Zero security. No asterisks.
               </p>
-              <p>
+              <p className="whitespace-nowrap">
                 We reveal exposed endpoints to encourage better security practices.
               </p>
             </div>
