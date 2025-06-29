@@ -15,6 +15,13 @@ const Index = () => {
 
   // Handle hash scrolling when navigating to homepage with hash
   useEffect(() => {
+    // Set user context for Sentry
+    Sentry.setContext("page", {
+      name: "Index",
+      path: location.pathname,
+      hash: location.hash
+    });
+
     if (location.hash) {
       // Small delay to ensure DOM is ready
       setTimeout(() => {
@@ -39,4 +46,4 @@ const Index = () => {
   );
 };
 
-export default Sentry.withSentryRouting(Index);
+export default Index;

@@ -10,6 +10,17 @@ const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
+    // Capture 404 errors in Sentry
+    Sentry.captureMessage(`404 Error: User attempted to access non-existent route: ${location.pathname}`, 'warning');
+    
+    // Set additional context
+    Sentry.setContext("404_error", {
+      attempted_path: location.pathname,
+      search: location.search,
+      hash: location.hash,
+      timestamp: new Date().toISOString()
+    });
+
     console.error(
       "404 Error: User attempted to access non-existent route:",
       location.pathname
@@ -49,4 +60,4 @@ const NotFound = () => {
   );
 };
 
-export default Sentry.withSentryRouting(NotFound);
+export default NotFound;

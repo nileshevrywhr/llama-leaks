@@ -3,7 +3,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { 
+  createBrowserRouter, 
+  RouterProvider,
+  createRoutesFromChildren,
+  Route
+} from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Leaderboard from "./pages/Leaderboard";
@@ -14,47 +19,30 @@ import Legal from "./pages/Legal";
 
 const queryClient = new QueryClient();
 
-// Create the router with Sentry integration
-const sentryCreateBrowserRouter = Sentry.wrapCreateBrowserRouter(createBrowserRouter);
+// Create Sentry-wrapped router
+const SentryRoutes = Sentry.withSentryRouting(createRoutesFromChildren);
 
-// Define routes as objects for Sentry integration
-const router = sentryCreateBrowserRouter([
-  {
-    path: "/",
-    element: <Index />,
-  },
-  {
-    path: "/leaderboard",
-    element: <Leaderboard />,
-  },
-  {
-    path: "/pricing", 
-    element: <Pricing />,
-  },
-  {
-    path: "/about",
-    element: <About />,
-  },
-  {
-    path: "/privacy",
-    element: <Privacy />,
-  },
-  {
-    path: "/legal",
-    element: <Legal />,
-  },
-  {
-    path: "*",
-    element: <NotFound />,
-  },
-]);
-
+// Define routes
+const router = createBrowserRouter(
+  SentryRoutes(
+    <>
+      <Route path="/" element={<Index />} />
+      <Route path="/leaderboard" element={<Leaderboard />} />
+      <Route path="/pricing" element={<Pricing />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/privacy" element={<Privacy />} />
+      <Route path="/legal" element={<Legal />} />
+      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+      <Route path="*" element={<NotFound />} />
+    </>
+  )
+);
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <Sentry.ErrorBoundary fallback={<p>An error has occurred</p>}>
+      <Sentry.ErrorBoundary fallback={<p>An error has occured</p>}>
         <RouterProvider router={router} />
       </Sentry.ErrorBoundary>
     </TooltipProvider>

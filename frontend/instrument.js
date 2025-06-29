@@ -1,4 +1,10 @@
 import * as Sentry from "@sentry/react";
+import {
+  createRoutesFromChildren,
+  matchRoutes,
+  useLocation,
+  useNavigationType,
+} from "react-router-dom";
 
 Sentry.init({
   dsn: "https://33881920c473b9003c975ed7a4cdbbe2@o4509549105512448.ingest.de.sentry.io/4509578391191632",
@@ -11,7 +17,13 @@ Sentry.init({
     // If you're using react router, use the integration for your react router version instead.
     // Learn more at
     // https://docs.sentry.io/platforms/javascript/guides/react/configuration/integrations/react-router/
-    Sentry.reactRouterV6BrowserTracingIntegration(),
+    Sentry.reactRouterV6BrowserTracingIntegration({
+      useEffect: React.useEffect,
+      useLocation,
+      useNavigationType,
+      createRoutesFromChildren,
+      matchRoutes,
+    }),
     Sentry.replayIntegration(),
     Sentry.feedbackIntegration({
       // Additional SDK configuration goes in here, for example:

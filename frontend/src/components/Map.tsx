@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import * as Sentry from "@sentry/react";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { MapPin, Loader2, AlertCircle } from "lucide-react";
@@ -134,6 +135,22 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
       console.error('Error initializing map:', err);
       const errorMessage = err instanceof Error ? err.message : 'Failed to initialize map';
       setError(errorMessage);
+      
+      // Report map errors to Sentry
+      Sentry.captureException(err, {
+        tags: {
+          component: 'Map',
+          action: 'initializeMap'
+        },
+        extra: {
+          city,
+          country,
+          latitude,
+          longitude,
+          theme,
+          systemTheme
+        }
+      });
       
       // Clean up on error
       if (map.current) {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as Sentry from "@sentry/react";
 import AnimatedCounter from './AnimatedCounter';
 
 interface ServerModel {
@@ -147,9 +148,30 @@ const ServerStats = () => {
           latestFindMinutes
         });
         
+        // Track successful stats calculation in Sentry
+        Sentry.addBreadcrumb({
+          message: 'Successfully calculated server statistics',
+          category: 'stats',
+          level: 'info',
+          data: {
+            totalServers,
+            liveServers,
+            newToday,
+            latestFindMinutes
+          }
+        });
+        
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load server statistics');
         console.error('Error fetching server stats:', err);
+        
+        // Report stats calculation errors to Sentry
+        Sentry.captureException(err, {
+          tags: {
+            component: 'ServerStats',
+            action: 'fetchAndCalculateStats'
+          }
+        });
       } finally {
         setLoading(false);
       }
