@@ -1,4 +1,6 @@
 import * as Sentry from "@sentry/react";
+import { createRoot } from "react-dom/client";
+import App from "./src/App";
 
 Sentry.init({
   dsn: "https://33881920c473b9003c975ed7a4cdbbe2@o4509549105512448.ingest.de.sentry.io/4509578391191632",
