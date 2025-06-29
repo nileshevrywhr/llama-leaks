@@ -23,13 +23,16 @@ const SentryRoutes = Sentry.withSentryRouting(createRoutesFromChildren);
 // Define routes
 const router = createBrowserRouter(
   SentryRoutes(
-    <Route path="/" element={<Index />} />,
-    <Route path="/leaderboard" element={<Leaderboard />} />,
-    <Route path="/pricing" element={<Pricing />} />,
-    <Route path="/about" element={<About />} />,
-    <Route path="/privacy" element={<Privacy />} />,
-    <Route path="/legal" element={<Legal />} />,
-    <Route path="*" element={<NotFound />} />
+    <>
+      <Route path="/" element={<Index />} />
+      <Route path="/leaderboard" element={<Leaderboard />} />
+      <Route path="/pricing" element={<Pricing />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/privacy" element={<Privacy />} />
+      <Route path="/legal" element={<Legal />} />
+      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+      <Route path="*" element={<NotFound />} />
+    </>
   )
 );
 
