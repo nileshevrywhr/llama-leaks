@@ -49,18 +49,6 @@ const Header = () => {
             <nav className="flex items-center space-x-6 text-sm font-medium">
               <a
                 className="transition-colors hover:text-foreground/80 text-foreground/60"
-                href="#features"
-              >
-                Vulnerabilities
-              </a>
-              <a
-                className="transition-colors hover:text-foreground/80 text-foreground/60"
-                href="#scanner"
-              >
-                Scanner
-              </a>
-              <a
-                className="transition-colors hover:text-foreground/80 text-foreground/60"
                 href="#solutions"
               >
                 Solutions
@@ -156,20 +144,6 @@ const Header = () => {
               {/* Navigation Links */}
               <nav className="p-4">
                 <div className="space-y-3">
-                  <a
-                    href="#features"
-                    onClick={closeMobileMenu}
-                    className="flex items-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    Vulnerabilities
-                  </a>
-                  <a
-                    href="#scanner"
-                    onClick={closeMobileMenu}
-                    className="flex items-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    Scanner
-                  </a>
                   <a
                     href="#solutions"
                     onClick={closeMobileMenu}

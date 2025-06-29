@@ -253,6 +253,8 @@ const Features = () => {
           </div>
         </div>
       </div>
+      
+      <div id="solutions" className="scroll-mt-24"></div>
     </section>
   );
 };
