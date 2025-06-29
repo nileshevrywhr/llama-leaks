@@ -182,14 +182,14 @@ const Hero = () => {
     <section className="container flex flex-col items-center justify-center space-y-6 py-12 md:py-16 mt-2">
       {/* Hero Title */}
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl lg:leading-[1.1] lg:whitespace-nowrap max-w-4xl mx-auto px-4 sm:px-6 lg:px-0">
+        <h1 className="text-2xl font-bold leading-tight tracking-tighter md:text-4xl lg:text-5xl lg:leading-[1.1] max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           Your Ollama Server is Now a{" "}
           <span className="bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent">
             Public AI Playground
           </span>
         </h1>
         
-        <div className="max-w-2xl mx-auto text-sm text-muted-foreground md:text-base mt-3 space-y-1">
+        <div className="max-w-2xl mx-auto text-sm text-muted-foreground md:text-base mt-3 space-y-1 px-4 sm:px-6 lg:px-8">
           <p className="text-center">
             Your server is cheerfully serving AI requests to the entire internet.
           </p>
