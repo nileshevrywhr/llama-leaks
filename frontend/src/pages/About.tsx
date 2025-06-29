@@ -201,7 +201,7 @@ const About = () => {
         <div className="max-w-4xl mx-auto">
           <Card className="border-muted bg-muted/10">
             <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
+              <CardTitle className="text-lg flex items-center justify-center gap-2">
                 <AlertTriangle className="h-4 w-4 text-muted-foreground" />
                 Legal Disclaimer & Project Scope
               </CardTitle>
