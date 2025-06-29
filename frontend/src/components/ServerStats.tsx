@@ -65,6 +65,28 @@ const ServerStats = () => {
     }
   };
 
+  const formatTimeComponents = (minutes: number): { value: number; unit: string } => {
+    if (minutes < 1) {
+      const seconds = Math.floor(minutes * 60);
+      return { value: seconds, unit: seconds === 1 ? "second ago" : "seconds ago" };
+    } else if (minutes < 60) {
+      const mins = Math.floor(minutes);
+      return { value: mins, unit: mins === 1 ? "minute ago" : "minutes ago" };
+    } else if (minutes < 1440) { // Less than 24 hours
+      const hours = Math.floor(minutes / 60);
+      return { value: hours, unit: hours === 1 ? "hour ago" : "hours ago" };
+    } else if (minutes < 10080) { // Less than 7 days
+      const days = Math.floor(minutes / 1440);
+      return { value: days, unit: days === 1 ? "day ago" : "days ago" };
+    } else if (minutes < 43200) { // Less than 30 days
+      const weeks = Math.floor(minutes / 10080);
+      return { value: weeks, unit: weeks === 1 ? "week ago" : "weeks ago" };
+    } else {
+      const months = Math.floor(minutes / 43200);
+      return { value: months, unit: months === 1 ? "month ago" : "months ago" };
+    }
+  };
+
   useEffect(() => {
     const fetchAndCalculateStats = async () => {
       try {
@@ -211,7 +233,18 @@ const ServerStats = () => {
             <div className="text-center">
               <div className={`text-2xl md:text-3xl font-bold ${stat.color} mb-2`}>
                 {stat.formatAsTime ? (
-                  <span className="text-sm font-normal">{formatTimeDuration(stat.value)}</span>
+                  <>
+                    <div className="flex flex-col items-center">
+                      <AnimatedCounter 
+                        target={formatTimeComponents(stat.value).value} 
+                        duration={2000 + (index * 300)}
+                        className="text-2xl md:text-3xl font-bold"
+                      />
+                      <div className="text-xs md:text-sm font-normal text-center mt-1 leading-tight">
+                        {formatTimeComponents(stat.value).unit}
+                      </div>
+                    </div>
+                  </>
                 ) : (
                   <>
                     <AnimatedCounter 
