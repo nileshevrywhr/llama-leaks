@@ -8,9 +8,8 @@ const Footer = () => {
       <div className="container py-8 md:py-12">
         <div className="grid gap-8 md:grid-cols-4">
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold">Ollama Wall</h3>
             <div className="text-sm text-muted-foreground max-w-xs space-y-2">
-              <p>
+              <p className="font-bold">
                 Zero security. No asterisks.
               </p>
               <p>
