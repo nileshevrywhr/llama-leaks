@@ -14,39 +14,39 @@ import Legal from "./pages/Legal";
 
 const queryClient = new QueryClient();
 
+const appRoutes = [
+  {
+    path: "/",
+    element: <Index />
+  },
+  {
+    path: "/leaderboard",
+    element: <Leaderboard />
+  },
+  {
+    path: "/pricing",
+    element: <Pricing />
+  },
+  {
+    path: "/about",
+    element: <About />
+  },
+  {
+    path: "/privacy",
+    element: <Privacy />
+  },
+  {
+    path: "/legal",
+    element: <Legal />
+  },
+  {
+    path: "*",
+    element: <NotFound />
+  }
+];
+
 const router = createBrowserRouter(
-  Sentry.withSentryRouting(
-    [
-      {
-        path: "/",
-        element: <Index />
-      },
-      {
-        path: "/leaderboard",
-        element: <Leaderboard />
-      },
-      {
-        path: "/pricing",
-        element: <Pricing />
-      },
-      {
-        path: "/about",
-        element: <About />
-      },
-      {
-        path: "/privacy",
-        element: <Privacy />
-      },
-      {
-        path: "/legal",
-        element: <Legal />
-      },
-      {
-        path: "*",
-        element: <NotFound />
-      }
-    ]
-  )
+  Sentry.withSentryRouting(appRoutes)
 );
 
 const App = () => (
