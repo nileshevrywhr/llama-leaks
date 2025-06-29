@@ -3,7 +3,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { 
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { withSentryReactRouterV6Routing } from "@sentry/react";
   createBrowserRouter, 
   RouterProvider,
   createRoutesFromChildren,
@@ -13,11 +14,41 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Leaderboard from "./pages/Leaderboard";
 import Pricing from "./pages/Pricing";
-import About from "./pages/About";
-import Privacy from "./pages/Privacy";
-import Legal from "./pages/Legal";
 
 const queryClient = new QueryClient();
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Index />,
+  },
+  {
+    path: "/leaderboard",
+    element: <Leaderboard />,
+  },
+  {
+    path: "/pricing",
+    element: <Pricing />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/privacy",
+    element: <Privacy />,
+  },
+  {
+    path: "/legal",
+    element: <Legal />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
+]);
+
+const SentryRouterProvider = withSentryReactRouterV6Routing(RouterProvider);
 
 // Create Sentry-wrapped router
 const SentryRoutes = Sentry.withSentryRouting(createRoutesFromChildren);
@@ -39,11 +70,4 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <Sentry.ErrorBoundary fallback={<p>An error has occured</p>}>
-        <RouterProvider router={router} />
-      </Sentry.ErrorBoundary>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
-
-export default App;
+      <SentryRouterProvider router={router} />
