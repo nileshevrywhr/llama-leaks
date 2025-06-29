@@ -191,10 +191,10 @@ const Hero = () => {
         
         <div className="max-w-3xl mx-auto text-sm text-muted-foreground md:text-base mt-3 space-y-2 px-4 sm:px-6 lg:px-8">
           <p className="text-center">
-            Your server is cheerfully serving AI requests to the entire internet.
+            Zero security. No asterisks.
           </p>
           <p className="text-center">
-            No authentication required. Just public endpoints serving AI models to anyone who asks nicely.
+            Just public endpoints serving AI models to anyone who asks nicely.
           </p>
         </div>
       </div>

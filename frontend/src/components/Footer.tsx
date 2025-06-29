@@ -6,21 +6,6 @@ const Footer = () => {
   return (
     <footer className="border-t bg-background">
       <div className="container py-8 md:py-12">
-        <div className="text-center space-y-3">
-          <div className="max-w-xs mx-auto">
-            <div className="text-sm text-muted-foreground max-w-xs space-y-2">
-              <p className="font-bold">
-                Zero security. No asterisks.
-              </p>
-              <p className="whitespace-nowrap">
-                We reveal exposed endpoints to encourage better security practices.
-              </p>
-            </div>
-          </div>
-        </div>
-        
-        <Separator className="my-8" />
-        
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-sm text-muted-foreground text-center md:text-left">
             Copyright © {new Date().getFullYear()} Banana Labs Inc.
