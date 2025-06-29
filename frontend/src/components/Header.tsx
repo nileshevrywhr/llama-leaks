@@ -2,9 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Menu, Shield, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -34,6 +36,10 @@ const Header = () => {
     };
   }, [isMobileMenuOpen]);
 
+  // Determine the correct href for solutions based on current page
+  const getSolutionsHref = () => {
+    return location.pathname === "/" ? "#solutions" : "/#solutions";
+  };
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -49,7 +55,7 @@ const Header = () => {
             <nav className="flex items-center space-x-6 text-sm font-medium">
               <a
                 className="transition-colors hover:text-foreground/80 text-foreground/60"
-                href="#solutions"
+                href={getSolutionsHref()}
               >
                 Solutions
               </a>
@@ -145,7 +151,7 @@ const Header = () => {
               <nav className="p-4">
                 <div className="space-y-3">
                   <a
-                    href="#solutions"
+                    href={getSolutionsHref()}
                     onClick={closeMobileMenu}
                     className="flex items-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
