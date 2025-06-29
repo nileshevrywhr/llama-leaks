@@ -6,8 +6,8 @@ const Footer = () => {
   return (
     <footer className="border-t bg-background">
       <div className="container py-8 md:py-12">
-        <div className="grid gap-8 md:grid-cols-4">
-          <div className="space-y-3">
+        <div className="flex justify-center">
+          <div className="space-y-3 text-center">
             <div className="text-sm text-muted-foreground max-w-xs space-y-2">
               <p className="font-bold">
                 Zero security. No asterisks.
@@ -16,33 +16,6 @@ const Footer = () => {
                 We reveal exposed endpoints to encourage better security practices.
               </p>
             </div>
-          </div>
-          
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold">Security Resources</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Ollama Security Guide</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Server Hardening Tips</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Vulnerability Reports</a></li>
-            </ul>
-          </div>
-          
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold">Tools & Scanners</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Server Scanner</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Security Checker</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Monitoring Tools</a></li>
-            </ul>
-          </div>
-          
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold">Get Help</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Security Audit</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Emergency Response</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Professional Support</a></li>
-            </ul>
           </div>
         </div>
         
