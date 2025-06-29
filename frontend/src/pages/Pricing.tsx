@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import WarningBanner from "@/components/WarningBanner";
 import PricingTiers from "@/components/PricingTiers";
+import PricingBottomSection from "@/components/PricingBottomSection";
 import Footer from "@/components/Footer";
 
 const Pricing = () => {
@@ -10,6 +11,7 @@ const Pricing = () => {
       <Header />
       <WarningBanner />
       <PricingTiers />
+      <PricingBottomSection />
       <Footer />
     </div>
   );
