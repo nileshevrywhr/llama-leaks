@@ -52,7 +52,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
       }
 
       // Get token from environment variables
-      const accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
+      const accessToken = import.meta.env.VITE_MAPBOX_TOKEN || '';
       
       if (!accessToken) {
         throw new Error('Mapbox token not configured. Please add VITE_MAPBOX_TOKEN to your environment variables.');
