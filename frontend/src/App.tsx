@@ -46,7 +46,8 @@ const appRoutes: RouteObject[] = [
 ];
 
 const router = createBrowserRouter(
-  Sentry.withSentryRouting([...appRoutes])
+  Sentry.withSentryRouting([...appRoutes]),
+  { basename: '/' }
 );
 
 const App = () => (
