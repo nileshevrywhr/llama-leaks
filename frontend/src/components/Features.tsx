@@ -131,7 +131,6 @@ const Features = () => {
       <div className="mt-12 p-8 bg-gradient-to-br from-blue-500/5 to-primary/5 border border-blue-500/20 rounded-xl">
         <div className="text-center space-y-6">
           <div className="space-y-2">
-            <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400">
               How to Actually Secure Your Server
             </h3>
             <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
@@ -254,7 +253,8 @@ const Features = () => {
         </div>
       </div>
       
-      <div id="solutions" className="scroll-mt-24"></div>
+      {/* Solutions Section - Security Recommendations */}
+      <div id="solutions" className="mt-12 p-8 bg-gradient-to-br from-blue-500/5 to-primary/5 border border-blue-500/20 rounded-xl scroll-mt-24">
     </section>
   );
 };
