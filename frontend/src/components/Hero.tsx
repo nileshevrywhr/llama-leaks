@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Clock, ChevronDown, ChevronUp } from "lucide-react";
 import Map from "./Map";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { calculateTimeSinceWithAgo } from "@/lib/timeUtils";
 
 interface ServerModel {
   name: string;
@@ -34,9 +33,6 @@ const Hero = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [modelsExpanded, setModelsExpanded] = useState(false);
-
-  // Calculate dynamic age using the utility function
-  const dynamicAge = serverData ? calculateTimeSinceWithAgo(serverData.first_seen_online) : null;
 
   const fetchRandomServer = async (isRefresh = false) => {
     try {
@@ -222,8 +218,8 @@ const Hero = () => {
             <div className="flex items-center justify-between p-3 lg:p-6 pb-2 lg:pb-3 border-b border-border flex-shrink-0">
               <div className="flex items-center gap-2 text-muted-foreground text-xs lg:text-xs">
                 <Clock className="w-3 h-3" />
-                <span className="hidden sm:inline">AS OF {timestamp.formatted} ({dynamicAge})</span>
-                <span className="sm:hidden">{timestamp.formatted.split('|')[0]} ({dynamicAge})</span>
+                <span className="hidden sm:inline">AS OF {timestamp.formatted} ({serverData.age})</span>
+                <span className="sm:hidden">{timestamp.formatted.split('|')[0]} ({serverData.age})</span>
               </div>
               <Button
                 onClick={handleRefresh}
@@ -245,10 +241,6 @@ const Hero = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full animate-pulse" />
                 )}
               </Button>
-              <div className="text-xs lg:text-sm">
-                <span className="text-muted-foreground">Age: </span>
-                <span className="text-foreground">{dynamicAge}</span>
-              </div>
             </div>
 
             {/* Server Details - Scrollable Content */}
@@ -348,13 +340,6 @@ const Hero = () => {
 
               {/* Desktop Model Details - Always Expanded */}
               <div className="hidden lg:block space-y-2">
-                <div>
-                  <div className="text-accent text-xs mb-1">Server Age</div>
-                  <div className="text-xs text-muted-foreground">
-                    First discovered {dynamicAge}
-                  </div>
-                </div>
-                
                 <div>
                   <div className="text-accent text-xs mb-1">Local Models ({serverData.local.length})</div>
                   <div className="text-xs text-muted-foreground">
