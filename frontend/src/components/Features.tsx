@@ -256,6 +256,7 @@ const Features = () => {
       
       {/* Solutions Section - Security Recommendations */}
       <div id="solutions" className="mt-12 p-8 bg-gradient-to-br from-blue-500/5 to-primary/5 border border-blue-500/20 rounded-xl scroll-mt-24">
+      </div>
     </section>
   );
 };
