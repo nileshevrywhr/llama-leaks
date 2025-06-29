@@ -182,11 +182,14 @@ const Hero = () => {
     <section className="container flex flex-col items-center justify-center space-y-6 py-12 md:py-16 mt-2">
       {/* Hero Title */}
       <div className="text-center space-y-2">
-        <h1 className="text-2xl font-bold leading-tight tracking-tighter md:text-4xl lg:text-5xl lg:leading-[1.1] max-w-4xl mx-auto px-4 sm:px-6 lg:px-0 lg:whitespace-nowrap">
-          Your Ollama Server is Now a{" "}
+        <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl lg:leading-[1.1] max-w-4xl mx-auto px-4 sm:px-6 lg:px-0">
           <span className="bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent">
-            Public AI Playground
+            Ollama Wall
           </span>
+        </h1>
+        
+        <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-muted-foreground max-w-2xl mx-auto px-4 sm:px-6 lg:px-0">
+          See what your AI models are telling the entire internet.
         </h1>
         
         <div className="max-w-2xl mx-auto text-sm text-muted-foreground md:text-base mt-3 space-y-1">

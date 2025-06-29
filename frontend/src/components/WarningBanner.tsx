@@ -6,7 +6,7 @@ const WarningBanner = () => {
       <div className="flex items-center justify-center space-x-2 w-full">
         <AlertTriangle className="h-4 w-4" />
         <span className="text-xs sm:text-sm font-medium whitespace-nowrap">
-          Your Ollama server is probably exposed right now
+          Your Ollama server might be exposed right now
         </span>
       </div>
     </div>

@@ -8,10 +8,10 @@ const Footer = () => {
       <div className="container py-8 md:py-12">
         <div className="grid gap-8 md:grid-cols-4">
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold">Ollama Security Alert</h3>
+            <h3 className="text-lg font-semibold">Ollama Wall</h3>
             <p className="text-sm text-muted-foreground max-w-xs">
-              Making the internet slightly more secure, one sarcastic wake-up call at a time. 
-              You're welcome.
+              A passive security project showcasing exposed Ollama endpoints. 
+              Making the internet slightly more secure, one awareness campaign at a time.
             </p>
           </div>
           
@@ -47,7 +47,7 @@ const Footer = () => {
         
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-sm text-muted-foreground">
-            © 2024 Ollama Security Alert. Saving servers from themselves since developers stopped caring about security.
+            © 2024 Ollama Wall. Saving servers from themselves since developers stopped caring about security.
           </p>
           
           <div className="flex items-center space-x-4">
