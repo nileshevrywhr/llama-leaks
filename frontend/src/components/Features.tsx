@@ -131,6 +131,7 @@ const Features = () => {
       <div className="mt-12 p-8 bg-gradient-to-br from-blue-500/5 to-primary/5 border border-blue-500/20 rounded-xl">
         <div className="text-center space-y-6">
           <div className="space-y-2">
+            <h3 className="text-xl font-bold tracking-tight">
               How to Actually Secure Your Server
             </h3>
             <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
