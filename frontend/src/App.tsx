@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import * as Sentry from "@sentry/react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -16,18 +16,36 @@ const queryClient = new QueryClient();
 
 const router = createBrowserRouter(
   Sentry.withSentryRouting(
-    createRoutesFromElements(
-      <>
-        <Route path="/" element={<Index />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/legal" element={<Legal />} />
-        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-        <Route path="*" element={<NotFound />} />
-      </>
-    )
+    [
+      {
+        path: "/",
+        element: <Index />
+      },
+      {
+        path: "/leaderboard",
+        element: <Leaderboard />
+      },
+      {
+        path: "/pricing",
+        element: <Pricing />
+      },
+      {
+        path: "/about",
+        element: <About />
+      },
+      {
+        path: "/privacy",
+        element: <Privacy />
+      },
+      {
+        path: "/legal",
+        element: <Legal />
+      },
+      {
+        path: "*",
+        element: <NotFound />
+      }
+    ]
   )
 );
 
