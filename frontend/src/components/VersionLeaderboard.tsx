@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import * as Sentry from "@sentry/react";
-import { useQuery } from "@tanstack/react-query";
 import { Trophy, Medal, Award, Server, HardDrive, Shield } from 'lucide-react';
 import AnimatedCounter from './AnimatedCounter';
 import { Button } from "@/components/ui/button";
@@ -39,6 +37,9 @@ interface VersionGroup {
 }
 
 const VersionLeaderboard = () => {
+  const [versionGroups, setVersionGroups] = useState<VersionGroup[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const parseVersion = (versionString: string): string => {
     // Extract major.minor from version strings like "0.5.10", "0.3.11", "0.5.7-0-ga420a45-dirty"
@@ -55,80 +56,6 @@ const VersionLeaderboard = () => {
     return `${mb.toFixed(0)}MB`;
   };
 
-  // Use React Query for version leaderboard data
-  const { data: versionGroups, isLoading, error } = useQuery({
-    queryKey: ['version-leaderboard'],
-    queryFn: async () => {
-      const response = await fetch('/data/live_servers.json');
-      if (!response.ok) {
-        throw new Error(`Failed to fetch server data: ${response.status}`);
-      }
-      return response.json();
-    },
-    select: (serversObject): VersionGroup[] => {
-      const serverEntries = Object.values(serversObject) as ServerData[];
-      
-      // Group servers by major.minor version
-      const versionMap = new Map<string, {
-        servers: ServerData[];
-        totalModels: number;
-        totalSize: number;
-        liveCount: number;
-      }>();
-      
-      serverEntries.forEach(server => {
-        const majorMinor = parseVersion(server.version);
-        
-        if (!versionMap.has(majorMinor)) {
-          versionMap.set(majorMinor, {
-            servers: [],
-            totalModels: 0,
-            totalSize: 0,
-            liveCount: 0
-          });
-        }
-        
-        const group = versionMap.get(majorMinor)!;
-        group.servers.push(server);
-        group.totalModels += server.local.length;
-        group.totalSize += server.local.reduce((sum, model) => sum + model.size, 0);
-        
-        if (server.status === 'live') {
-          group.liveCount++;
-        }
-      });
-      
-      // Convert to array and sort by version (older versions first)
-      const groups: VersionGroup[] = Array.from(versionMap.entries()).map(([version, data]) => ({
-        version,
-        serverCount: data.servers.length,
-        totalModels: data.totalModels,
-        totalModelSize: data.totalSize,
-        liveServers: data.liveCount
-      }));
-      
-      // Sort by version number (older first)
-      groups.sort((a, b) => {
-        const aVersion = a.version.split('.').map(Number);
-        const bVersion = b.version.split('.').map(Number);
-        
-        for (let i = 0; i < Math.max(aVersion.length, bVersion.length); i++) {
-          const aPart = aVersion[i] || 0;
-          const bPart = bVersion[i] || 0;
-          if (aPart !== bPart) {
-            return aPart - bPart; // Ascending order (older first)
-          }
-        }
-        return 0;
-      });
-      
-      return groups;
-    },
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    refetchInterval: 10 * 60 * 1000, // Refetch every 10 minutes
-  });
-
-  /* Old fetch function - keeping for reference but now using React Query
   useEffect(() => {
     const fetchAndGroupData = async () => {
       try {
@@ -207,7 +134,7 @@ const VersionLeaderboard = () => {
     };
 
     fetchAndGroupData();
-  }, []); */
+  }, []);
 
   const getRankIcon = (index: number) => {
     switch (index) {
@@ -248,7 +175,7 @@ const VersionLeaderboard = () => {
     }
   };
 
-  if (isLoading) {
+  if (loading) {
     return (
       <section className="container py-16">
         <div className="text-center space-y-4 mb-12">
@@ -290,21 +217,8 @@ const VersionLeaderboard = () => {
           <h2 className="text-2xl font-bold tracking-tight md:text-3xl mb-4">
             Version Leaderboard 🏆
           </h2>
-          <p className="text-destructive mb-2">Failed to load leaderboard data</p>
-          <p className="text-xs text-muted-foreground">{error?.message}</p>
-        </div>
-      </section>
-    );
-  }
-
-  if (!versionGroups || versionGroups.length === 0) {
-    return (
-      <section className="container py-16">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold tracking-tight md:text-3xl mb-4">
-            Version Leaderboard 🏆
-          </h2>
-          <p className="text-muted-foreground">No version data available</p>
+          <p className="text-destructive mb-2">Failed to load leaderboard</p>
+          <p className="text-xs text-muted-foreground">{error}</p>
         </div>
       </section>
     );
