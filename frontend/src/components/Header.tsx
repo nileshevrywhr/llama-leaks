@@ -152,12 +152,47 @@ const Header = () => {
           {/* Centered menu panel */}
           <div className="absolute inset-0 flex items-center justify-center p-4">
             <div className="relative bg-background/95 backdrop-blur-md border border-border rounded-lg shadow-lg w-full max-w-sm mx-auto">
-              {/* Header with close button */}
-              <div className="flex items-center justify-between p-4 border-b border-border">
-                <div className="flex items-center space-x-2">
-                  <Shield className="h-5 w-5 text-destructive" />
-                  <span className="font-bold text-sm">Menu</span>
+              
+              {/* Navigation Links */}
+              <nav className="p-6">
+                <div className="space-y-4">
+                  <a
+                    href="#solutions"
+                    onClick={(e) => {
+                      handleSolutionsClick(e);
+                      closeMobileMenu();
+                    }}
+                    className="block text-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex items-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    Solutions
+                  </a>
+                  <a
+                    href="/leaderboard"
+                    onClick={closeMobileMenu}
+                    className="block text-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    Leaderboard
+                  </a>
+                  <a
+                    href="/pricing"
+                    onClick={closeMobileMenu}
+                    className="block text-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    Pricing
+                  </a>
+                  <a
+                    href="/about"
+                    onClick={closeMobileMenu}
+                    className="block text-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    About
+                  </a>
                 </div>
+              </nav>
+              
+              {/* Close button at bottom center */}
+              <div className="flex justify-center p-4 border-t border-border">
                 <button
                   onClick={closeMobileMenu}
                   className="inline-flex items-center justify-center rounded-md h-10 w-10 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -167,44 +202,6 @@ const Header = () => {
                   <span className="sr-only">Close menu</span>
                 </button>
               </div>
-              
-              {/* Navigation Links */}
-              <nav className="p-4">
-                <div className="space-y-3">
-                  <a
-                    href="#solutions"
-                    onClick={(e) => {
-                      handleSolutionsClick(e);
-                      closeMobileMenu();
-                    }}
-                    onClick={closeMobileMenu}
-                    className="flex items-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    Solutions
-                  </a>
-                  <a
-                    href="/leaderboard"
-                    onClick={closeMobileMenu}
-                    className="flex items-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    Leaderboard
-                  </a>
-                  <a
-                    href="/pricing"
-                    onClick={closeMobileMenu}
-                    className="flex items-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    Pricing
-                  </a>
-                  <a
-                    href="/about"
-                    onClick={closeMobileMenu}
-                    className="flex items-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                  >
-                    About
-                  </a>
-                </div>
-              </nav>
             </div>
           </div>
         </div>
