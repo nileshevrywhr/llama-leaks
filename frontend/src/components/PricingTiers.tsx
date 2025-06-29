@@ -78,7 +78,7 @@ const PricingTiers = () => {
         </h2>
         <div className="text-muted-foreground max-w-4xl mx-auto space-y-4">
           <p className="text-lg font-medium">
-            Zero dollars. Zero cents. Zero excuse for exposed servers.
+            Zero dollars. Zero cents. Zero concerns for exposed servers.
           </p>
         </div>
       </div>
