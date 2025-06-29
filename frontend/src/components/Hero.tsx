@@ -190,7 +190,7 @@ const Hero = () => {
         
         <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-muted-foreground max-w-2xl mx-auto px-4 sm:px-6 lg:px-0">
           See what your AI models are telling the entire internet.
-        </h1>
+        </h2>
         
         <div className="max-w-2xl mx-auto text-sm text-muted-foreground md:text-base mt-3 space-y-1">
           <p className="text-center">
