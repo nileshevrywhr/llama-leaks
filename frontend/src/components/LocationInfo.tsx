@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MapPin, Clock, Shuffle, AlertCircle, Zap, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Map from "./Map";
+import { calculateTimeSinceWithAgo } from "@/lib/timeUtils";
 
 interface ServerModel {
   name: string;
@@ -31,6 +32,9 @@ const LocationInfo = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Calculate dynamic age using the utility function
+  const dynamicAge = serverData ? calculateTimeSinceWithAgo(serverData.first_seen_online) : null;
 
   const fetchRandomServer = async (isRefresh = false) => {
     try {
@@ -255,7 +259,7 @@ const LocationInfo = () => {
             <div className="flex items-center gap-2 text-muted-foreground text-xs">
               <span>AS OF</span>
               <span className="text-foreground font-medium">{timestamp.formatted}</span>
-              <span className="text-muted-foreground">({serverData.age})</span>
+              <span className="text-muted-foreground">({dynamicAge})</span>
             </div>
           </div>
 
@@ -302,6 +306,11 @@ const LocationInfo = () => {
 
           {/* Models - all in one line */}
           <div className="mb-4">
+            <div className="text-accent mb-2">Server Age</div>
+            <div className="text-xs text-muted-foreground mb-4">
+              First discovered {dynamicAge}
+            </div>
+            
             <div className="text-accent mb-2">Local Models ({serverData.local.length})</div>
             <div className="text-xs text-muted-foreground">
               {serverData.local.length > 0 ? (
