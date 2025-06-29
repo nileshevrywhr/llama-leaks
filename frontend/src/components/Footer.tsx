@@ -50,7 +50,7 @@ const Footer = () => {
         
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-sm text-muted-foreground text-center md:text-left">
-            © {new Date().getFullYear()} Banana Labs Inc.
+            Copyright © {new Date().getFullYear()} Banana Labs Inc.
           </p>
           
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
