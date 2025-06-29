@@ -43,7 +43,7 @@ const Header = () => {
             <a className="mr-6 flex items-center space-x-2" href="/">
               <Shield className="h-5 w-5 text-destructive" />
               <span className="hidden font-bold sm:inline-block">
-                Ollama Security Alert
+                Unsecured oLLaMa
               </span>
             </a>
             <nav className="flex items-center space-x-6 text-sm font-medium">
@@ -87,7 +87,7 @@ const Header = () => {
               <a className="flex items-center space-x-2" href="/">
                 <Shield className="h-5 w-5 text-destructive" />
                 <span className="font-bold text-sm">
-                  Ollama Security Alert
+                  Unsecured oLLaMa
                 </span>
               </a>
             </div>
