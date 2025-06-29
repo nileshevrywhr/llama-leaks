@@ -80,22 +80,6 @@ const PricingTiers = () => {
           <p className="text-lg font-medium">
             Zero dollars. Zero cents. Zero excuse for exposed servers.
           </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            <div className="space-y-1">
-              <p className="font-semibold text-foreground">💡 Real-Time Monitoring</p>
-              <p>Catch exposed servers before hackers do</p>
-            </div>
-            <div className="space-y-1">
-              <p className="font-semibold text-foreground">🎯 Educational Tools</p>
-              <p>Learn security through public shame</p>
-            </div>
-            <div className="space-y-1">
-              <p className="font-semibold text-foreground">🛡️ Community Impact</p>
-              <p>Help secure the internet, one server at a time</p>
-            </div>
-          </div>
-          
         </div>
       </div>
 
