@@ -9,10 +9,14 @@ const Footer = () => {
         <div className="grid gap-8 md:grid-cols-4">
           <div className="space-y-3">
             <h3 className="text-lg font-semibold">Ollama Wall</h3>
-            <p className="text-sm text-muted-foreground max-w-xs">
-              A passive security project showcasing exposed Ollama endpoints. 
-              Making the internet slightly more secure, one awareness campaign at a time.
-            </p>
+            <div className="text-sm text-muted-foreground max-w-xs space-y-2">
+              <p>
+                A passive security project showcasing exposed Ollama endpoints.
+              </p>
+              <p>
+                Making the internet slightly more secure, one awareness campaign at a time.
+              </p>
+            </div>
           </div>
           
           <div className="space-y-3">
@@ -46,7 +50,7 @@ const Footer = () => {
         <Separator className="my-8" />
         
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground text-center md:text-left">
             © 2024 Ollama Wall. Saving servers from themselves since developers stopped caring about security.
           </p>
           

@@ -9,9 +9,14 @@ const Solutions = () => {
             <h2 className="text-2xl font-bold tracking-tight md:text-3xl text-blue-600 dark:text-blue-400">
               How to Actually Secure Your Server
             </h2>
-            <p className="text-muted-foreground text-base max-w-2xl mx-auto">
-              Stop being part of the problem. Here are the security measures you should implement right now:
-            </p>
+            <div className="text-muted-foreground text-base max-w-3xl mx-auto space-y-1">
+              <p className="text-center">
+                Stop being part of the problem.
+              </p>
+              <p className="text-center">
+                Here are the security measures you should implement right now:
+              </p>
+            </div>
           </div>
           
           {/* Quick Fixes Section */}
@@ -122,9 +127,9 @@ const Solutions = () => {
             </div>
           </div>
           
-          <div className="text-xs text-muted-foreground space-y-1 pt-4 border-t border-blue-500/20">
-            <p className="font-medium">🛡️ Security is not optional in production environments.</p>
-            <p>Implement these measures before your server becomes another statistic on this wall.</p>
+          <div className="text-xs text-muted-foreground space-y-2 pt-4 border-t border-blue-500/20">
+            <p className="font-medium text-center">🛡️ Security is not optional in production environments.</p>
+            <p className="text-center">Implement these measures before your server becomes another statistic on this wall.</p>
           </div>
         </div>
       </div>

@@ -89,10 +89,14 @@ const Features = () => {
         <h3 className="text-2xl font-bold tracking-tight md:text-3xl">
           Why Your Ollama Server is a Security Nightmare*
         </h3>
-        <p className="text-muted-foreground text-base max-w-xl mx-auto">
-          *Don't worry, you're not alone. Thousands of developers are making the same mistake 
-          right now. Yes, even the one sitting next to you who claims to be a "security expert."
-        </p>
+        <div className="text-muted-foreground text-base max-w-2xl mx-auto space-y-1">
+          <p className="text-center">
+            *Don't worry, you're not alone. Thousands of developers are making the same mistake right now.
+          </p>
+          <p className="text-center">
+            Yes, even the one sitting next to you who claims to be a "security expert."
+          </p>
+        </div>
       </div>
       
       {/* Mobile Carousel */}

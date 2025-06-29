@@ -189,7 +189,7 @@ const Hero = () => {
           </span>
         </h1>
         
-        <div className="max-w-2xl mx-auto text-sm text-muted-foreground md:text-base mt-3 space-y-1 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto text-sm text-muted-foreground md:text-base mt-3 space-y-2 px-4 sm:px-6 lg:px-8">
           <p className="text-center">
             Your server is cheerfully serving AI requests to the entire internet.
           </p>
@@ -383,9 +383,14 @@ const Hero = () => {
               <h3 className="text-base lg:text-lg font-semibold text-destructive">
                 What Could Someone Do With This Access?
               </h3>
-              <p className="text-muted-foreground text-xs lg:text-sm max-w-2xl mx-auto">
-                These servers are completely open. Here's what a malicious actor could potentially do:
-              </p>
+              <div className="text-muted-foreground text-xs lg:text-sm max-w-2xl mx-auto space-y-1">
+                <p className="text-center">
+                  These servers are completely open.
+                </p>
+                <p className="text-center">
+                  Here's what a malicious actor could potentially do:
+                </p>
+              </div>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center max-w-lg mx-auto">
@@ -412,9 +417,9 @@ const Hero = () => {
               </Button>
             </div>
             
-            <div className="text-xs lg:text-xs text-muted-foreground space-y-1">
-              <p className="font-medium">🛡️ Don't worry - these buttons don't actually do anything harmful.</p>
-              <p>This is purely educational to demonstrate the security implications of exposed AI servers.</p>
+            <div className="text-xs lg:text-xs text-muted-foreground space-y-2">
+              <p className="font-medium text-center">🛡️ Don't worry - these buttons don't actually do anything harmful.</p>
+              <p className="text-center">This is purely educational to demonstrate the security implications of exposed AI servers.</p>
             </div>
           </div>
         </div>
