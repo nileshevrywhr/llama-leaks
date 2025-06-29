@@ -11,7 +11,7 @@ Sentry.init({
     // If you're using react router, use the integration for your react router version instead.
     // Learn more at
     // https://docs.sentry.io/platforms/javascript/guides/react/configuration/integrations/react-router/
-    Sentry.browserTracingIntegration(),
+    Sentry.reactRouterV6BrowserTracingIntegration(),
     Sentry.replayIntegration(),
     Sentry.feedbackIntegration({
       // Additional SDK configuration goes in here, for example:
