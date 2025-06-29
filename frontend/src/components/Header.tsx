@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, Shield, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -66,12 +66,12 @@ const Header = () => {
         <div className="container flex h-14 items-center">
           {/* Desktop Navigation */}
           <div className="mr-4 hidden md:flex">
-            <Link className="mr-6 flex items-center space-x-2" to="/">
+            <a className="mr-6 flex items-center space-x-2" href="/">
               <Shield className="h-5 w-5 text-destructive" />
               <span className="hidden font-bold sm:inline-block">
                 Ollama Wall
               </span>
-            </Link>
+            </a>
             <nav className="flex items-center space-x-6 text-sm font-medium">
               <a
                 className="transition-colors hover:text-foreground/80 text-foreground/60"
@@ -80,24 +80,24 @@ const Header = () => {
               >
                 Solutions
               </a>
-              <Link
+              <a
                 className="transition-colors hover:text-foreground/80 text-foreground/60"
-                to="/leaderboard"
+                href="/leaderboard"
               >
                 Leaderboard
-              </Link>
-              <Link
+              </a>
+              <a
                 className="transition-colors hover:text-foreground/80 text-foreground/60"
-                to="/pricing"
+                href="/pricing"
               >
                 Pricing
-              </Link>
-              <Link
+              </a>
+              <a
                 className="transition-colors hover:text-foreground/80 text-foreground/60"
-                to="/about"
+                href="/about"
               >
                 About
-              </Link>
+              </a>
             </nav>
           </div>
           
@@ -117,12 +117,12 @@ const Header = () => {
             
             {/* Center - Title */}
             <div className="flex-1 flex justify-center">
-              <Link className="flex items-center space-x-2" to="/">
+              <a className="flex items-center space-x-2" href="/">
                 <Shield className="h-5 w-5 text-destructive" />
                 <span className="font-bold text-sm">
                   Ollama Wall
                 </span>
-              </Link>
+              </a>
             </div>
             
             {/* Right Side - Theme Toggle */}
@@ -166,27 +166,27 @@ const Header = () => {
                   >
                     Solutions
                   </a>
-                  <Link
-                    to="/leaderboard"
+                  <a
+                    href="/leaderboard"
                     onClick={closeMobileMenu}
                     className="block text-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     Leaderboard
-                  </Link>
-                  <Link
-                    to="/pricing"
+                  </a>
+                  <a
+                    href="/pricing"
                     onClick={closeMobileMenu}
                     className="block text-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     Pricing
-                  </Link>
-                  <Link
-                    to="/about"
+                  </a>
+                  <a
+                    href="/about"
                     onClick={closeMobileMenu}
                     className="block text-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     About
-                  </Link>
+                  </a>
                 </div>
               </nav>
               

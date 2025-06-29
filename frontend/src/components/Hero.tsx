@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import * as Sentry from "@sentry/react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Clock, ChevronDown, ChevronUp } from "lucide-react";
 import Map from "./Map";
@@ -60,33 +59,9 @@ const Hero = () => {
       const randomServer = serverEntries[randomIndex];
       
       setServerData(randomServer);
-      
-      // Track successful server fetch in Sentry
-      Sentry.addBreadcrumb({
-        message: 'Successfully fetched random server data',
-        category: 'api',
-        level: 'info',
-        data: {
-          serverCount: serverEntries.length,
-          selectedIndex: randomIndex,
-          isRefresh
-        }
-      });
-      
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unknown error occurred');
       console.error('Error fetching server data:', err);
-      
-      // Report server fetch errors to Sentry
-      Sentry.captureException(err, {
-        tags: {
-          component: 'Hero',
-          action: 'fetchRandomServer'
-        },
-        extra: {
-          isRefresh
-        }
-      });
     } finally {
       setLoading(false);
       setRefreshing(false);

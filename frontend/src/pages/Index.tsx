@@ -1,7 +1,6 @@
 
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import * as Sentry from "@sentry/react";
 import Header from "@/components/Header";
 import WarningBanner from "@/components/WarningBanner";
 import Hero from "@/components/Hero";
@@ -15,13 +14,6 @@ const Index = () => {
 
   // Handle hash scrolling when navigating to homepage with hash
   useEffect(() => {
-    // Set user context for Sentry
-    Sentry.setContext("page", {
-      name: "Index",
-      path: location.pathname,
-      hash: location.hash
-    });
-
     if (location.hash) {
       // Small delay to ensure DOM is ready
       setTimeout(() => {
