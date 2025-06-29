@@ -11,10 +11,10 @@ const Footer = () => {
             <h3 className="text-lg font-semibold">Ollama Wall</h3>
             <div className="text-sm text-muted-foreground max-w-xs space-y-2">
               <p>
-                A passive security project showcasing exposed Ollama endpoints.
+                Zero security. No asterisks.
               </p>
               <p>
-                Making the internet slightly more secure, one awareness campaign at a time.
+                We reveal exposed endpoints to encourage better security practices.
               </p>
             </div>
           </div>
