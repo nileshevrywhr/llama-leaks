@@ -96,11 +96,7 @@ const PricingTiers = () => {
             </div>
           </div>
           
-          <div className="pt-4 space-y-2">
-            <p className="italic text-base">
-              Because security shouldn't cost a fortune, but insecurity definitely will
-            </p>
-            
+          <div className="pt-4">
             <div className="bg-muted/20 border border-muted/40 rounded-lg p-4 max-w-md mx-auto">
               <p className="text-xs font-mono leading-relaxed">
                 <span className="text-muted-foreground">// A haiku about money:</span><br/>
