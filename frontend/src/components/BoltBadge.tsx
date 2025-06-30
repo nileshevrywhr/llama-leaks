@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from "next-themes";
 
 const BoltBadge = () => {
   const { theme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  
+  // Ensure component is mounted to avoid hydration issues
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  // Don't render until mounted to avoid hydration mismatch
+  if (!mounted) {
+    return null;
+  }
   
   // Determine the current theme
   const currentTheme = theme === 'system' ? systemTheme : theme;
@@ -10,6 +21,8 @@ const BoltBadge = () => {
   
   // Use dark colors for light theme, light colors for dark theme
   const fillColor = isDark ? '#ffffff' : '#1a1a1a';
+
+  console.log('BoltBadge theme debug:', { theme, systemTheme, currentTheme, isDark, fillColor });
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
