@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Home } from "lucide-react";
 import Header from "@/components/Header";
 import WarningBanner from "@/components/WarningBanner";
+import BoltBadge from "@/components/BoltBadge";
 
 const NotFound = () => {
   const location = useLocation();
@@ -19,6 +20,7 @@ const NotFound = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <WarningBanner />
+      <BoltBadge />
       
       <div className="pt-[88px] min-h-screen flex items-center justify-center px-4">
         <div className="text-center space-y-8">

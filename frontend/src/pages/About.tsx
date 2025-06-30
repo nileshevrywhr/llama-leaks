@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import WarningBanner from "@/components/WarningBanner";
+import BoltBadge from "@/components/BoltBadge";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,7 @@ const About = () => {
     <div className="min-h-screen bg-background pt-[88px]">
       <Header />
       <WarningBanner />
+      <BoltBadge />
       
       {/* Hero Section */}
       <section className="container py-16">
