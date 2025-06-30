@@ -1,23 +1,40 @@
 import React from 'react';
+import { useTheme } from "next-themes";
 
 const BoltBadge = () => {
+  const { theme, systemTheme } = useTheme();
+  
+  // Determine the current theme
+  const currentTheme = theme === 'system' ? systemTheme : theme;
+  const isDark = currentTheme === 'dark';
+  
+  // Use dark colors for light theme, light colors for dark theme
+  const fillColor = isDark ? '#ffffff' : '#1a1a1a';
+  const backgroundColor = isDark ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.9)';
+  const borderColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+
   return (
     <div className="fixed bottom-4 right-4 z-50">
       <a 
         href="https://bolt.new" 
         target="_blank" 
         rel="noopener noreferrer"
-        className="block transition-all duration-200 hover:scale-105 hover:opacity-80"
+        className="block transition-all duration-200 hover:scale-105 hover:opacity-80 rounded-lg p-2"
+        style={{
+          backgroundColor,
+          border: `1px solid ${borderColor}`,
+          backdropFilter: 'blur(8px)',
+        }}
         aria-label="Powered by Bolt"
       >
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           version="1.1" 
           viewBox="0.00 0.00 360.00 166.00"
-          className="h-8 w-auto drop-shadow-lg"
+          className="h-6 w-auto"
           aria-hidden="true"
         >
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 224.97 0.32
             L 219.34 25.99
             A 0.54 0.53 -83.9 0 0 219.86 26.64
@@ -49,7 +66,7 @@ const BoltBadge = () => {
             A 0.08 0.08 0.0 0 1 224.97 0.32
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 37.53 32.06
             C 41.33 28.57 44.78 26.06 50.10 25.37
             C 64.04 23.56 73.99 32.54 75.11 46.23
@@ -77,7 +94,7 @@ const BoltBadge = () => {
             A 1.11 1.09 26.1 0 0 30.36 64.85
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 167.55 86.53
             L 145.99 86.53
             A 0.35 0.35 0.0 0 1 145.64 86.11
@@ -89,7 +106,7 @@ const BoltBadge = () => {
             A 0.35 0.35 0.0 0 1 167.55 86.53
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 121.90 85.87
             C 103.54 92.15 78.19 84.89 77.54 61.29
             C 77.13 46.07 86.37 32.25 100.84 27.29
@@ -103,7 +120,7 @@ const BoltBadge = () => {
             A 12.43 10.62 -56.0 0 0 118.3208 46.2651
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 262.11 64.27
             C 262.88 63.77 263.34 63.10 264.41 62.49
             C 270.41 59.06 280.89 61.14 278.78 70.27
@@ -127,7 +144,7 @@ const BoltBadge = () => {
             A 0.20 0.20 0.0 0 0 262.11 64.27
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 301.44 80.62
             A 0.75 0.74 -25.6 0 1 302.39 80.95
             L 305.12 86.08
@@ -152,7 +169,7 @@ const BoltBadge = () => {
             A 0.11 0.11 0.0 0 0 292.23 71.81
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 332.72 74.18
             A 0.19 0.18 -33.3 0 0 332.37 74.11
             L 325.20 88.18
@@ -182,8 +199,8 @@ const BoltBadge = () => {
             L 332.72 74.18
             Z"
           />
-          <ellipse fill="#ffffff" cx="0.00" cy="0.00" transform="translate(237.26,83.31) rotate(-46.1)" rx="6.23" ry="5.75"/>
-          <path fill="#ffffff" d="
+          <ellipse fill={fillColor} cx="0.00" cy="0.00" transform="translate(237.26,83.31) rotate(-46.1)" rx="6.23" ry="5.75"/>
+          <path fill={fillColor} d="
             M 55.81 125.58
             C 67.63 125.51 74.46 134.13 74.53 145.42
             C 74.60 156.70 67.88 165.41 56.07 165.49
@@ -197,7 +214,7 @@ const BoltBadge = () => {
             C 49.03 133.85 46.99 139.73 46.99 145.56
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 3.65 126.11
             Q 14.46 126.17 16.33 126.10
             Q 22.36 125.87 25.99 127.56
@@ -222,7 +239,7 @@ const BoltBadge = () => {
             A 0.32 0.32 0.0 0 0 12.35 133.98
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 103.57 126.12
             Q 105.61 126.12 107.24 126.23
             A 0.84 0.84 0.0 0 1 108.00 126.86
@@ -254,7 +271,7 @@ const BoltBadge = () => {
             Q 101.53 126.12 103.57 126.12
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 135.00 145.55
             Q 135.00 126.71 135.03 126.40
             A 0.31 0.30 2.1 0 1 135.34 126.12
@@ -284,7 +301,7 @@ const BoltBadge = () => {
             Q 134.99 164.40 135.00 145.55
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 199.35 164.88
             A 0.08 0.07 -13.7 0 1 199.28 164.99
             L 189.47 164.99
@@ -316,7 +333,7 @@ const BoltBadge = () => {
             A 0.31 0.31 0.0 0 0 177.40 133.97
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 229.00 145.56
             Q 229.00 147.38 228.95 148.72
             A 0.67 0.67 0.0 0 1 228.28 149.37
@@ -346,7 +363,7 @@ const BoltBadge = () => {
             Q 229.00 143.74 229.00 145.56
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 236.19 126.63
             A 0.52 0.52 0.0 0 1 236.71 126.11
             L 251.70 126.05
@@ -368,7 +385,7 @@ const BoltBadge = () => {
             A 0.40 0.40 0.0 0 0 245.72 134.52
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 310.22 144.92
             Q 318.47 147.05 317.70 155.18
             C 317.13 161.24 311.69 164.73 305.98 164.89
@@ -402,7 +419,7 @@ const BoltBadge = () => {
             A 0.39 0.39 0.0 0 0 296.28 148.51
             Z"
           />
-          <path fill="#ffffff" d="
+          <path fill={fillColor} d="
             M 339.29 142.18
             Q 339.36 142.18 339.41 142.16
             A 0.35 0.29 2.5 0 0 339.61 142.01
