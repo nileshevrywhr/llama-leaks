@@ -10,7 +10,6 @@ import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import Privacy from "./pages/Privacy";
 import Legal from "./pages/Legal";
-import BoltBadge from "./components/BoltBadge";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +18,6 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BoltBadge />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
