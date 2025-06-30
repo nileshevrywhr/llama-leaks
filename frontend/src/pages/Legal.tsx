@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Home } from "lucide-react";
 import Header from "@/components/Header";
 import WarningBanner from "@/components/WarningBanner";
+import Footer from "@/components/Footer";
 
 const Legal = () => {
   return (
@@ -9,28 +10,32 @@ const Legal = () => {
       <Header />
       <WarningBanner />
       
-      <div className="pt-[88px] min-h-screen flex items-center justify-center px-4">
-        <div className="text-center space-y-8">
-          <div className="space-y-4">
-            <div className="space-y-1 text-muted-foreground text-lg">
-              <p>Lawyers wrote this stuff</p>
-              <p>I just scan public endpoints</p>
-              <p>Don't sue me please</p>
+      <div className="pt-[88px] px-4">
+        <div className="min-h-[calc(100vh-200px)] flex items-center justify-center">
+          <div className="text-center space-y-8">
+            <div className="space-y-4">
+              <div className="space-y-1 text-muted-foreground text-lg">
+                <p>Lawyers wrote this stuff</p>
+                <p>I just scan public endpoints</p>
+                <p>Don't sue me please</p>
+              </div>
             </div>
-          </div>
 
-          <Button 
-            asChild 
-            size="lg" 
-            className="gap-2"
-          >
-            <a href="/">
-              <Home className="h-5 w-5" />
-              Back to Home
-            </a>
-          </Button>
+            <Button 
+              asChild 
+              size="lg" 
+              className="gap-2"
+            >
+              <a href="/">
+                <Home className="h-5 w-5" />
+                Back to Home
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 };
