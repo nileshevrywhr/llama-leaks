@@ -50,23 +50,3 @@ const Footer = () => {
 };
 
 export default Footer;
-          <p className="text-sm text-muted-foreground text-center md:text-left">
-            Copyright © {new Date().getFullYear()} Banana Labs Inc.
-          </p>
-          
-          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <a href="/privacy" className="hover:text-foreground transition-colors">
-              privacy policy
-            </a>
-            <span>|</span>
-            <a href="/legal" className="hover:text-foreground transition-colors">
-              legal disclosure
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
-export default Footer;
