@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTheme } from "next-themes";
 
 const BoltBadge = () => {
-  const { theme, systemTheme } = useTheme();
+  const { theme, systemTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   
   // Ensure component is mounted to avoid hydration issues
@@ -15,12 +15,21 @@ const BoltBadge = () => {
     return null;
   }
   
-  // Determine the current theme
-  const currentTheme = theme === 'system' ? systemTheme : theme;
+  // Determine the current theme - use resolvedTheme which handles system theme automatically
+  const currentTheme = resolvedTheme || theme;
   const isDark = currentTheme === 'dark';
   
-  // Use light colors for dark theme, dark colors for light theme
-  const fillColor = isDark ? '#ffffff' : '#000000';
+  // Use white for dark theme, dark gray for light theme (better contrast)
+  const fillColor = isDark ? '#ffffff' : '#1a1a1a';
+
+  console.log('BoltBadge theme debug:', { 
+    theme, 
+    systemTheme, 
+    resolvedTheme, 
+    currentTheme, 
+    isDark, 
+    fillColor 
+  });
 
   return (
     <div className="fixed bottom-4 left-4 z-50">
@@ -35,8 +44,9 @@ const BoltBadge = () => {
           xmlns="http://www.w3.org/2000/svg" 
           version="1.1" 
           viewBox="0.00 0.00 360.00 166.00"
-          className="h-6 w-auto"
+          className="h-6 w-auto drop-shadow-sm"
           aria-hidden="true"
+          style={{ filter: isDark ? 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8))' : 'drop-shadow(0 1px 2px rgba(255, 255, 255, 0.8))' }}
         >
           <path fill={fillColor} d="M 224.97 0.32 L 219.34 25.99 A 0.54 0.53 -83.9 0 0 219.86 26.64 L 230.58 26.64 A 0.52 0.51 -83.7 0 1 231.08 27.27 L 227.10 45.43 A 0.72 0.71 -84.0 0 1 226.40 46.00 L 215.35 46.00 A 0.77 0.77 0.0 0 0 214.60 46.61 Q 213.34 52.74 212.01 58.51 C 211.04 62.68 210.10 67.42 215.30 68.19 Q 217.09 68.45 219.26 67.85 A 0.49 0.49 0.0 0 1 219.88 68.32 L 219.88 84.96 A 0.99 0.97 -16.2 0 1 219.41 85.79 Q 217.49 86.97 214.49 87.47 C 202.26 89.54 184.11 85.85 187.57 68.76 Q 188.53 64.01 192.35 46.67 A 0.55 0.54 -83.6 0 0 191.82 46.00 L 183.15 46.00 A 0.42 0.42 0.0 0 1 182.74 45.49 L 186.76 27.19 A 0.70 0.70 0.0 0 1 187.44 26.64 L 196.19 26.64 A 0.80 0.79 5.8 0 0 196.97 26.01 L 200.30 10.83 A 1.04 1.02 85.7 0 1 200.92 10.10 L 224.86 0.22 A 0.08 0.08 0.0 0 1 224.97 0.32 Z" />
           <path fill={fillColor} d="M 37.53 32.06 C 41.33 28.57 44.78 26.06 50.10 25.37 C 64.04 23.56 73.99 32.54 75.11 46.23 C 76.15 58.96 71.70 73.13 61.75 81.54 C 53.06 88.87 39.22 90.50 29.76 83.68 C 28.83 83.01 27.75 81.72 26.90 80.82 A 0.43 0.43 0.0 0 0 26.17 81.02 L 25.13 85.72 A 1.69 1.66 -8.5 0 1 24.29 86.84 L 0.40 99.54 A 0.30 0.29 82.9 0 1 -0.02 99.21 L 20.83 4.14 A 0.35 0.34 6.2 0 1 21.17 3.87 L 42.58 3.87 A 0.48 0.47 -83.6 0 1 43.04 4.45 L 37.05 31.78 A 0.29 0.29 0.0 0 0 37.53 32.06 Z M 30.36 64.85 C 36.33 69.69 44.69 69.63 49.54 63.33 C 52.06 60.05 53.39 53.86 51.12 50.09 C 47.03 43.28 39.18 43.48 33.68 48.64 A 2.24 2.23 74.8 0 0 33.05 49.75 L 29.98 63.77 A 1.11 1.09 26.1 0 0 30.36 64.85 Z" />
