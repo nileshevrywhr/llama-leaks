@@ -10,6 +10,11 @@
     "longitude": "116.397102",
     "local": [
       {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 277
+      },
+      {
         "name": "deepseek-r1:1.5b",
         "model": "deepseek-r1:1.5b",
         "size": 1117322599
@@ -21,11 +26,11 @@
       }
     ],
     "running": [],
-    "last_observed": "2025-06-27T17:03:44.449296+00:00",
-    "status": "unreachable",
-    "last_updated": "2025-06-27T17:03:44.449296+00:00",
+    "last_observed": "2025-06-30T19:21:30.338828+00:00",
+    "status": "live",
+    "last_updated": "2025-06-30T19:21:30.338828+00:00",
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
-    "age": "21 hours",
+    "age": "4 days",
     "ip": "117.72.XXX.XXX"
   },
   "1ef04d9e86775daa9807c11177862ddc8ff75681b72fb05e2c1befee1ba78fef": {
@@ -37,13 +42,19 @@
     "region": "Tokyo",
     "latitude": "35.689499",
     "longitude": "139.692322",
-    "local": [],
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      }
+    ],
     "running": [],
-    "last_observed": "2025-06-27T17:03:44.449296+00:00",
+    "last_observed": "2025-06-30T19:21:30.338828+00:00",
     "status": "live",
-    "last_updated": "2025-06-27T17:03:44.449296+00:00",
+    "last_updated": "2025-06-30T19:21:30.338828+00:00",
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
-    "age": "21 hours",
+    "age": "4 days",
     "ip": "126.78.XXX.XXX"
   },
   "0fab6dc43c025fb4d3ebf57777bc273573b74515a5043c8073a9fe5f791e444a": {
@@ -68,11 +79,11 @@
       }
     ],
     "running": [],
-    "last_observed": "2025-06-27T17:03:44.449296+00:00",
+    "last_observed": "2025-06-30T19:21:30.338828+00:00",
     "status": "live",
-    "last_updated": "2025-06-27T17:03:44.449296+00:00",
+    "last_updated": "2025-06-30T19:21:30.338828+00:00",
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
-    "age": "21 hours",
+    "age": "4 days",
     "ip": "43.136.XXX.XXX"
   },
   "3735d67e09494f4d9e88c1eb50b0463152f0f72d37fc6149c3b8f797005d2633": {
@@ -92,11 +103,11 @@
       }
     ],
     "running": [],
-    "last_observed": "2025-06-27T17:03:44.449296+00:00",
+    "last_observed": "2025-06-30T19:21:30.338828+00:00",
     "status": "live",
-    "last_updated": "2025-06-27T17:03:44.449296+00:00",
+    "last_updated": "2025-06-30T19:21:30.338828+00:00",
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
-    "age": "21 hours",
+    "age": "4 days",
     "ip": "113.45.XXX.XXX"
   },
   "4dcbda9889dc5fb746322e378a3a0e2ad224ef66bdffc44ffdde91495da700f6": {
@@ -116,11 +127,11 @@
       }
     ],
     "running": [],
-    "last_observed": "2025-06-27T17:03:44.449296+00:00",
+    "last_observed": "2025-06-30T19:21:30.338828+00:00",
     "status": "live",
-    "last_updated": "2025-06-27T17:03:44.449296+00:00",
+    "last_updated": "2025-06-30T19:21:30.338828+00:00",
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
-    "age": "21 hours",
+    "age": "4 days",
     "ip": "120.53.XXX.XXX"
   },
   "1032064e25bb76eaebe70f17fd444dace5c144a2d7a14dc127e53f0e3d6ef887": {
@@ -154,12 +165,18 @@
         "size": 1117322599
       }
     ],
-    "running": [],
-    "last_observed": "2025-06-27T17:03:44.449296+00:00",
+    "running": [
+      {
+        "name": "llama3.1:8b",
+        "model": "llama3.1:8b",
+        "size": 6450833408
+      }
+    ],
+    "last_observed": "2025-06-30T19:21:30.338828+00:00",
     "status": "live",
-    "last_updated": "2025-06-27T17:03:44.449296+00:00",
+    "last_updated": "2025-06-30T19:21:30.338828+00:00",
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
-    "age": "21 hours",
+    "age": "4 days",
     "ip": "114.113.XXX.XXX"
   },
   "b9e2e90a68fb560aa1174a31a3ad253eff6bd840d183f6d41be3991c08341b62": {
@@ -173,17 +190,38 @@
     "longitude": "-0.125740",
     "local": [
       {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
         "name": "deepseek-r1:8b",
         "model": "deepseek-r1:8b",
         "size": 5225376047
       }
     ],
-    "running": [],
-    "last_observed": "2025-06-27T17:03:44.449296+00:00",
+    "running": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 3188551680
+      }
+    ],
+    "last_observed": "2025-06-30T19:21:30.338828+00:00",
     "status": "live",
-    "last_updated": "2025-06-27T17:03:44.449296+00:00",
+    "last_updated": "2025-06-30T19:21:30.338828+00:00",
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
-    "age": "21 hours",
+    "age": "4 days",
     "ip": "150.230.XXX.XXX"
   },
   "7baaf4d6495476046d1a52d1ce33cde03143a0d2eaca320f861cc46022650f53": {
@@ -229,11 +267,11 @@
         "size": 1715003392
       }
     ],
-    "last_observed": "2025-06-27T17:03:44.449296+00:00",
+    "last_observed": "2025-06-30T19:21:30.338828+00:00",
     "status": "live",
-    "last_updated": "2025-06-27T17:03:44.449296+00:00",
+    "last_updated": "2025-06-30T19:21:30.338828+00:00",
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
-    "age": "21 hours",
+    "age": "4 days",
     "ip": "116.130.XXX.XXX"
   },
   "85bfcbc480a30f2a319ae1f5aaf561d98d408ded24de311821943dfdd2ca363a": {
@@ -250,6 +288,16 @@
         "name": "llama3:latest",
         "model": "llama3:latest",
         "size": 4661224676
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
       },
       {
         "name": "llama3.2:latest",
@@ -269,16 +317,16 @@
     ],
     "running": [
       {
-        "name": "smollm2:135m",
-        "model": "smollm2:135m",
-        "size": 1122909952
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 4755648512
       }
     ],
-    "last_observed": "2025-06-27T17:03:44.449296+00:00",
+    "last_observed": "2025-06-30T19:21:30.338828+00:00",
     "status": "live",
-    "last_updated": "2025-06-27T17:03:44.449296+00:00",
+    "last_updated": "2025-06-30T19:21:30.338828+00:00",
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
-    "age": "21 hours",
+    "age": "4 days",
     "ip": "45.145.XXX.XXX"
   },
   "971eeeaf49622abc98da6c86ea16aaedd82178cda068260ba396d1cdd83aa6e8": {
@@ -302,12 +350,18 @@
         "size": 1117322599
       }
     ],
-    "running": [],
-    "last_observed": "2025-06-27T17:03:44.449296+00:00",
+    "running": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 643710720
+      }
+    ],
+    "last_observed": "2025-06-30T19:21:30.338828+00:00",
     "status": "live",
-    "last_updated": "2025-06-27T17:03:44.449296+00:00",
+    "last_updated": "2025-06-30T19:21:30.338828+00:00",
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
-    "age": "21 hours",
+    "age": "4 days",
     "ip": "47.116.XXX.XXX"
   }
 }
