@@ -10,8 +10,6 @@ const BoltBadge = () => {
   
   // Use dark colors for light theme, light colors for dark theme
   const fillColor = isDark ? '#ffffff' : '#1a1a1a';
-  const backgroundColor = isDark ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.9)';
-  const borderColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
@@ -19,12 +17,7 @@ const BoltBadge = () => {
         href="https://bolt.new" 
         target="_blank" 
         rel="noopener noreferrer"
-        className="block transition-all duration-200 hover:scale-105 hover:opacity-80 rounded-lg p-2"
-        style={{
-          backgroundColor,
-          border: `1px solid ${borderColor}`,
-          backdropFilter: 'blur(8px)',
-        }}
+        className="block transition-all duration-200 hover:scale-105 hover:opacity-80"
         aria-label="Powered by Bolt"
       >
         <svg 
