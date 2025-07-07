@@ -59,11 +59,12 @@ jobs:
         run: |
           python backend/live_server_identifier.py
 
-      - name: Commit changes
+      - name: Commit and push updated data
         run: |
           git config --global user.name "nileshevrywhr"
           git config --global user.email "nilesh.guptain@gmail.com"
           git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/nileshevrywhr/llama-leaks.git
           git add frontend/public/data/live_servers.json
-          git commit -m "chore: auto-refresh scan [skip ci]" || echo "error refreshing servers"
-          git push
+          git commit -m "chore: auto-refresh scan [skip ci]" || echo "no changes"
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/nileshevrywhr/llama-leaks.git HEAD:main
+          
