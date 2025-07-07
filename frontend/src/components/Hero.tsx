@@ -267,64 +267,44 @@ const Hero = () => {
 
             {/* Server Details - Scrollable Content */}
             <div className="flex-1 lg:overflow-y-auto px-3 lg:px-6 pt-2 lg:pt-4 pb-3 lg:pb-6 space-y-2 lg:space-y-4 lg:scrollbar-thin lg:scrollbar-thumb-border lg:scrollbar-track-transparent">
-              {/* IP and Status */}
-              {/* Protocol and URL Display */}
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 lg:gap-3">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs lg:text-sm text-muted-foreground font-mono">
-                      http://
-                    </span>
-                    <span className="text-primary text-sm lg:text-lg font-medium font-mono">
-                      {serverData.ip}:{serverData.port}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full animate-pulse ${
-                      serverData.status === 'live' ? 'bg-green-500' : 'bg-red-500'
-                    }`}></div>
-                    <span className={`text-xs lg:text-xs ${
-                      serverData.status === 'live' ? 'text-green-500' : 'text-red-500'
-                    }`}>
-                      {serverData.status.toUpperCase()}
-                    </span>
-                  </div>
-                </div>
-                
-                {/* Copy URL Button */}
-                <div className="flex items-center gap-2">
-                  <Button
-                    onClick={handleCopyUrl}
-                    size="sm"
-                    variant="outline"
-                    className={`
-                      relative overflow-hidden transition-all duration-200 
-                      hover:bg-primary hover:text-primary-foreground hover:border-primary
-                      focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background
-                      active:scale-95 font-mono text-xs
-                      ${copied ? 'bg-green-500 text-white border-green-500' : ''}
-                    `}
-                    disabled={!serverData}
-                  >
-                    {copied ? (
-                      <>
-                        <Check className="h-3 w-3 mr-1" />
-                        Copied!
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-3 w-3 mr-1" />
-                        Copy URL
-                      </>
-                    )}
-                    {copied && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full animate-pulse" />
-                    )}
-                  </Button>
-                  <span className="text-xs text-muted-foreground">
-                    http://{serverData.ip}:{serverData.port}
+              {/* URL Field with Copy Button - Single Row */}
+              <div className="flex items-center gap-2 lg:gap-3">
+                <div className="flex items-center gap-1 flex-1 min-w-0">
+                  <span className="text-xs lg:text-sm text-muted-foreground font-mono">
+                    http://
+                  </span>
+                  <span className="text-primary text-sm lg:text-lg font-medium font-mono truncate">
+                    {serverData.ip}:{serverData.port}
                   </span>
                 </div>
+                <Button
+                  onClick={handleCopyUrl}
+                  size="sm"
+                  variant="outline"
+                  className={`
+                    relative overflow-hidden transition-all duration-200 flex-shrink-0
+                    hover:bg-primary hover:text-primary-foreground hover:border-primary
+                    focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background
+                    active:scale-95 font-mono text-xs
+                    ${copied ? 'bg-green-500 text-white border-green-500' : ''}
+                  `}
+                  disabled={!serverData}
+                >
+                  {copied ? (
+                    <>
+                      <Check className="h-3 w-3 mr-1" />
+                      Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="h-3 w-3 mr-1" />
+                      Copy
+                    </>
+                  )}
+                  {copied && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full animate-pulse" />
+                  )}
+                </Button>
               </div>
 
               {/* Location */}
@@ -341,21 +321,37 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Protocol and Version - Compact */}
+              {/* Protocol and Version with Age */}
               <div className="grid grid-cols-2 gap-2 lg:space-y-1 lg:block text-xs lg:text-xs">
                 <div>
                   <span className="text-muted-foreground">Protocol: </span>
                   <span className="text-primary">http</span>
                 </div>
-                <div>
-                  <span className="text-muted-foreground">Version: </span>
-                  <span className="text-primary">{serverData.version}</span>
+                <div className="flex items-center gap-2">
+                  <div>
+                    <span className="text-muted-foreground">Version: </span>
+                    <span className="text-primary">{serverData.version}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className={`w-2 h-2 rounded-full animate-pulse ${
+                      serverData.status === 'live' ? 'bg-green-500' : 'bg-red-500'
+                    }`}></div>
+                    <span className={`text-xs ${
+                      serverData.status === 'live' ? 'text-green-500' : 'text-red-500'
+                    }`}>
+                      {serverData.status.toUpperCase()}
+                    </span>
+                  </div>
+                </div>
+                <div className="col-span-2 lg:col-span-1">
+                  <span className="text-muted-foreground">Age: </span>
+                  <span className="text-primary">{serverData.age}</span>
                 </div>
               </div>
 
               {/* Models Summary - Always Visible */}
               <div className="flex items-center justify-between">
-                <div className="text-xs lg:text-sm">
+                <div className="flex items-center gap-2">
                   <span className="text-muted-foreground">Models: </span>
                   <span className="text-foreground">{serverData.local.length} local</span>
                   {serverData.running.length > 0 && (
