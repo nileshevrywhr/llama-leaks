@@ -61,8 +61,8 @@ jobs:
 
       - name: Commit changes
         run: |
-          git config --global user.name "statusisgreen"
-          git config --global user.email "statusisgreen@bananalabs.dev"
+          git config --global user.name "nileshevrywhr"
+          git config --global user.email "nilesh.guptain@gmail.com"
           git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/nileshevrywhr/ollama-wall.git
           git add frontend/public/data/live_servers.json
           git commit -m "chore: auto-refresh scan [skip ci]" || echo "error refreshing servers"
