@@ -65,6 +65,7 @@ jobs:
           git config --global user.email "nilesh.guptain@gmail.com"
           git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/nileshevrywhr/llama-leaks.git
           git add frontend/public/data/live_servers.json
-          git commit -m "chore: auto-refresh scan [skip ci]" || echo "no changes"
-          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/nileshevrywhr/llama-leaks.git HEAD:main
+          git commit -m "chore: auto-refresh scan [skip ci]" || echo "No changes"
+          git push origin HEAD:main
+        
           
