@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Clock, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Clock, ChevronDown, ChevronUp, Copy, Check } from "lucide-react";
 import Map from "./Map";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
@@ -33,6 +33,7 @@ const Hero = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [modelsExpanded, setModelsExpanded] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const fetchRandomServer = async (isRefresh = false) => {
     try {
@@ -76,6 +77,27 @@ const Hero = () => {
     fetchRandomServer(true);
   };
 
+  const handleCopyUrl = async () => {
+    if (!serverData) return;
+    
+    const fullUrl = `http://${serverData.ip}:${serverData.port}`;
+    
+    try {
+      await navigator.clipboard.writeText(fullUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = fullUrl;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
   const formatSize = (bytes: number) => {
     const mb = bytes / (1024 * 1024);
     const gb = bytes / (1024 * 1024 * 1024);
@@ -246,18 +268,61 @@ const Hero = () => {
             {/* Server Details - Scrollable Content */}
             <div className="flex-1 lg:overflow-y-auto px-3 lg:px-6 pt-2 lg:pt-4 pb-3 lg:pb-6 space-y-2 lg:space-y-4 lg:scrollbar-thin lg:scrollbar-thumb-border lg:scrollbar-track-transparent">
               {/* IP and Status */}
-              <div className="flex items-center gap-2 lg:gap-3">
-                <span className="text-primary text-sm lg:text-lg font-medium">
-                  {serverData.ip}:{serverData.port}
-                </span>
+              {/* Protocol and URL Display */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 lg:gap-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs lg:text-sm text-muted-foreground font-mono">
+                      http://
+                    </span>
+                    <span className="text-primary text-sm lg:text-lg font-medium font-mono">
+                      {serverData.ip}:{serverData.port}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className={`w-2 h-2 rounded-full animate-pulse ${
+                      serverData.status === 'live' ? 'bg-green-500' : 'bg-red-500'
+                    }`}></div>
+                    <span className={`text-xs lg:text-xs ${
+                      serverData.status === 'live' ? 'text-green-500' : 'text-red-500'
+                    }`}>
+                      {serverData.status.toUpperCase()}
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Copy URL Button */}
                 <div className="flex items-center gap-2">
-                  <div className={`w-2 h-2 rounded-full animate-pulse ${
-                    serverData.status === 'live' ? 'bg-green-500' : 'bg-red-500'
-                  }`}></div>
-                  <span className={`text-xs lg:text-xs ${
-                    serverData.status === 'live' ? 'text-green-500' : 'text-red-500'
-                  }`}>
-                    {serverData.status.toUpperCase()}
+                  <Button
+                    onClick={handleCopyUrl}
+                    size="sm"
+                    variant="outline"
+                    className={`
+                      relative overflow-hidden transition-all duration-200 
+                      hover:bg-primary hover:text-primary-foreground hover:border-primary
+                      focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background
+                      active:scale-95 font-mono text-xs
+                      ${copied ? 'bg-green-500 text-white border-green-500' : ''}
+                    `}
+                    disabled={!serverData}
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="h-3 w-3 mr-1" />
+                        Copied!
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-3 w-3 mr-1" />
+                        Copy URL
+                      </>
+                    )}
+                    {copied && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full animate-pulse" />
+                    )}
+                  </Button>
+                  <span className="text-xs text-muted-foreground">
+                    http://{serverData.ip}:{serverData.port}
                   </span>
                 </div>
               </div>
