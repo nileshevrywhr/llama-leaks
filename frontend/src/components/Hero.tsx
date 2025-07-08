@@ -323,10 +323,6 @@ const Hero = () => {
 
               {/* Protocol and Version with Age */}
               <div className="grid grid-cols-2 gap-2 lg:space-y-1 lg:block text-xs lg:text-xs">
-                <div>
-                  <span className="text-muted-foreground">Protocol: </span>
-                  <span className="text-primary">http</span>
-                </div>
                 <div className="flex items-center gap-2">
                   <div>
                     <span className="text-muted-foreground">Version: </span>
