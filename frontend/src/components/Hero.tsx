@@ -343,13 +343,9 @@ const Hero = () => {
                     </span>
                   </div>
                 </div>
-                <div className="col-span-2 lg:col-span-1">
-                  <span className="text-muted-foreground">Age: </span>
-                  <span className="text-primary">{serverData.age}</span>
-                </div>
-                <div className="col-span-2 lg:col-span-1">
+                <div className="col-span-2 lg:col-span-1 lg:mt-1">
                   <span className="text-muted-foreground">First Seen: </span>
-                  <span className="text-primary">{timestamp.formatted}</span>
+                  <span className="text-primary">{timestamp.formatted} ({serverData.age} ago)</span>
                 </div>
               </div>
 
