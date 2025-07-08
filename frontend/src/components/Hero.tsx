@@ -523,7 +523,7 @@ const Hero = () => {
                 title="Educational purposes only - not functional"
               >
                 <Eye className="h-5 w-5" />
-                Evil Action #1
+                Generate Malicious Content
               </Button>
               
               <Button 
@@ -534,7 +534,7 @@ const Hero = () => {
                 title="Educational purposes only - not functional"
               >
                 <Zap className="h-5 w-5" />
-                Evil Action #2
+                Replace with Evil Model
               </Button>
             </div>
             
