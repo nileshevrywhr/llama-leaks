@@ -7,7 +7,7 @@ from datetime import datetime, timedelta, UTC
 import hashlib
 from tqdm import tqdm
 
-INPUT_JSON = Path("backend/input/FOFA_20250708_0047_IN.json")
+# INPUT_JSON = Path("backend/input/FOFA_20250708_0047_IN.json")
 OUTPUT_JSON = Path("frontend/public/data/live_servers.json")
 LOG_FILE = Path("backend/data/live_server_identifier.log")
 LOG_FILE.parent.mkdir(exist_ok=True)
@@ -17,7 +17,7 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s %(message)s',
     handlers=[
         logging.FileHandler(LOG_FILE),
-        logging.StreamHandler()
+        # logging.StreamHandler() # Removed
     ]
 )
 
@@ -169,84 +169,130 @@ def main():
     # This ensures that servers not in the current FOFA scan are still present
     final_output_servers.update(existing_live_servers_map)
 
-    # Process each entry from the input FOFA JSON
-    with INPUT_JSON.open() as f:
-        buffer = ""
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            buffer += line
-            if line.endswith("}"):
-                try:
-                    entry = json.loads(buffer)
-                except Exception as e:
-                    logging.error(f"Failed to parse JSON object: {e}")
-                    buffer = ""
+    input_files = list(Path("backend/input/").glob("FOFA_*.json"))
+    if not input_files:
+        logging.info("No FOFA_*.json files found in backend/input/. Exiting.")
+        return
+
+    total_servers = 0
+    for input_file in input_files:
+        with input_file.open() as f_count:
+            buffer_count = ""
+            for line_count in f_count:
+                line_count = line_count.strip()
+                if not line_count:
                     continue
-                
-                ip, port, city, country, country_name, region, latitude, longitude = extract_ip_port(entry)
-                if not ip or not port:
-                    buffer = ""
-                    continue
-                
-                server_hash_key = hash_ip_port(ip, port)
-                masked_ip = mask_ip(ip)
-
-                # Get existing info or start fresh for current server
-                current_server_info = final_output_servers.get(server_hash_key, {})
-
-                # Update common fields from current scan
-                current_server_info["port"] = int(port)
-                current_server_info["city"] = city
-                current_server_info["country"] = country
-                current_server_info["country_name"] = country_name
-                current_server_info["region"] = region
-                current_server_info["latitude"] = latitude
-                current_server_info["longitude"] = longitude
-                current_server_info["ip"] = masked_ip
-                current_server_info["last_observed"] = now.isoformat() # Always update last_observed
-                current_server_info["last_updated"] = now.isoformat() # Always update last_updated
-
-                # Determine status and update live-specific fields
-                server_status = is_server_live(ip, port)
-                current_server_info["status"] = server_status
-
-                if server_status == "live":
-                    current_server_info["version"] = get_ollama_version(ip, port)
-                    current_server_info["local"] = get_local_models(ip, port)
-                    current_server_info["running"] = get_running_models(ip, port)
-                    
-                    if "first_seen_online" not in current_server_info or not current_server_info["first_seen_online"]:
-                        current_server_info["first_seen_online"] = now.isoformat()
-                else: # Server is dead or unreachable
-                    # Set defaults if these fields are not present (e.g., for newly discovered dead servers)
-                    current_server_info.setdefault("version", "unknown")
-                    current_server_info.setdefault("local", [])
-                    current_server_info.setdefault("running", [])
-                    current_server_info.setdefault("first_seen_online", None)
-
-                # Calculate and add 'age' field
-                if current_server_info.get("first_seen_online"):
+                buffer_count += line_count
+                if line_count.endswith("}"):
                     try:
-                        dt_first_seen = datetime.fromisoformat(current_server_info["first_seen_online"])
-                        age_td = now - dt_first_seen
-                        current_server_info["age"] = format_timedelta(age_td)
-                    except ValueError as e:
-                        logging.error(f"Error parsing timestamp {current_server_info['first_seen_online']}: {e}")
-                        current_server_info["age"] = "unknown"
-                else:
-                    current_server_info["age"] = "N/A" # For newly observed dead servers that were never seen live
+                        json.loads(buffer_count)
+                        total_servers += 1
+                    except Exception:
+                        pass # Ignore errors during counting
+                    buffer_count = ""
 
-                logging.info(f"Processed {current_server_info['ip']}:{port} (status: {current_server_info['status']}, v{current_server_info.get('version', 'N/A')}, age: {current_server_info.get('age', 'N/A')})")
-                
-                final_output_servers[server_hash_key] = current_server_info # Store in the final dictionary
-                OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2)) # Write update to file immediately
+    # Process each entry from the input FOFA JSON
+    with tqdm(total=total_servers, desc="Overall Processing") as pbar:
+        for input_file in input_files:
+            logging.info(f"Processing file: {input_file.name}")
+            with input_file.open() as f:
                 buffer = ""
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    buffer += line
+                    if line.endswith("}"):
+                        try:
+                            entry = json.loads(buffer)
+                        except Exception as e:
+                            logging.error(f"Failed to parse JSON object: {e}")
+                            buffer = ""
+                            continue
+                        
+                        ip, port, city, country, country_name, region, latitude, longitude = extract_ip_port(entry)
+                        if not ip or not port:
+                            buffer = ""
+                            continue
+                        
+                        server_hash_key = hash_ip_port(ip, port)
+                        masked_ip = mask_ip(ip)
+
+                        # Get existing info or start fresh for current server
+                        current_server_info = final_output_servers.get(server_hash_key, {})
+
+                        # Update common fields from current scan
+                        current_server_info["port"] = int(port)
+                        current_server_info["city"] = city
+                        current_server_info["country"] = country
+                        current_server_info["country_name"] = country_name
+                        current_server_info["region"] = region
+                        current_server_info["latitude"] = latitude
+                        current_server_info["longitude"] = longitude
+                        current_server_info["ip"] = masked_ip
+                        current_server_info["last_observed"] = now.isoformat() # Always update last_observed
+                        current_server_info["last_updated"] = now.isoformat() # Always update last_updated
+
+                        # Determine status and update live-specific fields
+                        server_status = is_server_live(ip, port)
+                        current_server_info["status"] = server_status
+
+                        if server_status == "live":
+                            current_server_info["version"] = get_ollama_version(ip, port)
+                            current_server_info["local"] = get_local_models(ip, port)
+                            current_server_info["running"] = get_running_models(ip, port)
+                            
+                            if "first_seen_online" not in current_server_info or not current_server_info["first_seen_online"]:
+                                current_server_info["first_seen_online"] = now.isoformat()
+
+                            # Print detailed info for live servers using tqdm.write
+                            logging.info("\nFound Ollama Server")
+                            logging.info(f"API Endpoint: http://{mask_ip(ip)}:{port}/api/tags")
+                            logging.info(f"Server URL: http://{mask_ip(ip)}:{port}")
+                            
+                            local_models = current_server_info.get("local", [])
+                            if local_models:
+                                logging.info("Available Models:")
+                                for idx, model in enumerate(local_models):
+                                    name = model.get("name", "N/A")
+                                    size = model.get("size", "N/A")
+                                    # Convert size from bytes to GB for readability
+                                    if isinstance(size, (int, float)):
+                                        size_gb = size / (1024**3) # Bytes to GB
+                                        logging.info(f"{idx+1}. {name} ({size_gb:.2f} GB)")
+                                    else:
+                                        logging.info(f"{idx+1}. {name} ({size})")
+                            else:
+                                logging.info("Available Models: None")
+
+                        else: # Server is dead or unreachable
+                            # Set defaults if these fields are not present (e.g., for newly discovered dead servers)
+                            current_server_info.setdefault("version", "unknown")
+                            current_server_info.setdefault("local", [])
+                            current_server_info.setdefault("running", [])
+                            current_server_info.setdefault("first_seen_online", None)
+
+                        # Calculate and add 'age' field
+                        if current_server_info.get("first_seen_online"):
+                            try:
+                                dt_first_seen = datetime.fromisoformat(current_server_info["first_seen_online"])
+                                age_td = now - dt_first_seen
+                                current_server_info["age"] = format_timedelta(age_td)
+                            except ValueError as e:
+                                logging.error(f"Error parsing timestamp {current_server_info['first_seen_online']}: {e}")
+                                current_server_info["age"] = "unknown"
+                        else:
+                            current_server_info["age"] = "N/A" # For newly observed dead servers that were never seen live
+
+                        logging.info(f"Processed {current_server_info['ip']}:{port} (status: {current_server_info['status']}, v{current_server_info.get('version', 'N/A')}, age: {current_server_info.get('age', 'N/A')})")
+                        
+                        final_output_servers[server_hash_key] = current_server_info # Store in the final dictionary
+                        OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2)) # Write update to file immediately
+                        buffer = ""
+                        pbar.update(1)
     
     # Write the complete updated map to OUTPUT_JSON
     # OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2)) # Removed
-    tqdm.write(f"Scan complete. {len(final_output_servers)} servers saved to {OUTPUT_JSON.name}")
     logging.info(f"Scan complete. {len(final_output_servers)} servers saved to {OUTPUT_JSON.name}") # Keep file log
 
 if __name__ == "__main__":
