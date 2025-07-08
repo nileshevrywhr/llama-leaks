@@ -5,8 +5,9 @@ import time
 from pathlib import Path
 from datetime import datetime, timedelta, UTC
 import hashlib
+from tqdm import tqdm
 
-INPUT_JSON = Path("backend/input/raw_input.json")
+INPUT_JSON = Path("backend/input/FOFA_20250708_0047_IN.json")
 OUTPUT_JSON = Path("frontend/public/data/live_servers.json")
 LOG_FILE = Path("backend/data/live_server_identifier.log")
 LOG_FILE.parent.mkdir(exist_ok=True)
@@ -40,10 +41,10 @@ def is_server_live(ip, port, max_retries=2):
             if resp.status_code == 200:
                 return "live"
             else:
-                logging.warning(f"{ip}:{port} responded with status {resp.status_code}")
+                logging.warning(f"{mask_ip(ip)}:{port} responded with status {resp.status_code}")
                 return f"http_error_{resp.status_code}"
         except requests.RequestException as e:
-            logging.error(f"Network error for {ip}:{port} (attempt {attempt}): {e}")
+            logging.error(f"Network error for {mask_ip(ip)}:{port} (attempt {attempt}): {e}")
         if attempt < max_retries:
             time.sleep(2 ** attempt)
     return "unreachable"
@@ -57,9 +58,9 @@ def get_ollama_version(ip, port, max_retries=2):
                 data = resp.json()
                 return data.get("version", "unknown")
             else:
-                logging.warning(f"{ip}:{port} /api/version responded with status {resp.status_code}")
+                logging.warning(f"{mask_ip(ip)}:{port} /api/version responded with status {resp.status_code}")
         except requests.RequestException as e:
-            logging.error(f"Network error for {ip}:{port} /api/version (attempt {attempt}): {e}")
+            logging.error(f"Network error for {mask_ip(ip)}:{port} /api/version (attempt {attempt}): {e}")
         if attempt < max_retries:
             time.sleep(2 ** attempt)
     return "unreachable"
@@ -80,9 +81,9 @@ def get_local_models(ip, port, max_retries=2):
                     })
                 return models
             else:
-                logging.warning(f"{ip}:{port} /api/tags responded with status {resp.status_code}")
+                logging.warning(f"{mask_ip(ip)}:{port} /api/tags responded with status {resp.status_code}")
         except requests.RequestException as e:
-            logging.error(f"Network error for {ip}:{port} /api/tags (attempt {attempt}): {e}")
+            logging.error(f"Network error for {mask_ip(ip)}:{port} /api/tags (attempt {attempt}): {e}")
         if attempt < max_retries:
             time.sleep(2 ** attempt)
     return []
@@ -103,9 +104,9 @@ def get_running_models(ip, port, max_retries=2):
                     })
                 return models
             else:
-                logging.warning(f"{ip}:{port} /api/ps responded with status {resp.status_code}")
+                logging.warning(f"{mask_ip(ip)}:{port} /api/ps responded with status {resp.status_code}")
         except requests.RequestException as e:
-            logging.error(f"Network error for {ip}:{port} /api/ps (attempt {attempt}): {e}")
+            logging.error(f"Network error for {mask_ip(ip)}:{port} /api/ps (attempt {attempt}): {e}")
         if attempt < max_retries:
             time.sleep(2 ** attempt)
     return []
@@ -240,11 +241,13 @@ def main():
                 logging.info(f"Processed {current_server_info['ip']}:{port} (status: {current_server_info['status']}, v{current_server_info.get('version', 'N/A')}, age: {current_server_info.get('age', 'N/A')})")
                 
                 final_output_servers[server_hash_key] = current_server_info # Store in the final dictionary
+                OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2)) # Write update to file immediately
                 buffer = ""
     
     # Write the complete updated map to OUTPUT_JSON
-    OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2))
-    logging.info(f"Scan complete. {len(final_output_servers)} servers saved to {OUTPUT_JSON.name}")
+    # OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2)) # Removed
+    tqdm.write(f"Scan complete. {len(final_output_servers)} servers saved to {OUTPUT_JSON.name}")
+    logging.info(f"Scan complete. {len(final_output_servers)} servers saved to {OUTPUT_JSON.name}") # Keep file log
 
 if __name__ == "__main__":
     main() 
