@@ -296,12 +296,11 @@ def main():
                         logging.info(f"Processed {current_server_info['ip']}:{port} (status: {current_server_info['status']}, v{current_server_info.get('version', 'N/A')}, age: {current_server_info.get('age', 'N/A')})")
                         
                         final_output_servers[server_hash_key] = current_server_info # Store in the final dictionary
-                        OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2)) # Write update to file immediately
                         buffer = ""
                         pbar.update(1)
     
     # Write the complete updated map to OUTPUT_JSON
-    # OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2)) # Removed
+    OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2))
     logging.info(f"Scan complete. {len(final_output_servers)} servers saved to {OUTPUT_JSON.name}") # Keep file log
 
 if __name__ == "__main__":
