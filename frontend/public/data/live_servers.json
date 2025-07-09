@@ -26,9 +26,15 @@
       }
     ],
     "running": [],
+<<<<<<< HEAD
     "last_observed": "2025-07-07T19:03:09.750706+00:00",
     "status": "live",
     "last_updated": "2025-07-07T19:03:09.750706+00:00",
+=======
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+>>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "117.72.XXX.XXX"
@@ -55,9 +61,15 @@
       }
     ],
     "running": [],
+<<<<<<< HEAD
     "last_observed": "2025-07-07T19:03:09.750706+00:00",
     "status": "live",
     "last_updated": "2025-07-07T19:03:09.750706+00:00",
+=======
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+>>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "126.78.XXX.XXX"
@@ -84,9 +96,15 @@
       }
     ],
     "running": [],
+<<<<<<< HEAD
     "last_observed": "2025-07-07T19:03:09.750706+00:00",
     "status": "live",
     "last_updated": "2025-07-07T19:03:09.750706+00:00",
+=======
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+>>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "43.136.XXX.XXX"
@@ -108,9 +126,15 @@
       }
     ],
     "running": [],
+<<<<<<< HEAD
     "last_observed": "2025-07-07T19:03:09.750706+00:00",
     "status": "live",
     "last_updated": "2025-07-07T19:03:09.750706+00:00",
+=======
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+>>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "113.45.XXX.XXX"
@@ -132,9 +156,15 @@
       }
     ],
     "running": [],
+<<<<<<< HEAD
     "last_observed": "2025-07-07T19:03:09.750706+00:00",
     "status": "live",
     "last_updated": "2025-07-07T19:03:09.750706+00:00",
+=======
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+>>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "120.53.XXX.XXX"
@@ -171,9 +201,15 @@
       }
     ],
     "running": [],
+<<<<<<< HEAD
     "last_observed": "2025-07-07T19:03:09.750706+00:00",
     "status": "live",
     "last_updated": "2025-07-07T19:03:09.750706+00:00",
+=======
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+>>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "114.113.XXX.XXX"
@@ -209,6 +245,7 @@
         "size": 5225376047
       }
     ],
+<<<<<<< HEAD
     "running": [
       {
         "name": "llama3.2:latest",
@@ -219,6 +256,12 @@
     "last_observed": "2025-07-07T19:03:09.750706+00:00",
     "status": "live",
     "last_updated": "2025-07-07T19:03:09.750706+00:00",
+=======
+    "running": [],
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+>>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "150.230.XXX.XXX"
@@ -266,9 +309,15 @@
         "size": 1715003392
       }
     ],
+<<<<<<< HEAD
     "last_observed": "2025-07-07T19:03:09.750706+00:00",
     "status": "live",
     "last_updated": "2025-07-07T19:03:09.750706+00:00",
+=======
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+>>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "116.130.XXX.XXX"
@@ -321,9 +370,15 @@
         "size": 4755648512
       }
     ],
+<<<<<<< HEAD
     "last_observed": "2025-07-07T19:03:09.750706+00:00",
     "status": "live",
     "last_updated": "2025-07-07T19:03:09.750706+00:00",
+=======
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+>>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "45.145.XXX.XXX"
@@ -350,9 +405,15 @@
       }
     ],
     "running": [],
+<<<<<<< HEAD
     "last_observed": "2025-07-07T19:03:09.750706+00:00",
     "status": "live",
     "last_updated": "2025-07-07T19:03:09.750706+00:00",
+=======
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+>>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "47.116.XXX.XXX"
@@ -6114,8 +6175,13 @@
     "latitude": "11.000563",
     "longitude": "76.966576",
     "ip": "202.129.XXX.XXX",
+<<<<<<< HEAD
     "last_observed": "2025-07-08T19:42:24.337769+00:00",
     "last_updated": "2025-07-08T19:42:24.337769+00:00",
+=======
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+>>>>>>> main
     "status": "unreachable",
     "version": "unknown",
     "local": [],
@@ -6132,8 +6198,13 @@
     "latitude": "19.075975",
     "longitude": "72.877380",
     "ip": "13.233.XXX.XXX",
+<<<<<<< HEAD
     "last_observed": "2025-07-08T19:42:24.337769+00:00",
     "last_updated": "2025-07-08T19:42:24.337769+00:00",
+=======
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+>>>>>>> main
     "status": "unreachable",
     "version": "unknown",
     "local": [],
@@ -13717,5 +13788,5326 @@
     "running": [],
     "first_seen_online": null,
     "age": "N/A"
+<<<<<<< HEAD
+=======
+  },
+  "390f581ecf4bb1d09f77ca823b049d1948c47267da56160052ff7f69a3243b97": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "101.37.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.0",
+    "local": [],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:04:31.399060+00:00",
+    "age": "3 minutes"
+  },
+  "0d4d7a4bddc3bec673c6e674de253ff7d91fd39eb786cc9c8591c242a60c9b34": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "47.122.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.0",
+    "local": [
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:04:31.399060+00:00",
+    "age": "3 minutes"
+  },
+  "17359dfd9df4984bacf89892e4923ae6c118cff4c3acd37732b9c2e4ae0abeec": {
+    "port": 11434,
+    "city": "Clifton",
+    "country": "US",
+    "country_name": "United States of America",
+    "region": "New Jersey",
+    "latitude": "40.858585",
+    "longitude": "-74.163605",
+    "ip": "45.55.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.2.1",
+    "local": [],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:04:31.399060+00:00",
+    "age": "3 minutes"
+  },
+  "0ddadee8b7b69d463ffa17d70eea979ba45451f2077cc228fba214fe590c481f": {
+    "port": 11434,
+    "city": "Guangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "23.127361",
+    "longitude": "113.264572",
+    "ip": "113.45.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "8a33e88aa90fdbd3533e69ed84743fc6643fc62f94aaaee437cc5de5e50f6327": {
+    "port": 11434,
+    "city": "Shanghai",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shanghai",
+    "latitude": "31.224333",
+    "longitude": "121.468948",
+    "ip": "222.68.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "39ea119991f9018d817011aabb52ba555fdc537b5c9497ced508cce61bdc21b3": {
+    "port": 11434,
+    "city": "Heze",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shandong",
+    "latitude": "35.243061",
+    "longitude": "115.441109",
+    "ip": "182.44.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "87de5657c21f4b52c8821bd49c0174d4a62a35b12cb19e47217605609b163ada": {
+    "port": 11434,
+    "city": "Guangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "23.127361",
+    "longitude": "113.264572",
+    "ip": "121.37.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.12",
+    "local": [
+      {
+        "name": "deepseek-r1:7b",
+        "model": "deepseek-r1:7b",
+        "size": 4683075271
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "e02c95ab58e1545082406277f4a2f36f9d31581e90fb308009e5b4575576cef1": {
+    "port": 11434,
+    "city": "Velikiy Novgorod",
+    "country": "RU",
+    "country_name": "Russian Federation",
+    "region": "Novgorodskaya oblast'",
+    "latitude": "58.516708",
+    "longitude": "31.283382",
+    "ip": "5.227.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "2da35aa84b9323e872b00177947de21803fb10d86187c3d9874591b2e58d1bfa": {
+    "port": 11434,
+    "city": "Wuhan",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Hubei",
+    "latitude": "30.583330",
+    "longitude": "114.266853",
+    "ip": "119.98.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "c0600dfe4727c6d5730798a2af90379fd57cca15f7bb87562d31b01a470cce83": {
+    "port": 11434,
+    "city": "Hefei",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Anhui",
+    "latitude": "31.863815",
+    "longitude": "117.280830",
+    "ip": "220.180.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.8",
+    "local": [
+      {
+        "name": "dengcao/Qwen3-Embedding-8B:F16",
+        "model": "dengcao/Qwen3-Embedding-8B:F16",
+        "size": 15141156070
+      },
+      {
+        "name": "qwen3:32b",
+        "model": "qwen3:32b",
+        "size": 20201253588
+      },
+      {
+        "name": "qwen3:0.6b",
+        "model": "qwen3:0.6b",
+        "size": 522653526
+      },
+      {
+        "name": "qwen3:1.7b",
+        "model": "qwen3:1.7b",
+        "size": 1359293203
+      },
+      {
+        "name": "qwen3:14b",
+        "model": "qwen3:14b",
+        "size": 9276198324
+      },
+      {
+        "name": "deepseek-r1:70b",
+        "model": "deepseek-r1:70b",
+        "size": 42520397704
+      },
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "size": 1157672605
+      },
+      {
+        "name": "deepseek-r1:32b",
+        "model": "deepseek-r1:32b",
+        "size": 19851337640
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "e003a90869ce441682f12b89f6dca7b519a771630a43b0a57c358b9ae6ed721e": {
+    "port": 11434,
+    "city": "Huizhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "39.509766",
+    "longitude": "116.693001",
+    "ip": "61.143.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.8",
+    "local": [
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "size": 1157672605
+      },
+      {
+        "name": "mistral:latest",
+        "model": "mistral:latest",
+        "size": 4113301822
+      },
+      {
+        "name": "bge-large:latest",
+        "model": "bge-large:latest",
+        "size": 670532029
+      },
+      {
+        "name": "deepseek-r1:7b",
+        "model": "deepseek-r1:7b",
+        "size": 4683075440
+      },
+      {
+        "name": "nomic-embed-text:v1.5",
+        "model": "nomic-embed-text:v1.5",
+        "size": 274302450
+      },
+      {
+        "name": "dimavz/whisper-tiny:latest",
+        "model": "dimavz/whisper-tiny:latest",
+        "size": 44039248
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "13764d4573110542e2cd38b2557ee1bbe9927e1f69142ffafa1c54a16a254043": {
+    "port": 11434,
+    "city": "Guangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "23.127361",
+    "longitude": "113.264572",
+    "ip": "210.75.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "b90afd6b498ac9e1fe7b2ac5f4a909829b18b7e542eadf890793617386c84294": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "183.173.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "afcc86494d98b901b3ede3136a0bbbfa38aa67db6f6c90f662803ccbe9343625": {
+    "port": 11434,
+    "city": "Guangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "23.127361",
+    "longitude": "113.264572",
+    "ip": "210.75.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "6e1bdfa7645d8719be9ae02c80aa18c07712d4289cc720c72b177be362ef87ea": {
+    "port": 11434,
+    "city": "Chengdu",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Sichuan",
+    "latitude": "30.666670",
+    "longitude": "104.066269",
+    "ip": "211.149.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "ccfaf704400cf82712b1544ba2e9dbb6f20baa750a9c4558732e879011c23f8e": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "118.31.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.0",
+    "local": [
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "size": 1157672605
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322768
+      },
+      {
+        "name": "qwen3:0.6b",
+        "model": "qwen3:0.6b",
+        "size": 522653767
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "568634de14df65cd8ef49de139bdc1ecb8de0c0fe26d95dde7e871eb76cb6292": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "47.96.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.7",
+    "local": [
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "size": 1157672605
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "f4032953a4c1cbffec2f36b08b37f5e3ddade05b48cea3fa9829ecfcd3e219f8": {
+    "port": 11434,
+    "city": "Frankfurt am Main",
+    "country": "DE",
+    "country_name": "Germany",
+    "region": "Hessen",
+    "latitude": "50.110882",
+    "longitude": "8.681996",
+    "ip": "193.42.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.7-0-ga420a45-dirty",
+    "local": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3.1:8b-instruct-q4_K_M",
+        "model": "llama3.1:8b-instruct-q4_K_M",
+        "size": 4920753328
+      },
+      {
+        "name": "mistral:7b",
+        "model": "mistral:7b",
+        "size": 4113301824
+      },
+      {
+        "name": "qwq:32b",
+        "model": "qwq:32b",
+        "size": 19851349390
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "f0fdb99a5a5c63bc6b290d2071cd49068a66d07dd8c13418d0f0538a4762c706": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "121.52.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.11",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 277
+      },
+      {
+        "name": "deepseek-r1:7b",
+        "model": "deepseek-r1:7b",
+        "size": 4683075271
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "42a697049f8e4d77b79246ded7f824d906615c047e00486b0cd9c4d0e359cc39": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "101.201.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.5",
+    "local": [
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "e4834afdf90489b53644186b03d33c5b5e00c6ac1b92725e3b43e02f3f16a45b": {
+    "port": 11434,
+    "city": "Nanjing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Jiangsu",
+    "latitude": "32.061668",
+    "longitude": "118.777992",
+    "ip": "220.197.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.0",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 277
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322768
+      },
+      {
+        "name": "deepseek-r1:32b",
+        "model": "deepseek-r1:32b",
+        "size": 19851337809
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "63964ad3be5e830ad5bdf1b8a1aaa2f7d43ac9c1ca04110cb004e2692d205585": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "60.186.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "3ca27bb3353b676ff0dc78c6eea7a72c5f0469d1b05a5cc800144eb07168c2b1": {
+    "port": 11434,
+    "city": "Tokyo",
+    "country": "JP",
+    "country_name": "Japan",
+    "region": "Tokyo",
+    "latitude": "35.689499",
+    "longitude": "139.692322",
+    "ip": "117.102.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.6",
+    "local": [
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      },
+      {
+        "name": "llama3-groq-tool-use:latest",
+        "model": "llama3-groq-tool-use:latest",
+        "size": 4661257688
+      },
+      {
+        "name": "summerwind/japanese-starling-chatv:latest",
+        "model": "summerwind/japanese-starling-chatv:latest",
+        "size": 4368439603
+      },
+      {
+        "name": "llama3:latest",
+        "model": "llama3:latest",
+        "size": 4661224676
+      },
+      {
+        "name": "hf.co/mmnga/cyberagent-DeepSeek-R1-Distill-Qwen-14B-Japanese-gguf:latest",
+        "model": "hf.co/mmnga/cyberagent-DeepSeek-R1-Distill-Qwen-14B-Japanese-gguf:latest",
+        "size": 8988111151
+      },
+      {
+        "name": "deepseek-r1:14b",
+        "model": "deepseek-r1:14b",
+        "size": 8988112040
+      },
+      {
+        "name": "deepseek-r1:7b",
+        "model": "deepseek-r1:7b",
+        "size": 4683075271
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "04bf71c1dfca88f0dfe05ff84dddeb36926cc9c8f74d1737319bd5228917de20": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "6668a340eef9059acb7bea0313ea60136fb08034d1bae4075611503e14929cf5": {
+    "port": 11434,
+    "city": "Zaozhuang",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shandong",
+    "latitude": "34.864719",
+    "longitude": "117.554169",
+    "ip": "150.138.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "c30e5771504e80523159064f38c625b001d62b4b50343ba4acdbd4b110539da8": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "123.57.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322768
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "bd4f06dcbb659c4588fccf294c07be4e1529d987337131aa2ce873424c14945d": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "101.126.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "b7b33aa5f169571d74218d22a54215ad464fa56a321df1f71ffeb3bc204602aa": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "e00361d828e31f91e644ae0b4f1086616e73c74de241bdeedc91cd0edc44c7aa": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "101.201.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.6",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "deepseek-r1:7b",
+        "model": "deepseek-r1:7b",
+        "size": 4683075271
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "2bb7989cfdcfbe170192e2b81f7524fd643cf33781b5c8e5961ab22d84263488": {
+    "port": 11434,
+    "city": "Dalian",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Liaoning",
+    "latitude": "41.069592",
+    "longitude": "122.598511",
+    "ip": "116.3.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "aba90d39bc2f95de6a823520009d8c26de6d26f89a4322a221ba1f983e60106b": {
+    "port": 11434,
+    "city": "Ashburn",
+    "country": "US",
+    "country_name": "United States of America",
+    "region": "Virginia",
+    "latitude": "39.039474",
+    "longitude": "-77.491806",
+    "ip": "98.81.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.2",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3.1:8b-instruct-q4_K_M",
+        "model": "llama3.1:8b-instruct-q4_K_M",
+        "size": 4920753328
+      },
+      {
+        "name": "gemma3:latest",
+        "model": "gemma3:latest",
+        "size": 3338801718
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "c565f4aca92082db82db0ded8dad12f40b42395318b259fc6cac586123647b4e": {
+    "port": 11434,
+    "city": "Fuzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Fujian",
+    "latitude": "26.061390",
+    "longitude": "119.306107",
+    "ip": "218.104.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "97f75a39942be3f1ce156fcffe8ad14e3367bd2aa627d44fed036cbc74da8238": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "42.193.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.0",
+    "local": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "qwen2.5:0.5b-instruct",
+        "model": "qwen2.5:0.5b-instruct",
+        "size": 397821319
+      },
+      {
+        "name": "qwen2.5:1.5b-instruct",
+        "model": "qwen2.5:1.5b-instruct",
+        "size": 986061892
+      },
+      {
+        "name": "qwen2.5:1.5b",
+        "model": "qwen2.5:1.5b",
+        "size": 986061892
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "3b7881d6e137fbf354f5012cc95ced850f08f804c22451d823efec32767c7342": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "101.37.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.12",
+    "local": [
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "size": 1157672605
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "260b8eeb7d9379abc3d49be2b241b063afd4ca1e200d40e3d67776c4c39155ba": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "14.103.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.8",
+    "local": [
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1759108096
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "f6c6c228f62a99be3cfdf82e4ecddb6f662b9ab3f469b43fa6064bc2661dbc8a": {
+    "port": 11434,
+    "city": "Nanjing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Jiangsu",
+    "latitude": "32.061668",
+    "longitude": "118.777992",
+    "ip": "223.109.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.2",
+    "local": [
+      {
+        "name": "llama3.1:8b",
+        "model": "llama3.1:8b",
+        "size": 4920753328
+      },
+      {
+        "name": "qllama/bge-reranker-large:latest",
+        "model": "qllama/bge-reranker-large:latest",
+        "size": 604217224
+      },
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "size": 1157672605
+      },
+      {
+        "name": "aratan/qwen2.5-14bu:latest",
+        "model": "aratan/qwen2.5-14bu:latest",
+        "size": 15701600087
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "d9a749027904a631c5355a268426eb9ab5bf0fc5e93abddd07a1b4972ce8735e": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "114.116.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 277
+      },
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:7b",
+        "model": "deepseek-r1:7b",
+        "size": 4683075271
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "251271459bc39ee70c6c70397f7cbeec93834de6168f91bf6f4c1eda5a9e932d": {
+    "port": 11434,
+    "city": "Shanghai",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shanghai",
+    "latitude": "31.224333",
+    "longitude": "121.468948",
+    "ip": "47.116.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "3be70bfe69a39507d95d6aeadc132baef792105bed5af70b4fa483ab5d568e41": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "43.139.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.2",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "gemma3:1b",
+        "model": "gemma3:1b",
+        "size": 815319791
+      },
+      {
+        "name": "qwen:latest",
+        "model": "qwen:latest",
+        "size": 2330093361
+      },
+      {
+        "name": "llama3.2:1b",
+        "model": "llama3.2:1b",
+        "size": 1321098329
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "868efbab510b96d8994fb3de80c0d93dd492b37b4c682ebe18189d0a05d39d3e": {
+    "port": 11434,
+    "city": "Gunzenhausen",
+    "country": "DE",
+    "country_name": "Germany",
+    "region": "Bayern",
+    "latitude": "48.323860",
+    "longitude": "11.601019",
+    "ip": "5.9.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.0",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "gemma3:4b",
+        "model": "gemma3:4b",
+        "size": 3338801804
+      },
+      {
+        "name": "qwen3:8b",
+        "model": "qwen3:8b",
+        "size": 5225387923
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "d8b28cfcbabf4c5fc4458aa4025bc4909bd407fb96910cf6857872ca72869fc4": {
+    "port": 11434,
+    "city": "Chongqing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Chongqing",
+    "latitude": "29.562780",
+    "longitude": "106.553101",
+    "ip": "219.151.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.6",
+    "local": [
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "a4732d330f048f05a8a5e77054abab538360aeebc18297dc904f5796aa04cd12": {
+    "port": 11434,
+    "city": "Hong Kong",
+    "country": "CN",
+    "country_name": "Hong Kong Special Administrative Region",
+    "region": "HK",
+    "latitude": "22.285521",
+    "longitude": "114.157692",
+    "ip": "118.141.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.13",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      },
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      },
+      {
+        "name": "qwq:latest",
+        "model": "qwq:latest",
+        "size": 19851349390
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "394f94ea243f98c960b610f4666661513d28dab0d5652f3e329025bd382d329f": {
+    "port": 11434,
+    "city": "Taiyuan",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shanxi",
+    "latitude": "37.869438",
+    "longitude": "112.561508",
+    "ip": "219.145.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "d1b856abdca0d491020b66d724268dbb060d6343b06e492378871607df97de70": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "60.176.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "6e5b38459a7d5c4c86151db7293781ac89fe29d22bb477f4aba8aa6df1578f92": {
+    "port": 11434,
+    "city": "Tel Aviv",
+    "country": "IL",
+    "country_name": "Israel",
+    "region": "Tel Aviv",
+    "latitude": "32.080898",
+    "longitude": "34.781227",
+    "ip": "89.169.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "7c768fc6c35fa056d9ae7e77c3234dae4ba84eca380c19a34a6691304e49fd19": {
+    "port": 11434,
+    "city": "Walnut",
+    "country": "US",
+    "country_name": "United States of America",
+    "region": "California",
+    "latitude": "34.015400",
+    "longitude": "-117.858223",
+    "ip": "108.181.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.0",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "gemma3:12b",
+        "model": "gemma3:12b",
+        "size": 8149190253
+      },
+      {
+        "name": "gemma3:4b",
+        "model": "gemma3:4b",
+        "size": 3338801804
+      },
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "qwen2.5-coder:latest",
+        "model": "qwen2.5-coder:latest",
+        "size": 4683087519
+      },
+      {
+        "name": "qwen2.5:32b",
+        "model": "qwen2.5:32b",
+        "size": 19851349669
+      },
+      {
+        "name": "mistral-nemo:12b-instruct-2407-q8_0",
+        "model": "mistral-nemo:12b-instruct-2407-q8_0",
+        "size": 13022382032
+      },
+      {
+        "name": "gemma2:27b-instruct-q4_K_M",
+        "model": "gemma2:27b-instruct-q4_K_M",
+        "size": 16645391492
+      },
+      {
+        "name": "gemma2:27b",
+        "model": "gemma2:27b",
+        "size": 15628387458
+      },
+      {
+        "name": "gemma2:latest",
+        "model": "gemma2:latest",
+        "size": 5443152417
+      },
+      {
+        "name": "phi3.5:3.8b-mini-instruct-q8_0",
+        "model": "phi3.5:3.8b-mini-instruct-q8_0",
+        "size": 4061224091
+      },
+      {
+        "name": "phi3.5:latest",
+        "model": "phi3.5:latest",
+        "size": 2176178783
+      },
+      {
+        "name": "phi3:latest",
+        "model": "phi3:latest",
+        "size": 2176178401
+      },
+      {
+        "name": "mannix/defog-llama3-sqlcoder-8b:latest",
+        "model": "mannix/defog-llama3-sqlcoder-8b:latest",
+        "size": 4661211807
+      },
+      {
+        "name": "gemma2:9b",
+        "model": "gemma2:9b",
+        "size": 5443152417
+      },
+      {
+        "name": "llama3:latest",
+        "model": "llama3:latest",
+        "size": 4661224676
+      },
+      {
+        "name": "mistral:latest",
+        "model": "mistral:latest",
+        "size": 4113301090
+      }
+    ],
+    "running": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 3667750912
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "498af77847f478a28528ffb9fa29951cc8a97625315b034e827399764882cda2": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "125.122.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.6",
+    "local": [
+      {
+        "name": "deepseek-r1:7b",
+        "model": "deepseek-r1:7b",
+        "size": 4683075271
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "5e5821dd1a53fa0410fa6ff6ea8d524f11d0a1e218323488238678980b2c2a64": {
+    "port": 11434,
+    "city": "Shanghai",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shanghai",
+    "latitude": "31.224333",
+    "longitude": "121.468948",
+    "ip": "61.169.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.2",
+    "local": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "qwen2.5vl:32b",
+        "model": "qwen2.5vl:32b",
+        "size": 21159310657
+      },
+      {
+        "name": "linux6200/bge-reranker-v2-m3:latest",
+        "model": "linux6200/bge-reranker-v2-m3:latest",
+        "size": 1159777159
+      },
+      {
+        "name": "qllama/bge-reranker-large:latest",
+        "model": "qllama/bge-reranker-large:latest",
+        "size": 604217224
+      },
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "size": 1157672605
+      },
+      {
+        "name": "deepseek-30b:latest",
+        "model": "deepseek-30b:latest",
+        "size": 19851335818
+      },
+      {
+        "name": "emb-rag:latest",
+        "model": "emb-rag:latest",
+        "size": 1157671463
+      },
+      {
+        "name": "DeepSeek-R1-70b:latest",
+        "model": "DeepSeek-R1-70b:latest",
+        "size": 42520396576
+      }
+    ],
+    "running": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 16504942592
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "bff97b5789fb4a50085a259ef87117e3930c52522d9369d0d1475f4bed2ef9c9": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "46ca6ec250ae8569d3f3c7cb27238070d3370ebba2d1c3de062622c445f867c3": {
+    "port": 11434,
+    "city": "Jinan",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shandong",
+    "latitude": "36.668331",
+    "longitude": "116.997223",
+    "ip": "182.43.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.0",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322768
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "40cad5154d0018b667300e268b16b5787fe40695e928c27375f53ba72c690fd6": {
+    "port": 11434,
+    "city": "Bangkok",
+    "country": "TH",
+    "country_name": "Thailand",
+    "region": "Krung Thep Maha Nakhon",
+    "latitude": "13.749976",
+    "longitude": "100.516815",
+    "ip": "202.162.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.8",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "gemma3:latest",
+        "model": "gemma3:latest",
+        "size": 3338801804
+      },
+      {
+        "name": "deepseek-r1:latest",
+        "model": "deepseek-r1:latest",
+        "size": 4683075271
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      }
+    ],
+    "running": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 3188551680
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "7e05a743433478b38ba136a44d01f8196eb13599e58b05290f4c086c29f755cd": {
+    "port": 11434,
+    "city": "Taiyuan",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shanxi",
+    "latitude": "37.869438",
+    "longitude": "112.561508",
+    "ip": "223.15.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "873e541c575b96e9d4e62b2ad38b9d4f5dd56e9c5083498af3860f988935d522": {
+    "port": 11434,
+    "city": "Shenzhen",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "22.545673",
+    "longitude": "114.068108",
+    "ip": "120.233.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.9",
+    "local": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "bge-m3:567m",
+        "model": "bge-m3:567m",
+        "size": 1157672605
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "87bf7c99c1e5da85361fd58e6396cacc802de0b3f911696739ef70dd7e1a6c3d": {
+    "port": 11434,
+    "city": "Gunzenhausen",
+    "country": "DE",
+    "country_name": "Germany",
+    "region": "Bayern",
+    "latitude": "48.323860",
+    "longitude": "11.601019",
+    "ip": "157.90.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.7",
+    "local": [
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "snowflake-arctic-embed2:latest",
+        "model": "snowflake-arctic-embed2:latest",
+        "size": 1160296718
+      }
+    ],
+    "running": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 3188551680
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "e4d8063d3986c113d1997febd5d73ede953d32a1db02bc736e6fd24e0a24827a": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "120.55.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.1",
+    "local": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "0e42271d7575e518bc4abbad03ab2f4f9efa7935b3cb28cbaa94b938a89fb3aa": {
+    "port": 11434,
+    "city": "Candi Prambanan",
+    "country": "ID",
+    "country_name": "Indonesia",
+    "region": "Jawa Tengah",
+    "latitude": "-7.750000",
+    "longitude": "110.494171",
+    "ip": "180.246.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "902f0f0b750e2d9a4aff0d4cb7d53350892651c0189cfb4b6d4aece340cf8510": {
+    "port": 11434,
+    "city": "Chengdu",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Sichuan",
+    "latitude": "30.666670",
+    "longitude": "104.066269",
+    "ip": "60.255.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.11",
+    "local": [
+      {
+        "name": "qwq:latest",
+        "model": "qwq:latest",
+        "size": 19851349657
+      },
+      {
+        "name": "qwen2.5:14b",
+        "model": "qwen2.5:14b",
+        "size": 8988124069
+      },
+      {
+        "name": "qwen2.5:32b",
+        "model": "qwen2.5:32b",
+        "size": 19851349669
+      },
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "size": 1157672605
+      },
+      {
+        "name": "mxbai-embed-large:latest",
+        "model": "mxbai-embed-large:latest",
+        "size": 669615493
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:32b",
+        "model": "deepseek-r1:32b",
+        "size": 19851337640
+      },
+      {
+        "name": "deepseek-r1:70b",
+        "model": "deepseek-r1:70b",
+        "size": 42520397704
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "d00873025bf16fdd45cf80a719953abb6a6875d2283e0fe39f80e91b3d186923": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "5be5f64a85a2e0b5a07440062065f103dcbdb2548996b24f1c2cbdc7b5175fa3": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "118.178.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.5",
+    "local": [
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "deepseek-r1:32b",
+        "model": "deepseek-r1:32b",
+        "size": 19851337640
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      },
+      {
+        "name": "deepseek-r1:70b",
+        "model": "deepseek-r1:70b",
+        "size": 42520397704
+      },
+      {
+        "name": "deepseek-r1:14b",
+        "model": "deepseek-r1:14b",
+        "size": 8988112040
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "71e0193e5d0db6c305cd2dc3622d50dbf6c09dde8610203c3ea832ae7d00800d": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "211.159.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.2",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.1:8b",
+        "model": "llama3.1:8b",
+        "size": 4920753328
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "421b9f2c69fc02fd39c1dc30ed84d07f51f93f3afcf5548237d6ffd2ae34addb": {
+    "port": 11434,
+    "city": "Guangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "23.127361",
+    "longitude": "113.264572",
+    "ip": "113.44.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.11",
+    "local": [
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:8b",
+        "model": "deepseek-r1:8b",
+        "size": 4920738407
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "677ea335edf79bfb11d35e0f30a2086168c06a8e1e361e990b04543595d41acc": {
+    "port": 11434,
+    "city": "Singapore",
+    "country": "SG",
+    "country_name": "Singapore",
+    "region": "Singapore",
+    "latitude": "1.289987",
+    "longitude": "103.850281",
+    "ip": "103.112.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "52aea1e806be800f6c4d6b3f838e7eeba4d1c0c19429903231d90c03471b4fcd": {
+    "port": 11434,
+    "city": "Hong Kong",
+    "country": "CN",
+    "country_name": "Hong Kong Special Administrative Region",
+    "region": "HK",
+    "latitude": "22.285521",
+    "longitude": "114.157692",
+    "ip": "203.186.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.7.0",
+    "local": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "deepseek-coder-v2:16b",
+        "model": "deepseek-coder-v2:16b",
+        "size": 8905126121
+      },
+      {
+        "name": "qwen2.5vl:32b",
+        "model": "qwen2.5vl:32b",
+        "size": 21159310657
+      },
+      {
+        "name": "qwen2.5vl:7b",
+        "model": "qwen2.5vl:7b",
+        "size": 5969245856
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "gemma3:27b",
+        "model": "gemma3:27b",
+        "size": 17396936887
+      },
+      {
+        "name": "gemma3:12b",
+        "model": "gemma3:12b",
+        "size": 8149190199
+      },
+      {
+        "name": "qwen2.5:latest",
+        "model": "qwen2.5:latest",
+        "size": 4683087332
+      },
+      {
+        "name": "deepseek-r1:14b",
+        "model": "deepseek-r1:14b",
+        "size": 8988112040
+      }
+    ],
+    "running": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 3927009280
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "a34a86933395bdf3711b59f9a6e4433640aaad11ecfc5071ab6a23d2998ffe49": {
+    "port": 11434,
+    "city": "Shenzhen",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "22.545673",
+    "longitude": "114.068108",
+    "ip": "47.120.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.0",
+    "local": [
+      {
+        "name": "paraphrase-multilingual:278m",
+        "model": "paraphrase-multilingual:278m",
+        "size": 562777863
+      },
+      {
+        "name": "granite-embedding:30m",
+        "model": "granite-embedding:30m",
+        "size": 62534804
+      },
+      {
+        "name": "qwen:0.5b",
+        "model": "qwen:0.5b",
+        "size": 394998579
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "233d45e579018e583f6cb0dfbedc3558b70b49f1ce3a25a569338ac8e66cf68f": {
+    "port": 11434,
+    "city": "Huizhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "39.509766",
+    "longitude": "116.693001",
+    "ip": "120.237.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "0de493c73ebe50a6358e59dba8d344cfc0cfc1841f9301391b6a6ab8fb4b2fa0": {
+    "port": 11434,
+    "city": "Rizhao",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shandong",
+    "latitude": "35.427513",
+    "longitude": "119.455559",
+    "ip": "119.185.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "015dd8103acc53dc7d788e5b56fdc4d7e755b85f6f22dd3c27733cbf678d38c7": {
+    "port": 11434,
+    "city": "Gunzenhausen",
+    "country": "DE",
+    "country_name": "Germany",
+    "region": "Bayern",
+    "latitude": "48.323860",
+    "longitude": "11.601019",
+    "ip": "195.201.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.7.1",
+    "local": [
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "gemma3:1b-it-q4_K_M",
+        "model": "gemma3:1b-it-q4_K_M",
+        "size": 815319791
+      },
+      {
+        "name": "gemma3:1b-it-qat",
+        "model": "gemma3:1b-it-qat",
+        "size": 1003539988
+      },
+      {
+        "name": "qwen3:4b",
+        "model": "qwen3:4b",
+        "size": 2620788019
+      }
+    ],
+    "running": [
+      {
+        "name": "gemma3:1b-it-q4_K_M",
+        "model": "gemma3:1b-it-q4_K_M",
+        "size": 1427977216
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 3188551680
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "048b8b8c329af297f1077d45d9df0ba1602a1c8c1341d803b36792deaad7d8a1": {
+    "port": 11434,
+    "city": "Shenzhen",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "22.545673",
+    "longitude": "114.068108",
+    "ip": "120.76.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.12",
+    "local": [
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      },
+      {
+        "name": "qwen2.5-coder:1.5b",
+        "model": "qwen2.5-coder:1.5b",
+        "size": 986062047
+      },
+      {
+        "name": "qwen2.5-coder:0.5b",
+        "model": "qwen2.5-coder:0.5b",
+        "size": 531081760
+      },
+      {
+        "name": "llama3.2:1b",
+        "model": "llama3.2:1b",
+        "size": 1321098329
+      },
+      {
+        "name": "qwen2.5:0.5b",
+        "model": "qwen2.5:0.5b",
+        "size": 397821319
+      },
+      {
+        "name": "qwen2.5:1.5b",
+        "model": "qwen2.5:1.5b",
+        "size": 986061892
+      },
+      {
+        "name": "tinyllama:latest",
+        "model": "tinyllama:latest",
+        "size": 637700138
+      }
+    ],
+    "running": [
+      {
+        "name": "tinyllama:latest",
+        "model": "tinyllama:latest",
+        "size": 1389639680
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "8e6916fe2facc15d478b6f36cb415b1169160ae038c08cc3d36e562d55d37610": {
+    "port": 11434,
+    "city": "Dusseldorf",
+    "country": "DE",
+    "country_name": "Germany",
+    "region": "Nordrhein-Westfalen",
+    "latitude": "51.221535",
+    "longitude": "6.776170",
+    "ip": "149.102.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.13",
+    "local": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "llama3.1:8b-instruct-q4_K_M",
+        "model": "llama3.1:8b-instruct-q4_K_M",
+        "size": 4920753328
+      },
+      {
+        "name": "hermes3:8b",
+        "model": "hermes3:8b",
+        "size": 4661227243
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "3599831172c599cb4e9c933e5e65b0975cda138740b55966944c5f28c0abb407": {
+    "port": 11434,
+    "city": "Hefei",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Anhui",
+    "latitude": "31.863815",
+    "longitude": "117.280830",
+    "ip": "60.174.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.0",
+    "local": [
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "size": 1157672605
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "f644a73941d476eaba8753c7b55895f47123e22fd09024be2364b39c98cb5b89": {
+    "port": 11434,
+    "city": "Guangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "23.127361",
+    "longitude": "113.264572",
+    "ip": "113.45.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.7",
+    "local": [
+      {
+        "name": "deepseek-r1:7b",
+        "model": "deepseek-r1:7b",
+        "size": 4683075271
+      },
+      {
+        "name": "deepseek-r1:8b",
+        "model": "deepseek-r1:8b",
+        "size": 4920738407
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "99fe2dae97428b6e4b875879bb42cd99abae41693c5be0c09110abf14a56fe21": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "14.103.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "7c7f6ca8821547061239e9f782f4b83474b6122aaf646bd36d089b89113a2b58": {
+    "port": 11434,
+    "city": "Rainbow",
+    "country": "US",
+    "country_name": "United States of America",
+    "region": "Texas",
+    "latitude": "32.265343",
+    "longitude": "-97.714119",
+    "ip": "148.135.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "70a5dcd30e3133fafdd28acdc29cce91a493605915b2e85935e8f96b3f700a2d": {
+    "port": 11434,
+    "city": "Taichung",
+    "country": "CN",
+    "country_name": "Taiwan, Province of China",
+    "region": "TW",
+    "latitude": "24.146866",
+    "longitude": "120.684006",
+    "ip": "211.73.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.3",
+    "local": [
+      {
+        "name": "Qwen3_1.7B_0.55:latest",
+        "model": "Qwen3_1.7B_0.55:latest",
+        "size": 4069680451
+      },
+      {
+        "name": "Qwen3_1.7B_0.4:latest",
+        "model": "Qwen3_1.7B_0.4:latest",
+        "size": 4069680451
+      },
+      {
+        "name": "Qwen3_1.7B_finetuned:latest",
+        "model": "Qwen3_1.7B_finetuned:latest",
+        "size": 4069679769
+      },
+      {
+        "name": "incept5/llama3.1-claude:latest",
+        "model": "incept5/llama3.1-claude:latest",
+        "size": 4661237026
+      },
+      {
+        "name": "gemma3:27b",
+        "model": "gemma3:27b",
+        "size": 17396936941
+      },
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "llama3.1:8b",
+        "model": "llama3.1:8b",
+        "size": 4920753328
+      },
+      {
+        "name": "qwq:32b",
+        "model": "qwq:32b",
+        "size": 19851349657
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "70c1da5555a7a7a556a755b9892644eaef31c4ee376e4f393ce9aa577327938c": {
+    "port": 11434,
+    "city": "Jinan",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shandong",
+    "latitude": "36.668331",
+    "longitude": "116.997223",
+    "ip": "112.230.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "3df486c10abe39c93a84b89a9c53abb8892218e5f9680acc54789c5030b7d60f": {
+    "port": 11434,
+    "city": "Chengdu",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Sichuan",
+    "latitude": "30.666670",
+    "longitude": "104.066269",
+    "ip": "47.108.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.4.3",
+    "local": [
+      {
+        "name": "qwen2.5:32b",
+        "model": "qwen2.5:32b",
+        "size": 19851349669
+      },
+      {
+        "name": "deepseek-r1:14b",
+        "model": "deepseek-r1:14b",
+        "size": 8988112040
+      },
+      {
+        "name": "llama3.1:8b",
+        "model": "llama3.1:8b",
+        "size": 4920753328
+      },
+      {
+        "name": "llama3.1:8b-instruct-q4_K_M",
+        "model": "llama3.1:8b-instruct-q4_K_M",
+        "size": 4920753328
+      },
+      {
+        "name": "llama3.2:1b-instruct-q4_K_M",
+        "model": "llama3.2:1b-instruct-q4_K_M",
+        "size": 807709787
+      },
+      {
+        "name": "hellord/mxbai-embed-large-v1:f16",
+        "model": "hellord/mxbai-embed-large-v1:f16",
+        "size": 669603972
+      },
+      {
+        "name": "driaforall/tiny-agent-a:0.5b",
+        "model": "driaforall/tiny-agent-a:0.5b",
+        "size": 531069657
+      },
+      {
+        "name": "driaforall/tiny-agent-a:1.5b",
+        "model": "driaforall/tiny-agent-a:1.5b",
+        "size": 1646574486
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      },
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      },
+      {
+        "name": "qwen2:7b",
+        "model": "qwen2:7b",
+        "size": 4431401491
+      },
+      {
+        "name": "deepseek-r1:70b",
+        "model": "deepseek-r1:70b",
+        "size": 42520397704
+      },
+      {
+        "name": "qwq:32b",
+        "model": "qwq:32b",
+        "size": 19851349657
+      },
+      {
+        "name": "deepseek-r1:32b",
+        "model": "deepseek-r1:32b",
+        "size": 19851337640
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "06d2d0b587052b560783d75b51e23b18d541448806b719c526e5c4aeb84690e8": {
+    "port": 11434,
+    "city": "Halifax",
+    "country": "CA",
+    "country_name": "Canada",
+    "region": "Nova Scotia",
+    "latitude": "44.663338",
+    "longitude": "-63.654099",
+    "ip": "64.66.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.5",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 277
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "a6b9fea4748a58143a946553368599dc28762975b01cd063149278722f01e366": {
+    "port": 11434,
+    "city": "Hong Kong",
+    "country": "CN",
+    "country_name": "Hong Kong Special Administrative Region",
+    "region": "HK",
+    "latitude": "22.285521",
+    "longitude": "114.157692",
+    "ip": "112.120.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.8",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "qwen3:30b-a3b",
+        "model": "qwen3:30b-a3b",
+        "size": 18622562938
+      },
+      {
+        "name": "qwen3:32b",
+        "model": "qwen3:32b",
+        "size": 20201253588
+      },
+      {
+        "name": "mychen76/GLM-4-32B-cline-roocode:Q4",
+        "model": "mychen76/GLM-4-32B-cline-roocode:Q4",
+        "size": 19680034088
+      },
+      {
+        "name": "mychen76/qwen3_cline_roocode:30b",
+        "model": "mychen76/qwen3_cline_roocode:30b",
+        "size": 18622576640
+      },
+      {
+        "name": "qwq:32b",
+        "model": "qwq:32b",
+        "size": 19851349657
+      },
+      {
+        "name": "mychen76/qwen3_cline_roocode:32b",
+        "model": "mychen76/qwen3_cline_roocode:32b",
+        "size": 20201267290
+      },
+      {
+        "name": "hhao/qwen2.5-coder-tools:32b",
+        "model": "hhao/qwen2.5-coder-tools:32b",
+        "size": 19851364256
+      }
+    ],
+    "running": [
+      {
+        "name": "hhao/qwen2.5-coder-tools:32b",
+        "model": "hhao/qwen2.5-coder-tools:32b",
+        "size": 31695386624
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "ccef535cb86d3a89a11e08eb3230750487624d50fa7daf6c015a6ddc91438988": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "47.122.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.7",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 277
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "dcb79aeb8e8331229112f7fd8bf871e18f8e3d3bdb4abf87a7050da20ab071ab": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322768
+      }
+    ],
+    "running": [
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1567668736
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "5b8d4d973653b16deab6dc7fd1f53d8ece346b2ec092fc8abee8afd5667bdf5d": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "120.48.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "4485ab688bdc02fa237da5f603b181ec8be3a8a6f7d3794fb975fdf303844ef8": {
+    "port": 11434,
+    "city": "Perth",
+    "country": "AU",
+    "country_name": "Australia",
+    "region": "Western Australia",
+    "latitude": "-31.952240",
+    "longitude": "115.861397",
+    "ip": "159.196.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.8",
+    "local": [
+      {
+        "name": "argus:latest",
+        "model": "argus:latest",
+        "size": 4108929164
+      },
+      {
+        "name": "dolphin-mistral:latest",
+        "model": "dolphin-mistral:latest",
+        "size": 4108940323
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "b4bfaf3df48057e3be8580768e092748aae5cb66b99b0931186501aa7cf549ff": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "39.98.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "hello",
+    "local": [
+      {
+        "name": "sample",
+        "model": null,
+        "size": 787
+      }
+    ],
+    "running": [
+      {
+        "name": "hello",
+        "model": "world",
+        "size": 241
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "3eff2480c8cbe16129fe879fd48323460fae804b36557aaafad5dc5bdd7e1e22": {
+    "port": 11434,
+    "city": "Munich",
+    "country": "DE",
+    "country_name": "Germany",
+    "region": "Bayern",
+    "latitude": "48.137428",
+    "longitude": "11.575490",
+    "ip": "95.114.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "bbbf6b46bdb20c1bb5754bf5919b56f3a2a5157d7639193740f035cbd0dc079e": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "221.219.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "706e152e9bc082f641db6f2e4c74150377075d9ec0b980d7f69243c5a84e1e90": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "47.99.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.3.4",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "2f51d70c6ec85e800984da6ca9e2d0cf55d11b8d0ba9b6b6a7c8d956287ecdab": {
+    "port": 11434,
+    "city": "San Jose",
+    "country": "US",
+    "country_name": "United States of America",
+    "region": "California",
+    "latitude": "37.339390",
+    "longitude": "-121.894958",
+    "ip": "165.1.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.8",
+    "local": [
+      {
+        "name": "qwen3:0.6b",
+        "model": "qwen3:0.6b",
+        "size": 522653526
+      },
+      {
+        "name": "gemma3:1b",
+        "model": "gemma3:1b",
+        "size": 815319791
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      }
+    ],
+    "running": [
+      {
+        "name": "qwen3:0.6b",
+        "model": "qwen3:0.6b",
+        "size": 1726601898
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "fde9500c0da4bbdd2eb389ce15081bd0c4e0d17d29c197a565d6b4e4c51f3546": {
+    "port": 11434,
+    "city": "Lugano",
+    "country": "CH",
+    "country_name": "Switzerland",
+    "region": "Ticino",
+    "latitude": "46.010082",
+    "longitude": "8.960003",
+    "ip": "92.107.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.2",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "136e9118c3e12e5514154a57741d902b8bbc249c44ecde76621ae2100499fea0": {
+    "port": 11434,
+    "city": "Saint Petersburg",
+    "country": "RU",
+    "country_name": "Russian Federation",
+    "region": "Sankt-Peterburg",
+    "latitude": "59.894440",
+    "longitude": "30.264200",
+    "ip": "77.105.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "3b7f079d2c4b002af51b20f8d0d4001e6f1dd9addd2afd84a87c49773a72ae1a": {
+    "port": 11434,
+    "city": "Melbourne",
+    "country": "AU",
+    "country_name": "Australia",
+    "region": "Victoria",
+    "latitude": "-37.814007",
+    "longitude": "144.963165",
+    "ip": "1.123.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "07cde9a4ad0130f9ad75ae4512b29d0c344dc21d7cbdcfb93dfbba3c45304c6f": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "103.237.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.7.0",
+    "local": [
+      {
+        "name": "deepseek-r1:8b",
+        "model": "deepseek-r1:8b",
+        "size": 4920738407
+      },
+      {
+        "name": "deepseek-r1:32b",
+        "model": "deepseek-r1:32b",
+        "size": 19851337640
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "b5fe7491af784268b3acedd586737249b31e56222656df92a084d4fe89fe9867": {
+    "port": 11434,
+    "city": "Guangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "23.127361",
+    "longitude": "113.264572",
+    "ip": "36.133.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.3",
+    "local": [
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322768
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "bdb83b56992fd4196c9176471181d02e8b435461296277fc05035ca83243f4f4": {
+    "port": 11434,
+    "city": "Los Angeles",
+    "country": "US",
+    "country_name": "United States of America",
+    "region": "California",
+    "latitude": "34.052986",
+    "longitude": "-118.263687",
+    "ip": "156.233.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "f3d3defa8f9d1a4f61a13b642b20300c3f8fe7d2c983b551f63a2f66e52cf87d": {
+    "port": 11434,
+    "city": "Shanghai",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shanghai",
+    "latitude": "31.224333",
+    "longitude": "121.468948",
+    "ip": "117.50.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "46b3ea0ea12baab0736506f819d9bb140f56998bb1d4414542d3d5ebe2303b1f": {
+    "port": 11434,
+    "city": "Iranshahr",
+    "country": "IR",
+    "country_name": "Iran (Islamic Republic of)",
+    "region": "Sistan va Baluchestan",
+    "latitude": "27.202450",
+    "longitude": "60.684761",
+    "ip": "5.223.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.0",
+    "local": [
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "tinyllama:1.1b",
+        "model": "tinyllama:1.1b",
+        "size": 637700138
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "743e6f51a6e9a5e8188d5d842c934884672322e31ad12c536ceb9d249c8a1c95": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "39.104.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.5",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 277
+      },
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "size": 1157672605
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "c62fe92e0cdc941653b840ea320fee0ff1d1c147d68f0b421e3f42dd5ba59ee3": {
+    "port": 11434,
+    "city": "Guangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "23.127361",
+    "longitude": "113.264572",
+    "ip": "113.45.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "ffbaf6e7df9cc8784517188127f34d70527f0cbd3a36848fae6e46a898f3bc15": {
+    "port": 11434,
+    "city": "Haikou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Hainan",
+    "latitude": "20.045830",
+    "longitude": "110.341667",
+    "ip": "223.199.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "4fa79f95b530e1927d7eb41ffa873af3003c14b6a4b6dcddf7762853c79823c4": {
+    "port": 11434,
+    "city": "Nuremberg",
+    "country": "DE",
+    "country_name": "Germany",
+    "region": "Bayern",
+    "latitude": "49.447781",
+    "longitude": "11.068330",
+    "ip": "62.146.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.0",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "f841b2ccb12dd44e4980a1bf6a38fe3833107a82a0a68bb95a589b6602b971b0": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "36.133.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "c12f47ac73cb6c3a8e42d99ba89d709bb8b3c2cf33750e92d6ef3e12879219b2": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "764cc8964386d44c0b7028d2db0817dd3556e6f85ca861e4350acc59e6029c08": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "097f638227ae93a5e98847b290e2f5370822a4c7265689bad0728163f05e9444": {
+    "port": 11434,
+    "city": "Suzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Jiangsu",
+    "latitude": "31.311365",
+    "longitude": "120.617691",
+    "ip": "114.218.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "e14516b34806c57a6c3d66aa13d90b19d801adf7be275724b3fccf27ae66cbfa": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "114.249.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.1",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      },
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "size": 1157672605
+      },
+      {
+        "name": "deepseek-r1:7b",
+        "model": "deepseek-r1:7b",
+        "size": 4683075271
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "a5566e1ee739e4d842a99ec32bcec555ee415e214a420c666335cf7545162f32": {
+    "port": 11434,
+    "city": "Marburg an der Lahn",
+    "country": "DE",
+    "country_name": "Germany",
+    "region": "Hessen",
+    "latitude": "50.809124",
+    "longitude": "8.770520",
+    "ip": "83.137.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.6",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "phi4:latest",
+        "model": "phi4:latest",
+        "size": 9053116391
+      },
+      {
+        "name": "mixtral:8x7b",
+        "model": "mixtral:8x7b",
+        "size": 26443602516
+      },
+      {
+        "name": "gemma3:12b",
+        "model": "gemma3:12b",
+        "size": 8149190253
+      },
+      {
+        "name": "llama3.1:8b",
+        "model": "llama3.1:8b",
+        "size": 4920753328
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "deepseek-r1:14b",
+        "model": "deepseek-r1:14b",
+        "size": 8988112040
+      },
+      {
+        "name": "deepseek-r1:70b",
+        "model": "deepseek-r1:70b",
+        "size": 42520397704
+      },
+      {
+        "name": "llama3.2-vision:11b",
+        "model": "llama3.2-vision:11b",
+        "size": 7901829417
+      },
+      {
+        "name": "llama3.3:latest",
+        "model": "llama3.3:latest",
+        "size": 42520413916
+      },
+      {
+        "name": "gemma3:27b",
+        "model": "gemma3:27b",
+        "size": 17396936941
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "3a29adaef7cb092476dae9792d3a4aadf1153dc97d8b5542cacfedf94f35ac29": {
+    "port": 11434,
+    "city": "Voronezh",
+    "country": "RU",
+    "country_name": "Russian Federation",
+    "region": "Voronezhskaya oblast'",
+    "latitude": "51.672070",
+    "longitude": "39.184250",
+    "ip": "185.244.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "105571b6793498e121510f97d9bb3872d929f5d8c84d747a0e845de54b41a72b": {
+    "port": 11434,
+    "city": "Taipei",
+    "country": "CN",
+    "country_name": "Taiwan, Province of China",
+    "region": "TW",
+    "latitude": "25.038172",
+    "longitude": "121.563599",
+    "ip": "220.135.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.7",
+    "local": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.1:8b",
+        "model": "llama3.1:8b",
+        "size": 4920753328
+      },
+      {
+        "name": "openchat:latest",
+        "model": "openchat:latest",
+        "size": 4109876386
+      },
+      {
+        "name": "llama3:latest",
+        "model": "llama3:latest",
+        "size": 4661224676
+      }
+    ],
+    "running": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 3493163008
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "75454a30daf7c6a7b292da4e62d07152570305577e947a3454e9aa34f960b051": {
+    "port": 11434,
+    "city": "Gunzenhausen",
+    "country": "DE",
+    "country_name": "Germany",
+    "region": "Bayern",
+    "latitude": "48.323860",
+    "longitude": "11.601019",
+    "ip": "5.9.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "e8253cdef5a94aa5ee0cb114f7be2dbb7f883eeb89a333b257bbd7c4803450ee": {
+    "port": 11434,
+    "city": "Shantou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "23.368172",
+    "longitude": "116.714706",
+    "ip": "116.26.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "a8f0eaba8ce34bd212127c712328be97bdf2113ff0d85b63b0f4fdf83694cb1a": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "115.190.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.3",
+    "local": [
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "48ad8428b7fadf8906ea810323903653d4a7487d21220e4ecdd1190d0b8bca88": {
+    "port": 11434,
+    "city": "Xiangyang",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Hubei",
+    "latitude": "32.042267",
+    "longitude": "112.144836",
+    "ip": "111.170.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.5",
+    "local": [
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "llama3:8b-instruct-q4_K_M",
+        "model": "llama3:8b-instruct-q4_K_M",
+        "size": 4920747238
+      }
+    ],
+    "running": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 4276449280
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "91fe2003107e3ac60a9d738503b63d14da83f3bac4f9dd274b82ad5acaf2f071": {
+    "port": 11434,
+    "city": "Montreal",
+    "country": "CA",
+    "country_name": "Canada",
+    "region": "Quebec",
+    "latitude": "45.508839",
+    "longitude": "-73.587807",
+    "ip": "148.113.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.6",
+    "local": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "deepseek-coder:latest",
+        "model": "deepseek-coder:latest",
+        "size": 4083017246
+      },
+      {
+        "name": "Malicus7862/deepseekcoder-6.7b-jarvis-gguf:latest",
+        "model": "Malicus7862/deepseekcoder-6.7b-jarvis-gguf:latest",
+        "size": 4083017246
+      }
+    ],
+    "running": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 4276449280
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "f5dac0381c81e2717fea2fbe4e968f345efdda449665f797e42ef4d96b76fffb": {
+    "port": 11434,
+    "city": "Eugene",
+    "country": "US",
+    "country_name": "United States of America",
+    "region": "Oregon",
+    "latitude": "44.036083",
+    "longitude": "-123.052429",
+    "ip": "128.223.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.0",
+    "local": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "gemma2:2b",
+        "model": "gemma2:2b",
+        "size": 1629518495
+      }
+    ],
+    "running": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 3188551680
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "eb403e80d0f66af8a23a0673c851d45da381c8f0909ec7627745fae8be984565": {
+    "port": 11434,
+    "city": "Maribor",
+    "country": "SI",
+    "country_name": "Slovenia",
+    "region": "Maribor",
+    "latitude": "46.554752",
+    "longitude": "15.646681",
+    "ip": "89.212.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "0950c8ac1ee6233c69899bf4127db53f7d7c663f7d39b080dc1ddd5032c67c63": {
+    "port": 11434,
+    "city": "Hefei",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Anhui",
+    "latitude": "31.863815",
+    "longitude": "117.280830",
+    "ip": "117.68.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "cdb073fb0b46ee6ad572c493c6754e6b797abd0021e2737cc4e8f4349cf96948": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "be09c0b0f1616d457685cf537db7c0e7ea5d459b62b60386f7bd5010b6baaf29": {
+    "port": 11434,
+    "city": "Fuqing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Fujian",
+    "latitude": "25.725082",
+    "longitude": "119.379356",
+    "ip": "117.28.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "d217b5605693f87ab192438c81c7e6973021b65c4520a5c65e64ef37c8c6e60f": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "ef9b5d20a395225b061c1644ec06ecf5331dbad17af94ea9be974692c4acf2b2": {
+    "port": 11434,
+    "city": "Fuzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Jiangxi",
+    "latitude": "28.116390",
+    "longitude": "117.662498",
+    "ip": "59.54.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "038a8e81c5acbefff1786f39f95d316038313ca4641a67eb59e51002c43be082": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "5619789a2b61bb0a771b7a0ae1740311eadc544ed93f9b25bf60964eeab08597": {
+    "port": 11434,
+    "city": "Ningbo",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "29.878410",
+    "longitude": "121.549767",
+    "ip": "220.188.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "6fcb2c30a500d56f4c09f8b7d825fc26c2adb3a46ffd7e2478041c62a959a871": {
+    "port": 11434,
+    "city": "Dongguan",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "23.048780",
+    "longitude": "113.745003",
+    "ip": "14.220.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "98c78eb5c902958d076504f01714e36d428ddd1f8da0421a1b3eed44aabb7b92": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "121.196.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "21b5ec1ada9bde9f783e3d389cfe2a9300669bc82965db9b9045fd1702acbdaa": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "llama3.1:8b-instruct-q4_K_M",
+        "model": "llama3.1:8b-instruct-q4_K_M",
+        "size": 4920753328
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "b61999350138a4b4a321af8b528aa6ceaf26fe422e62dd43519c9a3e2bbec438": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "123.120.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "fc1f9d2ec4fcb028ac7e444be8cecf84e16a27314abe83154d9ae4249a413b08": {
+    "port": 11434,
+    "city": "Tbilisi",
+    "country": "GE",
+    "country_name": "Georgia",
+    "region": "Tbilisi",
+    "latitude": "41.693920",
+    "longitude": "44.833527",
+    "ip": "91.239.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.3.10",
+    "local": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      }
+    ],
+    "running": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 4687960064
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "ae75ed4db761d4c38d8a00d5993930c5c7542e4b2807bba234206fc320d3741c": {
+    "port": 11434,
+    "city": "Shanghai",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shanghai",
+    "latitude": "31.224333",
+    "longitude": "121.468948",
+    "ip": "124.71.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.2",
+    "local": [
+      {
+        "name": "deepseek-r1:7b",
+        "model": "deepseek-r1:7b",
+        "size": 4683075271
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "b24251ed8613fe876f4a12613cb6d55e1bd20c23b8360aaa687c003e6030312a": {
+    "port": 11434,
+    "city": "Jingzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Hubei",
+    "latitude": "30.350281",
+    "longitude": "112.190277",
+    "ip": "27.29.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.5",
+    "local": [
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      },
+      {
+        "name": "qwen3:32b",
+        "model": "qwen3:32b",
+        "size": 20201253588
+      },
+      {
+        "name": "deepcoder:14b",
+        "model": "deepcoder:14b",
+        "size": 8988113141
+      },
+      {
+        "name": "deepseek-coder:33b",
+        "model": "deepseek-coder:33b",
+        "size": 18819456424
+      },
+      {
+        "name": "gemma3:27b",
+        "model": "gemma3:27b",
+        "size": 17396936941
+      },
+      {
+        "name": "deepseek-r1:32b",
+        "model": "deepseek-r1:32b",
+        "size": 19851337640
+      },
+      {
+        "name": "qwq:latest",
+        "model": "qwq:latest",
+        "size": 19851349657
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "2ed7585ac5156553ce5be0f8dcbc18451eeb84fb1d206b61b7072ef2cca93847": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "118.89.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.5",
+    "local": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "43ccc87dd47a4f5778f5b4176a99af7d1856dc9a701e2e116fba8fa03e86d0e4": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "101.42.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322768
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "02d8e29c79341aa610e9e90faece109c1b07a7273abc3cb4e305d682c09935e1": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "7183ed3853a5ea1e36c2bd5ac8ecca24707690a2ef945a6cb75380a4fa7fedc0": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322768
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "9625ec2d372611acecbd9dee1b8b8e2b7998e3d292beae3a38ad1024896f3ace": {
+    "port": 11434,
+    "city": "Shanghai",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shanghai",
+    "latitude": "31.224333",
+    "longitude": "121.468948",
+    "ip": "139.196.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.7",
+    "local": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "deepseek-r1:14b",
+        "model": "deepseek-r1:14b",
+        "size": 8988112040
+      }
+    ],
+    "running": [
+      {
+        "name": "deepseek-r1:14b",
+        "model": "deepseek-r1:14b",
+        "size": 11656634368
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "6d52b8d354b74914a616b57a931c2440d18141291d4896e07c1153d46ffdd90c": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "47.97.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.1",
+    "local": [
+      {
+        "name": "bge-m3:567m",
+        "model": "bge-m3:567m",
+        "size": 1157672605
+      },
+      {
+        "name": "deepseek-r1:14b",
+        "model": "deepseek-r1:14b",
+        "size": 8988112209
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "c5bd8fceaea1c30425ed07460c19896bd31a7b6b70e6c4da795e9327f2dcded6": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "125.118.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "083b8e4dfbe5754a729689f7a56233f3a95234efcd3e85deb736be0d27a2969b": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "49.7.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.11",
+    "local": [
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      },
+      {
+        "name": "deepseek-r1:7b",
+        "model": "deepseek-r1:7b",
+        "size": 4683075271
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "7af91ebdc8768271d2cc0cb09dfbedf22e471c5e930b096bbe884671fe7b8291": {
+    "port": 11434,
+    "city": "Changzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Jiangsu",
+    "latitude": "31.783331",
+    "longitude": "119.966667",
+    "ip": "61.160.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "0503f670e759c04f6a5c370d8f3e2fca593130ec1bc8e3473ce612aa606ed653": {
+    "port": 11434,
+    "city": "Shaoyang",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Hunan",
+    "latitude": "27.250000",
+    "longitude": "111.466667",
+    "ip": "118.248.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.0",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "llama3.1:8b-instruct-q4_K_M",
+        "model": "llama3.1:8b-instruct-q4_K_M",
+        "size": 4920753328
+      },
+      {
+        "name": "llama3.2:1b-instruct-q4_K_M",
+        "model": "llama3.2:1b-instruct-q4_K_M",
+        "size": 807709787
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      },
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:8b",
+        "model": "deepseek-r1:8b",
+        "size": 4920738407
+      }
+    ],
+    "running": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 4755648512
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "0413373f43994ad54d816d46f11e076ccfdb32205d865aeee7d01d917f2d819d": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "116.198.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "b8b7cde57fab6afb3b97cdf5f8ddbfdb79cfadb3c6efc9c506b4cb528ad883de": {
+    "port": 11434,
+    "city": "Singapore",
+    "country": "SG",
+    "country_name": "Singapore",
+    "region": "Singapore",
+    "latitude": "1.289987",
+    "longitude": "103.850281",
+    "ip": "166.108.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.3.14",
+    "local": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.1:8b",
+        "model": "llama3.1:8b",
+        "size": 4920753328
+      }
+    ],
+    "running": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 643710720
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "aa99ac3422551b98289ba0d13dab755978a4ac2620c5aeee3bb41af8fcc8a5e2": {
+    "port": 11434,
+    "city": "Chongqing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Chongqing",
+    "latitude": "29.562780",
+    "longitude": "106.553101",
+    "ip": "106.89.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "931d5aa152851186944c8633c45617d476fcee5447f611c34f58d319715650db": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "183.159.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "457bc837f640869ba021d78393a7fe302f19507b904b781f2c3b0fded2d22e95": {
+    "port": 11434,
+    "city": "Taipei",
+    "country": "CN",
+    "country_name": "Taiwan, Province of China",
+    "region": "TW",
+    "latitude": "25.038172",
+    "longitude": "121.563599",
+    "ip": "140.114.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.0",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "llama3.1:8b-instruct-q4_K_M",
+        "model": "llama3.1:8b-instruct-q4_K_M",
+        "size": 4920753328
+      },
+      {
+        "name": "llama3.2:1b-instruct-q4_K_M",
+        "model": "llama3.2:1b-instruct-q4_K_M",
+        "size": 807709787
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      },
+      {
+        "name": "llama3.2:3b-instruct-q5_K_M",
+        "model": "llama3.2:3b-instruct-q5_K_M",
+        "size": 2322169509
+      },
+      {
+        "name": "llama3.1:8b",
+        "model": "llama3.1:8b",
+        "size": 4920753328
+      },
+      {
+        "name": "gemma3:latest",
+        "model": "gemma3:latest",
+        "size": 3338801718
+      },
+      {
+        "name": "gemma2:latest",
+        "model": "gemma2:latest",
+        "size": 5443152417
+      },
+      {
+        "name": "qwen2.5-coder:latest",
+        "model": "qwen2.5-coder:latest",
+        "size": 4683087519
+      },
+      {
+        "name": "llama3:latest",
+        "model": "llama3:latest",
+        "size": 4661224676
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      }
+    ],
+    "running": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 4755648512
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "0d0a0fe1e61e4046eb591655b7d4a99d94ebfef51b3dc657ff3a399cea1f9700": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "117.72.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322768
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "49cbe9803437d86b5edc80632be68c6e06d3960dd5624e5a66679546a108ad14": {
+    "port": 11434,
+    "city": "Zhengzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Henan",
+    "latitude": "34.757778",
+    "longitude": "113.648613",
+    "ip": "222.137.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "29dc74cf67a1d6eeaee2a453ac2c8c95c47aaf7dbb56560467ae378b501ce37e": {
+    "port": 11434,
+    "city": "Hangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Zhejiang",
+    "latitude": "30.293650",
+    "longitude": "120.161583",
+    "ip": "120.26.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.13",
+    "local": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "llama3.2:1b",
+        "model": "llama3.2:1b",
+        "size": 1321098329
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 643710720
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "2f909dbd62251b6b7fcd6b027231b2d5d6fbbc7fc8ba5f260461d5f027e1f163": {
+    "port": 11434,
+    "city": "Seongnam",
+    "country": "KR",
+    "country_name": "Korea (Republic of)",
+    "region": "Gyeonggi-do",
+    "latitude": "37.420624",
+    "longitude": "127.126717",
+    "ip": "183.96.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.9.5",
+    "local": [
+      {
+        "name": "gemma3n:latest",
+        "model": "gemma3n:latest",
+        "size": 7547589116
+      },
+      {
+        "name": "gemma3:12b-it-q4_K_M",
+        "model": "gemma3:12b-it-q4_K_M",
+        "size": 8149190253
+      },
+      {
+        "name": "exaone3.5:latest",
+        "model": "exaone3.5:latest",
+        "size": 4770664857
+      },
+      {
+        "name": "qwen3:14b",
+        "model": "qwen3:14b",
+        "size": 9276198324
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "5f42bf4402b72c1f3ce7fe8a244545fb32a912cdba1e54060dcda0937f0afc56": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "42.192.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.11",
+    "local": [
+      {
+        "name": "llama3.1:8b",
+        "model": "llama3.1:8b",
+        "size": 4920753328
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "80554d456cdda7c4698a1fcff718fdc58a14e5155d1515aeeabfd80a8d8ec26c": {
+    "port": 11434,
+    "city": "Wuwei",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Gansu",
+    "latitude": "37.928055",
+    "longitude": "102.641388",
+    "ip": "60.164.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.12",
+    "local": [
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "deepseek-r1:70b",
+        "model": "deepseek-r1:70b",
+        "size": 42520397704
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "a1688034f3e7edfd4d6ec0551c56e32e0c8a69200f9c46b1436110796e7bb65d": {
+    "port": 11434,
+    "city": "Guangzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Guangdong",
+    "latitude": "23.127361",
+    "longitude": "113.264572",
+    "ip": "183.6.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.4.6",
+    "local": [
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "qwq:latest",
+        "model": "qwq:latest",
+        "size": 19851349390
+      }
+    ],
+    "running": [
+      {
+        "name": "qwq:latest",
+        "model": "qwq:latest",
+        "size": 22609475584
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "854cb56aa69acf08bb8520ca56bbe2d11fa8d59708533f670f12c1090035b157": {
+    "port": 11434,
+    "city": "Algiers",
+    "country": "DZ",
+    "country_name": "Algeria",
+    "region": "Alger",
+    "latitude": "36.752499",
+    "longitude": "3.041970",
+    "ip": "154.251.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "ecdb9474b3d4999e66f5940d6ac8776c09e7cc2cd59bd383ee2a388eabe140cd": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "150.242.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.13",
+    "local": [
+      {
+        "name": "deepseek-r1:latest",
+        "model": "deepseek-r1:latest",
+        "size": 4683075271
+      },
+      {
+        "name": "deepseek-r1:7b",
+        "model": "deepseek-r1:7b",
+        "size": 4683075271
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "d3c1b42a60beb3cec0edcb472366cafcef3cc4d308a70763d87c779008f31cc8": {
+    "port": 11434,
+    "city": "Quanzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Fujian",
+    "latitude": "24.913891",
+    "longitude": "118.585831",
+    "ip": "125.77.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.1",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 277
+      },
+      {
+        "name": "smollm2:135m",
+        "model": "smollm2:135m",
+        "size": 270898672
+      },
+      {
+        "name": "qwen:1.8b",
+        "model": "qwen:1.8b",
+        "size": 1120243281
+      },
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "size": 1157672605
+      },
+      {
+        "name": "linux6200/bge-reranker-v2-m3:latest",
+        "model": "linux6200/bge-reranker-v2-m3:latest",
+        "size": 1159777159
+      },
+      {
+        "name": "shaw/dmeta-embedding-zh:latest",
+        "model": "shaw/dmeta-embedding-zh:latest",
+        "size": 408746693
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "69f8b48bde51003aa867b71efb4231fe215f3f487a719eb51a6ffe9ca5cdba82": {
+    "port": 11434,
+    "city": "Roubaix",
+    "country": "FR",
+    "country_name": "France",
+    "region": "Hauts-de-France",
+    "latitude": "50.693710",
+    "longitude": "3.174439",
+    "ip": "141.94.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.8",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3-backup:latest",
+        "model": "llama3-backup:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mattw/pygmalion:latest",
+        "model": "mattw/pygmalion:latest",
+        "size": 3825517996
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "mxbai-embed-large:latest",
+        "model": "mxbai-embed-large:latest",
+        "size": 669615493
+      },
+      {
+        "name": "nomic-embed-text:latest",
+        "model": "nomic-embed-text:latest",
+        "size": 274302450
+      },
+      {
+        "name": "llama3.2:3b",
+        "model": "llama3.2:3b",
+        "size": 2019393189
+      },
+      {
+        "name": "gemma3:12b",
+        "model": "gemma3:12b",
+        "size": 8149190253
+      },
+      {
+        "name": "gemma3:4b-it-fp16",
+        "model": "gemma3:4b-it-fp16",
+        "size": 8617194121
+      }
+    ],
+    "running": [
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 3188551680
+      }
+    ],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "0a831468b05a2acbf6be9ffe650ee1edc7ff76600ffde159b55686cb33c49a22": {
+    "port": 11434,
+    "city": "Beijing",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Beijing",
+    "latitude": "39.907501",
+    "longitude": "116.397102",
+    "ip": "101.34.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.6.1",
+    "local": [
+      {
+        "name": "mario:latest",
+        "model": "mario:latest",
+        "size": 2019393299
+      },
+      {
+        "name": "llama3.2:latest",
+        "model": "llama3.2:latest",
+        "size": 2019393189
+      },
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322599
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+  },
+  "786436224f4d8312676a8f8d48ff9321939f664733f7873e13482193defe8d2a": {
+    "port": 11434,
+    "city": "Ganzhou",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Jiangxi",
+    "latitude": "25.850000",
+    "longitude": "114.933327",
+    "ip": "182.107.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "17da867bddea9c6d25ed811184d2ebc9ba717ebc2a0db2bb4ff1653f9a3e482f": {
+    "port": 11434,
+    "city": "Hefei",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Anhui",
+    "latitude": "31.863815",
+    "longitude": "117.280830",
+    "ip": "61.191.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "first_seen_online": null,
+    "age": "N/A"
+  },
+  "23e41cb2f623ff2cdd022274d1bc9fe243f23dae3b3971a55c5ae64102127978": {
+    "port": 11434,
+    "city": "Shanghai",
+    "country": "CN",
+    "country_name": "China",
+    "region": "Shanghai",
+    "latitude": "31.224333",
+    "longitude": "121.468948",
+    "ip": "124.71.XXX.XXX",
+    "last_observed": "2025-07-08T21:08:19.892015+00:00",
+    "last_updated": "2025-07-08T21:08:19.892015+00:00",
+    "status": "live",
+    "version": "0.5.10",
+    "local": [
+      {
+        "name": "deepseek-r1:1.5b",
+        "model": "deepseek-r1:1.5b",
+        "size": 1117322768
+      }
+    ],
+    "running": [],
+    "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
+    "age": "0 seconds"
+>>>>>>> main
   }
 }
