@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r backend/requirements.txt || true
 
-      - name: Download raw input from Supabase
+      - name: Download all FOFA_* files from Supabase
         run: |
           python <<EOF
           import os
@@ -39,19 +39,23 @@ jobs:
               url = os.environ["SUPABASE_URL"]
               key = os.environ["SUPABASE_SECRET_KEY"]
               bucket = os.environ["SUPABASE_BUCKET_NAME"]
-              path = os.environ["SUPABASE_FILE_PATH"]
 
               supabase = create_client(url, key)
-              data = supabase.storage.from_(bucket).download(path)
+              # List all files in the bucket
+              files = supabase.storage.from_(bucket).list()
+              fofa_files = [f['name'] for f in files if f['name'].startswith('FOFA_') and f['name'].endswith('.json')]
 
-              target = pathlib.Path(f"backend/input/raw_input.json")
-              target.parent.mkdir(parents=True, exist_ok=True)
-              target.write_bytes(data)
+              target_dir = pathlib.Path("backend/input")
+              target_dir.mkdir(parents=True, exist_ok=True)
 
-              print("✅ File fetched and saved to backend/input/raw_input.json")
-          
+              for fname in fofa_files:
+                  data = supabase.storage.from_(bucket).download(fname)
+                  target = target_dir / fname
+                  target.write_bytes(data)
+                  print(f"✅ Downloaded {fname} to {target}")
+
           except Exception as e:
-              print(f"❌ Failed to fetch file from Supabase:", e, file=sys.stderr)
+              print(f"❌ Failed to fetch FOFA_* files from Supabase:", e, file=sys.stderr)
               sys.exit(1)
           EOF
 
