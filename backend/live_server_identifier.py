@@ -8,7 +8,6 @@ import hashlib
 from tqdm import tqdm
 from tqdm import tqdm
 
-# INPUT_JSON = Path("backend/input/FOFA_20250708_0047_IN.json")
 OUTPUT_JSON = Path("frontend/public/data/live_servers.json")
 LOG_FILE = Path("backend/data/live_server_identifier.log")
 LOG_FILE.parent.mkdir(exist_ok=True)
@@ -18,7 +17,6 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s %(message)s',
     handlers=[
         logging.FileHandler(LOG_FILE),
-        # logging.StreamHandler() # Removed
     ]
 )
 
@@ -43,10 +41,8 @@ def is_server_live(ip, port, max_retries=2):
                 return "live"
             else:
                 logging.warning(f"{mask_ip(ip)}:{port} responded with status {resp.status_code}")
-                logging.warning(f"{mask_ip(ip)}:{port} responded with status {resp.status_code}")
                 return f"http_error_{resp.status_code}"
         except requests.RequestException as e:
-            logging.error(f"Network error for {mask_ip(ip)}:{port} (attempt {attempt}): {e}")
             logging.error(f"Network error for {mask_ip(ip)}:{port} (attempt {attempt}): {e}")
         if attempt < max_retries:
             time.sleep(2 ** attempt)
@@ -62,9 +58,7 @@ def get_ollama_version(ip, port, max_retries=2):
                 return data.get("version", "unknown")
             else:
                 logging.warning(f"{mask_ip(ip)}:{port} /api/version responded with status {resp.status_code}")
-                logging.warning(f"{mask_ip(ip)}:{port} /api/version responded with status {resp.status_code}")
         except requests.RequestException as e:
-            logging.error(f"Network error for {mask_ip(ip)}:{port} /api/version (attempt {attempt}): {e}")
             logging.error(f"Network error for {mask_ip(ip)}:{port} /api/version (attempt {attempt}): {e}")
         if attempt < max_retries:
             time.sleep(2 ** attempt)
@@ -87,9 +81,7 @@ def get_local_models(ip, port, max_retries=2):
                 return models
             else:
                 logging.warning(f"{mask_ip(ip)}:{port} /api/tags responded with status {resp.status_code}")
-                logging.warning(f"{mask_ip(ip)}:{port} /api/tags responded with status {resp.status_code}")
         except requests.RequestException as e:
-            logging.error(f"Network error for {mask_ip(ip)}:{port} /api/tags (attempt {attempt}): {e}")
             logging.error(f"Network error for {mask_ip(ip)}:{port} /api/tags (attempt {attempt}): {e}")
         if attempt < max_retries:
             time.sleep(2 ** attempt)
@@ -112,9 +104,7 @@ def get_running_models(ip, port, max_retries=2):
                 return models
             else:
                 logging.warning(f"{mask_ip(ip)}:{port} /api/ps responded with status {resp.status_code}")
-                logging.warning(f"{mask_ip(ip)}:{port} /api/ps responded with status {resp.status_code}")
         except requests.RequestException as e:
-            logging.error(f"Network error for {mask_ip(ip)}:{port} /api/ps (attempt {attempt}): {e}")
             logging.error(f"Network error for {mask_ip(ip)}:{port} /api/ps (attempt {attempt}): {e}")
         if attempt < max_retries:
             time.sleep(2 ** attempt)
