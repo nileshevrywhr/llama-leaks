@@ -289,17 +289,13 @@ const Hero = () => {
                     ${copied ? 'bg-green-500 text-white border-green-500' : ''}
                   `}
                   disabled={!serverData}
+                  aria-label={copied ? "URL copied to clipboard" : "Copy server URL to clipboard"}
+                  title={copied ? "Copied!" : "Copy URL"}
                 >
                   {copied ? (
-                    <>
-                      <Check className="h-3 w-3 mr-1" />
-                      Copied!
-                    </>
+                    <Check className="h-3 w-3" />
                   ) : (
-                    <>
-                      <Copy className="h-3 w-3 mr-1" />
-                      Copy
-                    </>
+                    <Copy className="h-3 w-3" />
                   )}
                   {copied && (
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full animate-pulse" />
