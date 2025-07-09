@@ -26,15 +26,9 @@
       }
     ],
     "running": [],
-<<<<<<< HEAD
-    "last_observed": "2025-07-07T19:03:09.750706+00:00",
-    "status": "live",
-    "last_updated": "2025-07-07T19:03:09.750706+00:00",
-=======
     "last_observed": "2025-07-08T21:08:19.892015+00:00",
     "status": "live",
     "last_updated": "2025-07-08T21:08:19.892015+00:00",
->>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "117.72.XXX.XXX"
@@ -61,15 +55,9 @@
       }
     ],
     "running": [],
-<<<<<<< HEAD
-    "last_observed": "2025-07-07T19:03:09.750706+00:00",
-    "status": "live",
-    "last_updated": "2025-07-07T19:03:09.750706+00:00",
-=======
     "last_observed": "2025-07-08T21:08:19.892015+00:00",
     "status": "live",
     "last_updated": "2025-07-08T21:08:19.892015+00:00",
->>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "126.78.XXX.XXX"
@@ -96,15 +84,9 @@
       }
     ],
     "running": [],
-<<<<<<< HEAD
-    "last_observed": "2025-07-07T19:03:09.750706+00:00",
-    "status": "live",
-    "last_updated": "2025-07-07T19:03:09.750706+00:00",
-=======
     "last_observed": "2025-07-08T21:08:19.892015+00:00",
     "status": "live",
     "last_updated": "2025-07-08T21:08:19.892015+00:00",
->>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "43.136.XXX.XXX"
@@ -126,15 +108,9 @@
       }
     ],
     "running": [],
-<<<<<<< HEAD
-    "last_observed": "2025-07-07T19:03:09.750706+00:00",
-    "status": "live",
-    "last_updated": "2025-07-07T19:03:09.750706+00:00",
-=======
     "last_observed": "2025-07-08T21:08:19.892015+00:00",
     "status": "live",
     "last_updated": "2025-07-08T21:08:19.892015+00:00",
->>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "113.45.XXX.XXX"
@@ -156,15 +132,9 @@
       }
     ],
     "running": [],
-<<<<<<< HEAD
-    "last_observed": "2025-07-07T19:03:09.750706+00:00",
-    "status": "live",
-    "last_updated": "2025-07-07T19:03:09.750706+00:00",
-=======
     "last_observed": "2025-07-08T21:08:19.892015+00:00",
     "status": "live",
     "last_updated": "2025-07-08T21:08:19.892015+00:00",
->>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "120.53.XXX.XXX"
@@ -201,15 +171,9 @@
       }
     ],
     "running": [],
-<<<<<<< HEAD
-    "last_observed": "2025-07-07T19:03:09.750706+00:00",
-    "status": "live",
-    "last_updated": "2025-07-07T19:03:09.750706+00:00",
-=======
     "last_observed": "2025-07-08T21:08:19.892015+00:00",
     "status": "live",
     "last_updated": "2025-07-08T21:08:19.892015+00:00",
->>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "114.113.XXX.XXX"
@@ -245,23 +209,10 @@
         "size": 5225376047
       }
     ],
-<<<<<<< HEAD
-    "running": [
-      {
-        "name": "llama3.2:latest",
-        "model": "llama3.2:latest",
-        "size": 3188551680
-      }
-    ],
-    "last_observed": "2025-07-07T19:03:09.750706+00:00",
-    "status": "live",
-    "last_updated": "2025-07-07T19:03:09.750706+00:00",
-=======
     "running": [],
     "last_observed": "2025-07-08T21:08:19.892015+00:00",
     "status": "live",
     "last_updated": "2025-07-08T21:08:19.892015+00:00",
->>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "150.230.XXX.XXX"
@@ -309,15 +260,9 @@
         "size": 1715003392
       }
     ],
-<<<<<<< HEAD
-    "last_observed": "2025-07-07T19:03:09.750706+00:00",
-    "status": "live",
-    "last_updated": "2025-07-07T19:03:09.750706+00:00",
-=======
     "last_observed": "2025-07-08T21:08:19.892015+00:00",
     "status": "live",
     "last_updated": "2025-07-08T21:08:19.892015+00:00",
->>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "116.130.XXX.XXX"
@@ -370,15 +315,9 @@
         "size": 4755648512
       }
     ],
-<<<<<<< HEAD
-    "last_observed": "2025-07-07T19:03:09.750706+00:00",
-    "status": "live",
-    "last_updated": "2025-07-07T19:03:09.750706+00:00",
-=======
     "last_observed": "2025-07-08T21:08:19.892015+00:00",
     "status": "live",
     "last_updated": "2025-07-08T21:08:19.892015+00:00",
->>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "45.145.XXX.XXX"
@@ -405,15 +344,9 @@
       }
     ],
     "running": [],
-<<<<<<< HEAD
-    "last_observed": "2025-07-07T19:03:09.750706+00:00",
-    "status": "live",
-    "last_updated": "2025-07-07T19:03:09.750706+00:00",
-=======
     "last_observed": "2025-07-08T21:08:19.892015+00:00",
     "status": "live",
     "last_updated": "2025-07-08T21:08:19.892015+00:00",
->>>>>>> main
     "first_seen_online": "2025-06-26T19:11:15.014711+00:00",
     "age": "1 week",
     "ip": "47.116.XXX.XXX"
@@ -6175,13 +6108,8 @@
     "latitude": "11.000563",
     "longitude": "76.966576",
     "ip": "202.129.XXX.XXX",
-<<<<<<< HEAD
-    "last_observed": "2025-07-08T19:42:24.337769+00:00",
-    "last_updated": "2025-07-08T19:42:24.337769+00:00",
-=======
     "last_observed": "2025-07-08T21:08:19.892015+00:00",
     "last_updated": "2025-07-08T21:08:19.892015+00:00",
->>>>>>> main
     "status": "unreachable",
     "version": "unknown",
     "local": [],
@@ -6198,13 +6126,8 @@
     "latitude": "19.075975",
     "longitude": "72.877380",
     "ip": "13.233.XXX.XXX",
-<<<<<<< HEAD
-    "last_observed": "2025-07-08T19:42:24.337769+00:00",
-    "last_updated": "2025-07-08T19:42:24.337769+00:00",
-=======
     "last_observed": "2025-07-08T21:08:19.892015+00:00",
     "last_updated": "2025-07-08T21:08:19.892015+00:00",
->>>>>>> main
     "status": "unreachable",
     "version": "unknown",
     "local": [],
@@ -13788,8 +13711,6 @@
     "running": [],
     "first_seen_online": null,
     "age": "N/A"
-<<<<<<< HEAD
-=======
   },
   "390f581ecf4bb1d09f77ca823b049d1948c47267da56160052ff7f69a3243b97": {
     "port": 11434,
@@ -19108,6 +19029,5 @@
     "running": [],
     "first_seen_online": "2025-07-08T21:08:19.892015+00:00",
     "age": "0 seconds"
->>>>>>> main
   }
 }
