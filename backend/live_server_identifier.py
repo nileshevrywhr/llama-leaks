@@ -230,8 +230,12 @@ def main():
                         current_server_info["longitude"] = longitude
                         current_server_info["ip"] = masked_ip
                         current_server_info["last_observed"] = now.isoformat() # Always update last_observed
-                        current_server_info["last_updated"] = now.isoformat() # Always update last_updated
 
+                        # Set first_seen_online for new servers, regardless of status
+                        is_new_server = server_hash_key not in final_output_servers
+                        if is_new_server:
+                            current_server_info["first_seen_online"] = now.isoformat()
+                        
                         # Determine status and update live-specific fields
                         server_status = is_server_live(ip, port)
                         current_server_info["status"] = server_status
@@ -241,7 +245,8 @@ def main():
                             current_server_info["local"] = get_local_models(ip, port)
                             current_server_info["running"] = get_running_models(ip, port)
                             
-                            if "first_seen_online" not in current_server_info or not current_server_info["first_seen_online"]:
+                            # If this is the first time we see the server live, update first_seen_online
+                            if not current_server_info.get("first_seen_online"):
                                 current_server_info["first_seen_online"] = now.isoformat()
 
                             # Print detailed info for live servers using tqdm.write
@@ -269,7 +274,6 @@ def main():
                             current_server_info.setdefault("version", "unknown")
                             current_server_info.setdefault("local", [])
                             current_server_info.setdefault("running", [])
-                            current_server_info.setdefault("first_seen_online", None)
 
                         # Calculate and add 'age' field
                         if current_server_info.get("first_seen_online"):
@@ -286,12 +290,12 @@ def main():
                         logging.info(f"Processed {current_server_info['ip']}:{port} (status: {current_server_info['status']}, v{current_server_info.get('version', 'N/A')}, age: {current_server_info.get('age', 'N/A')})")
                         
                         final_output_servers[server_hash_key] = current_server_info # Store in the final dictionary
-                        OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2)) # Write update to file immediately
+                        # OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2)) # Write update to file immediately
                         buffer = ""
                         pbar.update(1)
     
     # Write the complete updated map to OUTPUT_JSON
-    # OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2)) # Removed
+    OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2)) # Removed
     logging.info(f"Scan complete. {len(final_output_servers)} servers saved to {OUTPUT_JSON.name}") # Keep file log
 
 if __name__ == "__main__":
