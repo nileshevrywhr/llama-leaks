@@ -4,6 +4,7 @@ import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Cloc
 import Map from "./Map";
 import { formatDistanceToNowStrict } from "date-fns";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useToast } from "@/components/ui/use-toast";
 
 interface ServerModel {
   name: string;
@@ -79,39 +80,88 @@ const Hero = () => {
     fetchRandomServer(true);
   };
 
-  const handleCopyUrl = async () => {
-    if (!serverData) return;
-    
-    const fullUrl = `http://${serverData.ip}:${serverData.port}`;
-    
+  const { toast } = useToast();
+
+  const fallbackCopyTextToClipboard = (text: string): boolean => {
     try {
-      await navigator.clipboard.writeText(fullUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      // Fallback for older browsers
-      // Create textarea in memory without adding to DOM
       const textArea = document.createElement('textarea');
-      // Sanitize the URL by only allowing expected characters
-      const sanitizedUrl = fullUrl.replace(/[^\w-./:]/g, '');
-      textArea.value = sanitizedUrl;
-      // Position off-screen
+      textArea.value = text;
+      
+      // Position off-screen but within the viewport
       textArea.style.position = 'fixed';
-      textArea.style.left = '-9999px';
-      // Append, copy, and remove safely
-      const parent = document.body;
-      // eslint-disable-next-line no-unsanitized/method
-      parent.appendChild(textArea);
-      try {
-        textArea.select();
-        document.execCommand('copy');
-      } finally {
-        parent.removeChild(textArea);
-      }
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      textArea.style.top = '0';
+      textArea.style.left = '0';
+      textArea.style.width = '2em';
+      textArea.style.height = '2em';
+      textArea.style.padding = '0';
+      textArea.style.border = 'none';
+      textArea.style.outline = 'none';
+      textArea.style.boxShadow = 'none';
+      textArea.style.background = 'transparent';
+      
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      const successful = document.execCommand('copy');
+      document.body.removeChild(textArea);
+      
+      return successful;
+    } catch (err) {
+      console.error('Fallback copy failed: ', err);
+      return false;
     }
   };
+
+  const handleCopyUrl = async (e: React.MouseEvent, server: ServerData) => {
+    e.preventDefault();
+    if (!server) return;
+    
+    const fullUrl = `${window.location.origin}?server=${server.ip}:${server.port}`;
+    // Sanitize the URL by only allowing expected characters
+    const sanitizedUrl = fullUrl.replace(/[^\w-./:?=&#]/g, '');
+    
+    try {
+      // Try modern Clipboard API first
+      await navigator.clipboard.writeText(sanitizedUrl);
+      
+      // Show success toast
+      toast({
+        title: 'Copied to clipboard!',
+        description: 'The server URL has been copied to your clipboard.',
+        duration: 2000,
+      });
+      
+      // Update the copied state for any UI that depends on it
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+      
+    } catch (err) {
+      console.error('Failed to copy URL: ', err);
+      
+      // Fallback to document.execCommand for older browsers
+      const fallbackSuccess = fallbackCopyTextToClipboard(sanitizedUrl);
+      
+      if (fallbackSuccess) {
+        toast({
+          title: 'Copied to clipboard!',
+          description: 'The server URL has been copied to your clipboard.',
+          duration: 2000,
+        });
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } else {
+        // Show error toast if both methods fail
+        toast({
+          title: 'Failed to copy',
+          description: 'Could not copy URL to clipboard. Please try again or copy it manually.',
+          variant: 'destructive',
+          duration: 3000,
+        });
+      }
+    }
+  };
+
   const formatSize = (bytes: number) => {
     const mb = bytes / (1024 * 1024);
     const gb = bytes / (1024 * 1024 * 1024);
@@ -285,7 +335,7 @@ const Hero = () => {
                   </span>
                 </div>
                 <Button
-                  onClick={handleCopyUrl}
+                  onClick={(e) => handleCopyUrl(e, serverData)}
                   size="sm"
                   variant="outline"
                   className={`
