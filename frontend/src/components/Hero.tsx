@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Clock, ChevronDown, ChevronUp, Copy, Check } from "lucide-react";
 import Map from "./Map";
+import { formatDistanceToNowStrict } from "date-fns";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface ServerModel {
@@ -23,6 +24,7 @@ interface ServerData {
   local: ServerModel[];
   running: ServerModel[];
   first_seen_online: string;
+  last_observed: string;
   age: string;
   status: string;
 }
@@ -88,12 +90,24 @@ const Hero = () => {
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       // Fallback for older browsers
+      // Create textarea in memory without adding to DOM
       const textArea = document.createElement('textarea');
-      textArea.value = fullUrl;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
+      // Sanitize the URL by only allowing expected characters
+      const sanitizedUrl = fullUrl.replace(/[^\w-./:]/g, '');
+      textArea.value = sanitizedUrl;
+      // Position off-screen
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-9999px';
+      // Append, copy, and remove safely
+      const parent = document.body;
+      // eslint-disable-next-line no-unsanitized/method
+      parent.appendChild(textArea);
+      try {
+        textArea.select();
+        document.execCommand('copy');
+      } finally {
+        parent.removeChild(textArea);
+      }
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -111,22 +125,17 @@ const Hero = () => {
 
   const formatTimestamp = (dateString: string) => {
     const date = new Date(dateString);
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-    
     const month = date.toLocaleString('default', { month: 'short' }).toUpperCase();
     const day = date.getDate();
     const year = date.getFullYear();
-    const time = date.toLocaleTimeString('en-US', { 
-      hour12: false, 
-      hour: '2-digit', 
-      minute: '2-digit' 
+    const time = date.toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
     });
-    
     return {
       formatted: `${month} ${day}, ${year} | ${time} UTC`,
-      hoursAgo: diffHours
+      distance: formatDistanceToNowStrict(date, { addSuffix: true }),
     };
   };
 
@@ -198,7 +207,8 @@ const Hero = () => {
     );
   }
 
-  const timestamp = formatTimestamp(serverData.first_seen_online);
+  const timestamp = formatTimestamp(serverData.last_observed);
+  const firstSeen = formatTimestamp(serverData.first_seen_online);
 
   return (
     <section className="container flex flex-col items-center justify-center space-y-6 py-12 md:py-16 mt-2">
@@ -240,8 +250,8 @@ const Hero = () => {
             <div className="flex items-center justify-between p-3 lg:p-6 pb-2 lg:pb-3 border-b border-border flex-shrink-0">
               <div className="flex items-center gap-2 text-muted-foreground text-xs lg:text-xs">
                 <Clock className="w-3 h-3" />
-                <span className="hidden sm:inline">AS OF {timestamp.formatted} ({serverData.age})</span>
-                <span className="sm:hidden">{timestamp.formatted.split('|')[0]} ({serverData.age})</span>
+                <span className="hidden sm:inline">AS OF {timestamp.formatted} ({timestamp.distance})</span>
+                <span className="sm:hidden">{timestamp.formatted.split('|')[0]} ({timestamp.distance})</span>
               </div>
               <Button
                 onClick={handleRefresh}
@@ -337,7 +347,7 @@ const Hero = () => {
                 </div>
                 <div className="col-span-2 lg:col-span-1 lg:mt-1">
                   <span className="text-muted-foreground">First Seen: </span>
-                  <span className="text-primary">{timestamp.formatted} ({serverData.age} ago)</span>
+                  <span className="text-primary">{firstSeen.formatted} ({firstSeen.distance})</span>
                 </div>
               </div>
 
