@@ -435,72 +435,7 @@ const Hero = () => {
                   </div>
                 </div>
               </div>
-              {/* Models Display - Minimal and Intuitive */}
-              <div className="space-y-3">
-                {/* Models Summary */}
-                <div className="flex items-center gap-4 text-xs">
-                  <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                    <span className="text-muted-foreground">{serverData.local.length} local</span>
-                  </div>
-                  {serverData.running.length > 0 && (
-                    <div className="flex items-center gap-1">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                      <span className="text-muted-foreground">{serverData.running.length} running</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Models List */}
-                <div className="space-y-2">
-                  {/* Running Models - Show First */}
-                  {serverData.running.length > 0 && (
-                    <div className="space-y-1">
-                      {serverData.running.map((model, index) => (
-                        <div key={`running-${index}`} className="flex items-center gap-2 text-xs">
-                          <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse flex-shrink-0"></div>
-                          <span className="text-green-400 font-medium truncate">{model.name}</span>
-                          <span className="text-muted-foreground text-xs">({formatSize(model.size)})</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Local Models - Show Available */}
-                  {serverData.local.length > 0 && (
-                    <div className="space-y-1">
-                      {serverData.local
-                        .filter(model => !serverData.running.some(running => running.name === model.name))
-                        .slice(0, 3) // Show max 3 to keep it minimal
-                        .map((model, index) => (
-                          <div key={`local-${index}`} className="flex items-center gap-2 text-xs">
-                            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full flex-shrink-0"></div>
-                            <span className="text-foreground truncate">{model.name}</span>
-                            <span className="text-muted-foreground text-xs">({formatSize(model.size)})</span>
-                          </div>
-                        ))}
-                      
-                      {/* Show "and X more" if there are more models */}
-                      {serverData.local.filter(model => !serverData.running.some(running => running.name === model.name)).length > 3 && (
-                        <div className="flex items-center gap-2 text-xs">
-                          <div className="w-1.5 h-1.5 bg-muted-foreground/50 rounded-full flex-shrink-0"></div>
-                          <span className="text-muted-foreground italic">
-                            and {serverData.local.filter(model => !serverData.running.some(running => running.name === model.name)).length - 3} more...
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Empty State */}
-                  {serverData.local.length === 0 && serverData.running.length === 0 && (
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <div className="w-1.5 h-1.5 bg-muted-foreground/30 rounded-full flex-shrink-0"></div>
-                      <span className="italic">No models found</span>
-                    </div>
-                  )}
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
