@@ -314,7 +314,7 @@ const Hero = () => {
                   }`} 
                 />
                 <span className="ml-2 hidden lg:inline">
-                  {refreshing ? 'Loading...' : 'Random Server'}
+                  {refreshing ? 'Loading...' : 'Random'}
                 </span>
                 {refreshing && (
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full animate-pulse" />
