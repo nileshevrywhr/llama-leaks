@@ -196,7 +196,7 @@ const Hero = () => {
         
         <div className="w-full max-w-4xl bg-destructive/5 border border-destructive/20 rounded-lg p-8 text-center">
           <AlertCircle className="h-12 w-12 mb-4 text-destructive mx-auto" />
-          <h3 className="text-lg font-semibold text-destructive mb-2">Unable to Load Live Evidence</h3>
+          <h3 className="text-lg font-semibold text-destructive mb-2">Unable to Load Server Information</h3>
           <p className="text-muted-foreground mb-4">{error}</p>
           <Button onClick={() => fetchRandomServer()} className="bg-primary text-primary-foreground hover:bg-primary/90">
             <Shuffle className="h-4 w-4 mr-2" />
@@ -222,7 +222,7 @@ const Hero = () => {
         </h1>
         
         <div className="max-w-3xl mx-auto text-sm text-muted-foreground md:text-base mt-3 space-y-2 px-4 sm:px-6 lg:px-8">
-          <p className="text-center">
+          <p className="text-center text-base sm:text-lg font-semibold text-foreground/90 lg:whitespace-nowrap">
             Zero security. No asterisks. Just public endpoints serving AI models to anyone who asks nicely.
           </p>
         </div>
