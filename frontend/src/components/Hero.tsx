@@ -398,17 +398,6 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Models Summary - Always Visible */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-muted-foreground">Models: </span>
-                  <span className="text-foreground">{serverData.local.length} local</span>
-                  {serverData.running.length > 0 && (
-                    <span className="text-green-400 ml-2">{serverData.running.length} running</span>
-                  )}
-                </div>
-              </div>
-
               {/* Collapsible Model Details - Mobile Only */}
               <div className="lg:hidden">
                 <Collapsible open={modelsExpanded} onOpenChange={setModelsExpanded}>
