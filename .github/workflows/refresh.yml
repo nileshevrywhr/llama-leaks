@@ -2,7 +2,7 @@ name: Refresh Server Data
 
 on:
   schedule:
-    - cron: '0 */3 * * *'   # every hour
+    - cron: '0 */1 * * *'   # every hour
   workflow_dispatch:        # allow manual trigger
 
 jobs:
