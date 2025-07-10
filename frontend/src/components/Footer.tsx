@@ -1,5 +1,4 @@
 
-import { Separator } from "@/components/ui/separator";
 import { Github, Twitter, Shield } from "lucide-react";
 
 const Footer = () => {

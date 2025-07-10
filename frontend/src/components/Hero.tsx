@@ -188,7 +188,7 @@ const Hero = () => {
     return (
       <section className="container flex flex-col items-center justify-center space-y-6 py-16 md:py-20 mt-4">
         <h1 className="text-2xl font-bold leading-tight tracking-tighter md:text-4xl lg:text-5xl lg:leading-[1.1] text-center max-w-3xl">
-          Your Ollama Server is Now {" "}
+          Your Ollama Server is Now a{" "}
           <span className="bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent">
             Public AI Playground
           </span>
@@ -223,10 +223,7 @@ const Hero = () => {
         
         <div className="max-w-3xl mx-auto text-sm text-muted-foreground md:text-base mt-3 space-y-2 px-4 sm:px-6 lg:px-8">
           <p className="text-center">
-            Zero security. No asterisks.
-          </p>
-          <p className="text-center">
-            Just public endpoints serving AI models to anyone who asks nicely.
+            Zero security. No asterisks. Just public endpoints serving AI models to anyone who asks nicely.
           </p>
         </div>
       </div>

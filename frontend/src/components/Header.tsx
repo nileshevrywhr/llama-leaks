@@ -67,9 +67,9 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="mr-4 hidden md:flex">
             <a className="mr-6 flex items-center space-x-2" href="/">
-              <Shield className="h-5 w-5 text-destructive" />
+              {/* <Shield className="h-5 w-5 text-destructive" /> */}
               <span className="hidden font-bold sm:inline-block">
-                Ollama Wall
+                LLaMa Leaks
               </span>
             </a>
             <nav className="flex items-center space-x-6 text-sm font-medium">
@@ -118,9 +118,9 @@ const Header = () => {
             {/* Center - Title */}
             <div className="flex-1 flex justify-center">
               <a className="flex items-center space-x-2" href="/">
-                <Shield className="h-5 w-5 text-destructive" />
+                {/* <Shield className="h-5 w-5 text-destructive" /> */}
                 <span className="font-bold text-sm">
-                  Ollama Wall
+                  LLaMa Leaks
                 </span>
               </a>
             </div>

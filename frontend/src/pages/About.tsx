@@ -17,26 +17,11 @@ const About = () => {
         <div className="text-center space-y-6 max-w-4xl mx-auto">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
-              About Ollama Wall
+              About LLaMa Leaks
             </h1>
             <p className="text-xl text-muted-foreground">
-              Making the internet more secure, one exposed server at a time
+              Making the internet more secure, one server at a time
             </p>
-          </div>
-          
-          <div className="flex flex-wrap gap-2 justify-center">
-            <Badge variant="outline" className="gap-1">
-              <Shield className="h-3 w-3" />
-              Security Education
-            </Badge>
-            <Badge variant="outline" className="gap-1">
-              <Eye className="h-3 w-3" />
-              Passive Monitoring
-            </Badge>
-            <Badge variant="outline" className="gap-1">
-              <Users className="h-3 w-3" />
-              Community Driven
-            </Badge>
           </div>
         </div>
       </section>
