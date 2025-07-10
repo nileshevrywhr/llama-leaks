@@ -2,15 +2,21 @@ import json
 import requests
 import logging
 import time
+import asyncio
+import aiohttp
 from pathlib import Path
 from datetime import datetime, timedelta, UTC
 import hashlib
 from tqdm import tqdm
-from tqdm import tqdm
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading
 
 OUTPUT_JSON = Path("frontend/public/data/live_servers.json")
 LOG_FILE = Path("backend/data/live_server_identifier.log")
 LOG_FILE.parent.mkdir(exist_ok=True)
+
+# Thread-safe logging
+log_lock = threading.Lock()
 
 logging.basicConfig(
     level=logging.INFO,
@@ -20,6 +26,10 @@ logging.basicConfig(
     ]
 )
 
+def thread_safe_log(level, message):
+    with log_lock:
+        logging.log(level, message)
+
 def hash_ip_port(ip, port):
     """Generates a SHA256 hash for a given IP and port."""
     return hashlib.sha256(f"{ip}:{port}".encode()).hexdigest()
@@ -28,93 +38,176 @@ def mask_ip(ip_address):
     """Masks the last two octets of an IPv4 address."""
     parts = ip_address.split('.')
     if len(parts) == 4:
-        # Mask the last two octets
         return f"{parts[0]}.{parts[1]}.XXX.XXX"
-    return ip_address # Return as is if not a standard IPv4
+    return ip_address
 
-def is_server_live(ip, port, max_retries=2):
-    url = f"http://{ip}:{port}/api/ps"
-    for attempt in range(1, max_retries + 1):
+# Async version for better performance
+async def check_server_async(session, ip, port, max_retries=2):
+    """Async version of server checking with all API calls in parallel"""
+    urls = {
+        'ps': f"http://{ip}:{port}/api/ps",
+        'version': f"http://{ip}:{port}/api/version", 
+        'tags': f"http://{ip}:{port}/api/tags"
+    }
+    
+    results = {
+        'status': 'unreachable',
+        'version': 'unknown',
+        'local': [],
+        'running': []
+    }
+    
+    for attempt in range(max_retries):
         try:
-            resp = requests.get(url, timeout=5)
-            if resp.status_code == 200:
-                return "live"
-            else:
-                logging.warning(f"{mask_ip(ip)}:{port} responded with status {resp.status_code}")
-                return f"http_error_{resp.status_code}"
-        except requests.RequestException as e:
-            logging.error(f"Network error for {mask_ip(ip)}:{port} (attempt {attempt}): {e}")
-        if attempt < max_retries:
-            time.sleep(2 ** attempt)
-    return "unreachable"
+            # Check if server is live first
+            async with session.get(urls['ps'], timeout=aiohttp.ClientTimeout(total=3)) as resp:
+                if resp.status == 200:
+                    results['status'] = 'live'
+                    ps_data = await resp.json()
+                    
+                    # Extract running models
+                    models = []
+                    for m in ps_data.get("models", []):
+                        models.append({
+                            "name": m.get("name"),
+                            "model": m.get("model"),
+                            "size": m.get("size")
+                        })
+                    results['running'] = models
+                    
+                    # Now get version and local models in parallel
+                    tasks = []
+                    
+                    # Version task
+                    async def get_version():
+                        try:
+                            async with session.get(urls['version'], timeout=aiohttp.ClientTimeout(total=3)) as v_resp:
+                                if v_resp.status == 200:
+                                    v_data = await v_resp.json()
+                                    return v_data.get("version", "unknown")
+                        except:
+                            pass
+                        return "unknown"
+                    
+                    # Local models task
+                    async def get_local():
+                        try:
+                            async with session.get(urls['tags'], timeout=aiohttp.ClientTimeout(total=3)) as t_resp:
+                                if t_resp.status == 200:
+                                    t_data = await t_resp.json()
+                                    models = []
+                                    for m in t_data.get("models", []):
+                                        models.append({
+                                            "name": m.get("name"),
+                                            "model": m.get("model"),
+                                            "size": m.get("size")
+                                        })
+                                    return models
+                        except:
+                            pass
+                        return []
+                    
+                    # Run version and tags requests in parallel
+                    version_result, local_result = await asyncio.gather(
+                        get_version(), 
+                        get_local(),
+                        return_exceptions=True
+                    )
+                    
+                    if not isinstance(version_result, Exception):
+                        results['version'] = version_result
+                    if not isinstance(local_result, Exception):
+                        results['local'] = local_result
+                    
+                    return results
+                    
+                else:
+                    results['status'] = f"http_error_{resp.status}"
+                    return results
+                    
+        except asyncio.TimeoutError:
+            thread_safe_log(logging.WARNING, f"Timeout for {mask_ip(ip)}:{port} (attempt {attempt + 1})")
+        except Exception as e:
+            thread_safe_log(logging.ERROR, f"Error for {mask_ip(ip)}:{port} (attempt {attempt + 1}): {e}")
+        
+        if attempt < max_retries - 1:
+            await asyncio.sleep(0.5 * (2 ** attempt))  # Shorter backoff
+    
+    return results
 
-def get_ollama_version(ip, port, max_retries=2):
-    url = f"http://{ip}:{port}/api/version"
-    for attempt in range(1, max_retries + 1):
+# Synchronous version using ThreadPoolExecutor for backwards compatibility
+def check_server_sync(ip, port, max_retries=2):
+    """Optimized synchronous version with shorter timeouts"""
+    session = requests.Session()
+    session.headers.update({'Connection': 'close'})  # Prevent connection reuse issues
+    
+    results = {
+        'status': 'unreachable',
+        'version': 'unknown',
+        'local': [],
+        'running': []
+    }
+    
+    for attempt in range(max_retries):
         try:
-            resp = requests.get(url, timeout=5)
+            # Check if server is live with shorter timeout
+            resp = session.get(f"http://{ip}:{port}/api/ps", timeout=2)
             if resp.status_code == 200:
-                data = resp.json()
-                return data.get("version", "unknown")
-            else:
-                logging.warning(f"{mask_ip(ip)}:{port} /api/version responded with status {resp.status_code}")
-        except requests.RequestException as e:
-            logging.error(f"Network error for {mask_ip(ip)}:{port} /api/version (attempt {attempt}): {e}")
-        if attempt < max_retries:
-            time.sleep(2 ** attempt)
-    return "unreachable"
-
-def get_local_models(ip, port, max_retries=2):
-    url = f"http://{ip}:{port}/api/tags"
-    for attempt in range(1, max_retries + 1):
-        try:
-            resp = requests.get(url, timeout=5)
-            if resp.status_code == 200:
-                data = resp.json()
+                results['status'] = 'live'
+                ps_data = resp.json()
+                
+                # Extract running models
                 models = []
-                for m in data.get("models", []):
+                for m in ps_data.get("models", []):
                     models.append({
                         "name": m.get("name"),
                         "model": m.get("model"),
                         "size": m.get("size")
                     })
-                return models
+                results['running'] = models
+                
+                # Get version and local models quickly
+                try:
+                    v_resp = session.get(f"http://{ip}:{port}/api/version", timeout=2)
+                    if v_resp.status_code == 200:
+                        v_data = v_resp.json()
+                        results['version'] = v_data.get("version", "unknown")
+                except:
+                    pass
+                
+                try:
+                    t_resp = session.get(f"http://{ip}:{port}/api/tags", timeout=2)
+                    if t_resp.status_code == 200:
+                        t_data = t_resp.json()
+                        models = []
+                        for m in t_data.get("models", []):
+                            models.append({
+                                "name": m.get("name"),
+                                "model": m.get("model"),
+                                "size": m.get("size")
+                            })
+                        results['local'] = models
+                except:
+                    pass
+                
+                return results
             else:
-                logging.warning(f"{mask_ip(ip)}:{port} /api/tags responded with status {resp.status_code}")
+                results['status'] = f"http_error_{resp.status_code}"
+                return results
+                
         except requests.RequestException as e:
-            logging.error(f"Network error for {mask_ip(ip)}:{port} /api/tags (attempt {attempt}): {e}")
-        if attempt < max_retries:
-            time.sleep(2 ** attempt)
-    return []
-
-def get_running_models(ip, port, max_retries=2):
-    url = f"http://{ip}:{port}/api/ps"
-    for attempt in range(1, max_retries + 1):
-        try:
-            resp = requests.get(url, timeout=5)
-            if resp.status_code == 200:
-                data = resp.json()
-                models = []
-                for m in data.get("models", []):
-                    models.append({
-                        "name": m.get("name"),
-                        "model": m.get("model"),
-                        "size": m.get("size")
-                    })
-                return models
-            else:
-                logging.warning(f"{mask_ip(ip)}:{port} /api/ps responded with status {resp.status_code}")
-        except requests.RequestException as e:
-            logging.error(f"Network error for {mask_ip(ip)}:{port} /api/ps (attempt {attempt}): {e}")
-        if attempt < max_retries:
-            time.sleep(2 ** attempt)
-    return []
+            thread_safe_log(logging.ERROR, f"Network error for {mask_ip(ip)}:{port} (attempt {attempt + 1}): {e}")
+        
+        if attempt < max_retries - 1:
+            time.sleep(0.5 * (2 ** attempt))  # Shorter backoff
+    
+    session.close()
+    return results
 
 def extract_ip_port(entry):
     ip = entry.get("ip")
     port = entry.get("port", 11434)
     if not ip:
-        # Try to extract from 'host' if present
         host = entry.get("host")
         if host and ":" in host:
             ip, port = host.split(":")
@@ -130,173 +223,255 @@ def extract_ip_port(entry):
 
 def format_timedelta(td):
     seconds = int(td.total_seconds())
-    if seconds < 60: # less than a minute
+    if seconds < 60:
         return f"{seconds} second{'s' if seconds != 1 else ''}"
     minutes = seconds // 60
-    if minutes < 60: # less than an hour
+    if minutes < 60:
         return f"{minutes} minute{'s' if minutes != 1 else ''}"
     hours = minutes // 60
-    if hours < 24: # less than a day
+    if hours < 24:
         return f"{hours} hour{'s' if hours != 1 else ''}"
     days = hours // 24
-    if days < 7: # less than a week
+    if days < 7:
         return f"{days} day{'s' if days != 1 else ''}"
     weeks = days // 7
     return f"{weeks} week{'s' if weeks != 1 else ''}"
+
+async def process_servers_async(servers_to_check, final_output_servers, now):
+    """Process servers using async HTTP requests"""
+    connector = aiohttp.TCPConnector(
+        limit=100,  # Total connection limit
+        limit_per_host=10,  # Per-host connection limit
+        ttl_dns_cache=300,  # DNS cache TTL
+        use_dns_cache=True,
+    )
+    
+    timeout = aiohttp.ClientTimeout(total=5)  # Overall timeout per request
+    
+    async with aiohttp.ClientSession(
+        connector=connector,
+        timeout=timeout,
+        headers={'Connection': 'close'}
+    ) as session:
+        
+        semaphore = asyncio.Semaphore(50)  # Limit concurrent requests
+        
+        async def process_single_server(server_data):
+            async with semaphore:
+                ip, port, city, country, country_name, region, latitude, longitude = server_data
+                server_hash_key = hash_ip_port(ip, port)
+                masked_ip = mask_ip(ip)
+                
+                # Get existing info or start fresh
+                current_server_info = final_output_servers.get(server_hash_key, {})
+                
+                # Update common fields
+                current_server_info.update({
+                    "port": int(port),
+                    "city": city,
+                    "country": country,
+                    "country_name": country_name,
+                    "region": region,
+                    "latitude": latitude,
+                    "longitude": longitude,
+                    "ip": masked_ip,
+                    "last_observed": now.isoformat()
+                })
+                
+                # Set first_seen_online for new servers
+                is_new_server = server_hash_key not in final_output_servers
+                if is_new_server:
+                    current_server_info["first_seen_online"] = now.isoformat()
+                
+                # Check server status
+                check_result = await check_server_async(session, ip, port)
+                current_server_info.update(check_result)
+                
+                # Update first_seen_online for newly live servers
+                if check_result['status'] == 'live' and not current_server_info.get("first_seen_online"):
+                    current_server_info["first_seen_online"] = now.isoformat()
+                
+                # Calculate age
+                if current_server_info.get("first_seen_online"):
+                    try:
+                        dt_first_seen = datetime.fromisoformat(current_server_info["first_seen_online"])
+                        age_td = now - dt_first_seen
+                        current_server_info["age"] = format_timedelta(age_td)
+                    except ValueError as e:
+                        thread_safe_log(logging.ERROR, f"Error parsing timestamp: {e}")
+                        current_server_info["age"] = "unknown"
+                else:
+                    current_server_info["age"] = "N/A"
+                
+                # Log live servers
+                if check_result['status'] == 'live':
+                    thread_safe_log(logging.INFO, f"Live server found: {masked_ip}:{port}")
+                    local_models = current_server_info.get("local", [])
+                    if local_models:
+                        for idx, model in enumerate(local_models[:3]):  # Log first 3 models
+                            name = model.get("name", "N/A")
+                            size = model.get("size", "N/A")
+                            if isinstance(size, (int, float)):
+                                size_gb = size / (1024**3)
+                                thread_safe_log(logging.INFO, f"  {idx+1}. {name} ({size_gb:.2f} GB)")
+                
+                return server_hash_key, current_server_info
+        
+        # Process all servers concurrently
+        tasks = [process_single_server(server_data) for server_data in servers_to_check]
+        
+        # Use tqdm for progress tracking
+        results = []
+        for task in tqdm(asyncio.as_completed(tasks), total=len(tasks), desc="Checking servers"):
+            result = await task
+            results.append(result)
+        
+        return results
+
+def process_servers_threaded(servers_to_check, final_output_servers, now, max_workers=50):
+    """Process servers using ThreadPoolExecutor for CPU-bound work"""
+    results = []
+    
+    def process_single_server(server_data):
+        ip, port, city, country, country_name, region, latitude, longitude = server_data
+        server_hash_key = hash_ip_port(ip, port)
+        masked_ip = mask_ip(ip)
+        
+        # Get existing info or start fresh
+        current_server_info = final_output_servers.get(server_hash_key, {})
+        
+        # Update common fields
+        current_server_info.update({
+            "port": int(port),
+            "city": city,
+            "country": country,
+            "country_name": country_name,
+            "region": region,
+            "latitude": latitude,
+            "longitude": longitude,
+            "ip": masked_ip,
+            "last_observed": now.isoformat()
+        })
+        
+        # Set first_seen_online for new servers
+        is_new_server = server_hash_key not in final_output_servers
+        if is_new_server:
+            current_server_info["first_seen_online"] = now.isoformat()
+        
+        # Check server status
+        check_result = check_server_sync(ip, port, max_retries=1)  # Reduced retries
+        current_server_info.update(check_result)
+        
+        # Update first_seen_online for newly live servers
+        if check_result['status'] == 'live' and not current_server_info.get("first_seen_online"):
+            current_server_info["first_seen_online"] = now.isoformat()
+        
+        # Calculate age
+        if current_server_info.get("first_seen_online"):
+            try:
+                dt_first_seen = datetime.fromisoformat(current_server_info["first_seen_online"])
+                age_td = now - dt_first_seen
+                current_server_info["age"] = format_timedelta(age_td)
+            except ValueError as e:
+                thread_safe_log(logging.ERROR, f"Error parsing timestamp: {e}")
+                current_server_info["age"] = "unknown"
+        else:
+            current_server_info["age"] = "N/A"
+        
+        # Log live servers
+        if check_result['status'] == 'live':
+            thread_safe_log(logging.INFO, f"Live server found: {masked_ip}:{port}")
+        
+        return server_hash_key, current_server_info
+    
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # Submit all tasks
+        future_to_server = {executor.submit(process_single_server, server_data): server_data 
+                           for server_data in servers_to_check}
+        
+        # Process completed tasks with progress bar
+        for future in tqdm(as_completed(future_to_server), total=len(servers_to_check), desc="Checking servers"):
+            try:
+                result = future.result()
+                results.append(result)
+            except Exception as e:
+                server_data = future_to_server[future]
+                thread_safe_log(logging.ERROR, f"Error processing server {server_data[0]}:{server_data[1]}: {e}")
+    
+    return results
 
 def main():
     final_output_servers = {}
     existing_live_servers_map = {}
     now = datetime.now(UTC)
 
-    # Load existing data to preserve first_seen_online and other historical details
+    # Load existing data
     if OUTPUT_JSON.exists():
         try:
             with OUTPUT_JSON.open() as f:
                 existing_data = json.load(f)
-                if isinstance(existing_data, list): # Handle old list format
+                if isinstance(existing_data, list):
                     for server in existing_data:
                         if server.get("ip") and server.get("port"):
                             key = hash_ip_port(server["ip"], server["port"])
                             existing_live_servers_map[key] = server
-                else: # Assume it's already dictionary format
+                else:
                     existing_live_servers_map = existing_data
         except Exception as e:
             logging.error(f"Failed to load existing {OUTPUT_JSON.name}: {e}")
 
-    # Populate final_output_servers with existing data first
-    # This ensures that servers not in the current FOFA scan are still present
+    # Populate final_output_servers with existing data
     final_output_servers.update(existing_live_servers_map)
 
+    # Collect all servers to check
     input_files = list(Path("backend/input/").glob("FOFA_*.json"))
     if not input_files:
         logging.info("No FOFA_*.json files found in backend/input/. Exiting.")
         return
 
-    total_servers = 0
-    for input_file in input_files:
-        with input_file.open() as f_count:
-            buffer_count = ""
-            for line_count in f_count:
-                line_count = line_count.strip()
-                if not line_count:
-                    continue
-                buffer_count += line_count
-                if line_count.endswith("}"):
-                    try:
-                        json.loads(buffer_count)
-                        total_servers += 1
-                    except Exception:
-                        pass # Ignore errors during counting
-                    buffer_count = ""
-
-    # Process each entry from the input FOFA JSON
-    with tqdm(total=total_servers, desc="Overall Processing") as pbar:
-        for input_file in input_files:
-            logging.info(f"Processing file: {input_file.name}")
-            with input_file.open() as f:
-                buffer = ""
-                for line in f:
-                    line = line.strip()
-                    if not line:
-                        continue
-                    buffer += line
-                    if line.endswith("}"):
-                        try:
-                            entry = json.loads(buffer)
-                        except Exception as e:
-                            logging.error(f"Failed to parse JSON object: {e}")
-                            buffer = ""
-                            continue
-                        
-                        ip, port, city, country, country_name, region, latitude, longitude = extract_ip_port(entry)
-                        if not ip or not port:
-                            buffer = ""
-                            continue
-                        
-                        server_hash_key = hash_ip_port(ip, port)
-                        masked_ip = mask_ip(ip)
-
-                        # Get existing info or start fresh for current server
-                        current_server_info = final_output_servers.get(server_hash_key, {})
-
-                        # Update common fields from current scan
-                        current_server_info["port"] = int(port)
-                        current_server_info["city"] = city
-                        current_server_info["country"] = country
-                        current_server_info["country_name"] = country_name
-                        current_server_info["region"] = region
-                        current_server_info["latitude"] = latitude
-                        current_server_info["longitude"] = longitude
-                        current_server_info["ip"] = masked_ip
-                        current_server_info["last_observed"] = now.isoformat() # Always update last_observed
-
-                        # Set first_seen_online for new servers, regardless of status
-                        is_new_server = server_hash_key not in final_output_servers
-                        if is_new_server:
-                            current_server_info["first_seen_online"] = now.isoformat()
-                        
-                        # Determine status and update live-specific fields
-                        server_status = is_server_live(ip, port)
-                        current_server_info["status"] = server_status
-
-                        if server_status == "live":
-                            current_server_info["version"] = get_ollama_version(ip, port)
-                            current_server_info["local"] = get_local_models(ip, port)
-                            current_server_info["running"] = get_running_models(ip, port)
-                            
-                            # If this is the first time we see the server live, update first_seen_online
-                            if not current_server_info.get("first_seen_online"):
-                                current_server_info["first_seen_online"] = now.isoformat()
-
-                            # Print detailed info for live servers using tqdm.write
-                            logging.info("\nFound Ollama Server")
-                            logging.info(f"API Endpoint: http://{mask_ip(ip)}:{port}/api/tags")
-                            logging.info(f"Server URL: http://{mask_ip(ip)}:{port}")
-                            
-                            local_models = current_server_info.get("local", [])
-                            if local_models:
-                                logging.info("Available Models:")
-                                for idx, model in enumerate(local_models):
-                                    name = model.get("name", "N/A")
-                                    size = model.get("size", "N/A")
-                                    # Convert size from bytes to GB for readability
-                                    if isinstance(size, (int, float)):
-                                        size_gb = size / (1024**3) # Bytes to GB
-                                        logging.info(f"{idx+1}. {name} ({size_gb:.2f} GB)")
-                                    else:
-                                        logging.info(f"{idx+1}. {name} ({size})")
-                            else:
-                                logging.info("Available Models: None")
-
-                        else: # Server is dead or unreachable
-                            # Set defaults if these fields are not present (e.g., for newly discovered dead servers)
-                            current_server_info.setdefault("version", "unknown")
-                            current_server_info.setdefault("local", [])
-                            current_server_info.setdefault("running", [])
-
-                        # Calculate and add 'age' field
-                        if current_server_info.get("first_seen_online"):
-                            try:
-                                dt_first_seen = datetime.fromisoformat(current_server_info["first_seen_online"])
-                                age_td = now - dt_first_seen
-                                current_server_info["age"] = format_timedelta(age_td)
-                            except ValueError as e:
-                                logging.error(f"Error parsing timestamp {current_server_info['first_seen_online']}: {e}")
-                                current_server_info["age"] = "unknown"
-                        else:
-                            current_server_info["age"] = "N/A" # For newly observed dead servers that were never seen live
-
-                        logging.info(f"Processed {current_server_info['ip']}:{port} (status: {current_server_info['status']}, v{current_server_info.get('version', 'N/A')}, age: {current_server_info.get('age', 'N/A')})")
-                        
-                        final_output_servers[server_hash_key] = current_server_info # Store in the final dictionary
-                        # OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2)) # Write update to file immediately
-                        buffer = ""
-                        pbar.update(1)
+    servers_to_check = []
     
-    # Write the complete updated map to OUTPUT_JSON
-    OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2)) # Removed
-    logging.info(f"Scan complete. {len(final_output_servers)} servers saved to {OUTPUT_JSON.name}") # Keep file log
+    print("Collecting servers from input files...")
+    for input_file in input_files:
+        logging.info(f"Processing file: {input_file.name}")
+        with input_file.open() as f:
+            buffer = ""
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                buffer += line
+                if line.endswith("}"):
+                    try:
+                        entry = json.loads(buffer)
+                        ip, port, city, country, country_name, region, latitude, longitude = extract_ip_port(entry)
+                        if ip and port:
+                            servers_to_check.append((ip, port, city, country, country_name, region, latitude, longitude))
+                    except Exception as e:
+                        logging.error(f"Failed to parse JSON object: {e}")
+                    buffer = ""
+
+    print(f"Found {len(servers_to_check)} servers to check")
+    
+    # Choose processing method
+    use_async = True  # Set to False to use threaded approach
+    
+    if use_async:
+        print("Using async processing...")
+        # Use async processing
+        results = asyncio.run(process_servers_async(servers_to_check, final_output_servers, now))
+    else:
+        print("Using threaded processing...")
+        # Use threaded processing
+        results = process_servers_threaded(servers_to_check, final_output_servers, now)
+    
+    # Update final_output_servers with results
+    for server_hash_key, server_info in results:
+        final_output_servers[server_hash_key] = server_info
+    
+    # Write results
+    OUTPUT_JSON.write_text(json.dumps(final_output_servers, indent=2))
+    logging.info(f"Scan complete. {len(final_output_servers)} servers saved to {OUTPUT_JSON.name}")
 
 if __name__ == "__main__":
-    main() 
+    main()
