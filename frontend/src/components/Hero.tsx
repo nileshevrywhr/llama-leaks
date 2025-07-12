@@ -444,6 +444,15 @@ const Hero = () => {
                 <Eye className="h-5 w-5" />
                 Generate Malicious Content
               </Button>
+
+              <Button
+                onClick={() => {
+                  throw new Error("Sentry Test Error");
+                }}
+              >
+                Break the world!
+              </Button>;
+
               
               <Button 
                 variant="destructive" 
