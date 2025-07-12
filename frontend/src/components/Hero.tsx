@@ -454,7 +454,7 @@ const Hero = () => {
                 }}
               >
                 Break the world!
-              </Button>;
+              </Button>
 
               
               <Button 
