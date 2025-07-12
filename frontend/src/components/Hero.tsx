@@ -446,6 +446,9 @@ const Hero = () => {
               </Button>
 
               <Button
+                variant="destructive" 
+                size="default"
+                className="flex-1 gap-2 bg-destructive/90 hover:bg-destructive transition-all duration-200 shadow-lg hover:shadow-xl"
                 onClick={() => {
                   throw new Error("Sentry Test Error");
                 }}
