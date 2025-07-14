@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigationType, createRoutesFromChildren, matchRoutes } from 'react-router-dom';
 import * as Sentry from "@sentry/react";
+import { reactRouterV6BrowserTracingIntegration } from "@sentry/react";
 
 Sentry.init({
   // Your Sentry DSN (Data Source Name) - this tells Sentry where to send error data
@@ -16,15 +17,13 @@ Sentry.init({
   // Integrations array - these extend Sentry's functionality
   integrations: [
     // Browser tracing integration for performance monitoring
-    Sentry.browserTracingIntegration({
+    reactRouterV6BrowserTracingIntegration({
       // Set up automatic route change tracking for React Router
-      routingInstrumentation: Sentry.reactRouterV6Instrumentation(
-        React.useEffect,
-        useLocation,
-        useNavigationType,
-        createRoutesFromChildren,
-        matchRoutes
-      ),
+      useEffect: React.useEffect,
+      useLocation,
+      useNavigationType,
+      createRoutesFromChildren,
+      matchRoutes,
     }),
     // Replay integration to record user sessions when errors occur
     Sentry.replayIntegration({
