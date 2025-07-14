@@ -88,6 +88,12 @@ const Header = () => {
               </a>
               <a
                 className="transition-colors hover:text-foreground/80 text-foreground/60"
+                href="/models"
+              >
+                Models
+              </a>
+              <a
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
                 href="/pricing"
               >
                 Pricing
@@ -172,6 +178,13 @@ const Header = () => {
                     className="block text-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     Leaderboard
+                  </a>
+                  <a
+                    href="/models"
+                    onClick={closeMobileMenu}
+                    className="block text-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    Models
                   </a>
                   <a
                     href="/pricing"
