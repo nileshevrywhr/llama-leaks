@@ -19,9 +19,9 @@ const SentryTestButton = () => {
       // Simulate an error in a try-catch block
       throw new Error("Caught error for testing");
     } catch (error) {
-      captureException(error as Error, { 
+      captureException(error as Error, {
         testType: 'manual-capture',
-        userAction: 'button-click' 
+        userAction: 'button-click'
       });
       alert('Error captured and sent to Sentry!');
     }
@@ -33,11 +33,8 @@ const SentryTestButton = () => {
   };
 
   const testPerformance = () => {
-    const transaction = startTransaction({
-      name: 'test-performance',
-      op: 'user-interaction'
-    });
-    
+    const transaction = startTransaction('test-performance', 'user-interaction');
+
     // Simulate some work
     setTimeout(() => {
       transaction.finish();
@@ -52,30 +49,30 @@ const SentryTestButton = () => {
         Sentry Testing (Remove in Production)
       </h3>
       <div className="flex flex-wrap gap-2">
-        <Button 
-          onClick={testError} 
-          variant="destructive" 
+        <Button
+          onClick={testError}
+          variant="destructive"
           size="sm"
         >
           Test Uncaught Error
         </Button>
-        <Button 
-          onClick={testCaptureException} 
-          variant="outline" 
+        <Button
+          onClick={testCaptureException}
+          variant="outline"
           size="sm"
         >
           Test Caught Error
         </Button>
-        <Button 
-          onClick={testCaptureMessage} 
-          variant="outline" 
+        <Button
+          onClick={testCaptureMessage}
+          variant="outline"
           size="sm"
         >
           Test Message
         </Button>
-        <Button 
-          onClick={testPerformance} 
-          variant="outline" 
+        <Button
+          onClick={testPerformance}
+          variant="outline"
           size="sm"
         >
           Test Performance
