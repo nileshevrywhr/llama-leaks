@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { AlertTriangle } from "lucide-react";
 import * as Sentry from "@sentry/react";
-import { captureException, captureMessage, addBreadcrumb } from "@/utils/sentry";
+import { captureException, captureMessage, addBreadcrumb, startTransaction } from "@/utils/sentry";
 
 /**
  * Test component to verify Sentry integration
@@ -33,7 +33,7 @@ const SentryTestButton = () => {
   };
 
   const testPerformance = () => {
-    const transaction = Sentry.startTransaction({
+    const transaction = startTransaction({
       name: 'test-performance',
       op: 'user-interaction'
     });
