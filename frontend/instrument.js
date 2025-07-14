@@ -7,9 +7,6 @@ Sentry.init({
   // Your Sentry DSN (Data Source Name) - this tells Sentry where to send error data
   dsn: "https://33881920c473b9003c975ed7a4cdbbe2@o4509549105512448.ingest.de.sentry.io/4509578391191632",
   
-  // Custom tunnel endpoint to avoid ad blockers that might block Sentry requests
-  tunnel: "/tunnel",
-
   // Include request headers and IP for users - helps with debugging
   // https://docs.sentry.io/platforms/javascript/guides/react/configuration/options/#sendDefaultPii
   sendDefaultPii: true,
