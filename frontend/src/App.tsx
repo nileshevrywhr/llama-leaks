@@ -14,6 +14,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     {/* <TooltipProvider> */}
+    <Sentry.ErrorBoundary fallback={<p>the Sentry.ErrorBoundary fallback happened</p>}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+  </Sentry.ErrorBoundary>
     {/* </TooltipProvider> */}
   </QueryClientProvider>
 );
