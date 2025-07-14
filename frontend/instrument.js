@@ -9,6 +9,10 @@ Sentry.init({
   sendDefaultPii: true,
 
   integrations: [
+    Sentry.browserTracingIntegration(),
   ],
+
+  tracesSampleRate: 1.0,
+  tracePropagationTargets: [/^\//, /^https:\/\/yourserver\.io\/api/],
 
 });
