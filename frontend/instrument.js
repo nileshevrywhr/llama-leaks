@@ -35,7 +35,7 @@ Sentry.init({
 
   // Performance monitoring sample rate (0.0 to 1.0)
   // 1.0 = capture 100% of transactions, 0.1 = capture 10%
-  tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
+  tracesSampleRate: import.meta.env.MODE === 'production' ? 0.1 : 1.0,
 
   // Session replay sample rate
   // Only capture replays for 10% of sessions, but 100% of error sessions
@@ -43,10 +43,10 @@ Sentry.init({
   replaysOnErrorSampleRate: 1.0,
 
   // Environment configuration
-  environment: process.env.NODE_ENV || 'development',
+  environment: import.meta.env.MODE || 'development',
 
   // Release tracking - helps identify which version introduced bugs
-  release: process.env.REACT_APP_VERSION || '1.0.0',
+  release: import.meta.env.VITE_APP_VERSION || '1.0.0',
 
   // Configure which URLs to trace for performance monitoring
   tracePropagationTargets: [
@@ -68,5 +68,5 @@ Sentry.init({
   },
 
   // Additional configuration for development
-  debug: process.env.NODE_ENV === 'development',
+  debug: import.meta.env.MODE === 'development',
 });
