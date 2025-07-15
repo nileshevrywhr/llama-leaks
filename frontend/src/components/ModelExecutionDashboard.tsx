@@ -23,6 +23,15 @@ import {
   Zap,
   HardDrive
 } from "lucide-react";
+import { 
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  PaginationEllipsis,
+} from "@/components/ui/pagination";
 import { formatDistanceToNowStrict } from "date-fns";
 import AnimatedCounter from './AnimatedCounter';
 
@@ -82,6 +91,8 @@ const ModelExecutionDashboard = () => {
   const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
   const [expandedModels, setExpandedModels] = useState<Set<string>>(new Set());
   const [refreshing, setRefreshing] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const modelsPerPage = 10;
 
   const fetchServerData = async (isRefresh = false) => {
     try {
@@ -206,6 +217,11 @@ const ModelExecutionDashboard = () => {
     return Array.from(modelMap.values());
   }, [serverData]);
 
+  // Reset current page when filters or sorting change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, serverFilter, statusFilter, sortBy, sortDirection]);
+
   const filteredAndSortedModels = useMemo(() => {
     let filtered = modelExecutions.filter(model => {
       // Search filter
@@ -277,6 +293,12 @@ const ModelExecutionDashboard = () => {
     return filtered;
   }, [modelExecutions, searchTerm, serverFilter, statusFilter, sortBy, sortDirection]);
 
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredAndSortedModels.length / modelsPerPage);
+  const indexOfLastModel = currentPage * modelsPerPage;
+  const indexOfFirstModel = indexOfLastModel - modelsPerPage;
+  const currentModels = filteredAndSortedModels.slice(indexOfFirstModel, indexOfLastModel);
+
   const formatSize = (bytes: number) => {
     const gb = bytes / (1024 * 1024 * 1024);
     if (gb >= 1) {
@@ -316,6 +338,15 @@ const ModelExecutionDashboard = () => {
 
   const handleRefresh = () => {
     fetchServerData(true);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Scroll to top of the models section when page changes
+    const modelsSection = document.getElementById('models-section');
+    if (modelsSection) {
+      modelsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   const uniqueServers = useMemo(() => {
@@ -529,7 +560,19 @@ const ModelExecutionDashboard = () => {
       </div>
 
       {/* Model List */}
-      <div className="space-y-4 max-w-6xl mx-auto">
+      <div id="models-section" className="space-y-4 max-w-6xl mx-auto">
+        {/* Results Summary */}
+        {filteredAndSortedModels.length > 0 && (
+          <div className="flex items-center justify-between mb-6">
+            <div className="text-sm text-muted-foreground">
+              Showing {indexOfFirstModel + 1}-{Math.min(indexOfLastModel, filteredAndSortedModels.length)} of {filteredAndSortedModels.length} models
+            </div>
+            <div className="text-sm text-muted-foreground">
+              Page {currentPage} of {totalPages}
+            </div>
+          </div>
+        )}
+
         {filteredAndSortedModels.length === 0 ? (
           <Card>
             <CardContent className="text-center py-12">
@@ -541,7 +584,7 @@ const ModelExecutionDashboard = () => {
             </CardContent>
           </Card>
         ) : (
-          filteredAndSortedModels.map((model) => (
+          currentModels.map((model) => (
             <Card key={model.modelName} className="overflow-hidden">
               <Collapsible
                 open={expandedModels.has(model.modelName)}
@@ -676,6 +719,87 @@ const ModelExecutionDashboard = () => {
           ))
         )}
       </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-8">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious 
+                  onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                  className={currentPage === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                />
+              </PaginationItem>
+              
+              {/* First page */}
+              {currentPage > 3 && (
+                <>
+                  <PaginationItem>
+                    <PaginationLink 
+                      onClick={() => handlePageChange(1)}
+                      isActive={currentPage === 1}
+                      className="cursor-pointer"
+                    >
+                      1
+                    </PaginationLink>
+                  </PaginationItem>
+                  {currentPage > 4 && (
+                    <PaginationItem>
+                      <PaginationEllipsis />
+                    </PaginationItem>
+                  )}
+                </>
+              )}
+              
+              {/* Page numbers around current page */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1)
+                .filter(page => {
+                  return page >= Math.max(1, currentPage - 2) && 
+                         page <= Math.min(totalPages, currentPage + 2);
+                })
+                .map(page => (
+                  <PaginationItem key={page}>
+                    <PaginationLink 
+                      onClick={() => handlePageChange(page)}
+                      isActive={currentPage === page}
+                      className="cursor-pointer"
+                    >
+                      {page}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+              
+              {/* Last page */}
+              {currentPage < totalPages - 2 && (
+                <>
+                  {currentPage < totalPages - 3 && (
+                    <PaginationItem>
+                      <PaginationEllipsis />
+                    </PaginationItem>
+                  )}
+                  <PaginationItem>
+                    <PaginationLink 
+                      onClick={() => handlePageChange(totalPages)}
+                      isActive={currentPage === totalPages}
+                      className="cursor-pointer"
+                    >
+                      {totalPages}
+                    </PaginationLink>
+                  </PaginationItem>
+                </>
+              )}
+              
+              <PaginationItem>
+                <PaginationNext 
+                  onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                  className={currentPage === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
+      )}
 
       {/* Footer Info */}
       <div className="text-center mt-12">
