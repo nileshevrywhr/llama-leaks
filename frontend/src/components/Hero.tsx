@@ -4,6 +4,7 @@ import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Cloc
 import Map from "./Map";
 import { formatDistanceToNowStrict } from "date-fns";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { formatSize } from "@/lib/utils";
 
 interface ServerModel {
   name: string;
@@ -101,17 +102,6 @@ const Hero = () => {
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy server URL: ', err);
-    }
-  };
-
-  const formatSize = (bytes: number) => {
-    const mb = bytes / (1024 * 1024);
-    const gb = bytes / (1024 * 1024 * 1024);
-    
-    if (gb >= 1) {
-      return `${gb.toFixed(1)}GB`;
-    } else {
-      return `${mb.toFixed(0)}MB`;
     }
   };
 

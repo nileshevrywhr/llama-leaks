@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MapPin, Clock, Shuffle, AlertCircle, Zap, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Map from "./Map";
+import { formatSize } from "@/lib/utils";
 
 interface ServerModel {
   name: string;
@@ -75,17 +76,6 @@ const LocationInfo = () => {
 
   const handleRefresh = () => {
     fetchRandomServer(true);
-  };
-
-  const formatSize = (bytes: number) => {
-    const mb = bytes / (1024 * 1024);
-    const gb = bytes / (1024 * 1024 * 1024);
-    
-    if (gb >= 1) {
-      return `${gb.toFixed(1)}GB`;
-    } else {
-      return `${mb.toFixed(0)}MB`;
-    }
   };
 
   const formatTimestamp = (dateString: string) => {
