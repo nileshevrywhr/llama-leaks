@@ -27,6 +27,11 @@ const ThemeToggle = () => {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
+
+    // Dispatch custom event to notify other components (like Map) of theme change
+    window.dispatchEvent(new CustomEvent('themeChange', {
+      detail: { isDark: newTheme, theme: newTheme ? 'dark' : 'light' }
+    }));
   };
 
   return (
