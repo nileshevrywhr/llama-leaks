@@ -52,9 +52,9 @@ const ModelList: React.FC<ModelListProps> = ({
       ) : (
         models.map((model) => (
           <ModelCard
-            key={model.modelName}
+            key={model.metadata.modelName}
             model={model}
-            isExpanded={expandedModels.has(model.modelName)}
+            isExpanded={expandedModels.has(model.metadata.modelName)}
             toggleExpansion={toggleModelExpansion}
           />
         ))

@@ -41,10 +41,10 @@ const getCountryFlag = (countryCode: string) => {
 
 const ModelCard: React.FC<ModelCardProps> = ({ model, isExpanded, toggleExpansion }) => {
   return (
-    <Card key={model.modelName} className="overflow-hidden">
+    <Card key={model.metadata.modelName} className="overflow-hidden">
       <Collapsible
         open={isExpanded}
-        onOpenChange={() => toggleExpansion(model.modelName)}
+        onOpenChange={() => toggleExpansion(model.metadata.modelName)}
       >
         <CollapsibleTrigger asChild>
           <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors">
@@ -55,14 +55,14 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isExpanded, toggleExpansio
                     <ChevronUp className="h-5 w-5" /> :
                     <ChevronDown className="h-5 w-5" />
                   }
-                  <CardTitle className="text-xl">{model.modelName}</CardTitle>
+                  <CardTitle className="text-xl">{model.metadata.modelName}</CardTitle>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  {model.runningServers > 0 ? (
+                  {model.aggregation.runningServers > 0 ? (
                     <Badge variant="default" className="bg-green-500 gap-1">
                       <Play className="h-3 w-3" />
-                      {model.runningServers} Running
+                      {model.aggregation.runningServers} Running
                     </Badge>
                   ) : (
                     <Badge variant="secondary" className="gap-1">
@@ -73,12 +73,12 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isExpanded, toggleExpansio
 
                   <Badge variant="outline" className="gap-1">
                     <Server className="h-3 w-3" />
-                    {model.totalServers} Servers
+                    {model.aggregation.totalServers} Servers
                   </Badge>
 
                   <Badge variant="outline" className="gap-1">
                     <HardDrive className="h-3 w-3" />
-                    {formatSize(model.averageSize)} avg
+                    {formatSize(model.metadata.averageSize)} avg
                   </Badge>
                 </div>
               </div>
@@ -86,10 +86,10 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isExpanded, toggleExpansio
               <div className="text-right">
                 <div className="text-sm text-muted-foreground flex items-center gap-1">
                   <Clock className="h-3 w-3" />
-                  Last seen {formatTimestamp(model.lastActivity)}
+                  Last seen {formatTimestamp(model.statistics.lastActivity)}
                 </div>
                 <div className="text-xs text-muted-foreground">
-                  {Math.round(model.executionFrequency * 100)}% execution rate
+                  {Math.round(model.statistics.executionFrequency * 100)}% execution rate
                 </div>
               </div>
             </div>
@@ -101,15 +101,15 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isExpanded, toggleExpansio
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-muted/20 rounded-lg">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">{model.totalServers}</div>
+                  <div className="text-2xl font-bold text-primary">{model.aggregation.totalServers}</div>
                   <div className="text-sm text-muted-foreground">Total Servers</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-500">{model.runningServers}</div>
+                  <div className="text-2xl font-bold text-green-500">{model.aggregation.runningServers}</div>
                   <div className="text-sm text-muted-foreground">Currently Running</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-500">{formatSize(model.totalSize)}</div>
+                  <div className="text-2xl font-bold text-blue-500">{formatSize(model.aggregation.totalSize)}</div>
                   <div className="text-sm text-muted-foreground">Total Size</div>
                 </div>
               </div>
@@ -117,10 +117,10 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isExpanded, toggleExpansio
               <div>
                 <h4 className="font-semibold mb-3 flex items-center gap-2">
                   <Server className="h-4 w-4" />
-                  Server Locations ({model.servers.length})
+                  Server Locations ({model.aggregation.servers.length})
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {model.servers.map((serverInfo, index) => (
+                  {model.aggregation.servers.map((serverInfo, index) => (
                     <Card key={`${serverInfo.server.ip}-${serverInfo.server.port}-${index}`} className="p-4">
                       <div className="space-y-2">
                         <div className="flex items-center justify-between">

@@ -45,7 +45,11 @@ export interface ExecutionStatistics {
   executionFrequency: number;
 }
 
-export interface ModelExecution extends ModelMetadata, ServerAggregation, ExecutionStatistics {}
+export interface ModelExecution {
+  metadata: ModelMetadata;
+  aggregation: ServerAggregation;
+  statistics: ExecutionStatistics;
+}
 
 export type SortOption = 'name' | 'servers' | 'running' | 'frequency' | 'size';
 export type SortDirection = 'asc' | 'desc';

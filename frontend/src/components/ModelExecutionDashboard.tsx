@@ -69,21 +69,27 @@ const ModelExecutionDashboard = () => {
         const key = model.name;
         if (!modelMap.has(key)) {
           modelMap.set(key, {
-            modelName: model.name,
-            averageSize: 0,
-            totalServers: 0,
-            runningServers: 0,
-            totalSize: 0,
-            servers: [],
-            lastActivity: server.last_observed,
-            executionFrequency: 0,
+            metadata: {
+              modelName: model.name,
+              averageSize: 0,
+            },
+            aggregation: {
+              totalServers: 0,
+              runningServers: 0,
+              totalSize: 0,
+              servers: [],
+            },
+            statistics: {
+              lastActivity: server.last_observed,
+              executionFrequency: 0,
+            },
           });
         }
         
         const execution = modelMap.get(key)!;
         const isRunning = server.running.some(runningModel => runningModel.name === model.name);
         
-        execution.servers.push({
+        execution.aggregation.servers.push({
           server,
           isRunning,
           isLocal: true,
@@ -91,13 +97,13 @@ const ModelExecutionDashboard = () => {
           lastSeen: server.last_observed
         });
         
-        execution.totalServers++;
-        if (isRunning) execution.runningServers++;
-        execution.totalSize += model.size;
+        execution.aggregation.totalServers++;
+        if (isRunning) execution.aggregation.runningServers++;
+        execution.aggregation.totalSize += model.size;
         
         // Update last activity if this server was seen more recently
-        if (new Date(server.last_observed) > new Date(execution.lastActivity)) {
-          execution.lastActivity = server.last_observed;
+        if (new Date(server.last_observed) > new Date(execution.statistics.lastActivity)) {
+          execution.statistics.lastActivity = server.last_observed;
         }
       });
       
@@ -106,22 +112,28 @@ const ModelExecutionDashboard = () => {
         const key = model.name;
         if (!modelMap.has(key)) {
           modelMap.set(key, {
-            modelName: model.name,
-            averageSize: 0,
-            totalServers: 0,
-            runningServers: 0,
-            totalSize: 0,
-            servers: [],
-            lastActivity: server.last_observed,
-            executionFrequency: 0,
+            metadata: {
+              modelName: model.name,
+              averageSize: 0,
+            },
+            aggregation: {
+              totalServers: 0,
+              runningServers: 0,
+              totalSize: 0,
+              servers: [],
+            },
+            statistics: {
+              lastActivity: server.last_observed,
+              executionFrequency: 0,
+            },
           });
         }
         
         const execution = modelMap.get(key)!;
-        const existingServer = execution.servers.find(s => s.server.ip === server.ip && s.server.port === server.port);
+        const existingServer = execution.aggregation.servers.find(s => s.server.ip === server.ip && s.server.port === server.port);
         
         if (!existingServer) {
-          execution.servers.push({
+          execution.aggregation.servers.push({
             server,
             isRunning: true,
             isLocal: false,
@@ -129,17 +141,17 @@ const ModelExecutionDashboard = () => {
             lastSeen: server.last_observed
           });
           
-          execution.totalServers++;
-          execution.runningServers++;
-          execution.totalSize += model.size;
+          execution.aggregation.totalServers++;
+          execution.aggregation.runningServers++;
+          execution.aggregation.totalSize += model.size;
         }
       });
     });
     
     // Calculate averages and execution frequency
     modelMap.forEach(execution => {
-      execution.averageSize = execution.totalServers > 0 ? execution.totalSize / execution.totalServers : 0;
-      execution.executionFrequency = execution.totalServers > 0 ? execution.runningServers / execution.totalServers : 0;
+      execution.metadata.averageSize = execution.aggregation.totalServers > 0 ? execution.aggregation.totalSize / execution.aggregation.totalServers : 0;
+      execution.statistics.executionFrequency = execution.aggregation.totalServers > 0 ? execution.aggregation.runningServers / execution.aggregation.totalServers : 0;
     });
     
     return Array.from(modelMap.values());
@@ -153,13 +165,13 @@ const ModelExecutionDashboard = () => {
   const filteredAndSortedModels = useMemo(() => {
     const filtered = modelExecutions.filter(model => {
       // Search filter
-      if (searchTerm && !model.modelName.toLowerCase().includes(searchTerm.toLowerCase())) {
+      if (searchTerm && !model.metadata.modelName.toLowerCase().includes(searchTerm.toLowerCase())) {
         return false;
       }
       
       // Server filter
       if (serverFilter !== 'all') {
-        const hasServer = model.servers.some(s => 
+        const hasServer = model.aggregation.servers.some(s =>
           `${s.server.ip}:${s.server.port}` === serverFilter ||
           s.server.city.toLowerCase().includes(serverFilter.toLowerCase()) ||
           s.server.country_name.toLowerCase().includes(serverFilter.toLowerCase())
@@ -170,11 +182,11 @@ const ModelExecutionDashboard = () => {
       // Status filter
       switch (statusFilter) {
         case 'running':
-          return model.runningServers > 0;
+          return model.aggregation.runningServers > 0;
         case 'stopped':
-          return model.runningServers === 0 && model.totalServers > 0;
+          return model.aggregation.runningServers === 0 && model.aggregation.totalServers > 0;
         case 'available':
-          return model.totalServers > 0;
+          return model.aggregation.totalServers > 0;
         default:
           return true;
       }
@@ -187,28 +199,28 @@ const ModelExecutionDashboard = () => {
       
       switch (sortBy) {
         case 'name':
-          aValue = a.modelName.toLowerCase();
-          bValue = b.modelName.toLowerCase();
+          aValue = a.metadata.modelName.toLowerCase();
+          bValue = b.metadata.modelName.toLowerCase();
           break;
         case 'servers':
-          aValue = a.totalServers;
-          bValue = b.totalServers;
+          aValue = a.aggregation.totalServers;
+          bValue = b.aggregation.totalServers;
           break;
         case 'running':
-          aValue = a.runningServers;
-          bValue = b.runningServers;
+          aValue = a.aggregation.runningServers;
+          bValue = b.aggregation.runningServers;
           break;
         case 'frequency':
-          aValue = a.executionFrequency;
-          bValue = b.executionFrequency;
+          aValue = a.statistics.executionFrequency;
+          bValue = b.statistics.executionFrequency;
           break;
         case 'size':
-          aValue = a.averageSize;
-          bValue = b.averageSize;
+          aValue = a.metadata.averageSize;
+          bValue = b.metadata.averageSize;
           break;
         default:
-          aValue = a.totalServers;
-          bValue = b.totalServers;
+          aValue = a.aggregation.totalServers;
+          bValue = b.aggregation.totalServers;
       }
       
       if (typeof aValue === 'string' && typeof bValue === 'string') {
