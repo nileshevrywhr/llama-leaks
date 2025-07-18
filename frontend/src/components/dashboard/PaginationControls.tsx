@@ -70,7 +70,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({ currentPage, to
 
           {getPageNumbers(currentPage, totalPages).map((page, index) =>
             typeof page === 'number' ? (
-              <PaginationItem key={index}>
+              <PaginationItem key={typeof page === 'number' ? page : `ellipsis-${index}`}>
                 <PaginationLink
                   onClick={() => handlePageChange(page)}
                   isActive={currentPage === page}
