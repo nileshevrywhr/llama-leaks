@@ -68,23 +68,27 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({ currentPage, to
             />
           </PaginationItem>
 
-          {getPageNumbers(currentPage, totalPages).map((page, index) =>
-            typeof page === 'number' ? (
-              <PaginationItem key={typeof page === 'number' ? page : `ellipsis-${index}`}>
-                <PaginationLink
-                  onClick={() => handlePageChange(page)}
-                  isActive={currentPage === page}
-                  className="cursor-pointer"
-                >
-                  {page}
-                </PaginationLink>
-              </PaginationItem>
-            ) : (
-              <PaginationItem key={index}>
-                <PaginationEllipsis />
-              </PaginationItem>
-            )
-          )}
+          {getPageNumbers(currentPage, totalPages).map((page, index) => {
+            if (typeof page === 'number') {
+              return (
+                <PaginationItem key={page}>
+                  <PaginationLink
+                    onClick={() => handlePageChange(page)}
+                    isActive={currentPage === page}
+                    className="cursor-pointer"
+                  >
+                    {page}
+                  </PaginationLink>
+                </PaginationItem>
+              );
+            } else {
+              return (
+                <PaginationItem key={`ellipsis-${index}`}>
+                  <PaginationEllipsis />
+                </PaginationItem>
+              );
+            }
+          })}
 
           <PaginationItem>
             <PaginationNext
