@@ -1,4 +1,41 @@
 import React from 'react';
+
+const getPageNumbers = (currentPage: number, totalPages: number) => {
+  const pageNumbers = [];
+
+  if (totalPages <= 7) {
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
+    return pageNumbers;
+  }
+
+  // Always show the first page
+  pageNumbers.push(1);
+
+  // Show ellipsis if needed
+  if (currentPage > 4) {
+    pageNumbers.push('...');
+  }
+
+  // Show pages around the current page
+  const startPage = Math.max(2, currentPage - 1);
+  const endPage = Math.min(totalPages - 1, currentPage + 1);
+  for (let i = startPage; i <= endPage; i++) {
+    pageNumbers.push(i);
+  }
+
+  // Show ellipsis if needed
+  if (currentPage < totalPages - 3) {
+    pageNumbers.push('...');
+  }
+
+  // Always show the last page
+  pageNumbers.push(totalPages);
+
+  return pageNumbers;
+};
+
 import {
   Pagination,
   PaginationContent,
@@ -31,34 +68,9 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({ currentPage, to
             />
           </PaginationItem>
 
-          {/* First page */}
-          {currentPage > 3 && (
-            <>
-              <PaginationItem>
-                <PaginationLink
-                  onClick={() => handlePageChange(1)}
-                  isActive={currentPage === 1}
-                  className="cursor-pointer"
-                >
-                  1
-                </PaginationLink>
-              </PaginationItem>
-              {currentPage > 4 && (
-                <PaginationItem>
-                  <PaginationEllipsis />
-                </PaginationItem>
-              )}
-            </>
-          )}
-
-          {/* Page numbers around current page */}
-          {Array.from({ length: totalPages }, (_, i) => i + 1)
-            .filter(page => {
-              return page >= Math.max(1, currentPage - 2) &&
-                     page <= Math.min(totalPages, currentPage + 2);
-            })
-            .map(page => (
-              <PaginationItem key={page}>
+          {getPageNumbers(currentPage, totalPages).map((page, index) =>
+            typeof page === 'number' ? (
+              <PaginationItem key={index}>
                 <PaginationLink
                   onClick={() => handlePageChange(page)}
                   isActive={currentPage === page}
@@ -67,26 +79,11 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({ currentPage, to
                   {page}
                 </PaginationLink>
               </PaginationItem>
-            ))}
-
-          {/* Last page */}
-          {currentPage < totalPages - 2 && (
-            <>
-              {currentPage < totalPages - 3 && (
-                <PaginationItem>
-                  <PaginationEllipsis />
-                </PaginationItem>
-              )}
-              <PaginationItem>
-                <PaginationLink
-                  onClick={() => handlePageChange(totalPages)}
-                  isActive={currentPage === totalPages}
-                  className="cursor-pointer"
-                >
-                  {totalPages}
-                </PaginationLink>
+            ) : (
+              <PaginationItem key={index}>
+                <PaginationEllipsis />
               </PaginationItem>
-            </>
+            )
           )}
 
           <PaginationItem>
