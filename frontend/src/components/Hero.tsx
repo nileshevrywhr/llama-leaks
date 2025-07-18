@@ -4,7 +4,7 @@ import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Cloc
 import Map from "./Map";
 import { formatDistanceToNowStrict } from "date-fns";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { formatSize } from "@/lib/utils";
+import { formatSize } from "@/utils/formatting";
 
 interface ServerModel {
   name: string;

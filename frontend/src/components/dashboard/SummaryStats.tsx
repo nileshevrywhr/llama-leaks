@@ -2,15 +2,19 @@ import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import AnimatedCounter from '../AnimatedCounter';
 import { ModelExecution, ServerData } from '@/types/ModelExecution';
+import { calculateActiveExecutions, calculateTotalModelSize } from '@/utils/stats-calculator';
+import { formatBytesToGB } from '@/utils/formatting';
 
 interface SummaryStatsProps {
   modelExecutions: ModelExecution[];
   serverData: ServerData[];
-  activeExecutions: number;
-  totalModelSize: number;
 }
 
-const SummaryStats: React.FC<SummaryStatsProps> = ({ modelExecutions, serverData, activeExecutions, totalModelSize }) => {
+const SummaryStats: React.FC<SummaryStatsProps> = ({ modelExecutions, serverData }) => {
+  const activeExecutions = calculateActiveExecutions(modelExecutions);
+  const totalModelSizeBytes = calculateTotalModelSize(modelExecutions);
+  const totalModelSizeGB = formatBytesToGB(totalModelSizeBytes);
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-4xl mx-auto">
       <Card className="text-center">
@@ -47,7 +51,7 @@ const SummaryStats: React.FC<SummaryStatsProps> = ({ modelExecutions, serverData
         <CardContent className="pt-6">
           <div className="text-2xl font-bold text-orange-500">
             <AnimatedCounter
-              target={totalModelSize}
+              target={totalModelSizeGB}
               duration={1500}
             />
             <span className="text-sm font-normal">GB</span>

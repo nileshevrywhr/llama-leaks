@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { formatDistanceToNowStrict } from "date-fns";
 import { ModelExecution, ModelMetadata, ServerAggregation, ExecutionStatistics } from '@/types/ModelExecution';
-import { formatSize } from "@/lib/utils";
+import { formatSize } from "@/utils/formatting";
 
 interface ModelCardProps {
   model: ModelExecution;
