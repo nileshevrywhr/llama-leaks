@@ -5,5 +5,5 @@ export const calculateActiveExecutions = (modelExecutions: ModelExecution[]): nu
 };
 
 export const calculateTotalModelSize = (modelExecutions: ModelExecution[]): number => {
-  return Math.round(modelExecutions.reduce((sum, model) => sum + model.totalSize, 0) / (1024 * 1024 * 1024));
+  return modelExecutions.reduce((sum, model) => sum + model.totalSize, 0);
 };
