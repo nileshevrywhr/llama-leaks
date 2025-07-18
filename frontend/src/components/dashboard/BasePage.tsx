@@ -12,18 +12,21 @@ const DashboardHeader = () => {
         {/* Haiku */}
         <div className="max-w-md mx-auto p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-lg">
           <div className="text-sm font-mono text-muted-foreground italic leading-relaxed">
-            No keys, no limits here.
-            AI models run wild and free.
-            Internet's playground.
+            <div>No keys, no limits here</div>
+            <div>AI models run wild and free—</div>
+            <div>Internet's playground</div>
           </div>
         </div>
 
         {/* Body copy */}
         <div className="text-muted-foreground max-w-3xl mx-auto space-y-2">
-          <p className="text-sm font-mono italic leading-relaxed">
-            "Choose your AI model!"
-            Developers cry, you click
-            Who made this dashboard?
+          <p>
+            Welcome to the wild west of AI, where LLM servers roam free without authentication, rate limits, or adult supervision.
+            These beautifully exposed endpoints are running everything from creative writing assistants to code generators—all waiting for your prompts.
+          </p>
+          <p className="text-sm">
+            What makes them special? Zero barriers, infinite possibilities, and the kind of open access that would make security teams weep.
+            Perfect for experimentation, research, or just seeing what happens when AI meets the honor system.
           </p>
         </div>
       </div>
