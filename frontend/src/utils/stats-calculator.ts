@@ -6,6 +6,6 @@ export const calculateActiveExecutions = (modelExecutions: ModelExecution[]): nu
 };
 
 export const calculateTotalModelSize = (modelExecutions: ModelExecution[]): number => {
-  const totalSizeInBytes = modelExecutions.reduce((sum, model) => sum + model.aggregation.totalSize, 0);
-  return Math.round(convertBytesToGB(totalSizeInBytes));
+  const totalSizeInBytes = modelExecutions.reduce((sum, model) => sum + model.metadata.averageSize, 0);
+  return totalSizeInBytes;
 };
