@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MapPin, Clock, Shuffle, AlertCircle, Zap, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Map from "./Map";
-import { formatSize } from "@/lib/utils";
+import { formatSize } from "@/utils/formatting";
 
 interface ServerModel {
   name: string;

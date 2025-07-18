@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Trophy, Medal, Award, Server, HardDrive, Shield } from 'lucide-react';
 import AnimatedCounter from './AnimatedCounter';
 import { Button } from "@/components/ui/button";
-import { formatSize } from '@/lib/utils';
+import { formatSize } from '@/utils/formatting';
 
 interface ServerModel {
   name: string;
