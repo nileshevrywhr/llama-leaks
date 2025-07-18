@@ -18,6 +18,7 @@ const ModelExecutionDashboard = () => {
   const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
   const [expandedModels, setExpandedModels] = useState<Set<string>>(new Set());
   const [refreshing, setRefreshing] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const modelsPerPage = 10;
 
@@ -39,6 +40,7 @@ const ModelExecutionDashboard = () => {
       const serverEntries = Object.values(serversObject) as ServerData[];
       
       setServerData(serverEntries);
+      setLastUpdated(new Date());
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load model execution data');
       console.error('Error fetching server data:', err);
@@ -294,7 +296,7 @@ const ModelExecutionDashboard = () => {
       />
       <div className="text-center mt-12">
         <p className="text-sm text-muted-foreground">
-          Data refreshes automatically every 30 seconds. Last updated: {formatDistanceToNowStrict(new Date(), { addSuffix: true })}
+          Data refreshes automatically every 30 seconds. Last updated: {lastUpdated ? formatDistanceToNowStrict(lastUpdated, { addSuffix: true }) : 'never'}
         </p>
       </div>
     </BasePage>
