@@ -13,21 +13,13 @@ import {
 } from "lucide-react";
 import { formatDistanceToNowStrict } from "date-fns";
 import { ModelExecution, ModelMetadata, ServerAggregation, ExecutionStatistics } from '@/types/ModelExecution';
+import { formatSize } from "@/lib/utils";
 
 interface ModelCardProps {
   model: ModelExecution;
   isExpanded: boolean;
   toggleExpansion: (modelName: string) => void;
 }
-
-const formatSize = (bytes: number) => {
-  const gb = bytes / (1024 * 1024 * 1024);
-  if (gb >= 1) {
-    return `${gb.toFixed(1)}GB`;
-  }
-  const mb = bytes / (1024 * 1024);
-  return `${mb.toFixed(0)}MB`;
-};
 
 const formatTimestamp = (dateString: string) => {
   try {
