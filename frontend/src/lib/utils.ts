@@ -13,3 +13,7 @@ export const formatSize = (bytes: number) => {
   const mb = bytes / (1024 * 1024);
   return `${mb.toFixed(0)}MB`;
 };
+
+export const convertBytesToGB = (bytes: number): number => {
+  return bytes / (1024 * 1024 * 1024);
+};
