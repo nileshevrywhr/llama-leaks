@@ -21,6 +21,7 @@ const ModelExecutionDashboard = () => {
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const modelsPerPage = 10;
+  const [timeSinceUpdate, setTimeSinceUpdate] = useState<number>(0);
 
   const fetchServerData = async (isRefresh = false) => {
     try {
@@ -60,6 +61,16 @@ const ModelExecutionDashboard = () => {
     
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (lastUpdated) {
+        const seconds = Math.floor((Date.now() - lastUpdated.getTime()) / 1000);
+        setTimeSinceUpdate(seconds);
+      }
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [lastUpdated]);
 
   const modelExecutions = useMemo(() => {
     const modelMap = new Map<string, ModelExecution>();
@@ -296,7 +307,7 @@ const ModelExecutionDashboard = () => {
       />
       <div className="text-center mt-12">
         <p className="text-sm text-muted-foreground">
-          Data refreshes automatically every 30 seconds. Last updated: {lastUpdated ? formatDistanceToNowStrict(lastUpdated, { addSuffix: true }) : 'never'}
+          Data refreshes automatically every 30 seconds. Last updated: {lastUpdated ? `${timeSinceUpdate} seconds ago` : 'never'}
         </p>
       </div>
     </BasePage>
