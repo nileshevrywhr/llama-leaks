@@ -444,7 +444,7 @@ const Hero = () => {
                 <Eye className="h-5 w-5" />
                 Generate Malicious Content
               </Button>
-              
+
               <Button 
                 variant="destructive" 
                 size="default"

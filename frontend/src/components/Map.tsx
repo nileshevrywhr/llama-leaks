@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { MapPin, Loader2, AlertCircle } from "lucide-react";
-import { useTheme } from "next-themes";
 
 interface MapProps {
   latitude: string;
@@ -16,8 +15,38 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
   const map = useRef<mapboxgl.Map | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
-  const { theme, systemTheme } = useTheme();
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [currentMapStyle, setCurrentMapStyle] = useState<string>('');
+
+  // Theme detection logic that matches ThemeToggle component
+  const detectTheme = () => {
+    const theme = localStorage.getItem("theme");
+    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return theme === "dark" || (!theme && systemPrefersDark);
+  };
+
+  // Initialize theme on component mount
+  useEffect(() => {
+    setIsDarkMode(detectTheme());
+  }, []);
+
+  // Listen for theme changes (storage events and manual updates)
+  useEffect(() => {
+    const handleThemeChange = () => {
+      setIsDarkMode(detectTheme());
+    };
+
+    // Listen for localStorage changes from other tabs/windows
+    window.addEventListener('storage', handleThemeChange);
+    
+    // Listen for manual theme changes (custom event)
+    window.addEventListener('themeChange', handleThemeChange);
+
+    return () => {
+      window.removeEventListener('storage', handleThemeChange);
+      window.removeEventListener('themeChange', handleThemeChange);
+    };
+  }, []);
 
   const waitForContainer = (): Promise<void> => {
     return new Promise((resolve, reject) => {
@@ -28,10 +57,10 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
           setTimeout(checkContainer, 100);
         }
       };
-      
+
       // Start checking immediately
       checkContainer();
-      
+
       // Timeout after 5 seconds
       setTimeout(() => {
         reject(new Error('Map container failed to become available'));
@@ -53,7 +82,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
 
       // Get token from environment variables
       const accessToken = import.meta.env.VITE_MAPBOX_TOKEN || '';
-      
+
       if (!accessToken) {
         throw new Error('Mapbox token not configured. Please add VITE_MAPBOX_TOKEN to your environment variables.');
       }
@@ -65,15 +94,14 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
       }
 
       mapboxgl.accessToken = accessToken;
-      
+
       // Determine the current theme and select appropriate map style
-      const currentTheme = theme === 'system' ? systemTheme : theme;
-      const mapStyle = currentTheme === 'dark' 
-        ? 'mapbox://styles/mapbox/dark-v11' 
+      const mapStyle = isDarkMode
+        ? 'mapbox://styles/mapbox/dark-v11'
         : 'mapbox://styles/mapbox/light-v11';
-      
+
       setCurrentMapStyle(mapStyle);
-      
+
       // Create the map
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
@@ -98,10 +126,10 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
           resolve();
         });
 
-        map.current.on('error', (e) => {
+        map.current.on('error', (e: { error: Error & { status?: number } }) => {
           clearTimeout(timeoutId);
           console.error('Mapbox error:', e);
-          
+
           // Provide more specific error messages based on the error
           if (e.error?.message?.includes('Unauthorized') || e.error?.status === 401) {
             reject(new Error('Invalid or unauthorized token. Please check your Mapbox access token.'));
@@ -117,7 +145,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
 
       // Add marker for server location
       new mapboxgl.Marker({
-        color: currentTheme === 'dark' ? '#22c55e' : '#10b981', // Adjust marker color for theme
+        color: isDarkMode ? '#22c55e' : '#10b981', // Adjust marker color for theme
       })
         .setLngLat([Number(longitude), Number(latitude)])
         .setPopup(
@@ -134,7 +162,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
       console.error('Error initializing map:', err);
       const errorMessage = err instanceof Error ? err.message : 'Failed to initialize map';
       setError(errorMessage);
-      
+
       // Clean up on error
       if (map.current) {
         map.current.remove();
@@ -165,17 +193,16 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
   // Update map style when theme changes
   useEffect(() => {
     if (map.current && !isLoading && !error) {
-      const currentTheme = theme === 'system' ? systemTheme : theme;
-      const mapStyle = currentTheme === 'dark' 
-        ? 'mapbox://styles/mapbox/dark-v11' 
+      const mapStyle = isDarkMode
+        ? 'mapbox://styles/mapbox/dark-v11'
         : 'mapbox://styles/mapbox/light-v11';
-      
+
       // Only update if the style is actually different
       if (currentMapStyle !== mapStyle) {
         console.log('Updating map style from', currentMapStyle, 'to', mapStyle);
         setCurrentMapStyle(mapStyle);
         map.current.setStyle(mapStyle);
-        
+
         // Re-add marker after style change
         map.current.once('styledata', () => {
           console.log('Map style loaded, re-adding marker');
@@ -183,10 +210,10 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
             // Remove existing markers
             const markers = document.querySelectorAll('.mapboxgl-marker');
             markers.forEach(marker => marker.remove());
-            
+
             // Add new marker with theme-appropriate color
             new mapboxgl.Marker({
-              color: currentTheme === 'dark' ? '#22c55e' : '#10b981',
+              color: isDarkMode ? '#22c55e' : '#10b981',
             })
               .setLngLat([Number(longitude), Number(latitude)])
               .setPopup(
@@ -196,28 +223,26 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
               .addTo(map.current);
           }
         });
-        
+
         // Also listen for style load errors
         map.current.once('error', (e) => {
           console.error('Map style load error:', e);
         });
       }
     }
-  }, [theme, systemTheme, latitude, longitude, city, country, isLoading, error]);
-  
+  }, [isDarkMode, latitude, longitude, city, country, isLoading, error, currentMapStyle]);
+
   // Update map when coordinates change
   useEffect(() => {
     if (map.current && !isLoading && !error) {
       map.current.setCenter([Number(longitude), Number(latitude)]);
-      
-      const currentTheme = theme === 'system' ? systemTheme : theme;
-      
+
       // Update marker
       const markers = document.querySelectorAll('.mapboxgl-marker');
       markers.forEach(marker => marker.remove());
-      
+
       new mapboxgl.Marker({
-        color: currentTheme === 'dark' ? '#22c55e' : '#10b981',
+        color: isDarkMode ? '#22c55e' : '#10b981',
       })
         .setLngLat([Number(longitude), Number(latitude)])
         .setPopup(
@@ -226,15 +251,15 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
         )
         .addTo(map.current);
     }
-  }, [latitude, longitude, city, country, isLoading, error]);
+  }, [latitude, longitude, city, country, isLoading, error, isDarkMode]);
 
   return (
     <div className="bg-muted rounded-lg w-full h-full overflow-hidden relative">
-      <div 
-        ref={mapContainer} 
+      <div
+        ref={mapContainer}
         className="w-full h-full"
       />
-      
+
       {/* Loading overlay */}
       {isLoading && (
         <div className="absolute inset-0 bg-muted rounded-lg flex items-center justify-center z-10">
@@ -244,7 +269,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
           </div>
         </div>
       )}
-      
+
       {/* Error overlay */}
       {error && (
         <div className="absolute inset-0 bg-muted rounded-lg flex items-center justify-center z-10">

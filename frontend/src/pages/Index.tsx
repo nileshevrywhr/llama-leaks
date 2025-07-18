@@ -8,6 +8,7 @@ import ServerStats from "@/components/ServerStats";
 import Features from "@/components/Features";
 import Solutions from "@/components/Solutions";
 import Footer from "@/components/Footer";
+import SentryTestButton from "@/components/SentryTestButton";
 
 const Index = () => {
   const location = useLocation();
@@ -34,6 +35,13 @@ const Index = () => {
       <Features />
       <Solutions />
       <Footer />
+      
+      {/* Remove this in production */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="fixed bottom-4 right-4 z-50">
+          <SentryTestButton />
+        </div>
+      )}
     </div>
   );
 };
