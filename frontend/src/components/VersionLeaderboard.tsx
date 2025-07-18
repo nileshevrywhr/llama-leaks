@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Trophy, Medal, Award, Server, HardDrive, Shield } from 'lucide-react';
 import AnimatedCounter from './AnimatedCounter';
+import { useFormatSize } from '@/hooks/useFormatSize';
 import { Button } from "@/components/ui/button";
-import { formatSize } from '@/lib/utils';
 
 interface ServerModel {
   name: string;
@@ -41,6 +41,7 @@ const VersionLeaderboard = () => {
   const [versionGroups, setVersionGroups] = useState<VersionGroup[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const formatSize = useFormatSize();
 
   const parseVersion = (versionString: string): string => {
     // Extract major.minor from version strings like "0.5.10", "0.3.11", "0.5.7-0-ga420a45-dirty"
