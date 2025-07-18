@@ -6,6 +6,7 @@ import FilterControls from './dashboard/FilterControls';
 import ModelList from './dashboard/ModelList';
 import PaginationControls from './dashboard/PaginationControls';
 import { formatDistanceToNowStrict } from "date-fns";
+import { calculateActiveExecutions, calculateTotalModelSize } from '@/utils/stats-calculator';
 
 const ModelExecutionDashboard = () => {
   const [serverData, setServerData] = useState<ServerData[]>([]);
@@ -82,13 +83,13 @@ const ModelExecutionDashboard = () => {
         if (!modelMap.has(key)) {
           modelMap.set(key, {
             modelName: model.name,
+            averageSize: 0,
             totalServers: 0,
             runningServers: 0,
             totalSize: 0,
-            averageSize: 0,
             servers: [],
             lastActivity: server.last_observed,
-            executionFrequency: 0
+            executionFrequency: 0,
           });
         }
         
@@ -119,13 +120,13 @@ const ModelExecutionDashboard = () => {
         if (!modelMap.has(key)) {
           modelMap.set(key, {
             modelName: model.name,
+            averageSize: 0,
             totalServers: 0,
             runningServers: 0,
             totalSize: 0,
-            averageSize: 0,
             servers: [],
             lastActivity: server.last_observed,
-            executionFrequency: 0
+            executionFrequency: 0,
           });
         }
         
@@ -272,9 +273,17 @@ const ModelExecutionDashboard = () => {
     return Array.from(servers).sort();
   }, [serverData]);
 
+  const activeExecutions = useMemo(() => calculateActiveExecutions(modelExecutions), [modelExecutions]);
+  const totalModelSize = useMemo(() => calculateTotalModelSize(modelExecutions), [modelExecutions]);
+
   return (
     <BasePage loading={loading} error={error} retry={() => fetchServerData()}>
-      <SummaryStats modelExecutions={modelExecutions} serverData={serverData} />
+      <SummaryStats
+        modelExecutions={modelExecutions}
+        serverData={serverData}
+        activeExecutions={activeExecutions}
+        totalModelSize={totalModelSize}
+      />
       <FilterControls
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}

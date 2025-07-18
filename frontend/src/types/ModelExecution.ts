@@ -22,12 +22,15 @@ export interface ServerData {
   status: string;
 }
 
-export interface ModelExecution {
+export interface ModelMetadata {
   modelName: string;
+  averageSize: number;
+}
+
+export interface ServerAggregation {
   totalServers: number;
   runningServers: number;
   totalSize: number;
-  averageSize: number;
   servers: {
     server: ServerData;
     isRunning: boolean;
@@ -35,9 +38,14 @@ export interface ModelExecution {
     modelSize: number;
     lastSeen: string;
   }[];
+}
+
+export interface ExecutionStatistics {
   lastActivity: string;
   executionFrequency: number;
 }
+
+export interface ModelExecution extends ModelMetadata, ServerAggregation, ExecutionStatistics {}
 
 export type SortOption = 'name' | 'servers' | 'running' | 'frequency' | 'size';
 export type SortDirection = 'asc' | 'desc';

@@ -12,7 +12,7 @@ import {
   HardDrive
 } from "lucide-react";
 import { formatDistanceToNowStrict } from "date-fns";
-import { ModelExecution } from '@/types/ModelExecution';
+import { ModelExecution, ModelMetadata, ServerAggregation, ExecutionStatistics } from '@/types/ModelExecution';
 
 interface ModelCardProps {
   model: ModelExecution;
@@ -129,7 +129,7 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, isExpanded, toggleExpansio
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                   {model.servers.map((serverInfo, index) => (
-                    <Card key={`${serverInfo.server.ip}-${serverInfo.server.port}-${index}`} className="p-4">
+                    <Card key={`${serverInfo.server.ip}-${serverInfo.server.port}`} className="p-4">
                       <div className="space-y-2">
                         <div className="flex items-center justify-between">
                           <div className="font-mono text-sm">
