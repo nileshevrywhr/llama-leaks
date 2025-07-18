@@ -12,7 +12,7 @@ import {
   HardDrive
 } from "lucide-react";
 import { formatDistanceToNowStrict } from "date-fns";
-import { ModelExecution } from '@/types/ModelExecution';
+import { ModelExecution, ModelMetadata, ServerAggregation, ExecutionStatistics } from '@/types/ModelExecution';
 
 interface ModelCardProps {
   model: ModelExecution;

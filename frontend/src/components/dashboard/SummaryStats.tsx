@@ -6,9 +6,11 @@ import { ModelExecution, ServerData } from '@/types/ModelExecution';
 interface SummaryStatsProps {
   modelExecutions: ModelExecution[];
   serverData: ServerData[];
+  activeExecutions: number;
+  totalModelSize: number;
 }
 
-const SummaryStats: React.FC<SummaryStatsProps> = ({ modelExecutions, serverData }) => {
+const SummaryStats: React.FC<SummaryStatsProps> = ({ modelExecutions, serverData, activeExecutions, totalModelSize }) => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-4xl mx-auto">
       <Card className="text-center">
@@ -24,7 +26,7 @@ const SummaryStats: React.FC<SummaryStatsProps> = ({ modelExecutions, serverData
         <CardContent className="pt-6">
           <div className="text-2xl font-bold text-green-500">
             <AnimatedCounter
-              target={modelExecutions.reduce((sum, model) => sum + model.runningServers, 0)}
+              target={activeExecutions}
               duration={1500}
             />
           </div>
@@ -45,7 +47,7 @@ const SummaryStats: React.FC<SummaryStatsProps> = ({ modelExecutions, serverData
         <CardContent className="pt-6">
           <div className="text-2xl font-bold text-orange-500">
             <AnimatedCounter
-              target={Math.round(modelExecutions.reduce((sum, model) => sum + model.totalSize, 0) / (1024 * 1024 * 1024))}
+              target={totalModelSize}
               duration={1500}
             />
             <span className="text-sm font-normal">GB</span>
