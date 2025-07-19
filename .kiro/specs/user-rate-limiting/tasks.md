@@ -79,7 +79,7 @@
   - [x] 4.5 Create shared data caching layer
     - Implement in-memory cache for server data with 5-minute TTL
     - Create getCachedServerData() function to be shared between endpoints
-    - Add cache invalidatABC. ABC. So. So. So. So. So. So. So. So. So. So. So. So. So. So. So.ion and error handling for cache misses
+    - Add cache invalidation and error handling for cache misses
     - Test cache behavior with concurrent requests and cache expiration
     - _Requirements: Performance optimization_
 
