@@ -9,6 +9,10 @@ import {
     checkRateLimit,
     resetRateLimitCounters,
     getRateLimitHeaders,
+    checkRequestRateLimit,
+    processRequestWithRateLimit,
+    getUserQuotaInfo,
+    checkRateLimitWarnings,
     type RateLimitData,
     type RateLimitState
 } from '../rate-limit';
@@ -770,6 +774,213 @@ describe('Edge cases and error handling', () => {
         expect(result.allowed).toBe(true);
         expect(result.rateLimitState.dailyCount).toBe(0);
         expect(result.rateLimitState.monthlyCount).toBe(5);
+    });
+
+    it('should handle timezone edge cases around reset times', async () => {
+        // Test at exactly midnight UTC
+        vi.setSystemTime(new Date('2024-03-16T00:00:00.000Z'));
+
+        const result = await getRateLimitData(testUserHash);
+
+        expect(result.dailyResetTime.toISOString()).toBe('2024-03-17T00:00:00.000Z');
+        expect(result.monthlyResetTime.toISOString()).toBe('2024-04-01T00:00:00.000Z');
+    });
+
+    it('should handle month boundary edge cases', async () => {
+        // Test at end of February in leap year
+        vi.setSystemTime(new Date('2024-02-29T23:59:59.999Z'));
+
+        const result = await getRateLimitData(testUserHash);
+
+        expect(result.dailyResetTime.toISOString()).toBe('2024-03-01T00:00:00.000Z');
+        expect(result.monthlyResetTime.toISOString()).toBe('2024-03-01T00:00:00.000Z');
+    });
+
+    it('should handle year boundary edge cases', async () => {
+        // Test at end of December
+        vi.setSystemTime(new Date('2024-12-31T23:59:59.999Z'));
+
+        const result = await getRateLimitData(testUserHash);
+
+        expect(result.dailyResetTime.toISOString()).toBe('2025-01-01T00:00:00.000Z');
+        expect(result.monthlyResetTime.toISOString()).toBe('2025-01-01T00:00:00.000Z');
+    });
+
+    it('should handle concurrent requests with race conditions', async () => {
+        mockKvClient.get.mockResolvedValue(null);
+
+        const mockPipeline = {
+            set: vi.fn(),
+            exec: vi.fn().mockResolvedValue([])
+        };
+        mockKvClient.pipeline.mockReturnValue(mockPipeline);
+
+        // Simulate concurrent requests
+        const promises = Array.from({ length: 5 }, () =>
+            processRequestWithRateLimit(testUserHash)
+        );
+
+        const results = await Promise.all(promises);
+
+        // All should be allowed since we're mocking successful operations
+        results.forEach(result => {
+            expect(result.allowed).toBe(true);
+        });
+
+        // Pipeline should have been called for each request
+        expect(mockPipeline.exec).toHaveBeenCalledTimes(5);
+    });
+
+    it('should handle malformed data in KV storage', async () => {
+        // Mock malformed data that doesn't match RateLimitData interface
+        mockKvClient.get
+            .mockResolvedValueOnce({ invalid: 'data' })
+            .mockResolvedValueOnce('not an object');
+
+        const result = await getRateLimitData(testUserHash);
+
+        // Should handle gracefully and return fallback state
+        expect(result.dailyCount).toBe(0);
+        expect(result.monthlyCount).toBe(0);
+        expect(result.isBlocked).toBe(false);
+    });
+
+    it('should handle very large counter values', async () => {
+        const dailyData: RateLimitData = {
+            count: 999999,
+            firstRequest: '2024-03-15T10:00:00.000Z',
+            lastRequest: '2024-03-15T14:00:00.000Z'
+        };
+
+        mockKvClient.get
+            .mockResolvedValueOnce(dailyData)
+            .mockResolvedValueOnce(null);
+
+        const result = await getRateLimitData(testUserHash);
+
+        expect(result.dailyCount).toBe(999999);
+        expect(result.dailyRemaining).toBe(0); // Should be capped at 0
+        expect(result.isBlocked).toBe(true);
+        expect(result.blockType).toBe('daily');
+    });
+
+    it('should handle negative counter values gracefully', async () => {
+        const dailyData: RateLimitData = {
+            count: -1,
+            firstRequest: '2024-03-15T10:00:00.000Z',
+            lastRequest: '2024-03-15T14:00:00.000Z'
+        };
+
+        mockKvClient.get
+            .mockResolvedValueOnce(dailyData)
+            .mockResolvedValueOnce(null);
+
+        const result = await getRateLimitData(testUserHash);
+
+        expect(result.dailyCount).toBe(-1);
+        expect(result.dailyRemaining).toBe(4); // 3 - (-1) = 4
+        expect(result.isBlocked).toBe(false);
+    });
+});
+
+describe('Performance and reliability', () => {
+    it('should handle KV timeout errors', async () => {
+        const timeoutError = new Error('Operation timed out');
+        timeoutError.name = 'TimeoutError';
+
+        mockKvClient.get.mockRejectedValue(timeoutError);
+
+        const result = await checkRequestRateLimit(testUserHash);
+
+        expect(result.allowed).toBe(true); // Should be permissive on errors
+        expect(result.rateLimitState.dailyRemaining).toBe(DAILY_LIMIT);
+    });
+
+    it('should handle KV connection errors', async () => {
+        const connectionError = new Error('Connection refused');
+        connectionError.name = 'ConnectionError';
+
+        mockKvClient.get.mockRejectedValue(connectionError);
+
+        const result = await processRequestWithRateLimit(testUserHash);
+
+        expect(result.allowed).toBe(true); // Should be permissive on errors
+        expect(result.rateLimitState.isBlocked).toBe(false);
+    });
+
+    it('should handle pipeline execution failures gracefully', async () => {
+        mockKvClient.get.mockResolvedValue(null);
+
+        const mockPipeline = {
+            set: vi.fn(),
+            exec: vi.fn().mockRejectedValue(new Error('Pipeline execution failed'))
+        };
+        mockKvClient.pipeline.mockReturnValue(mockPipeline);
+
+        const result = await incrementRateLimitCounters(testUserHash);
+
+        // Should return current state without incrementing
+        expect(result.dailyCount).toBe(0);
+        expect(result.monthlyCount).toBe(0);
+        expect(result.isBlocked).toBe(false);
+    });
+
+    it('should handle partial pipeline failures', async () => {
+        mockKvClient.get.mockResolvedValue(null);
+
+        const mockPipeline = {
+            set: vi.fn(),
+            exec: vi.fn().mockResolvedValue([
+                { error: 'Daily counter failed' },
+                null // Monthly counter succeeded
+            ])
+        };
+        mockKvClient.pipeline.mockReturnValue(mockPipeline);
+
+        const result = await incrementRateLimitCounters(testUserHash);
+
+        // Should still handle gracefully
+        expect(result.dailyCount).toBe(1);
+        expect(result.monthlyCount).toBe(1);
+    });
+});
+
+describe('Security and validation', () => {
+    it('should handle suspicious user hash patterns', async () => {
+        const suspiciousHash = '<script>alert("xss")</script>';
+
+        mockKvClient.get.mockResolvedValue(null);
+
+        const result = await getRateLimitData(suspiciousHash);
+
+        // Should still work but log the suspicious pattern
+        expect(result.dailyRemaining).toBe(DAILY_LIMIT);
+        expect(result.monthlyRemaining).toBe(MONTHLY_LIMIT);
+    });
+
+    it('should handle very long user hash values', async () => {
+        const longHash = 'a'.repeat(1000);
+
+        mockKvClient.get.mockResolvedValue(null);
+
+        const result = await getRateLimitData(longHash);
+
+        expect(result.dailyRemaining).toBe(DAILY_LIMIT);
+        expect(result.monthlyRemaining).toBe(MONTHLY_LIMIT);
+    });
+
+    it('should handle empty or null user hash', async () => {
+        const results = await Promise.all([
+            getRateLimitData(''),
+            getRateLimitData(null as any),
+            getRateLimitData(undefined as any)
+        ]);
+
+        results.forEach(result => {
+            expect(result.dailyRemaining).toBe(DAILY_LIMIT);
+            expect(result.monthlyRemaining).toBe(MONTHLY_LIMIT);
+            expect(result.isBlocked).toBe(false);
+        });
     });
 });
 });
