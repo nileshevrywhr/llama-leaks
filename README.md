@@ -41,6 +41,53 @@ No scans. No leaks. Just redacted reality.
 
 ---
 
+## 🚀 Development Setup
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+- Vercel account (for KV storage)
+
+### Quick Start
+
+1. **Clone and install dependencies:**
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+2. **Set up Vercel KV storage:**
+   - Follow the detailed guide in [KV_SETUP.md](KV_SETUP.md)
+   - Update `frontend/.env.local` with your KV credentials
+
+3. **Test your KV setup:**
+   ```bash
+   npm run test:kv
+   ```
+
+4. **Start development server:**
+   ```bash
+   npm run dev
+   ```
+
+### Environment Variables
+
+Copy `frontend/.env.example` to `frontend/.env.local` and fill in your values:
+
+- `KV_REST_API_URL` - Your Vercel KV REST API URL
+- `KV_REST_API_TOKEN` - Your Vercel KV REST API Token
+- `VITE_MAPBOX_TOKEN` - Mapbox token for map functionality
+
+### Rate Limiting
+
+The application uses Vercel KV for rate limiting anonymous users:
+- 3 requests per day per user
+- 15 requests per month per user
+- User identification via IP + browser fingerprint
+
+---
+
 ## 🤝 Want to Help?
 
 * 🛡️ **Run Ollama securely** — auth on, ports closed
