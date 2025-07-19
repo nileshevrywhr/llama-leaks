@@ -47,29 +47,29 @@
     - Write unit tests for limit checking and remaining count calculations
     - _Requirements: 1.2, 1.3, 5.1, 5.2_
 
-- [ ] 4. Create the /api/random Edge Function
-  - [ ] 4.1 Set up basic Edge Function structure
+- [x] 4. Create the /api/random Edge Function
+  - [x] 4.1 Set up basic Edge Function structure
     - Create /api/random.ts file with proper Vercel Edge Function exports
     - Implement basic request handling and response structure
     - Add error handling for malformed requests
     - Test basic function deployment and execution
     - _Requirements: 1.1, 6.1_
 
-  - [ ] 4.2 Integrate user identification into API endpoint
+  - [x] 4.2 Integrate user identification into API endpoint
     - Add user identification logic to extract IP and fingerprint from requests
     - Generate user hash for rate limiting lookups
     - Implement fallback identification when fingerprinting fails
     - Test identification accuracy with various request scenarios
     - _Requirements: 2.1, 2.2, 2.3, 4.4_
 
-  - [ ] 4.3 Add rate limiting to API endpoint
+  - [x] 4.3 Add rate limiting to API endpoint
     - Integrate rate limit checking before serving data
     - Return 429 status with proper headers when limits exceeded
     - Include rate limit information in all successful responses
     - Test rate limiting behavior with multiple requests
     - _Requirements: 1.2, 1.3, 1.4, 5.1, 5.2_
 
-  - [ ] 4.4 Implement server data serving logic
+  - [x] 4.4 Implement server data serving logic
     - Read live_servers.json file from the filesystem
     - Select random server from the available data
     - Return single ServerData object in standardized response format
