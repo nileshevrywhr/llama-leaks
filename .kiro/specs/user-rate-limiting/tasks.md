@@ -76,22 +76,37 @@
     - Handle file reading errors and empty data scenarios
     - _Requirements: 1.1, 5.3_
 
-- [ ] 5. Update frontend components to use new API
-  - [ ] 5.1 Update ServerStats component
-    - Replace direct JSON file fetch with /api/random API call
-    - Modify data processing to handle single server response instead of array
-    - Add error handling for rate limit responses (429 status)
-    - Update loading states and error messages
-    - _Requirements: 1.1, 1.4, 5.4_
+- [x] 4.5 Create shared data caching layer
+  - Implement in-memory cache for server data with 5-minute TTL
+  - Create getCachedServerData() function to be shared between endpoints
+  - Add cache invalidatABC. ABC. So. So. So. So. So. So. So. So. So. So. So. So. So. So. So.ion and error handling for cache misses
+  - Test cache behavior with concurrent requests and cache expiration
+  - _Requirements: Performance optimization_
 
-  - [ ] 5.2 Update Hero component
+- [x] 4.6 Create /api/stats Edge Function
+  - Create /api/stats.ts file with proper Vercel Edge Function exports
+  - Implement aggregate statistics calculation (total, live, new today, latest find)
+  - Use shared caching layer to avoid duplicate data loading
+  - Add proper cache headers (Cache-Control: public, max-age=300)
+  - No rate limiting required for aggregate statistics
+  - _Requirements: Dashboard statistics support_
+
+- [x] 5. Update frontend components to use new API
+  - [x] 5.1 Update ServerStats component
+    - Replace direct JSON file fetch with /api/stats API call
+    - Update data processing to use aggregate statistics from API response
+    - Add error handling for API failures with graceful fallback
+    - Update loading states and error messages for new endpoint
+    - _Requirements: Dashboard statistics display_
+
+  - [x] 5.2 Update Hero component
     - Replace direct JSON file fetch with /api/random API call for initial load
     - Update random button click handler to use /api/random endpoint
     - Remove client-side random selection logic (now handled by API)
     - Add error handling for rate limit responses with user-friendly messages
     - _Requirements: 1.1, 1.4, 5.4_
 
-  - [ ] 5.3 Add rate limit error handling
+  - [x] 5.3 Add rate limit error handling
     - Create reusable error handling for 429 responses
     - Display user-friendly messages when rate limits are exceeded
     - Show remaining quotas and reset times when available

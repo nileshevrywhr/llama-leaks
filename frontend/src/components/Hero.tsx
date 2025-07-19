@@ -5,6 +5,7 @@ import Map from "./Map";
 import { formatDistanceToNowStrict } from "date-fns";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { formatSize } from "@/utils/formatting";
+import { isRateLimitError, formatRateLimitErrorMessage, handleRateLimitError } from "@/lib/rate-limit-error-handler";
 
 interface ServerModel {
   name: string;
@@ -30,6 +31,22 @@ interface ServerData {
   status: string;
 }
 
+interface RateLimitInfo {
+  dailyRemaining: number;
+  monthlyRemaining: number;
+  dailyResetTime: string;
+  monthlyResetTime: string;
+}
+
+interface RandomApiResponse {
+  success: boolean;
+  data?: ServerData;
+  rateLimit?: RateLimitInfo;
+  error?: string;
+  message?: string;
+  retryAfter?: number;
+}
+
 const Hero = () => {
   const [serverData, setServerData] = useState<ServerData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -46,23 +63,32 @@ const Hero = () => {
         setLoading(true);
       }
       setError(null);
-      
-      const response = await fetch('/data/live_servers.json');
+
+      // Use the new /api/random endpoint
+      const response = await fetch('/api/random');
+
       if (!response.ok) {
+        if (response.status === 429) {
+          // Handle rate limit error with enhanced messaging
+          const errorData: RandomApiResponse = await response.json();
+          if (isRateLimitError(errorData)) {
+            const rateLimitMessage = formatRateLimitErrorMessage(errorData);
+            throw new Error(rateLimitMessage);
+          }
+          throw new Error(`Rate limit exceeded: ${errorData.message || 'Too many requests. Please try again later.'}`);
+        }
         throw new Error(`Failed to fetch server data: ${response.status}`);
       }
-      
-      const serversObject = await response.json();
-      const serverEntries = Object.values(serversObject) as ServerData[];
-      
-      if (serverEntries.length === 0) {
-        throw new Error('No servers found in the data');
+
+      const apiResponse: RandomApiResponse = await response.json();
+
+      if (!apiResponse.success || !apiResponse.data) {
+        throw new Error(apiResponse.message || 'Failed to load server data');
       }
-      
-      const randomIndex = Math.floor(Math.random() * serverEntries.length);
-      const randomServer = serverEntries[randomIndex];
-      
-      setServerData(randomServer);
+
+      // API returns a single random server directly
+      setServerData(apiResponse.data);
+
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unknown error occurred');
       console.error('Error fetching server data:', err);
@@ -82,9 +108,9 @@ const Hero = () => {
 
   const handleCopyUrl = async () => {
     if (!serverData) return;
-    
+
     const serverUrl = `http://${serverData.ip}:${serverData.port}`;
-    
+
     try {
       // Try the modern Clipboard API first
       if (navigator.clipboard) {
@@ -150,9 +176,9 @@ const Hero = () => {
             Public AI Playground
           </span>
         </h1>
-        
+
         <p className="max-w-xl text-center text-base text-muted-foreground md:text-lg">
-          Your server is cheerfully entertaining prompts from the entire internet. 
+          Your server is cheerfully entertaining prompts from the entire internet.
           No authentication required. Here's proof:
         </p>
 
@@ -175,7 +201,7 @@ const Hero = () => {
             Public AI Playground
           </span>
         </h1>
-        
+
         <div className="w-full max-w-4xl bg-destructive/5 border border-destructive/20 rounded-lg p-8 text-center">
           <AlertCircle className="h-12 w-12 mb-4 text-destructive mx-auto" />
           <h3 className="text-lg font-semibold text-destructive mb-2">Unable to Load Server Information</h3>
@@ -202,7 +228,7 @@ const Hero = () => {
             Public AI Playground
           </span>
         </h1>
-        
+
         <div className="max-w-3xl mx-auto text-sm text-muted-foreground md:text-base mt-3 space-y-2 px-4 sm:px-6 lg:px-8">
           <p className="text-center text-base sm:text-lg font-semibold text-foreground/90 lg:whitespace-nowrap">
             Zero security. No asterisks. Just public endpoints serving AI models to anyone who asks nicely.
@@ -215,7 +241,7 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 items-stretch">
           {/* Map */}
           <div className="w-full h-40 sm:h-48 lg:h-96 min-h-[160px] sm:min-h-[192px] lg:min-h-[384px] max-h-[500px]">
-            <Map 
+            <Map
               latitude={serverData.latitude}
               longitude={serverData.longitude}
               city={serverData.city}
@@ -240,10 +266,9 @@ const Hero = () => {
                 className="relative overflow-hidden transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-background"
                 aria-label={refreshing ? "Loading new server data" : "Load new random server"}
               >
-                <Shuffle 
-                  className={`h-4 w-4 transition-transform duration-200 ${
-                    refreshing ? 'animate-pulse' : 'group-hover:scale-110'
-                  }`} 
+                <Shuffle
+                  className={`h-4 w-4 transition-transform duration-200 ${refreshing ? 'animate-pulse' : 'group-hover:scale-110'
+                    }`}
                 />
                 <span className="ml-2 hidden lg:inline">
                   {refreshing ? 'Loading...' : 'Random'}
@@ -314,12 +339,10 @@ const Hero = () => {
                     <span className="text-primary">{serverData.version}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full animate-pulse ${
-                      serverData.status === 'live' ? 'bg-green-500' : 'bg-red-500'
-                    }`}></div>
-                    <span className={`text-xs ${
-                      serverData.status === 'live' ? 'text-green-500' : 'text-red-500'
-                    }`}>
+                    <div className={`w-2 h-2 rounded-full animate-pulse ${serverData.status === 'live' ? 'bg-green-500' : 'bg-red-500'
+                      }`}></div>
+                    <span className={`text-xs ${serverData.status === 'live' ? 'text-green-500' : 'text-red-500'
+                      }`}>
                       {serverData.status.toUpperCase()}
                     </span>
                   </div>
@@ -403,7 +426,7 @@ const Hero = () => {
                   </div>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>
@@ -422,10 +445,10 @@ const Hero = () => {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center max-w-lg mx-auto">
-              <Button 
-                variant="destructive" 
+              <Button
+                variant="destructive"
                 size="default"
                 className="flex-1 gap-2 bg-destructive/90 hover:bg-destructive transition-all duration-200 shadow-lg hover:shadow-xl"
                 disabled
@@ -435,8 +458,8 @@ const Hero = () => {
                 Generate Malicious Content
               </Button>
 
-              <Button 
-                variant="destructive" 
+              <Button
+                variant="destructive"
                 size="default"
                 className="flex-1 gap-2 bg-gradient-to-r from-destructive to-orange-600 hover:from-destructive/90 hover:to-orange-600/90 transition-all duration-200 shadow-lg hover:shadow-xl"
                 disabled
@@ -446,7 +469,7 @@ const Hero = () => {
                 Replace with Evil Model
               </Button>
             </div>
-            
+
             <div className="text-xs lg:text-xs text-muted-foreground space-y-2">
               <p className="font-medium text-center">🛡️ Don't worry - these buttons don't actually do anything harmful.</p>
               <p className="text-center">This is purely educational to demonstrate the security implications of exposed AI servers.</p>

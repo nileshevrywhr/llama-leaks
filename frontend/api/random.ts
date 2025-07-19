@@ -1,6 +1,7 @@
 // Vercel Edge Function for Vite projects
 import { createUserIdentifierFromHeaders, isValidUserIdentifier, type UserIdentifier } from '../src/lib/user-identification';
 import { processRequestWithRateLimit, getRateLimitHeaders, type RateLimitCheckResult } from '../src/lib/rate-limit';
+import { getRandomServerData } from '../src/lib/server-data-cache';
 
 // Response interfaces based on design document
 interface ServerData {
@@ -54,120 +55,7 @@ export const config = {
     runtime: 'edge',
 };
 
-// Interface for the raw server data from JSON file
-interface RawServerData {
-    port: number;
-    version: string;
-    city: string;
-    country: string;
-    country_name: string;
-    region: string;
-    latitude: string;
-    longitude: string;
-    local: Array<{
-        name: string;
-        model: string;
-        size: number;
-    }>;
-    running: Array<{
-        name: string;
-        model: string;
-        size: number;
-    }>;
-    first_seen_online: string;
-    last_observed: string;
-    age: string;
-    status: string;
-    ip: string;
-}
-
-/**
- * Load and parse the live servers JSON file
- * @returns Promise resolving to parsed server data
- */
-async function loadServerData(): Promise<Record<string, RawServerData>> {
-    try {
-        // In Vercel Edge Functions, we need to fetch the file from the deployed URL
-        // The file should be accessible at the root domain + path
-        const baseUrl = process.env.VERCEL_URL
-            ? `https://${process.env.VERCEL_URL}`
-            : 'http://localhost:5173'; // Fallback for local development
-
-        const dataUrl = `${baseUrl}/data/live_servers.json`;
-
-        console.log('Fetching server data from:', dataUrl);
-
-        const response = await fetch(dataUrl);
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch server data: ${response.status} ${response.statusText}`);
-        }
-
-        const data = await response.json();
-
-        if (!data || typeof data !== 'object') {
-            throw new Error('Invalid server data format');
-        }
-
-        console.log(`Loaded ${Object.keys(data).length} servers from data file`);
-
-        return data;
-    } catch (error) {
-        console.error('Error loading server data:', error);
-        throw new Error('Failed to load server data');
-    }
-}
-
-/**
- * Convert raw server data to the expected ServerData format
- * @param hash Server hash key
- * @param rawData Raw server data from JSON
- * @returns Formatted ServerData object
- */
-function formatServerData(hash: string, rawData: RawServerData): ServerData {
-    return {
-        ip: rawData.ip,
-        port: rawData.port,
-        version: rawData.version,
-        city: rawData.city,
-        country: rawData.country,
-        country_name: rawData.country_name,
-        region: rawData.region,
-        latitude: rawData.latitude,
-        longitude: rawData.longitude,
-        local: rawData.local || [],
-        running: rawData.running || [],
-        first_seen_online: rawData.first_seen_online,
-        last_observed: rawData.last_observed,
-        age: rawData.age,
-        status: rawData.status
-    };
-}
-
-/**
- * Get a random server from the live servers data
- * @returns Promise resolving to a random ServerData object
- */
-async function getRandomServerData(): Promise<ServerData> {
-    const serversData = await loadServerData();
-
-    const serverHashes = Object.keys(serversData);
-
-    if (serverHashes.length === 0) {
-        throw new Error('No servers available');
-    }
-
-    // Select a random server
-    const randomIndex = Math.floor(Math.random() * serverHashes.length);
-    const selectedHash = serverHashes[randomIndex];
-    const selectedRawData = serversData[selectedHash];
-
-    if (!selectedRawData) {
-        throw new Error('Selected server data is invalid');
-    }
-
-    return formatServerData(selectedHash, selectedRawData);
-}
+// Note: Server data loading and caching is now handled by the shared cache layer
 
 export default async function handler(request: Request): Promise<Response> {
     try {

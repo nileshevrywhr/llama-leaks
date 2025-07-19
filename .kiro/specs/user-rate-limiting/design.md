@@ -59,6 +59,65 @@ GET /api/random
 }
 ```
 
+### 2. Statistics Edge Function (`/api/stats`)
+
+**Purpose**: Provide aggregate server statistics without rate limiting for dashboard components
+
+**Interface**:
+```typescript
+// Request
+GET /api/stats
+
+// Response (Success)
+{
+  "success": true,
+  "statistics": {
+    "totalServers": number,
+    "liveServers": number,
+    "newToday": number,
+    "latestFindMinutes": number
+  },
+  "lastUpdated": string // ISO timestamp
+}
+
+// Response (Error)
+{
+  "success": false,
+  "error": "DATA_UNAVAILABLE",
+  "message": string
+}
+```
+
+**Caching Strategy**:
+- **In-Memory Cache**: 5-minute cache shared between `/api/random` and `/api/stats`
+- **No Rate Limiting**: Statistics are aggregate data, safe to access frequently
+- **Cache Headers**: `Cache-Control: public, max-age=300` (5 minutes)
+
+### 3. Shared Data Caching Layer
+
+**Purpose**: Optimize performance by caching server data in memory across both API endpoints
+
+**Implementation**:
+```typescript
+// Shared cache for both endpoints
+let cachedServerData: ServerData[] | null = null;
+let cacheTime = 0;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+async function getCachedServerData(): Promise<ServerData[]> {
+    if (!cachedServerData || Date.now() - cacheTime > CACHE_DURATION) {
+        cachedServerData = await loadServerData();
+        cacheTime = Date.now();
+    }
+    return cachedServerData;
+}
+```
+
+**Benefits**:
+- **Performance**: JSON file loaded once every 5 minutes instead of every request
+- **Efficiency**: Both endpoints share the same cached data
+- **Scalability**: Reduces load on static file serving
+
 ### 2. User Identification Service
 
 **Purpose**: Generate consistent user identifiers from request data

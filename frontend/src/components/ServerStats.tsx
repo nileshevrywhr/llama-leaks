@@ -33,6 +33,21 @@ interface ServerStats {
   latestFindMinutes: number;
 }
 
+interface StatisticsData {
+  totalServers: number;
+  liveServers: number;
+  newToday: number;
+  latestFindMinutes: number;
+}
+
+interface StatsApiResponse {
+  success: boolean;
+  statistics?: StatisticsData;
+  lastUpdated?: string;
+  error?: string;
+  message?: string;
+}
+
 const ServerStats = () => {
   const [stats, setStats] = useState<ServerStats>({
     totalServers: 0,
@@ -88,65 +103,32 @@ const ServerStats = () => {
   };
 
   useEffect(() => {
-    const fetchAndCalculateStats = async () => {
+    const fetchStats = async () => {
       try {
         setLoading(true);
         setError(null);
-        
-        const response = await fetch('/data/live_servers.json');
+
+        // Use the new /api/stats endpoint
+        const response = await fetch('/api/stats');
+
         if (!response.ok) {
-          throw new Error(`Failed to fetch server data: ${response.status}`);
+          throw new Error(`Failed to fetch server statistics: ${response.status}`);
         }
-        
-        const serversObject = await response.json();
-        const serverEntries = Object.values(serversObject) as ServerData[];
-        
-        const now = new Date();
-        const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-        
-        // Calculate total servers
-        const totalServers = serverEntries.length;
-        
-        // Calculate live servers (status === "live")
-        const liveServers = serverEntries.filter(server => server.status === 'live').length;
-        
-        // Calculate new servers today (first_seen_online within last 24 hours)
-        const newToday = serverEntries.filter(server => {
-          if (!server.first_seen_online) return false;
-          try {
-            const firstSeenDate = new Date(server.first_seen_online);
-            return firstSeenDate >= oneDayAgo;
-          } catch {
-            return false;
-          }
-        }).length;
-        
-        // Calculate latest find (most recent first_seen_online)
-        let latestFindMinutes = 0;
-        const validFirstSeenDates = serverEntries
-          .filter(server => server.first_seen_online)
-          .map(server => {
-            try {
-              return new Date(server.first_seen_online);
-            } catch {
-              return null;
-            }
-          })
-          .filter(date => date !== null) as Date[];
-        
-        if (validFirstSeenDates.length > 0) {
-          const latestDate = new Date(Math.max(...validFirstSeenDates.map(date => date.getTime())));
-          const diffMs = now.getTime() - latestDate.getTime();
-          latestFindMinutes = Math.floor(diffMs / (1000 * 60));
+
+        const apiResponse: StatsApiResponse = await response.json();
+
+        if (!apiResponse.success || !apiResponse.statistics) {
+          throw new Error(apiResponse.message || 'Failed to load server statistics');
         }
-        
+
+        // Use the statistics directly from the API response
         setStats({
-          totalServers,
-          liveServers,
-          newToday,
-          latestFindMinutes
+          totalServers: apiResponse.statistics.totalServers,
+          liveServers: apiResponse.statistics.liveServers,
+          newToday: apiResponse.statistics.newToday,
+          latestFindMinutes: apiResponse.statistics.latestFindMinutes
         });
-        
+
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load server statistics');
         console.error('Error fetching server stats:', err);
@@ -155,7 +137,7 @@ const ServerStats = () => {
       }
     };
 
-    fetchAndCalculateStats();
+    fetchStats();
   }, []);
 
   const statsConfig = [
@@ -168,7 +150,7 @@ const ServerStats = () => {
     {
       value: stats.liveServers,
       label: "Live Servers",
-      color: "text-green-400", 
+      color: "text-green-400",
       bgColor: "bg-green-500/10 border-green-500/20"
     },
     {
@@ -235,8 +217,8 @@ const ServerStats = () => {
                 {stat.formatAsTime ? (
                   <>
                     <div className="flex flex-col items-center">
-                      <AnimatedCounter 
-                        target={formatTimeComponents(stat.value).value} 
+                      <AnimatedCounter
+                        target={formatTimeComponents(stat.value).value}
                         duration={2000 + (index * 300)}
                         className="text-2xl md:text-3xl font-bold"
                       />
@@ -247,8 +229,8 @@ const ServerStats = () => {
                   </>
                 ) : (
                   <>
-                    <AnimatedCounter 
-                      target={stat.value} 
+                    <AnimatedCounter
+                      target={stat.value}
                       duration={2000 + (index * 300)}
                     />
                     {stat.suffix && (
@@ -264,7 +246,7 @@ const ServerStats = () => {
           </div>
         ))}
       </div>
-      
+
       <div className="text-center mt-6">
         <p className="text-sm text-muted-foreground">
           Real-time data from live server monitoring. Updated automatically.
