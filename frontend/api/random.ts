@@ -2,6 +2,15 @@
 import { createUserIdentifierFromHeaders, isValidUserIdentifier, type UserIdentifier } from '../src/lib/user-identification';
 import { processRequestWithRateLimit, getRateLimitHeaders, type RateLimitCheckResult } from '../src/lib/rate-limit';
 import { getRandomServerData } from '../src/lib/server-data-cache';
+import { validateAndSanitizeIP } from '../src/lib/input-validation';
+import {
+    createTimer,
+    logAPIError,
+    logUserIdentificationFailure,
+    logSuspiciousActivity,
+    logRateLimitViolation,
+    generateMonitoringReport
+} from '../src/lib/monitoring';
 
 // Response interfaces based on design document
 interface ServerData {
@@ -58,15 +67,36 @@ export const config = {
 // Note: Server data loading and caching is now handled by the shared cache layer
 
 export default async function handler(request: Request): Promise<Response> {
+    const requestTimer = createTimer('api-random-request');
+    const requestId = `req-${Date.now()}-${Math.random().toString(36).substring(2)}`;
+
     try {
+        console.log('[API] Processing /api/random request', {
+            requestId,
+            method: request.method,
+            timestamp: new Date().toISOString()
+        });
+
         // Only allow GET requests
         if (request.method !== 'GET') {
+            logSuspiciousActivity(
+                'invalid_headers',
+                {
+                    reason: 'Invalid HTTP method',
+                    method: request.method,
+                    requestId
+                },
+                request.headers.get('x-forwarded-for')?.split(',')[0]?.trim(),
+                request.headers.get('user-agent')
+            );
+
             const errorResponse: ErrorResponse = {
                 success: false,
                 error: 'METHOD_NOT_ALLOWED',
                 message: 'Only GET requests are allowed',
             };
 
+            requestTimer.end(false);
             return new Response(JSON.stringify(errorResponse), {
                 status: 405,
                 headers: {
@@ -76,62 +106,114 @@ export default async function handler(request: Request): Promise<Response> {
             });
         }
 
-        // Extract user identification from request headers
+        // Extract user identification from request headers with enhanced validation
         let userIdentifier: UserIdentifier;
         try {
+            console.log('[API] Starting user identification process', {
+                timestamp: new Date().toISOString()
+            });
+
             userIdentifier = createUserIdentifierFromHeaders(request.headers);
 
             // Validate the user identifier
             if (!isValidUserIdentifier(userIdentifier)) {
-                console.warn('Invalid user identifier generated:', userIdentifier);
-                // Continue with a fallback identifier rather than failing
+                console.warn('[API] Invalid user identifier generated, using secure fallback', {
+                    ip: userIdentifier.ip,
+                    hasFingerprint: !!userIdentifier.fingerprint,
+                    hashLength: userIdentifier.hash?.length || 0,
+                    timestamp: new Date().toISOString()
+                });
+
+                // Use a more secure fallback identifier
+                const fallbackIP = userIdentifier.ip !== '0.0.0.0' ? userIdentifier.ip : '127.0.0.1';
                 userIdentifier = {
-                    ip: '0.0.0.0',
+                    ip: fallbackIP,
                     fingerprint: null,
-                    hash: 'fallback-hash'
+                    hash: `secure-fallback-${Date.now()}-${Math.random().toString(36).substring(2)}`
                 };
             }
 
-            console.log('User identified:', {
+            console.log('[API] User identification successful', {
                 ip: userIdentifier.ip,
                 hasFingerprint: !!userIdentifier.fingerprint,
-                hash: userIdentifier.hash.substring(0, 8) + '...' // Log partial hash for debugging
+                hashPrefix: userIdentifier.hash.substring(0, 8) + '...',
+                timestamp: new Date().toISOString()
             });
 
         } catch (identificationError) {
-            console.error('User identification failed:', identificationError);
-
-            // Fallback identification using basic IP extraction
             const fallbackIP = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
                 request.headers.get('x-real-ip') ||
-                '0.0.0.0';
+                request.headers.get('x-client-ip') ||
+                '127.0.0.1';
+
+            // Log user identification failure for monitoring
+            logUserIdentificationFailure(
+                identificationError.message,
+                true,
+                fallbackIP,
+                request.headers.get('user-agent')
+            );
+
+            console.error('[API] User identification failed with error', {
+                error: identificationError.message,
+                requestId,
+                timestamp: new Date().toISOString()
+            });
+
+            // Validate the fallback IP
+            const validatedFallbackIP = validateAndSanitizeIP(fallbackIP) || '127.0.0.1';
 
             userIdentifier = {
-                ip: fallbackIP,
+                ip: validatedFallbackIP,
                 fingerprint: null,
-                hash: `fallback-${fallbackIP.replace(/\./g, '-')}`
+                hash: `error-fallback-${Date.now()}-${Math.random().toString(36).substring(2)}`
             };
 
-            console.log('Using fallback identification:', userIdentifier);
+            console.log('[API] Using enhanced fallback identification', {
+                ip: userIdentifier.ip,
+                hashPrefix: userIdentifier.hash.substring(0, 8) + '...',
+                requestId,
+                timestamp: new Date().toISOString()
+            });
         }
 
         // Check and process rate limiting
         let rateLimitResult: RateLimitCheckResult;
+        const rateLimitTimer = createTimer('rate-limit-check');
+
         try {
             rateLimitResult = await processRequestWithRateLimit(userIdentifier.hash);
+            rateLimitTimer.end(true);
 
-            console.log('Rate limit check result:', {
+            console.log('[API] Rate limit check result:', {
                 allowed: rateLimitResult.allowed,
                 dailyRemaining: rateLimitResult.rateLimitState.dailyRemaining,
                 monthlyRemaining: rateLimitResult.rateLimitState.monthlyRemaining,
                 isBlocked: rateLimitResult.rateLimitState.isBlocked,
-                blockType: rateLimitResult.rateLimitState.blockType
+                blockType: rateLimitResult.rateLimitState.blockType,
+                requestId,
+                timestamp: new Date().toISOString()
             });
 
         } catch (rateLimitError) {
-            console.error('Rate limiting failed:', rateLimitError);
+            rateLimitTimer.end(false);
 
-            // Return error response when rate limiting fails
+            // Log API error for monitoring
+            logAPIError(
+                '/api/random',
+                rateLimitError,
+                503,
+                userIdentifier.hash,
+                userIdentifier.ip,
+                requestTimer.end(false)
+            );
+
+            console.error('[API] Rate limiting failed:', {
+                error: rateLimitError.message,
+                requestId,
+                timestamp: new Date().toISOString()
+            });
+
             const errorResponse: ErrorResponse = {
                 success: false,
                 error: 'RATE_LIMIT_ERROR',
@@ -149,6 +231,17 @@ export default async function handler(request: Request): Promise<Response> {
 
         // Check if request is blocked by rate limits
         if (!rateLimitResult.allowed) {
+            // Log rate limit violation with full context for monitoring
+            logRateLimitViolation(
+                userIdentifier.hash,
+                userIdentifier.ip,
+                rateLimitResult.rateLimitState.blockType!,
+                rateLimitResult.rateLimitState.blockType === 'daily' ?
+                    rateLimitResult.rateLimitState.dailyCount :
+                    rateLimitResult.rateLimitState.monthlyCount,
+                request.headers.get('user-agent')
+            );
+
             const rateLimitInfo: RateLimitInfo = {
                 dailyRemaining: rateLimitResult.rateLimitState.dailyRemaining,
                 monthlyRemaining: rateLimitResult.rateLimitState.monthlyRemaining,
@@ -166,6 +259,15 @@ export default async function handler(request: Request): Promise<Response> {
 
             const rateLimitHeaders = getRateLimitHeaders(rateLimitResult.rateLimitState);
 
+            console.log('[API] Request blocked by rate limit', {
+                userHash: userIdentifier.hash.substring(0, 8) + '...',
+                ip: userIdentifier.ip,
+                blockType: rateLimitResult.rateLimitState.blockType,
+                requestId,
+                timestamp: new Date().toISOString()
+            });
+
+            requestTimer.end(false);
             return new Response(JSON.stringify(errorResponse), {
                 status: 429,
                 headers: {
@@ -186,10 +288,34 @@ export default async function handler(request: Request): Promise<Response> {
 
         // Load and serve actual server data
         let serverData: ServerData;
+        const dataTimer = createTimer('server-data-fetch');
+
         try {
             serverData = await getRandomServerData();
+            dataTimer.end(true);
+
+            console.log('[API] Server data loaded successfully', {
+                requestId,
+                timestamp: new Date().toISOString()
+            });
         } catch (dataError) {
-            console.error('Failed to load server data:', dataError);
+            dataTimer.end(false);
+
+            // Log API error for monitoring
+            logAPIError(
+                '/api/random',
+                dataError,
+                503,
+                userIdentifier.hash,
+                userIdentifier.ip,
+                requestTimer.end(false)
+            );
+
+            console.error('[API] Failed to load server data:', {
+                error: dataError.message,
+                requestId,
+                timestamp: new Date().toISOString()
+            });
 
             const errorResponse: ErrorResponse = {
                 success: false,
@@ -218,6 +344,18 @@ export default async function handler(request: Request): Promise<Response> {
 
         const rateLimitHeaders = getRateLimitHeaders(rateLimitResult.rateLimitState);
 
+        // Log successful request completion
+        const requestDuration = requestTimer.end(true);
+        console.log('[API] Request completed successfully', {
+            requestId,
+            duration: requestDuration,
+            userHash: userIdentifier.hash.substring(0, 8) + '...',
+            ip: userIdentifier.ip,
+            dailyRemaining: rateLimitResult.rateLimitState.dailyRemaining,
+            monthlyRemaining: rateLimitResult.rateLimitState.monthlyRemaining,
+            timestamp: new Date().toISOString()
+        });
+
         return new Response(JSON.stringify(successResponse), {
             status: 200,
             headers: {
@@ -228,7 +366,22 @@ export default async function handler(request: Request): Promise<Response> {
         });
 
     } catch (error) {
-        console.error('Edge Function error:', error);
+        // Log critical API error for monitoring
+        logAPIError(
+            '/api/random',
+            error,
+            500,
+            undefined, // userHash may not be available
+            request.headers.get('x-forwarded-for')?.split(',')[0]?.trim(),
+            requestTimer.end(false)
+        );
+
+        console.error('[API] Critical Edge Function error:', {
+            error: error.message,
+            stack: error.stack,
+            requestId,
+            timestamp: new Date().toISOString()
+        });
 
         const errorResponse: ErrorResponse = {
             success: false,

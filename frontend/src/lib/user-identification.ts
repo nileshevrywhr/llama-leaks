@@ -1,7 +1,18 @@
 /**
  * User identification utilities for rate limiting
  * Handles IP extraction, browser fingerprinting, and composite user identification
+ * Includes security validation and sanitization
  */
+
+import {
+    validateAndSanitizeIP,
+    validateAndSanitizeUserAgent,
+    validateAndSanitizeAcceptLanguage,
+    validateAndSanitizeAcceptEncoding,
+    validateAndSanitizeCustomHeader,
+    validateRequestHeaders,
+    isLegitimateRequest
+} from './input-validation';
 
 /**
  * Interface for browser fingerprint data
@@ -15,44 +26,80 @@ export interface FingerprintData {
 }
 
 /**
- * Extracts the real IP address from Vercel request headers
+ * Extracts the real IP address from Vercel request headers with validation and sanitization
  * Handles X-Forwarded-For chains and various proxy scenarios
  */
 export function extractIPFromHeaders(headers: Headers): string {
+    console.log('[UserID] Extracting IP from headers', {
+        timestamp: new Date().toISOString()
+    });
+
     // Try X-Forwarded-For first (most common for proxied requests)
     const xForwardedFor = headers.get('x-forwarded-for');
     if (xForwardedFor) {
+        console.log('[UserID] Found X-Forwarded-For header', {
+            headerLength: xForwardedFor.length,
+            timestamp: new Date().toISOString()
+        });
+
         // X-Forwarded-For can contain multiple IPs: "client, proxy1, proxy2"
         // The first IP is typically the original client IP
         const ips = xForwardedFor.split(',').map(ip => ip.trim());
-        const clientIP = ips[0];
-
-        // Validate that it's a proper IP address (basic validation)
-        if (isValidIP(clientIP)) {
-            return clientIP;
+        for (const ip of ips) {
+            const validatedIP = validateAndSanitizeIP(ip);
+            if (validatedIP) {
+                console.log('[UserID] Valid IP found in X-Forwarded-For', {
+                    ip: validatedIP,
+                    timestamp: new Date().toISOString()
+                });
+                return validatedIP;
+            }
         }
     }
 
     // Try X-Real-IP (used by some proxies)
     const xRealIP = headers.get('x-real-ip');
-    if (xRealIP && isValidIP(xRealIP.trim())) {
-        return xRealIP.trim();
+    if (xRealIP) {
+        const validatedIP = validateAndSanitizeIP(xRealIP.trim());
+        if (validatedIP) {
+            console.log('[UserID] Valid IP found in X-Real-IP', {
+                ip: validatedIP,
+                timestamp: new Date().toISOString()
+            });
+            return validatedIP;
+        }
     }
 
     // Try X-Client-IP (less common but sometimes used)
     const xClientIP = headers.get('x-client-ip');
-    if (xClientIP && isValidIP(xClientIP.trim())) {
-        return xClientIP.trim();
+    if (xClientIP) {
+        const validatedIP = validateAndSanitizeIP(xClientIP.trim());
+        if (validatedIP) {
+            console.log('[UserID] Valid IP found in X-Client-IP', {
+                ip: validatedIP,
+                timestamp: new Date().toISOString()
+            });
+            return validatedIP;
+        }
     }
 
     // Try CF-Connecting-IP (Cloudflare specific, but might be present)
     const cfConnectingIP = headers.get('cf-connecting-ip');
-    if (cfConnectingIP && isValidIP(cfConnectingIP.trim())) {
-        return cfConnectingIP.trim();
+    if (cfConnectingIP) {
+        const validatedIP = validateAndSanitizeIP(cfConnectingIP.trim());
+        if (validatedIP) {
+            console.log('[UserID] Valid IP found in CF-Connecting-IP', {
+                ip: validatedIP,
+                timestamp: new Date().toISOString()
+            });
+            return validatedIP;
+        }
     }
 
     // Fallback to a default IP if no valid IP is found
-    // This should rarely happen in production but provides a safe fallback
+    console.warn('[UserID] No valid IP found in headers, using fallback', {
+        timestamp: new Date().toISOString()
+    });
     return '0.0.0.0';
 }
 
@@ -85,27 +132,60 @@ function isValidIP(ip: string): boolean {
     return false;
 }
 /**
- * E
-xtracts browser fingerprint data from request headers
+ * Extracts browser fingerprint data from request headers with validation and sanitization
  * Creates a consistent fingerprint from browser characteristics
  */
 export function extractFingerprintFromHeaders(headers: Headers): FingerprintData {
-    const userAgent = headers.get('user-agent') || '';
-    const acceptLanguage = headers.get('accept-language') || '';
-    const acceptEncoding = headers.get('accept-encoding') || '';
+    console.log('[UserID] Extracting fingerprint from headers', {
+        timestamp: new Date().toISOString()
+    });
+
+    // Validate and sanitize core headers
+    const userAgent = validateAndSanitizeUserAgent(headers.get('user-agent') || '') || '';
+    const acceptLanguage = validateAndSanitizeAcceptLanguage(headers.get('accept-language') || '') || '';
+    const acceptEncoding = validateAndSanitizeAcceptEncoding(headers.get('accept-encoding') || '') || '';
 
     // Optional fields that might be provided by client-side code
-    const screenResolution = headers.get('x-screen-resolution') || undefined;
-    const timezoneOffsetHeader = headers.get('x-timezone-offset');
-    const timezoneOffset = timezoneOffsetHeader ? parseInt(timezoneOffsetHeader, 10) : undefined;
+    const screenResolutionRaw = headers.get('x-screen-resolution');
+    const screenResolution = screenResolutionRaw ?
+        validateAndSanitizeCustomHeader(screenResolutionRaw, 'x-screen-resolution', 32) : undefined;
 
-    return {
+    const timezoneOffsetHeader = headers.get('x-timezone-offset');
+    let timezoneOffset: number | undefined = undefined;
+
+    if (timezoneOffsetHeader) {
+        const sanitizedOffset = validateAndSanitizeCustomHeader(timezoneOffsetHeader, 'x-timezone-offset', 16);
+        if (sanitizedOffset && /^-?\d+$/.test(sanitizedOffset)) {
+            const parsed = parseInt(sanitizedOffset, 10);
+            if (!isNaN(parsed) && parsed >= -720 && parsed <= 720) { // Valid timezone offset range
+                timezoneOffset = parsed;
+            } else {
+                console.warn('[UserID] Invalid timezone offset value', {
+                    value: sanitizedOffset,
+                    timestamp: new Date().toISOString()
+                });
+            }
+        }
+    }
+
+    const fingerprintData: FingerprintData = {
         userAgent,
         acceptLanguage,
         acceptEncoding,
         screenResolution,
-        timezoneOffset: isNaN(timezoneOffset as number) ? undefined : timezoneOffset,
+        timezoneOffset
     };
+
+    console.log('[UserID] Extracted fingerprint data', {
+        hasUserAgent: !!userAgent,
+        hasAcceptLanguage: !!acceptLanguage,
+        hasAcceptEncoding: !!acceptEncoding,
+        hasScreenResolution: !!screenResolution,
+        hasTimezoneOffset: timezoneOffset !== undefined,
+        timestamp: new Date().toISOString()
+    });
+
+    return fingerprintData;
 }
 
 /**
@@ -281,19 +361,68 @@ export async function generateUserIdentifierAsync(ip: string, fingerprint: strin
 }
 
 /**
- * Creates a complete user identifier from request headers
+ * Creates a complete user identifier from request headers with comprehensive validation
  * Extracts IP and fingerprint, then generates composite hash
  * Implements fallback to IP-only identification when fingerprinting fails
  */
 export function createUserIdentifierFromHeaders(headers: Headers): UserIdentifier {
-    // Extract IP address
+    console.log('[UserID] Creating user identifier from headers', {
+        timestamp: new Date().toISOString()
+    });
+
+    // First validate the request headers for security issues
+    const validation = validateRequestHeaders(headers);
+
+    if (!validation.valid) {
+        console.error('[UserID] Request header validation failed', {
+            errorCount: validation.errors.length,
+            errors: validation.errors.map(e => ({ type: e.type, field: e.field, message: e.message })),
+            timestamp: new Date().toISOString()
+        });
+
+        // Use fallback identification for invalid headers
+        return {
+            ip: '0.0.0.0',
+            fingerprint: null,
+            hash: 'invalid-headers-fallback'
+        };
+    }
+
+    if (validation.warnings.length > 0) {
+        console.warn('[UserID] Request header validation warnings', {
+            warningCount: validation.warnings.length,
+            warnings: validation.warnings,
+            timestamp: new Date().toISOString()
+        });
+    }
+
+    // Check if the request appears to be from a legitimate browser
+    const isLegitimate = isLegitimateRequest(headers);
+    if (!isLegitimate) {
+        console.warn('[UserID] Request does not appear to be from a legitimate browser', {
+            timestamp: new Date().toISOString()
+        });
+        // Continue processing but log for monitoring
+    }
+
+    // Extract IP address using validated headers
     const ip = extractIPFromHeaders(headers);
 
-    // Try to create browser fingerprint
+    // Try to create browser fingerprint using validated headers
     const fingerprint = createBrowserFingerprint(headers);
 
     // Generate composite identifier (will fallback to IP-only if fingerprint is null)
-    return generateUserIdentifier(ip, fingerprint);
+    const userIdentifier = generateUserIdentifier(ip, fingerprint);
+
+    console.log('[UserID] Created user identifier', {
+        hasValidIP: ip !== '0.0.0.0',
+        hasFingerprint: !!fingerprint,
+        hashLength: userIdentifier.hash.length,
+        isLegitimate,
+        timestamp: new Date().toISOString()
+    });
+
+    return userIdentifier;
 }
 
 /**
