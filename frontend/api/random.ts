@@ -87,7 +87,7 @@ export default async function handler(request: Request): Promise<Response> {
                     requestId
                 },
                 request.headers.get('x-forwarded-for')?.split(',')[0]?.trim(),
-                request.headers.get('user-agent')
+                request.headers.get('user-agent') || undefined
             );
 
             const errorResponse: ErrorResponse = {
@@ -151,7 +151,7 @@ export default async function handler(request: Request): Promise<Response> {
                 identificationError.message,
                 true,
                 fallbackIP,
-                request.headers.get('user-agent')
+                request.headers.get('user-agent') || undefined
             );
 
             console.error('[API] User identification failed with error', {
@@ -239,7 +239,7 @@ export default async function handler(request: Request): Promise<Response> {
                 rateLimitResult.rateLimitState.blockType === 'daily' ?
                     rateLimitResult.rateLimitState.dailyCount :
                     rateLimitResult.rateLimitState.monthlyCount,
-                request.headers.get('user-agent')
+                request.headers.get('user-agent') || undefined
             );
 
             const rateLimitInfo: RateLimitInfo = {

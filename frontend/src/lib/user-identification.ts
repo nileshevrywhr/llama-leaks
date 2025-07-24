@@ -264,10 +264,9 @@ export function createBrowserFingerprint(headers: Headers): string | null {
         console.error('Browser fingerprinting failed:', error);
         return null;
     }
-}/
-    **
+}/**
  * Interface for user identifier data
-    */
+ */
 export interface UserIdentifier {
         ip: string;
         fingerprint: string | null;
@@ -295,7 +294,7 @@ async function createSHA256Hash(data: string): Promise<string> {
             return crypto.createHash('sha256').update(data).digest('hex');
         }
 
-        // Fallback to simple hash if crypto is not available
+        // Fallback to simple hash if crypto is not via available
         return simpleHash(data);
     } catch (error) {
         // If any crypto operation fails, fallback to simple hash
