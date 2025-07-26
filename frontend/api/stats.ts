@@ -47,7 +47,10 @@ export default async function handler(request: Request): Promise<Response> {
         // Get aggregate statistics using shared cache
         let statistics: StatisticsData;
         try {
-            statistics = await getServerStatistics();
+            // Pass the request URL to help with data loading
+            const requestUrl = new URL(request.url);
+            const baseUrl = `${requestUrl.protocol}//${requestUrl.host}`;
+            statistics = await getServerStatistics(baseUrl);
         } catch (statisticsError) {
             console.error('Failed to calculate server statistics:', statisticsError);
 

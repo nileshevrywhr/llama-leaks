@@ -54,38 +54,78 @@ let cacheTime = 0;
 
 /**
  * Load and parse the live servers JSON file
+ * @param baseUrl Optional base URL to help with data loading
  * @returns Promise resolving to parsed server data
  */
-async function loadServerData(): Promise<Record<string, RawServerData>> {
+async function loadServerData(baseUrl?: string): Promise<Record<string, RawServerData>> {
     try {
-        // In Vercel Edge Functions, we need to fetch the file from the deployed URL
-        // The file should be accessible at the root domain + path
-        const baseUrl = process.env.VERCEL_URL
-            ? `https://${process.env.VERCEL_URL}`
-            : 'http://localhost:5173'; // Fallback for local development
+        // Try multiple approaches to load the data
+        const attempts = [
+            // Attempt 1: Use baseUrl if provided (from request context)
+            ...(baseUrl ? [`${baseUrl}/data/live_servers.json`] : []),
+            // Attempt 2: Use relative path (works in many Vercel deployments)
+            '/data/live_servers.json',
+            // Attempt 3: Use VERCEL_URL if available
+            ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}/data/live_servers.json`] : []),
+            // Attempt 4: Use localhost for development
+            ...(process.env.NODE_ENV === 'development' ? ['http://localhost:5173/data/live_servers.json'] : []),
+            // Attempt 5: Try common production URLs
+            'https://llama-leaks.vercel.app/data/live_servers.json',
+            'https://llama-leaks.onrender.com/data/live_servers.json'
+        ];
 
-        const dataUrl = `${baseUrl}/data/live_servers.json`;
+        let lastError: Error | null = null;
 
-        console.log('Loading server data from:', dataUrl);
+        for (const dataUrl of attempts) {
+            try {
+                console.log(`Attempting to load server data from: ${dataUrl}`);
 
-        const response = await fetch(dataUrl);
+                const response = await fetch(dataUrl, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Cache-Control': 'no-cache'
+                    },
+                    // Add timeout to prevent hanging
+                    signal: AbortSignal.timeout(10000) // 10 second timeout
+                });
 
-        if (!response.ok) {
-            throw new Error(`Failed to fetch server data: ${response.status} ${response.statusText}`);
+                if (!response.ok) {
+                    console.warn(`Failed to fetch from ${dataUrl}: ${response.status} ${response.statusText}`);
+                    lastError = new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    continue;
+                }
+
+                const data = await response.json();
+
+                if (!data || typeof data !== 'object') {
+                    console.warn(`Invalid data format from ${dataUrl}`);
+                    lastError = new Error('Invalid server data format');
+                    continue;
+                }
+
+                const serverCount = Object.keys(data).length;
+                if (serverCount === 0) {
+                    console.warn(`No servers found in data from ${dataUrl}`);
+                    lastError = new Error('No servers available in data file');
+                    continue;
+                }
+
+                console.log(`Successfully loaded ${serverCount} servers from: ${dataUrl}`);
+                return data;
+
+            } catch (fetchError) {
+                console.warn(`Error fetching from ${dataUrl}:`, fetchError.message);
+                lastError = fetchError;
+                continue;
+            }
         }
 
-        const data = await response.json();
+        // If all attempts failed, throw the last error
+        throw lastError || new Error('All data loading attempts failed');
 
-        if (!data || typeof data !== 'object') {
-            throw new Error('Invalid server data format');
-        }
-
-        console.log(`Loaded ${Object.keys(data).length} servers from data file`);
-
-        return data;
     } catch (error) {
-        console.error('Error loading server data:', error);
-        throw new Error('Failed to load server data');
+        console.error('Critical error loading server data:', error);
+        throw new Error(`Failed to load server data: ${error.message}`);
     }
 }
 
@@ -117,9 +157,10 @@ function formatServerData(hash: string, rawData: RawServerData): ServerData {
 
 /**
  * Get cached server data with automatic cache refresh
+ * @param baseUrl Optional base URL to help with data loading
  * @returns Promise resolving to array of ServerData objects
  */
-export async function getCachedServerData(): Promise<ServerData[]> {
+export async function getCachedServerData(baseUrl?: string): Promise<ServerData[]> {
     const now = Date.now();
 
     // Check if cache is valid
@@ -132,7 +173,7 @@ export async function getCachedServerData(): Promise<ServerData[]> {
         console.log('Cache expired or empty, loading fresh data');
 
         // Load fresh data
-        const rawServersData = await loadServerData();
+        const rawServersData = await loadServerData(baseUrl);
         const serverHashes = Object.keys(rawServersData);
 
         if (serverHashes.length === 0) {
@@ -168,10 +209,11 @@ export async function getCachedServerData(): Promise<ServerData[]> {
 
 /**
  * Get a random server from cached data
+ * @param baseUrl Optional base URL to help with data loading
  * @returns Promise resolving to a random ServerData object
  */
-export async function getRandomServerData(): Promise<ServerData> {
-    const servers = await getCachedServerData();
+export async function getRandomServerData(baseUrl?: string): Promise<ServerData> {
+    const servers = await getCachedServerData(baseUrl);
 
     if (servers.length === 0) {
         throw new Error('No servers available');
@@ -183,15 +225,16 @@ export async function getRandomServerData(): Promise<ServerData> {
 
 /**
  * Calculate aggregate statistics from cached server data
+ * @param baseUrl Optional base URL to help with data loading
  * @returns Promise resolving to statistics object
  */
-export async function getServerStatistics(): Promise<{
+export async function getServerStatistics(baseUrl?: string): Promise<{
     totalServers: number;
     liveServers: number;
     newToday: number;
     latestFindMinutes: number;
 }> {
-    const servers = await getCachedServerData();
+    const servers = await getCachedServerData(baseUrl);
     const now = new Date();
     const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
 

@@ -85,6 +85,13 @@ export async function getRateLimitData(userHash: string): Promise<RateLimitState
     const monthlyKey = getMonthlyCounterKey(userHash);
 
     // Get both counters using safe KV operations
+    console.log('[RateLimit] Attempting to get rate limit data', {
+        userHash: userHash.substring(0, 8) + '...',
+        dailyKey,
+        monthlyKey,
+        timestamp: new Date().toISOString()
+    });
+
     const [dailyData, monthlyData] = await Promise.all([
         safeKVOperation(
             () => kvClient.get<RateLimitData>(dailyKey),
@@ -96,6 +103,15 @@ export async function getRateLimitData(userHash: string): Promise<RateLimitState
         )
     ]);
 
+    console.log('[RateLimit] KV operation results', {
+        userHash: userHash.substring(0, 8) + '...',
+        dailyDataResult: dailyData,
+        monthlyDataResult: monthlyData,
+        dailyDataIsNull: dailyData === null,
+        monthlyDataIsNull: monthlyData === null,
+        timestamp: new Date().toISOString()
+    });
+
     // If either operation failed, return fallback state
     if (dailyData === null || monthlyData === null) {
         console.warn('[RateLimit] Failed to retrieve rate limit data, using fallback state', {
@@ -104,7 +120,25 @@ export async function getRateLimitData(userHash: string): Promise<RateLimitState
             monthlyDataAvailable: monthlyData !== null,
             timestamp: new Date().toISOString()
         });
-        return fallbackState;
+
+        // For now, treat null as "no data exists yet" (new user)
+        // This allows the system to work even if KV has issues
+        const dailyCount = 0;
+        const monthlyCount = 0;
+
+        const dailyRemaining = Math.max(0, DAILY_LIMIT - dailyCount);
+        const monthlyRemaining = Math.max(0, MONTHLY_LIMIT - monthlyCount);
+
+        return {
+            dailyCount,
+            monthlyCount,
+            dailyRemaining,
+            monthlyRemaining,
+            dailyResetTime: new Date(Date.now() + getSecondsUntilDailyReset() * 1000),
+            monthlyResetTime: new Date(Date.now() + getSecondsUntilMonthlyReset() * 1000),
+            isBlocked: false,
+            blockType: null
+        };
     }
 
     const dailyCount = dailyData?.count || 0;
@@ -174,16 +208,26 @@ export async function incrementRateLimitCounters(userHash: string): Promise<Rate
         )
     ]);
 
-    // If we can't get current values, return current state without incrementing
-    if (dailyData === null || monthlyData === null) {
-        console.error('[RateLimit] Failed to get current counter values, not incrementing', {
-            userHash: userHash.substring(0, 8) + '...',
-            dailyDataAvailable: dailyData !== null,
-            monthlyDataAvailable: monthlyData !== null,
-            timestamp: new Date().toISOString()
-        });
-        return getRateLimitData(userHash);
-    }
+    console.log('[RateLimit] Retrieved current counter values for increment', {
+        userHash: userHash.substring(0, 8) + '...',
+        dailyData,
+        monthlyData,
+        dailyDataIsNull: dailyData === null,
+        monthlyDataIsNull: monthlyData === null,
+        timestamp: new Date().toISOString()
+    });
+
+    // If we can't get current values, treat as new user (start from 0)
+    // This allows the system to work even if KV has temporary issues
+    const currentDailyData = dailyData || { count: 0, firstRequest: now, lastRequest: now };
+    const currentMonthlyData = monthlyData || { count: 0, firstRequest: now, lastRequest: now };
+
+    console.log('[RateLimit] Using counter values (with fallbacks)', {
+        userHash: userHash.substring(0, 8) + '...',
+        currentDailyCount: currentDailyData.count,
+        currentMonthlyCount: currentMonthlyData.count,
+        timestamp: new Date().toISOString()
+    });
 
     // Prepare new counter data
     const newDailyData: RateLimitData = {
@@ -198,25 +242,42 @@ export async function incrementRateLimitCounters(userHash: string): Promise<Rate
         lastRequest: now
     };
 
-    // Atomic update using pipeline with safe operation wrapper
-    const pipelineResult = await safeKVOperation(
-        async () => {
-            const pipeline = kvClient.pipeline();
-            pipeline.set(dailyKey, newDailyData, { ex: dailyTTL });
-            pipeline.set(monthlyKey, newMonthlyData, { ex: monthlyTTL });
-            return await pipeline.exec();
-        },
-        `increment-counters-${userHash.substring(0, 8)}`,
-        1 // Only retry once for atomic operations
-    );
+    // Try to update counters individually (more reliable than pipeline)
+    const [dailySetResult, monthlySetResult] = await Promise.all([
+        safeKVOperation(
+            () => kvClient.set(dailyKey, newDailyData, { ex: dailyTTL }),
+            `set-daily-counter-${userHash.substring(0, 8)}`
+        ),
+        safeKVOperation(
+            () => kvClient.set(monthlyKey, newMonthlyData, { ex: monthlyTTL }),
+            `set-monthly-counter-${userHash.substring(0, 8)}`
+        )
+    ]);
 
-    // If pipeline failed, return current state without incrementing
-    if (pipelineResult === null) {
-        console.error('[RateLimit] Failed to increment counters atomically, returning current state', {
+    console.log('[RateLimit] Counter update results', {
+        userHash: userHash.substring(0, 8) + '...',
+        dailySetSuccess: dailySetResult !== null,
+        monthlySetSuccess: monthlySetResult !== null,
+        timestamp: new Date().toISOString()
+    });
+
+    // If both operations failed, return current state without incrementing
+    if (dailySetResult === null && monthlySetResult === null) {
+        console.error('[RateLimit] Failed to increment counters, returning current state', {
             userHash: userHash.substring(0, 8) + '...',
             timestamp: new Date().toISOString()
         });
         return getRateLimitData(userHash);
+    }
+
+    // If only one operation failed, we still proceed but log the issue
+    if (dailySetResult === null || monthlySetResult === null) {
+        console.warn('[RateLimit] Partial counter update failure', {
+            userHash: userHash.substring(0, 8) + '...',
+            dailySetSuccess: dailySetResult !== null,
+            monthlySetSuccess: monthlySetResult !== null,
+            timestamp: new Date().toISOString()
+        });
     }
 
     // Return updated state

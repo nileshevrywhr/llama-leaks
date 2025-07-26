@@ -291,7 +291,10 @@ export default async function handler(request: Request): Promise<Response> {
         const dataTimer = createTimer('server-data-fetch');
 
         try {
-            serverData = await getRandomServerData();
+            // Pass the request URL to help with data loading
+            const requestUrl = new URL(request.url);
+            const baseUrl = `${requestUrl.protocol}//${requestUrl.host}`;
+            serverData = await getRandomServerData(baseUrl);
             dataTimer.end(true);
 
             console.log('[API] Server data loaded successfully', {

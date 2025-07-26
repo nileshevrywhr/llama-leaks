@@ -1,6 +1,7 @@
 import { kv } from '@vercel/kv';
 
 // KV connection configuration
+// In Edge Functions, we need to ensure the client is properly initialized
 export const kvClient = kv;
 
 // KV error types for better error handling
