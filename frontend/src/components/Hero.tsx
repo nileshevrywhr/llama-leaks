@@ -95,8 +95,11 @@ const Hero = () => {
         textArea.value = serverUrl;
         document.body.appendChild(textArea);
         textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
+        try {
+          document.execCommand('copy');
+        } finally {
+          document.body.removeChild(textArea);
+        }
       }
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
