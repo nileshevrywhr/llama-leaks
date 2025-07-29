@@ -17,7 +17,7 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
   const { theme } = useTheme();
-  const isDarkMode = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const isDarkMode = theme === 'dark' || (theme === 'system' && typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches);
   const [currentMapStyle, setCurrentMapStyle] = useState<string>('');
 
   const waitForContainer = (): Promise<void> => {
