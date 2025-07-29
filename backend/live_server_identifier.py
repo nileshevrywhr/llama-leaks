@@ -173,7 +173,7 @@ def check_server_sync(ip, port, max_retries=2):
                         if v_resp.status_code == 200:
                             v_data = v_resp.json()
                             results['version'] = v_data.get("version", "unknown")
-                    except:
+                    except Exception:
                         pass
 
                     try:
