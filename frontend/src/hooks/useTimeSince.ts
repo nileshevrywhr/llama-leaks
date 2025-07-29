@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export const useTimeSince = (lastUpdated: Date | null) => {
-  const [timeSinceUpdate, setTimeSinceUpdate] = useState<number>(0);
+  const [timeSinceUpdate, setTimeSinceUpdate] = useState<number>(lastUpdated ? Math.floor((Date.now() - lastUpdated.getTime()) / 1000) : 0);
 
   useEffect(() => {
     const timer = setInterval(() => {
