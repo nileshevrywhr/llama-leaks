@@ -160181,5 +160181,22 @@
       }
     ],
     "age": "2 weeks"
+  },
+  "b678fa77dde442f6b0ba2fa3a0f4af238df5790666bfb2414405f2efc01c92c6": {
+    "port": 8080,
+    "city": "Test City",
+    "country": "Test Country",
+    "country_name": "Test Country Name",
+    "region": "Test Region",
+    "latitude": 0,
+    "longitude": 0,
+    "ip": "127.0.XXX.XXX",
+    "last_observed": "2025-07-29T10:57:03.953789+00:00",
+    "first_seen_online": "2025-07-29T10:57:03.953789+00:00",
+    "status": "unreachable",
+    "version": "unknown",
+    "local": [],
+    "running": [],
+    "age": "0 seconds"
   }
 }

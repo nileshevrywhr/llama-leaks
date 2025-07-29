@@ -239,16 +239,86 @@ def format_timedelta(td):
     weeks = days // 7
     return f"{weeks} week{'s' if weeks != 1 else ''}"
 
+def update_server_info(current_server_info, server_data, now):
+    """Updates server information with new data."""
+    ip, port, city, country, country_name, region, latitude, longitude = server_data
+    masked_ip = mask_ip(ip)
+
+    current_server_info.update({
+        "port": int(port),
+        "city": city,
+        "country": country,
+        "country_name": country_name,
+        "region": region,
+        "latitude": latitude,
+        "longitude": longitude,
+        "ip": masked_ip,
+        "last_observed": now.isoformat()
+    })
+
+def calculate_server_age(current_server_info, now):
+    """Calculates the age of a server based on its first_seen_online timestamp."""
+    if current_server_info.get("first_seen_online"):
+        try:
+            dt_first_seen = datetime.fromisoformat(current_server_info["first_seen_online"])
+            age_td = now - dt_first_seen
+            current_server_info["age"] = format_timedelta(age_td)
+        except ValueError as e:
+            thread_safe_log(logging.ERROR, f"Error parsing timestamp: {e}")
+            current_server_info["age"] = "unknown"
+    else:
+        current_server_info["age"] = "N/A"
+
+def log_live_server_details(masked_ip, port, current_server_info):
+    """Logs details of a live server."""
+    thread_safe_log(logging.INFO, f"Live server found: {masked_ip}:{port}")
+    local_models = current_server_info.get("local", [])
+    if local_models:
+        for idx, model in enumerate(local_models[:3]):  # Log first 3 models
+            name = model.get("name", "N/A")
+            size = model.get("size", "N/A")
+            if isinstance(size, (int, float)):
+                size_gb = size / (1024**3)
+                thread_safe_log(logging.INFO, f"  {idx+1}. {name} ({size_gb:.2f} GB)")
+
+async def process_single_server_async(session, server_data, final_output_servers, now, semaphore):
+    """Processes a single server asynchronously."""
+    async with semaphore:
+        ip, port, _, _, _, _, _, _ = server_data
+        server_hash_key = hash_ip_port(ip, port)
+        masked_ip = mask_ip(ip)
+
+        current_server_info = final_output_servers.get(server_hash_key, {})
+
+        update_server_info(current_server_info, server_data, now)
+
+        is_new_server = server_hash_key not in final_output_servers
+        if is_new_server:
+            current_server_info["first_seen_online"] = now.isoformat()
+
+        check_result = await check_server_async(session, ip, port)
+        current_server_info.update(check_result)
+
+        if check_result['status'] == 'live' and not current_server_info.get("first_seen_online"):
+            current_server_info["first_seen_online"] = now.isoformat()
+
+        calculate_server_age(current_server_info, now)
+
+        if check_result['status'] == 'live':
+            log_live_server_details(masked_ip, port, current_server_info)
+
+        return server_hash_key, current_server_info
+
 async def process_servers_async(servers_to_check, final_output_servers, now):
     """Process servers using async HTTP requests"""
     connector = aiohttp.TCPConnector(
-        limit=100,  # Total connection limit
-        limit_per_host=10,  # Per-host connection limit
-        ttl_dns_cache=300,  # DNS cache TTL
+        limit=100,
+        limit_per_host=10,
+        ttl_dns_cache=300,
         use_dns_cache=True,
     )
     
-    timeout = aiohttp.ClientTimeout(total=5)  # Overall timeout per request
+    timeout = aiohttp.ClientTimeout(total=5)
     
     async with aiohttp.ClientSession(
         connector=connector,
@@ -256,142 +326,52 @@ async def process_servers_async(servers_to_check, final_output_servers, now):
         headers={'Connection': 'close'}
     ) as session:
         
-        semaphore = asyncio.Semaphore(50)  # Limit concurrent requests
+        semaphore = asyncio.Semaphore(50)
         
-        async def process_single_server(server_data):
-            async with semaphore:
-                ip, port, city, country, country_name, region, latitude, longitude = server_data
-                server_hash_key = hash_ip_port(ip, port)
-                masked_ip = mask_ip(ip)
-                
-                # Get existing info or start fresh
-                current_server_info = final_output_servers.get(server_hash_key, {})
-                
-                # Update common fields
-                current_server_info.update({
-                    "port": int(port),
-                    "city": city,
-                    "country": country,
-                    "country_name": country_name,
-                    "region": region,
-                    "latitude": latitude,
-                    "longitude": longitude,
-                    "ip": masked_ip,
-                    "last_observed": now.isoformat()
-                })
-                
-                # Set first_seen_online for new servers
-                is_new_server = server_hash_key not in final_output_servers
-                if is_new_server:
-                    current_server_info["first_seen_online"] = now.isoformat()
-                
-                # Check server status
-                check_result = await check_server_async(session, ip, port)
-                current_server_info.update(check_result)
-                
-                # Update first_seen_online for newly live servers
-                if check_result['status'] == 'live' and not current_server_info.get("first_seen_online"):
-                    current_server_info["first_seen_online"] = now.isoformat()
-                
-                # Calculate age
-                if current_server_info.get("first_seen_online"):
-                    try:
-                        dt_first_seen = datetime.fromisoformat(current_server_info["first_seen_online"])
-                        age_td = now - dt_first_seen
-                        current_server_info["age"] = format_timedelta(age_td)
-                    except ValueError as e:
-                        thread_safe_log(logging.ERROR, f"Error parsing timestamp: {e}")
-                        current_server_info["age"] = "unknown"
-                else:
-                    current_server_info["age"] = "N/A"
-                
-                # Log live servers
-                if check_result['status'] == 'live':
-                    thread_safe_log(logging.INFO, f"Live server found: {masked_ip}:{port}")
-                    local_models = current_server_info.get("local", [])
-                    if local_models:
-                        for idx, model in enumerate(local_models[:3]):  # Log first 3 models
-                            name = model.get("name", "N/A")
-                            size = model.get("size", "N/A")
-                            if isinstance(size, (int, float)):
-                                size_gb = size / (1024**3)
-                                thread_safe_log(logging.INFO, f"  {idx+1}. {name} ({size_gb:.2f} GB)")
-                
-                return server_hash_key, current_server_info
+        tasks = [process_single_server_async(session, server_data, final_output_servers, now, semaphore) for server_data in servers_to_check]
         
-        # Process all servers concurrently
-        tasks = [process_single_server(server_data) for server_data in servers_to_check]
-        
-        # Use tqdm for progress tracking
         results = []
         for task in tqdm(asyncio.as_completed(tasks), total=len(tasks), desc="Checking servers"):
             result = await task
             results.append(result)
-        
+
         return results
+
+def process_single_server_threaded(server_data, final_output_servers, now):
+    """Processes a single server synchronously."""
+    ip, port, _, _, _, _, _, _ = server_data
+    server_hash_key = hash_ip_port(ip, port)
+    masked_ip = mask_ip(ip)
+
+    current_server_info = final_output_servers.get(server_hash_key, {})
+
+    update_server_info(current_server_info, server_data, now)
+
+    is_new_server = server_hash_key not in final_output_servers
+    if is_new_server:
+        current_server_info["first_seen_online"] = now.isoformat()
+
+    check_result = check_server_sync(ip, port, max_retries=1)
+    current_server_info.update(check_result)
+
+    if check_result['status'] == 'live' and not current_server_info.get("first_seen_online"):
+        current_server_info["first_seen_online"] = now.isoformat()
+
+    calculate_server_age(current_server_info, now)
+
+    if check_result['status'] == 'live':
+        log_live_server_details(masked_ip, port, current_server_info)
+
+    return server_hash_key, current_server_info
 
 def process_servers_threaded(servers_to_check, final_output_servers, now, max_workers=50):
     """Process servers using ThreadPoolExecutor for CPU-bound work"""
     results = []
     
-    def process_single_server(server_data):
-        ip, port, city, country, country_name, region, latitude, longitude = server_data
-        server_hash_key = hash_ip_port(ip, port)
-        masked_ip = mask_ip(ip)
-        
-        # Get existing info or start fresh
-        current_server_info = final_output_servers.get(server_hash_key, {})
-        
-        # Update common fields
-        current_server_info.update({
-            "port": int(port),
-            "city": city,
-            "country": country,
-            "country_name": country_name,
-            "region": region,
-            "latitude": latitude,
-            "longitude": longitude,
-            "ip": masked_ip,
-            "last_observed": now.isoformat()
-        })
-        
-        # Set first_seen_online for new servers
-        is_new_server = server_hash_key not in final_output_servers
-        if is_new_server:
-            current_server_info["first_seen_online"] = now.isoformat()
-        
-        # Check server status
-        check_result = check_server_sync(ip, port, max_retries=1)  # Reduced retries
-        current_server_info.update(check_result)
-        
-        # Update first_seen_online for newly live servers
-        if check_result['status'] == 'live' and not current_server_info.get("first_seen_online"):
-            current_server_info["first_seen_online"] = now.isoformat()
-        
-        # Calculate age
-        if current_server_info.get("first_seen_online"):
-            try:
-                dt_first_seen = datetime.fromisoformat(current_server_info["first_seen_online"])
-                age_td = now - dt_first_seen
-                current_server_info["age"] = format_timedelta(age_td)
-            except ValueError as e:
-                thread_safe_log(logging.ERROR, f"Error parsing timestamp: {e}")
-                current_server_info["age"] = "unknown"
-        else:
-            current_server_info["age"] = "N/A"
-        
-        # Log live servers
-        if check_result['status'] == 'live':
-            thread_safe_log(logging.INFO, f"Live server found: {masked_ip}:{port}")
-        
-        return server_hash_key, current_server_info
-    
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        # Submit all tasks
-        future_to_server = {executor.submit(process_single_server, server_data): server_data 
+        future_to_server = {executor.submit(process_single_server_threaded, server_data, final_output_servers, now): server_data
                            for server_data in servers_to_check}
         
-        # Process completed tasks with progress bar
         for future in tqdm(as_completed(future_to_server), total=len(servers_to_check), desc="Checking servers"):
             try:
                 result = future.result()
