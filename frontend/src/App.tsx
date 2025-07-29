@@ -21,7 +21,7 @@ import Legal from "./pages/Legal";
 import { ThemeProvider } from "./providers/theme-provider";
 
 // Create Sentry-wrapped Router component for automatic route tracking
-const SentryBrowserRouter = Sentry.withSentryRouting(BrowserRouter);
+const SentryBrowserRouter = Sentry.withSentryReactRouterV6Routing(BrowserRouter);
 
 const queryClient = new QueryClient();
 
