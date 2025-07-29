@@ -37,7 +37,7 @@ const SentryTestButton = () => {
 
     // Simulate some work
     setTimeout(() => {
-      span.end();
+      span?.end();
       alert('Performance span completed!');
     }, 1000);
   };
