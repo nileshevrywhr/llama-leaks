@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { useTheme } from '@/providers/theme-provider';
 import { MapPin, Loader2, AlertCircle } from "lucide-react";
 
 interface MapProps {
@@ -15,38 +16,9 @@ const Map = ({ latitude, longitude, city, country }: MapProps) => {
   const map = useRef<mapboxgl.Map | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const { theme } = useTheme();
+  const isDarkMode = theme === 'dark' || (theme === 'system' && typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches);
   const [currentMapStyle, setCurrentMapStyle] = useState<string>('');
-
-  // Theme detection logic that matches ThemeToggle component
-  const detectTheme = () => {
-    const theme = localStorage.getItem("theme");
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    return theme === "dark" || (!theme && systemPrefersDark);
-  };
-
-  // Initialize theme on component mount
-  useEffect(() => {
-    setIsDarkMode(detectTheme());
-  }, []);
-
-  // Listen for theme changes (storage events and manual updates)
-  useEffect(() => {
-    const handleThemeChange = () => {
-      setIsDarkMode(detectTheme());
-    };
-
-    // Listen for localStorage changes from other tabs/windows
-    window.addEventListener('storage', handleThemeChange);
-    
-    // Listen for manual theme changes (custom event)
-    window.addEventListener('themeChange', handleThemeChange);
-
-    return () => {
-      window.removeEventListener('storage', handleThemeChange);
-      window.removeEventListener('themeChange', handleThemeChange);
-    };
-  }, []);
 
   const waitForContainer = (): Promise<void> => {
     return new Promise((resolve, reject) => {
