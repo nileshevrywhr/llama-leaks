@@ -148,60 +148,62 @@ def check_server_sync(ip, port, max_retries=2):
         'running': []
     }
     
-    for attempt in range(max_retries):
-        try:
-            # Check if server is live with shorter timeout
-            resp = session.get(f"http://{ip}:{port}/api/ps", timeout=2)
-            if resp.status_code == 200:
-                results['status'] = 'live'
-                ps_data = resp.json()
-                
-                # Extract running models
-                models = []
-                for m in ps_data.get("models", []):
-                    models.append({
-                        "name": m.get("name"),
-                        "model": m.get("model"),
-                        "size": m.get("size")
-                    })
-                results['running'] = models
-                
-                # Get version and local models quickly
-                try:
-                    v_resp = session.get(f"http://{ip}:{port}/api/version", timeout=2)
-                    if v_resp.status_code == 200:
-                        v_data = v_resp.json()
-                        results['version'] = v_data.get("version", "unknown")
-                except:
-                    pass
-                
-                try:
-                    t_resp = session.get(f"http://{ip}:{port}/api/tags", timeout=2)
-                    if t_resp.status_code == 200:
-                        t_data = t_resp.json()
-                        models = []
-                        for m in t_data.get("models", []):
-                            models.append({
-                                "name": m.get("name"),
-                                "model": m.get("model"),
-                                "size": m.get("size")
-                            })
-                        results['local'] = models
-                except:
-                    pass
-                
-                return results
-            else:
-                results['status'] = f"http_error_{resp.status_code}"
-                return results
-                
-        except requests.RequestException as e:
-            thread_safe_log(logging.ERROR, f"Network error for {mask_ip(ip)}:{port} (attempt {attempt + 1}): {e}")
-        
-        if attempt < max_retries - 1:
-            time.sleep(0.5 * (2 ** attempt))  # Shorter backoff
+    try:
+        for attempt in range(max_retries):
+            try:
+                # Check if server is live with shorter timeout
+                resp = session.get(f"http://{ip}:{port}/api/ps", timeout=2)
+                if resp.status_code == 200:
+                    results['status'] = 'live'
+                    ps_data = resp.json()
+
+                    # Extract running models
+                    models = []
+                    for m in ps_data.get("models", []):
+                        models.append({
+                            "name": m.get("name"),
+                            "model": m.get("model"),
+                            "size": m.get("size")
+                        })
+                    results['running'] = models
+
+                    # Get version and local models quickly
+                    try:
+                        v_resp = session.get(f"http://{ip}:{port}/api/version", timeout=2)
+                        if v_resp.status_code == 200:
+                            v_data = v_resp.json()
+                            results['version'] = v_data.get("version", "unknown")
+                    except Exception:
+                        pass
+
+                    try:
+                        t_resp = session.get(f"http://{ip}:{port}/api/tags", timeout=2)
+                        if t_resp.status_code == 200:
+                            t_data = t_resp.json()
+                            models = []
+                            for m in t_data.get("models", []):
+                                models.append({
+                                    "name": m.get("name"),
+                                    "model": m.get("model"),
+                                    "size": m.get("size")
+                                })
+                            results['local'] = models
+                    except:
+                        pass
+
+                    return results
+                else:
+                    results['status'] = f"http_error_{resp.status_code}"
+                    return results
+
+            except requests.RequestException as e:
+                thread_safe_log(logging.ERROR, f"Network error for {mask_ip(ip)}:{port} (attempt {attempt + 1}): {e}")
+
+            if attempt < max_retries - 1:
+                time.sleep(0.5 * (2 ** attempt))  # Shorter backoff
+    finally:
+        session.close()
     
-    session.close()
     return results
 
 def extract_ip_port(entry):
