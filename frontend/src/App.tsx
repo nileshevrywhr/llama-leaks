@@ -18,6 +18,7 @@ import Pricing from "./pages/Pricing";
 import About from "./pages/About";
 import Privacy from "./pages/Privacy";
 import Legal from "./pages/Legal";
+import { ThemeProvider } from "./providers/theme-provider";
 
 // Create Sentry-wrapped Router component for automatic route tracking
 const SentryBrowserRouter = Sentry.withSentryRouting(BrowserRouter);
@@ -53,7 +54,7 @@ const ErrorFallback = ({ error, resetError }) => (
 const App = () => (
   <Sentry.ErrorBoundary fallback={<ErrorFallback />} showDialog>
     <QueryClientProvider client={queryClient}>
-      {/* <TooltipProvider> */}
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <SentryBrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
@@ -67,7 +68,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </SentryBrowserRouter>
-      {/* </TooltipProvider> */}
+      </ThemeProvider>
     </QueryClientProvider>
   </Sentry.ErrorBoundary>
 );
