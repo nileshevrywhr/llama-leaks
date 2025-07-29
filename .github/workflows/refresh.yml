@@ -49,7 +49,7 @@ jobs:
 
               for fname in fofa_files:
                   data = supabase.storage.from_(bucket).download(fname)
-                  target = target_dir / fname
+                  target = target_dir / pathlib.Path(fname).name
                   target.write_bytes(data)
                   print(f"✅ Downloaded {fname} to {target}")
 
