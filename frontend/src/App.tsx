@@ -51,7 +51,7 @@ const ErrorFallback = ({ error, resetError }) => (
 );
 
 const App = () => (
-  <Sentry.ErrorBoundary fallback={ErrorFallback} showDialog>
+  <Sentry.ErrorBoundary fallback={<ErrorFallback />} showDialog>
     <QueryClientProvider client={queryClient}>
       {/* <TooltipProvider> */}
         <SentryBrowserRouter>
