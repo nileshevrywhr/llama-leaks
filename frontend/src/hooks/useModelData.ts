@@ -106,6 +106,9 @@ export const useModelData = () => {
           execution.aggregation.runningServers++;
           execution.aggregation.totalSize += model.size;
         }
+        if (new Date(server.last_observed) > new Date(execution.statistics.lastActivity)) {
+          execution.statistics.lastActivity = server.last_observed;
+        }
       });
     });
 
