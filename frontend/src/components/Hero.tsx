@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Clock, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowRight, Shield, AlertTriangle, Shuffle, AlertCircle, Zap, Eye, Clock, ChevronDown, ChevronUp, Copy, Check } from "lucide-react";
 import Map from "./Map";
+import { formatDistanceToNowStrict } from "date-fns";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { formatSize } from "@/utils/formatting";
 
 interface ServerModel {
   name: string;
@@ -23,6 +25,7 @@ interface ServerData {
   local: ServerModel[];
   running: ServerModel[];
   first_seen_online: string;
+  last_observed: string;
   age: string;
   status: string;
 }
@@ -33,6 +36,7 @@ const Hero = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [modelsExpanded, setModelsExpanded] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const fetchRandomServer = async (isRefresh = false) => {
     try {
@@ -76,35 +80,47 @@ const Hero = () => {
     fetchRandomServer(true);
   };
 
-  const formatSize = (bytes: number) => {
-    const mb = bytes / (1024 * 1024);
-    const gb = bytes / (1024 * 1024 * 1024);
+  const handleCopyUrl = async () => {
+    if (!serverData) return;
     
-    if (gb >= 1) {
-      return `${gb.toFixed(1)}GB`;
-    } else {
-      return `${mb.toFixed(0)}MB`;
+    const serverUrl = `http://${serverData.ip}:${serverData.port}`;
+    
+    try {
+      // Try the modern Clipboard API first
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(serverUrl);
+      } else {
+        // Fallback for browsers that don't support the Clipboard API
+        const textArea = document.createElement('textarea');
+        textArea.value = serverUrl;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+        } finally {
+          document.body.removeChild(textArea);
+        }
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy server URL: ', err);
     }
   };
 
   const formatTimestamp = (dateString: string) => {
     const date = new Date(dateString);
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-    
     const month = date.toLocaleString('default', { month: 'short' }).toUpperCase();
     const day = date.getDate();
     const year = date.getFullYear();
-    const time = date.toLocaleTimeString('en-US', { 
-      hour12: false, 
-      hour: '2-digit', 
-      minute: '2-digit' 
+    const time = date.toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
     });
-    
     return {
       formatted: `${month} ${day}, ${year} | ${time} UTC`,
-      hoursAgo: diffHours
+      distance: formatDistanceToNowStrict(date, { addSuffix: true }),
     };
   };
 
@@ -157,7 +173,7 @@ const Hero = () => {
     return (
       <section className="container flex flex-col items-center justify-center space-y-6 py-16 md:py-20 mt-4">
         <h1 className="text-2xl font-bold leading-tight tracking-tighter md:text-4xl lg:text-5xl lg:leading-[1.1] text-center max-w-3xl">
-          Your Ollama Server is Now {" "}
+          Your Ollama Server is Now a{" "}
           <span className="bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent">
             Public AI Playground
           </span>
@@ -165,7 +181,7 @@ const Hero = () => {
         
         <div className="w-full max-w-4xl bg-destructive/5 border border-destructive/20 rounded-lg p-8 text-center">
           <AlertCircle className="h-12 w-12 mb-4 text-destructive mx-auto" />
-          <h3 className="text-lg font-semibold text-destructive mb-2">Unable to Load Live Evidence</h3>
+          <h3 className="text-lg font-semibold text-destructive mb-2">Unable to Load Server Information</h3>
           <p className="text-muted-foreground mb-4">{error}</p>
           <Button onClick={() => fetchRandomServer()} className="bg-primary text-primary-foreground hover:bg-primary/90">
             <Shuffle className="h-4 w-4 mr-2" />
@@ -176,7 +192,8 @@ const Hero = () => {
     );
   }
 
-  const timestamp = formatTimestamp(serverData.first_seen_online);
+  const timestamp = formatTimestamp(serverData.last_observed);
+  const firstSeen = formatTimestamp(serverData.first_seen_online);
 
   return (
     <section className="container flex flex-col items-center justify-center space-y-6 py-12 md:py-16 mt-2">
@@ -190,11 +207,8 @@ const Hero = () => {
         </h1>
         
         <div className="max-w-3xl mx-auto text-sm text-muted-foreground md:text-base mt-3 space-y-2 px-4 sm:px-6 lg:px-8">
-          <p className="text-center">
-            Zero security. No asterisks.
-          </p>
-          <p className="text-center">
-            Just public endpoints serving AI models to anyone who asks nicely.
+          <p className="text-center text-base sm:text-lg font-semibold text-foreground/90 lg:whitespace-nowrap">
+            Zero security. No asterisks. Just public endpoints serving AI models to anyone who asks nicely.
           </p>
         </div>
       </div>
@@ -218,8 +232,8 @@ const Hero = () => {
             <div className="flex items-center justify-between p-3 lg:p-6 pb-2 lg:pb-3 border-b border-border flex-shrink-0">
               <div className="flex items-center gap-2 text-muted-foreground text-xs lg:text-xs">
                 <Clock className="w-3 h-3" />
-                <span className="hidden sm:inline">AS OF {timestamp.formatted} ({serverData.age})</span>
-                <span className="sm:hidden">{timestamp.formatted.split('|')[0]} ({serverData.age})</span>
+                <span className="hidden sm:inline">AS OF {timestamp.formatted} ({timestamp.distance})</span>
+                <span className="sm:hidden">{timestamp.formatted.split('|')[0]} ({timestamp.distance})</span>
               </div>
               <Button
                 onClick={handleRefresh}
@@ -235,7 +249,7 @@ const Hero = () => {
                   }`} 
                 />
                 <span className="ml-2 hidden lg:inline">
-                  {refreshing ? 'Loading...' : 'Random Server'}
+                  {refreshing ? 'Loading...' : 'Random'}
                 </span>
                 {refreshing && (
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full animate-pulse" />
@@ -245,21 +259,40 @@ const Hero = () => {
 
             {/* Server Details - Scrollable Content */}
             <div className="flex-1 lg:overflow-y-auto px-3 lg:px-6 pt-2 lg:pt-4 pb-3 lg:pb-6 space-y-2 lg:space-y-4 lg:scrollbar-thin lg:scrollbar-thumb-border lg:scrollbar-track-transparent">
-              {/* IP and Status */}
+              {/* URL Field with Copy Button - Single Row */}
               <div className="flex items-center gap-2 lg:gap-3">
-                <span className="text-primary text-sm lg:text-lg font-medium">
-                  {serverData.ip}:{serverData.port}
-                </span>
-                <div className="flex items-center gap-2">
-                  <div className={`w-2 h-2 rounded-full animate-pulse ${
-                    serverData.status === 'live' ? 'bg-green-500' : 'bg-red-500'
-                  }`}></div>
-                  <span className={`text-xs lg:text-xs ${
-                    serverData.status === 'live' ? 'text-green-500' : 'text-red-500'
-                  }`}>
-                    {serverData.status.toUpperCase()}
+                <div className="flex items-center gap-1 flex-1 min-w-0">
+                  <span className="text-xs lg:text-sm text-muted-foreground font-mono">
+                    http://
+                  </span>
+                  <span className="text-primary text-sm lg:text-lg font-medium font-mono truncate">
+                    {serverData.ip}:{serverData.port}
                   </span>
                 </div>
+                <Button
+                  onClick={handleCopyUrl}
+                  size="sm"
+                  variant="outline"
+                  className={`
+                    relative overflow-hidden transition-all duration-200 flex-shrink-0
+                    hover:bg-primary hover:text-primary-foreground hover:border-primary
+                    focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background
+                    active:scale-95 font-mono text-xs
+                    ${copied ? 'bg-green-500 text-white border-green-500' : ''}
+                  `}
+                  disabled={!serverData}
+                  aria-label={copied ? "URL copied to clipboard" : "Copy server URL to clipboard"}
+                  title={copied ? "Copied!" : "Copy URL"}
+                >
+                  {copied ? (
+                    <Check className="h-3 w-3" />
+                  ) : (
+                    <Copy className="h-3 w-3" />
+                  )}
+                  {copied && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full animate-pulse" />
+                  )}
+                </Button>
               </div>
 
               {/* Location */}
@@ -276,26 +309,27 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Protocol and Version - Compact */}
+              {/* Protocol and Version with Age */}
               <div className="grid grid-cols-2 gap-2 lg:space-y-1 lg:block text-xs lg:text-xs">
-                <div>
-                  <span className="text-muted-foreground">Protocol: </span>
-                  <span className="text-primary">http</span>
+                <div className="flex items-center gap-2">
+                  <div>
+                    <span className="text-muted-foreground">Version: </span>
+                    <span className="text-primary">{serverData.version}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className={`w-2 h-2 rounded-full animate-pulse ${
+                      serverData.status === 'live' ? 'bg-green-500' : 'bg-red-500'
+                    }`}></div>
+                    <span className={`text-xs ${
+                      serverData.status === 'live' ? 'text-green-500' : 'text-red-500'
+                    }`}>
+                      {serverData.status.toUpperCase()}
+                    </span>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-muted-foreground">Version: </span>
-                  <span className="text-primary">{serverData.version}</span>
-                </div>
-              </div>
-
-              {/* Models Summary - Always Visible */}
-              <div className="flex items-center justify-between">
-                <div className="text-xs lg:text-sm">
-                  <span className="text-muted-foreground">Models: </span>
-                  <span className="text-foreground">{serverData.local.length} local</span>
-                  {serverData.running.length > 0 && (
-                    <span className="text-green-400 ml-2">{serverData.running.length} running</span>
-                  )}
+                <div className="col-span-2 lg:col-span-1 lg:mt-1">
+                  <span className="text-muted-foreground">First Seen: </span>
+                  <span className="text-primary">{firstSeen.formatted} ({firstSeen.distance})</span>
                 </div>
               </div>
 
@@ -372,6 +406,7 @@ const Hero = () => {
                   </div>
                 </div>
               </div>
+              
             </div>
           </div>
         </div>
@@ -400,9 +435,9 @@ const Hero = () => {
                 title="Educational purposes only - not functional"
               >
                 <Eye className="h-5 w-5" />
-                Evil Action #1
+                Generate Malicious Content
               </Button>
-              
+
               <Button 
                 variant="destructive" 
                 size="default"
@@ -411,7 +446,7 @@ const Hero = () => {
                 title="Educational purposes only - not functional"
               >
                 <Zap className="h-5 w-5" />
-                Evil Action #2
+                Replace with Evil Model
               </Button>
             </div>
             

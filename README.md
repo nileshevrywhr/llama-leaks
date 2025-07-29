@@ -1,8 +1,8 @@
-## 🦙 Ollama Wall
+## 🦙 LLaMa Leaks
 
 > *“Oops. I left my LLaMA running wide open…”* — Someone, probably.
 
-**Ollama Wall** is a passive AI security dashboard that highlights one simple, overlooked fact:
+**LLaMa Leaks** is a passive AI security dashboard that highlights one simple, overlooked fact:
 
 > A surprising number of people have accidentally exposed their Ollama servers to the entire internet — no auth, no firewall, just... vibes.
 

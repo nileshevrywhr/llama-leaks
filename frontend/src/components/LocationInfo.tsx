@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MapPin, Clock, Shuffle, AlertCircle, Zap, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Map from "./Map";
+import { formatSize } from "@/utils/formatting";
 
 interface ServerModel {
   name: string;
@@ -75,17 +76,6 @@ const LocationInfo = () => {
 
   const handleRefresh = () => {
     fetchRandomServer(true);
-  };
-
-  const formatSize = (bytes: number) => {
-    const mb = bytes / (1024 * 1024);
-    const gb = bytes / (1024 * 1024 * 1024);
-    
-    if (gb >= 1) {
-      return `${gb.toFixed(1)}GB`;
-    } else {
-      return `${mb.toFixed(0)}MB`;
-    }
   };
 
   const formatTimestamp = (dateString: string) => {
@@ -377,12 +367,9 @@ const LocationInfo = () => {
               className="flex-1 gap-2 bg-gradient-to-r from-destructive to-orange-600 hover:from-destructive/90 hover:to-orange-600/90 transition-all duration-200 shadow-lg hover:shadow-xl"
               disabled
               title="Educational purposes only - not functional"
-              onClick={() => {
-                throw new Error("Sentry Test Error");
-              }}
             >
               <Zap className="h-5 w-5" />
-              Break The World!
+              Evil Action #3
             </Button>
           </div>
           

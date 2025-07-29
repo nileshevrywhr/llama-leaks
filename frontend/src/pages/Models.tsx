@@ -1,20 +1,17 @@
-import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import WarningBanner from "@/components/WarningBanner";
-import PricingTiers from "@/components/PricingTiers";
-import PricingBottomSection from "@/components/PricingBottomSection";
+import ModelExecutionDashboard from "@/components/ModelExecutionDashboard";
 import Footer from "@/components/Footer";
 
-const Pricing = () => {
+const Models = () => {
   return (
     <div className="min-h-screen bg-background pt-[88px]">
       <Header />
       <WarningBanner />
-      <PricingTiers />
-      <PricingBottomSection />
+      <ModelExecutionDashboard />
       <Footer />
     </div>
   );
 };
 
-export default Pricing;
+export default Models;

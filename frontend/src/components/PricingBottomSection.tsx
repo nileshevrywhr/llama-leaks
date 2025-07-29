@@ -19,7 +19,7 @@ const PricingBottomSection = () => {
     },
     {
       question: "Will you add paid features?",
-      answer: "Highly unlikely. The core mission of helping secure exposed API keys should remain free and accessible to everyone."
+      answer: "Highly unlikely. The core mission of helping secure exposed AI servers should remain free and accessible to everyone."
     }
   ];
 

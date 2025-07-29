@@ -34,3 +34,4 @@ docs/
 checklist.md
 playground.py
 
+.fuse_hidden*

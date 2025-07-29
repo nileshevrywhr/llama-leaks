@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Trophy, Medal, Award, Server, HardDrive, Shield } from 'lucide-react';
 import AnimatedCounter from './AnimatedCounter';
 import { Button } from "@/components/ui/button";
+import { formatSize } from '@/utils/formatting';
 
 interface ServerModel {
   name: string;
@@ -45,15 +46,6 @@ const VersionLeaderboard = () => {
     // Extract major.minor from version strings like "0.5.10", "0.3.11", "0.5.7-0-ga420a45-dirty"
     const match = versionString.match(/^(\d+\.\d+)/);
     return match ? match[1] : versionString;
-  };
-
-  const formatSize = (bytes: number): string => {
-    const gb = bytes / (1024 * 1024 * 1024);
-    if (gb >= 1) {
-      return `${gb.toFixed(1)}GB`;
-    }
-    const mb = bytes / (1024 * 1024);
-    return `${mb.toFixed(0)}MB`;
   };
 
   useEffect(() => {

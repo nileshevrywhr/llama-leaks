@@ -1,4 +1,3 @@
-import * as Sentry from "@sentry/react";
 import Header from "@/components/Header";
 import WarningBanner from "@/components/WarningBanner";
 import VersionLeaderboard from "@/components/VersionLeaderboard";
@@ -15,4 +14,4 @@ const Leaderboard = () => {
   );
 };
 
-export default Sentry.withSentryRouting(Leaderboard);
+export default Leaderboard;

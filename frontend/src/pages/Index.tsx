@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import WarningBanner from "@/components/WarningBanner";
@@ -8,6 +8,12 @@ import ServerStats from "@/components/ServerStats";
 import Features from "@/components/Features";
 import Solutions from "@/components/Solutions";
 import Footer from "@/components/Footer";
+
+// Dynamically import SentryTestButton only in development
+const SentryTestButton =
+  process.env.NODE_ENV === "development"
+    ? lazy(() => import("@/components/SentryTestButton"))
+    : () => null;
 
 const Index = () => {
   const location = useLocation();
@@ -34,6 +40,15 @@ const Index = () => {
       <Features />
       <Solutions />
       <Footer />
+      
+      {/* Remove this in production */}
+      {process.env.NODE_ENV === 'development' && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <div className="fixed bottom-4 right-4 z-50">
+            <SentryTestButton />
+          </div>
+        </Suspense>
+      )}
     </div>
   );
 };

@@ -67,9 +67,9 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="mr-4 hidden md:flex">
             <a className="mr-6 flex items-center space-x-2" href="/">
-              <Shield className="h-5 w-5 text-destructive" />
+              {/* <Shield className="h-5 w-5 text-destructive" /> */}
               <span className="hidden font-bold sm:inline-block">
-                Ollama Wall
+                LLaMa Leaks
               </span>
             </a>
             <nav className="flex items-center space-x-6 text-sm font-medium">
@@ -85,6 +85,12 @@ const Header = () => {
                 href="/leaderboard"
               >
                 Leaderboard
+              </a>
+              <a
+                className="transition-colors hover:text-foreground/80 text-foreground/60"
+                href="/models"
+              >
+                Models
               </a>
               <a
                 className="transition-colors hover:text-foreground/80 text-foreground/60"
@@ -118,9 +124,9 @@ const Header = () => {
             {/* Center - Title */}
             <div className="flex-1 flex justify-center">
               <a className="flex items-center space-x-2" href="/">
-                <Shield className="h-5 w-5 text-destructive" />
+                {/* <Shield className="h-5 w-5 text-destructive" /> */}
                 <span className="font-bold text-sm">
-                  Ollama Wall
+                  LLaMa Leaks
                 </span>
               </a>
             </div>
@@ -172,6 +178,13 @@ const Header = () => {
                     className="block text-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     Leaderboard
+                  </a>
+                  <a
+                    href="/models"
+                    onClick={closeMobileMenu}
+                    className="block text-center py-4 px-4 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-foreground text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    Models
                   </a>
                   <a
                     href="/pricing"
