@@ -4,7 +4,7 @@ import * as Sentry from "@sentry/react";
  * Manually capture an exception to Sentry
  * Use this for caught errors that you want to track
  */
-export const captureException = (error: Error, context?: Record<string, any>) => {
+export const captureException = (error: Error, context?: Record<string, unknown>) => {
   Sentry.withScope((scope) => {
     if (context) {
       Object.keys(context).forEach(key => {
@@ -40,11 +40,11 @@ export const setTag = (key: string, value: string) => {
 };
 
 /**
- * Start a new transaction for performance monitoring
+ * Start a new span for performance monitoring
  * Use this to track custom operations
  */
-export const startTransaction = (name: string, operation: string) => {
-  return Sentry.startTransaction({ name, op: operation });
+export const startSpan = (name: string, operation: string) => {
+  return Sentry.startSpan({ name, op: operation });
 };
 
 /**
