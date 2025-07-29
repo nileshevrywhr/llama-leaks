@@ -85,7 +85,7 @@ async def check_server_async(session, ip, port, max_retries=2):
                                 if v_resp.status == 200:
                                     v_data = await v_resp.json()
                                     return v_data.get("version", "unknown")
-                        except:
+                        except Exception:
                             pass
                         return "unknown"
                     
