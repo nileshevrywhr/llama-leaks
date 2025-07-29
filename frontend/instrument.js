@@ -56,7 +56,7 @@ Sentry.init({
   beforeSend(event, hint) {
     // Filter out network errors that aren't actionable
     if (event.exception) {
-      const error = hint.originalException;
+      const error = hint?.originalException;
       if (error && error.message && error.message.includes('Network Error')) {
         return null; // Don't send this error to Sentry
       }
